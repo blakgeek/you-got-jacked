@@ -1,0 +1,230 @@
+@import url(../fonts/stylesheet.css);
+
+$boardSize: 710px;
+$cellSpacing: 10px;
+$cellSize: ($boardSize - ($cellSpacing * 11)) / 10;
+$cellNumberIndent: $cellSize * .05;
+$cellFontSize: $cellSize * .22;
+
+$cardWidth: 100px;
+$cardHeight: $cardWidth *.75;
+$cardFontSize: $cardWidth * .18;
+
+$gameLandscapeHeight: $boardSize - 5;
+$otherStuffLandscapePadding: $boardSize + 5px;
+
+$cardFont: 'ArtifikaMedium';
+
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-user-select: none;
+}
+
+#game {
+  position: absolute;
+  height: $gameLandscapeHeight;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+
+#board {
+  padding: 0;
+  width: $boardSize;
+  height: $boardSize;
+  list-style: none;
+  margin: 0;
+  line-height: 0;
+
+  li {
+    border-radius: 10px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, .9), 0 0 0 1px black;
+    line-height: 1em;
+    text-align: center;
+    display: inline-block;
+    width: $cellSize;
+    height: $cellSize;
+    margin: $cellSpacing 0 0 $cellSpacing;
+    border: 3px solid white;
+    position: relative;
+    background-size: 20px auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+    font-family: $cardFont;
+  }
+
+  li div.tl {
+    top: $cellNumberIndent;
+    left: $cellNumberIndent;
+  }
+
+  li div.br {
+    bottom: $cellNumberIndent;
+    right: $cellNumberIndent;
+  }
+}
+
+#board li div,
+#hands li div,
+#discardPile li div {
+  position: absolute;
+}
+
+#board li div {
+  font-size: $cellFontSize;
+}
+
+/*#board li:before {*/
+
+/*position: absolute;*/
+/*top: 5px;*/
+/*right: 5px;*/
+/*content: attr(data-score);*/
+/*}*/
+
+li[data-suit=CLUB] {
+  background-image: url('../images/symbols/club.svg');
+  color: black;
+}
+
+li[data-suit=HEART] {
+  background-image: url('../images/symbols/heart.svg');
+  color: #8a0f00;
+  /*text-shadow: -1px 1px rgba(0,0,0,.5);*/
+}
+
+li[data-suit=SPADE] {
+  background-image: url('../images/symbols/spade.svg');
+}
+
+li[data-suit=DIAMOND] {
+  background-image: url('../images/symbols/diamond.svg');
+  color: #8a0f00;
+}
+
+li[data-suit=JOKER] {
+  background-image: url('../images/joker.svg');
+}
+
+#board li[data-suit=JOKER] {
+
+  background-size: auto 45px;
+}
+
+.p1 {
+  border-color: #3399cc !important;
+  background-color: #f3f9fc;
+}
+
+.p2 {
+  border-color: #ffcc00 !important;
+  background-color: #fffdf5;
+}
+
+.p3 {
+  border-color: #00cc00 !important;
+  background-color: #f5fdf5;
+}
+
+#hands {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  padding: 0 0 0 $otherStuffLandscapePadding;
+  margin: 0;
+}
+
+#hands ul,
+#discardPile ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+#hands li,
+#discardPile li {
+  display: inline-block;
+  height: 108px;
+  width: 81px;
+  border-radius: 10px;
+  box-shadow: 0 0 0 1px black, 0 0 6px rgba(0, 0, 0, .5);
+  border: 6px solid #d9d7d3;
+  background-color: #f6f3ef;
+  margin-left: 8px;
+  position: relative;
+  background-size: 45px auto;
+  background-position: center center;
+  background-repeat: no-repeat;
+  font-family: $cardFont;
+}
+
+#hands li[data-suit=JOKER],
+#discardPile li[data-suit=JOKER] {
+
+  background-size: auto 70px;
+}
+
+#hands li.active {
+  box-shadow: 0 0 0 1px #186925, 0 0 6px 3px rgba(24, 105, 37, .8);
+}
+
+#hands li div,
+#discardPile li div {
+  font-size: $cardFontSize;
+}
+
+#hands li div.tl,
+#discardPile li div.tl {
+  top: 0;
+  left: 5px;
+}
+
+#hands li div.br,
+#discardPile li div.br {
+  bottom: 0;
+  right: 5px;
+}
+
+#discardPile {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 0 0 0 $otherStuffLandscapePadding;
+  margin: 0;
+  list-style: none;
+}
+
+#rules {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 150px 0 0 $otherStuffLandscapePadding;
+  margin: 0;;
+}
+
+@media all and (max-width: 800px) {
+
+  #board {
+    margin: 0 auto;
+  }
+
+  #hands {
+    top: 720px !important;
+    left: 50% !important;
+    width: 623px;
+    margin-left: -311px;
+    padding: 0 !important;
+  }
+
+  #rules, #discardPile {
+    display: none;
+    position: relative;
+  }
+
+}

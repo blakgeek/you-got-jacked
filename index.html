@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>One Eyed Jax</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <script src="./js/jquery-1.8.3.min.js"></script>
+    <script src="./js/jax.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/jax.css"/>
+    <style>
+    </style>
+</head>
+<body>
+<div id="game">
+    <div id="rules">
+        <p>The rules of BlakJax are almost just like Sequence but there are no one or two eyed jacks.  Instead red jacks are used to
+            free up a square that has been captured by your opponent and black jacks are wild and can be played in any open square except for the corners.</p>
+        <p>Your hand is located in the upper right section of the screen.  When its your turn to play click a card in your hand to select it.
+            The selected card will be highlighted in green.  To capture a square click it when the matching card or a jack is selected in your haand.
+            If the play is valid the cell will change to blue signifying that has been captured by you.</p>
+        <p>If you capture five connecting squares horizontally, vertically or diagonally before the computer you win.  If not you lose.</p>
+        <p>The cards at bottom show the last four cards that have been played.</p>
+    </div>
+    <ul id="discardPile"></ul>
+    <div id="hands">
+        <ul id="player1"></ul>
+        <ul id="player2"></ul>
+        <ul id="player3"></ul>
+    </div>
+    <ul id="board"></ul>
+</div>
+</body>
+</html>
