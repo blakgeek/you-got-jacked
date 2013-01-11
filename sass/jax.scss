@@ -14,6 +14,9 @@ $gameLandscapeHeight: $boardSize - 5;
 $otherStuffLandscapePadding: $boardSize + 5px;
 
 $cardFont: 'ArtifikaMedium';
+$cardBackgroundColor: #f5f3ef;
+$gameRed: #8a0f00;
+$cardBorderColor: #d9d7d3;
 
 body, html {
   margin: 0;
@@ -26,7 +29,96 @@ body, html {
   -webkit-user-select: none;
 }
 
+@mixin dialog {
+  position: fixed;
+  width: 500px;
+  height: 300px;
+  top: 50%;
+  left: 50%;
+  margin-top: -150px;
+  margin-left: -250px;
+  border-radius: 20px;
+  background-color: $cardBackgroundColor;
+  text-align: center;
+  box-shadow: 0 0 0 10px $cardBorderColor, 0 0 8px 12px rgba(0, 0, 0, .8);
+}
+
+@mixin jaxButton {
+  border-radius: 10px;
+  border: 3px solid black;
+  background-color: white;
+  padding: 10px 15px 10px 15px;
+  font-family: Tahoma, Arial, SANS-SERIF;
+  font-size: 16px;
+}
+
+#splash {
+  @include dialog;
+  background-image: url(../images/joker2.svg);
+  background-size: auto 150px;
+  background-position: center 130px;
+  background-repeat: repeat-x;
+  color: $gameRed;
+
+  h1 {
+    margin-top: 15px;
+    text-shadow: 0 0 3px white, 0 0 8px black;
+    font-family: $cardFont;
+    font-size: 100px;
+    text-align: center;
+  }
+
+  button {
+    @include jaxButton;
+  }
+}
+
+#dialog {
+  @include dialog;
+  display: none;
+
+  button {
+    @include jaxButton;
+  }
+}
+
+#rules {
+  margin: 15px auto;
+  width: 700px;
+  display: none;
+}
+
+#panel {
+
+  display: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 30px;
+  border-left: 1px solid black;
+  border-radius: 0 0 0 20px;
+  //box-shadow: 0 0 4px 4px rgba(0,0,0,.8);
+  background: #999;
+  border-left: 1px solid black;
+  border-bottom: 1px solid black;
+
+  .handle {
+    background-color: #999;
+    border-radius: 20px 0 0 20px;
+    height: 60px;
+    width: 40px;
+    position: absolute;
+    top: 20px;
+    left: -40px;
+    border-left: 1px solid black;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+  }
+}
+
 #game {
+  display: none;
   position: absolute;
   height: $gameLandscapeHeight;
   top: 0;
@@ -95,7 +187,7 @@ li[data-suit=CLUB] {
 
 li[data-suit=HEART] {
   background-image: url('../images/symbols/heart.svg');
-  color: #8a0f00;
+  color: $gameRed;
   /*text-shadow: -1px 1px rgba(0,0,0,.5);*/
 }
 
@@ -105,11 +197,11 @@ li[data-suit=SPADE] {
 
 li[data-suit=DIAMOND] {
   background-image: url('../images/symbols/diamond.svg');
-  color: #8a0f00;
+  color: $gameRed;
 }
 
 li[data-suit=JOKER] {
-  background-image: url('../images/joker.svg');
+  background-image: url('../images/joker2.svg');
 }
 
 #board li[data-suit=JOKER] {
@@ -154,7 +246,7 @@ li[data-suit=JOKER] {
   width: 81px;
   border-radius: 10px;
   box-shadow: 0 0 0 1px black, 0 0 6px rgba(0, 0, 0, .5);
-  border: 6px solid #d9d7d3;
+  border: 6px solid $cardBorderColor;
   background-color: #f6f3ef;
   margin-left: 8px;
   position: relative;
@@ -200,14 +292,6 @@ li[data-suit=JOKER] {
   list-style: none;
 }
 
-#rules {
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 150px 0 0 $otherStuffLandscapePadding;
-  margin: 0;;
-}
-
 @media all and (max-width: 800px) {
 
   #board {
@@ -222,7 +306,7 @@ li[data-suit=JOKER] {
     padding: 0 !important;
   }
 
-  #rules, #discardPile {
+  #discardPile {
     display: none;
     position: relative;
   }

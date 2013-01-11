@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 <head>
-    <title>One Eyed Jax</title>
+    <title>Play BlakJax Online</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <script src="./js/jquery-1.8.3.min.js"></script>
     <script src="./js/jax.js"></script>
@@ -10,15 +10,44 @@
     </style>
 </head>
 <body>
-<div id="game">
-    <div id="rules">
-        <p>The rules of BlakJax are almost just like Sequence but there are no one or two eyed jacks.  Instead red jacks are used to
-            free up a square that has been captured by your opponent and black jacks are wild and can be played in any open square except for the corners.</p>
-        <p>Your hand is located in the upper right section of the screen.  When its your turn to play click a card in your hand to select it.
-            The selected card will be highlighted in green.  To capture a square click it when the matching card or a jack is selected in your haand.
-            If the play is valid the cell will change to blue signifying that has been captured by you.</p>
-        <p>If you capture five connecting squares horizontally, vertically or diagonally before the computer you win.  If not you lose.</p>
-        <p>The cards at bottom show the last four cards that have been played.</p>
+<section id="splash">
+    <h1>BlakJax</h1>
+    <button class="play">Start Game</button>
+    <button class="rules">How Do You Play?</button>
+</section>
+<section id="rules">
+    <p>The goal of BlakJax is to capture five connecting squares horizontally, vertically or diagonally before the
+        computer can.</p>
+
+    <p>The rules are almost just like <a href="http://www.pagat.com/misc/jack.html">One Eyed Jack</a> or Sequence. The
+        difference is there are no one or two eyed jacks. Instead red jacks are used to
+        free up a square that has been captured by your opponent and black jacks are wild and can be played in any open
+        square except for the corners.</p>
+
+    <p>The cards are the top are your hand. When its your turn to play click a card in your hand to select it.
+        The selected card will be highlighted in green. To capture a square click it when the matching card or a jack is
+        selected in your hand.
+        If the play is valid the cell will change to blue signifying that has been captured by you.</p>
+
+    <p>The cards at the bottom are the last four cards that have been played. If you have a dead card, meaning all of
+        the squares where it could have been
+        played are already occupied, you can discard it and get a new one by clicking these cards.</p>
+
+    <button class="play">Start Game</button>
+</section>
+<section id="dialog">
+    <p class="message"></p>
+    <button class="play">Play Again</button>
+</section>
+<section id="game">
+    <div id="panel">
+        <div class="handle"></div>
+        <ul class="games">
+            <li class="sequence">Play Sequence</li>
+            <li class="oneEyedJack">Play One Eyed Jack</li>
+            <li class="swirl">Play Swirl</li>
+        </ul>
+
     </div>
     <ul id="discardPile"></ul>
     <div id="hands">
@@ -27,6 +56,6 @@
         <ul id="player3"></ul>
     </div>
     <ul id="board"></ul>
-</div>
+</section>
 </body>
 </html>

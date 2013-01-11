@@ -36,6 +36,8 @@ var Jax = {
         40, 41, 42, 43, 44, 45, 46, 47, 48, 49,
         50, 51, 52, 52
     ],
+    CARDS: ['A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K'],
+
     cardToCells: [],
     cellScores: [],
     cellVals: [],
@@ -43,6 +45,211 @@ var Jax = {
     cellCards: [],
     players: [],
     discardPile: [],
+
+    init: function () {
+
+        this.BOARDS = {
+            sequence: this.readBoard([
+                'jj', '6d', '7d', '8d', '9d', '10d', 'qd', 'kd', 'ad', 'jj',
+                '5d', '3h', '2h', '2s', '3c', '4s', '5s', '6s', '7s', 'ac',
+                '4d', '4h', 'kd', 'ad', 'ac', 'kc', 'qc', '10c', '8s', 'kc',
+                '3d', '5h', 'qd', 'qh', '10h', '9h', '8h', '9c', '9s', 'qc',
+                '2d', '6h', '10d', 'kh', '3h', '2h', '7h', '8c', '10s', '10c',
+                'as', '7h', '9d', 'ah', '4h', '5h', '6h', '7c', 'qs', '9c',
+                'ks', '8h', '8d', '2c', '3c', '4c', '5c', '6c', 'ks', '8c',
+                'qs', '9h', '7d', '6d', '5d', '4d', '3d', '2d', 'as', '7c',
+                '10s', '10h', 'qh', 'kh', 'ah', '2c', '3c', '4c', '5c', '6c',
+                'jj', '9s', '8s', '7s', '6s', '5s', '4s', '3s', '2s', 'jj'
+            ]),
+            oneEyedJack: this.readBoard(
+                "jj 10d 9d 8d 7d 7s 8s 9s 10s jj\
+                10c kc 6d 5d 4d 4s 5s 6s kh 10h\
+                9c 5c qc 3d 2d 2s 3s qh 6h 9h \
+                8c 6c 3c qd ad as qs 3h 5h 8h\
+                7c 4c 2c ac kd ks ah 2h 4h 7h\
+                7h 4h 2h ah ks kd ac 2c 4c 7c\
+                8h 5h 3h qs as ad qd 2c 5c 8c\
+                9h 6h qh 3s 2s 2d 3d qc 5c 9c\
+                10h kh 6s 5s 4s 4d 5d 6d kc 10c\
+                jj 10s 9s 8s 7s 7d 8d 9d 10d jj"
+            ),
+            custom1: this.readBoard([
+                'kh', 'qh', '10h', '9h', '8h', '7h', '6h', '5h', '4h', 'ks',
+                '4c', '3c', '2c', '6s', '7s', '8s', '9s', '10s', '3h', 'qs',
+                '5c', '10h', 'qh', '5s', 'jj', 'as', 'ks', 'qs', '2h', '10s',
+                '6c', '9h', 'kh', '4s', '2d', '3d', '4d', '5d', '6d', '9s',
+                '7c', '8h', 'ah', '3s', 'ac', 'ah', '2c', 'jj', '7d', '8s',
+                '8c', '7h', 'jj', '2s', 'ad', 'as', '3c', 'ad', '8d', '7s',
+                '9c', '6h', '5h', '4h', '3h', '2h', '4c', 'kd', '9d', '6s',
+                '10c', '2d', 'qc', 'kc', 'ac', 'jj', '5c', 'qd', '10d', '5s',
+                'qc', '3d', '10c', '9c', '8c', '7c', '6c', '2s', '3s', '4s',
+                'kc', '4d', '5d', '6d', '7d', '8d', '9d', '10d', 'qd', 'kd'
+            ])
+        }
+
+        $('#discardPile').click(function() {
+
+            var activeCard = Jax.myActiveCard,
+                cards = Jax.players[0].cards;
+
+            if (activeCard && Jax.isDeadCard(activeCard.value)) {
+
+                cards.splice(activeCard.index, 1);
+                cards.push(Jax.gameDeck.pop());
+                addToDiscardPile(activeCard.value);
+                displayHand();
+                delete Jax.myActiveCard;
+            }
+        });
+
+        $('button.play').click(function() {
+
+            $('#splash, #rules, #dialog').hide();
+            $('#game').show();
+            Jax.newGame(['sequence', 'oneEyedJack', 'custom1'][Math.floor(Math.random() * 3)]);
+        });
+
+        $('#splash button.rules').click(function() {
+
+            $('#splash, #game, #rules').hide();
+            $('#rules').show();
+        });
+
+    },
+
+    newGame: function (boardName) {
+
+        var board = this.BOARDS[boardName || 'sequence'];
+        this.cardToCells[Jax.JACK_SPADE] = this.cardToCells[Jax.JACK_CLUB] = [
+            1, 2, 3, 4, 5, 6, 7, 8,
+            10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+            20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
+            30, 31, 32, 33, 34, 35, 36, 37, 38, 39,
+            40, 41, 42, 43, 44, 45, 46, 47, 48, 49,
+            50, 51, 52, 53, 54, 55, 56, 57, 58, 59,
+            60, 61, 62, 63, 64, 65, 66, 67, 68, 69,
+            70, 71, 72, 73, 74, 75, 76, 77, 78, 79,
+            80, 81, 82, 83, 84, 85, 86, 87, 88, 89,
+            91, 92, 93, 94, 95, 96, 97, 98
+        ];
+
+        this.cardToCells[Jax.JACK_HEART] = this.cardToCells[Jax.JACK_SPADE] = [];
+
+        var html = [];
+        for (var i = 0; i < 100; i++) {
+
+            var card = board[i];
+
+            if (card != Jax.JOKER) {
+                Jax.cellStates[i] = Jax.OPEN;
+                Jax.cellCards[i] = card;
+                var suit = Jax.SUITS[Math.floor(card / 13)];
+                var val = this.CARDS[card % 13];
+                html.push('<li data-cell="' + i + '" data-value="' + card + '" data-suit="' + suit + '"><div class="tl">' + val + '</div><div class="br">' + val + '</div></li>');
+            } else {
+                html.push('<li data-cell="' + i + '" data-value="' + card + '" data-suit="JOKER"><div>&nbsp;</div><div>&nbsp;</div></li>');
+                Jax.cellStates[i] = Jax.P1 | Jax.P2 | Jax.P3 | Jax.OPEN;
+            }
+
+            // initialize cell entry to array
+            this.cardToCells[card] = [i].concat(this.cardToCells[card]);
+        }
+
+        $('#board').html(html.join(''));
+
+        Jax.cells = $('#board li');
+
+        Jax.gameDeck = Jax.shuffleDecks();
+
+        Jax.numPlayers = 2;
+        Jax.players = [];
+        for (var i = 0; i < Jax.numPlayers; i++) {
+            Jax.players.push({
+                cards: [],
+                jackableCells: []
+            });
+        }
+
+        for (var i = 0; i < 7; i++) {
+            for (var k = 0; k < Jax.numPlayers; k++) {
+                Jax.players[k].cards.push(Jax.gameDeck.pop());
+            }
+        }
+
+        Jax.cells.click(function () {
+
+            var cell = $(this),
+                cellIndex = cell.attr('data-cell'),
+                card = cell.attr('data-value'),
+                activeCard = Jax.myActiveCard;
+
+            if (activeCard) {
+
+                if ((Jax.isOpen(cellIndex) && (card == activeCard.value || Jax.isBlackJack(activeCard.value))) ||
+                    (Jax.isRedJack(activeCard.value) && Jax.isOccupied(cellIndex) && !Jax.isOccupiedBy(cellIndex, Jax.P1))) {
+
+                    if (playCard(0, cellIndex, activeCard.index) == false) {
+                        autoPlay(1);
+                        delete Jax.myActiveCard;
+                    }
+                }
+            }
+        });
+
+        $('#player1').on('click', 'li', this.selectCard);
+        displayHand();
+    },
+
+    gameOver: function(winner) {
+
+        $('#dialog p').html(winner == 0 ? "You win!" : "You just got whooped by a computer.");
+        $('#dialog').css('z-index', 10000).show();
+        $('#player1').unbind('click', this.selectCard);
+    },
+
+    selectCard: function () {
+
+        $('#player1 li').removeClass('active');
+        $(this).addClass('active');
+        Jax.myActiveCard = {
+            index: $(this).attr('data-pos'),
+            value: $(this).attr('data-value')
+        };
+    },
+
+    readBoard: function (board) {
+
+        board = board instanceof Array ? board : board.split(/\s+/);
+
+        var suitMultipliers = {
+            'd': 0,
+            'h': 1,
+            'c': 2,
+            's': 3,
+            'j': 0
+        }
+
+        var cardVals = {
+            'a': 0,
+            '2': 1,
+            '3': 2,
+            '4': 3,
+            '5': 4,
+            '6': 5,
+            '7': 6,
+            '8': 7,
+            '9': 8,
+            '10': 9,
+            'q': 11,
+            'k': 12,
+            'j': 52
+        }
+
+        return board.map(function (cell) {
+
+            return cardVals[cell.slice(0, -1)] + (13 * suitMultipliers[cell.substr(-1)]);
+        })
+    },
 
     shuffleDecks: function () {
         var a = [].concat(Jax.DECKS);
@@ -75,6 +282,28 @@ var Jax = {
             br: ((row + Math.min(bottom, right)) * 10) + (col + Math.min(bottom, right)),
             bl: ((row + Math.min(bottom, left)) * 10) + (col - Math.min(bottom, left))
         };
+    },
+
+    isDeadCard: function(card) {
+
+        var cells = this.cardToCells[card],
+            result = true;
+
+        if(this.isJack(card)) {
+            result = false;
+        } else {
+
+            for(var i=0; i<cells.length; i++) {
+
+                if(!this.isOccupied(cells[i])) {
+
+                    result = false;
+                    break;
+                }
+            }
+        }
+
+        return result;
     },
 
     isOpen: function (index) {
@@ -416,112 +645,6 @@ var Jax = {
     }
 };
 
-
-$(function () {
-
-    var cards = ['A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K'];
-    Jax.SEQUENCE_BOARD = [
-        Jax.JOKER, 5 + Jax.DIAMOND, 6 + Jax.DIAMOND, 7 + Jax.DIAMOND, 8 + Jax.DIAMOND, 9 + Jax.DIAMOND, 11 + Jax.DIAMOND, 12 + Jax.DIAMOND, 0 + Jax.DIAMOND, Jax.JOKER,
-        4 + Jax.DIAMOND, 2 + Jax.HEART, 1 + Jax.HEART, 1 + Jax.SPADE, 2 + Jax.SPADE, 3 + Jax.SPADE, 4 + Jax.SPADE, 5 + Jax.SPADE, 6 + Jax.SPADE, 0 + Jax.CLUB,
-        3 + Jax.DIAMOND, 3 + Jax.HEART, 12 + Jax.DIAMOND, 0 + Jax.DIAMOND, 0 + Jax.CLUB, 12 + Jax.CLUB, 11 + Jax.CLUB, 9 + Jax.CLUB, 7 + Jax.SPADE, 12 + Jax.CLUB,
-        2 + Jax.DIAMOND, 4 + Jax.HEART, 11 + Jax.DIAMOND, 11 + Jax.HEART, 9 + Jax.HEART, 8 + Jax.HEART, 7 + Jax.HEART, 8 + Jax.CLUB, 8 + Jax.SPADE, 11 + Jax.CLUB,
-        1 + Jax.DIAMOND, 5 + Jax.HEART, 9 + Jax.DIAMOND, 12 + Jax.HEART, 2 + Jax.HEART, 1 + Jax.HEART, 6 + Jax.HEART, 7 + Jax.CLUB, 9 + Jax.SPADE, 9 + Jax.CLUB,
-        0 + Jax.SPADE, 6 + Jax.HEART, 8 + Jax.DIAMOND, 0 + Jax.HEART, 3 + Jax.HEART, 4 + Jax.HEART, 5 + Jax.HEART, 6 + Jax.CLUB, 11 + Jax.SPADE, 8 + Jax.CLUB,
-        12 + Jax.SPADE, 7 + Jax.HEART, 7 + Jax.DIAMOND, 1 + Jax.CLUB, 2 + Jax.CLUB, 3 + Jax.CLUB, 4 + Jax.CLUB, 5 + Jax.CLUB, 12 + Jax.SPADE, 7 + Jax.CLUB,
-        11 + Jax.SPADE, 8 + Jax.HEART, 6 + Jax.DIAMOND, 5 + Jax.DIAMOND, 4 + Jax.DIAMOND, 3 + Jax.DIAMOND, 2 + Jax.DIAMOND, 1 + Jax.DIAMOND, 0 + Jax.SPADE, 6 + Jax.CLUB,
-        9 + Jax.SPADE, 9 + Jax.HEART, 11 + Jax.HEART, 12 + Jax.HEART, 0 + Jax.HEART, 1 + Jax.CLUB, 2 + Jax.CLUB, 3 + Jax.CLUB, 4 + Jax.CLUB, 5 + Jax.CLUB,
-        Jax.JOKER, 8 + Jax.SPADE, 7 + Jax.SPADE, 6 + Jax.SPADE, 5 + Jax.SPADE, 4 + Jax.SPADE, 3 + Jax.SPADE, 2 + Jax.SPADE, 1 + Jax.SPADE, Jax.JOKER
-    ];
-
-    var html = [];
-    for (var i = 0; i < 100; i++) {
-
-        var card = Jax.SEQUENCE_BOARD[i];
-
-        if (card != Jax.JOKER) {
-            Jax.cellStates[i] = Jax.OPEN;
-            Jax.cellCards[i] = card;
-            var suit = Jax.SUITS[Math.floor(card / 13)];
-            var val = cards[card % 13];
-            html.push('<li data-cell="' + i + '" data-value="' + card + '" data-suit="' + suit + '"><div class="tl">' + val + '</div><div class="br">' + val + '</div></li>');
-        } else {
-            html.push('<li data-cell="' + i + '" data-value="' + card + '" data-suit="JOKER"><div>&nbsp;</div><div>&nbsp;</div></li>');
-            Jax.cellStates[i] = Jax.P1 | Jax.P2 | Jax.P3 | Jax.OPEN;
-        }
-
-        // initialize cell entry to array
-        Jax.cardToCells[card] = Jax.cardToCells[card] || [];
-        Jax.cardToCells[card].push(i);
-    }
-
-    $('#board').html(html.join(''));
-
-    Jax.cardToCells[Jax.JACK_SPADE] = Jax.cardToCells[Jax.JACK_CLUB] = [
-        1, 2, 3, 4, 5, 6, 7, 8,
-        10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-        20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
-        30, 31, 32, 33, 34, 35, 36, 37, 38, 39,
-        40, 41, 42, 43, 44, 45, 46, 47, 48, 49,
-        50, 51, 52, 53, 54, 55, 56, 57, 58, 59,
-        60, 61, 62, 63, 64, 65, 66, 67, 68, 69,
-        70, 71, 72, 73, 74, 75, 76, 77, 78, 79,
-        80, 81, 82, 83, 84, 85, 86, 87, 88, 89,
-        91, 92, 93, 94, 95, 96, 97, 98
-    ];
-
-    Jax.cardToCells[Jax.JACK_HEART] = Jax.cardToCells[Jax.JACK_SPADE] = [];
-
-    Jax.cells = $('#board li');
-
-    Jax.gameDeck = Jax.shuffleDecks();
-
-    Jax.numPlayers = 2;
-    for (var i = 0; i < Jax.numPlayers; i++) {
-        Jax.players.push({
-            cards: [],
-            jackableCells: []
-        });
-    }
-
-    for (var i = 0; i < 7; i++) {
-        for (var k = 0; k < Jax.numPlayers; k++) {
-            Jax.players[k].cards.push(Jax.gameDeck.pop());
-        }
-    }
-
-    Jax.cells.click(function () {
-
-        var cell = $(this),
-            cellIndex = cell.attr('data-cell'),
-            card = cell.attr('data-value'),
-            activeCard = Jax.myActiveCard;
-
-        if (activeCard) {
-
-            if ((Jax.isOpen(cellIndex) && (card == activeCard.value || Jax.isBlackJack(activeCard.value))) ||
-                (Jax.isRedJack(activeCard.value) && Jax.isOccupied(cellIndex) && !Jax.isOccupiedBy(cellIndex, Jax.P1))) {
-
-                if(playCard(0, cellIndex, activeCard.index) == false) {
-                    autoPlay(1);
-                    delete Jax.myActiveCard;
-                }
-            }
-        }
-    });
-
-    $('#player1').on('click', 'li', function () {
-
-        $('#player1 li').removeClass('active');
-        $(this).addClass('active');
-        Jax.myActiveCard = {
-            index: $(this).attr('data-pos'),
-            value: $(this).attr('data-value')
-        };
-    });
-    displayHand();
-
-});
-
 function playCard(playerIndex, cellIndex, cardIndex) {
 
     var player = Jax.players[playerIndex];
@@ -541,7 +664,7 @@ function playCard(playerIndex, cellIndex, cardIndex) {
     cards.splice(cardIndex, 1);
 
     if (Jax.isSeq(cellIndex, players[playerIndex])) {
-        alert(playerIndex == 0 ? "You win!" : "You just got whooped by a computer.");
+        Jax.gameOver(playerIndex);
         gameOver = true;
     } else {
         cards.push(Jax.gameDeck.pop());
@@ -561,14 +684,14 @@ function playCard(playerIndex, cellIndex, cardIndex) {
 function addToDiscardPile(card) {
 
     Jax.discardPile.unshift(card);
-    if(Jax.discardPile.length > 4) {
+    if (Jax.discardPile.length > 4) {
         Jax.discardPile.pop();
     }
 
 
     var cards = ['A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K'];
     var html = [];
-    for(var i=0; i<Jax.discardPile.length; i++) {
+    for (var i = 0; i < Jax.discardPile.length; i++) {
 
         card = Jax.discardPile[i];
         if (card != Jax.JOKER) {
@@ -660,47 +783,10 @@ function displayHand() {
     $('#player1').html(html);
 }
 
-function readBoard(board) {
 
-    var suitMultipliers = {
-        'd': 1,
-        'h': 2,
-        'c': 3,
-        's': 4,
-        'j': 1
-    }
 
-    var cardVals = {
-        '2': 0,
-        '3': 1,
-        '4': 2,
-        '5': 3,
-        '6': 4,
-        '7': 5,
-        '8': 6,
-        '9': 7,
-        '10': 8,
-        'q': 10,
-        'k': 11,
-        'a': 12,
-        'j': 52
-    }
 
-    return board.map(function(cell) {
+$(function () {
 
-        return cardVals[cell.slice(0, -1)] * suitMultipliers[cell.substr(-1)];
-    })
-}
-
-var board = [
-    'jj','8d','9d','10d','kd','qd','ad','ac','kc','jj',
-    '2h','2h','2h','2h','2h','2h','2h','2h','2h','2h',
-    '2h','2h','2h','2h','2h','2h','2h','2h','2h','2h',
-    '2h','2h','2h','2h','2h','2h','2h','2h','2h','2h',
-    '2h','2h','2h','2h','2h','2h','2h','2h','2h','2h',
-    '2h','2h','2h','2h','2h','2h','2h','2h','2h','2h',
-    '2h','2h','2h','2h','2h','2h','2h','2h','2h','2h',
-    '2h','2h','2h','2h','2h','2h','2h','2h','2h','2h',
-    '2h','2h','2h','2h','2h','2h','2h','2h','2h','2h',
-    'jj','8d','9d','10d','kd','qd','ad','ac','kc','jj'
-]
+    Jax.init();
+});
