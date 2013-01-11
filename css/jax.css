@@ -33,11 +33,20 @@ body, html {
     text-align: center; }
   #splash button {
     border-radius: 10px;
-    border: 3px solid black;
+    border: 1px solid black;
+    box-shadow: 0 0 0 1px white, 0 0 6px 1px black;
     background-color: white;
-    padding: 10px 15px 10px 15px;
+    padding: 12px 15px 12px 40px;
     font-family: Tahoma, Arial, SANS-SERIF;
-    font-size: 16px; }
+    font-size: 16px;
+    background-position: 12px center;
+    background-size: 20px auto;
+    background-repeat: no-repeat; }
+  #splash .play {
+    background-image: url(../images/symbols/spade.svg); }
+  #splash .rules {
+    margin-left: 10px;
+    background-image: url(../images/symbols/diamond.svg); }
 
 #dialog {
   position: fixed;
@@ -54,40 +63,37 @@ body, html {
   display: none; }
   #dialog button {
     border-radius: 10px;
-    border: 3px solid black;
+    border: 1px solid black;
+    box-shadow: 0 0 0 1px white, 0 0 6px 1px black;
     background-color: white;
-    padding: 10px 15px 10px 15px;
+    padding: 12px 15px 12px 40px;
     font-family: Tahoma, Arial, SANS-SERIF;
-    font-size: 16px; }
+    font-size: 16px;
+    background-position: 12px center;
+    background-size: 20px auto;
+    background-repeat: no-repeat; }
+  #dialog .play {
+    background-image: url(../images/symbols/heart.svg); }
 
 #rules {
   margin: 15px auto;
   width: 700px;
   display: none; }
-
-#panel {
-  display: none;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  width: 30px;
-  border-left: 1px solid black;
-  border-radius: 0 0 0 20px;
-  background: #999;
-  border-left: 1px solid black;
-  border-bottom: 1px solid black; }
-  #panel .handle {
-    background-color: #999;
-    border-radius: 20px 0 0 20px;
-    height: 60px;
-    width: 40px;
-    position: absolute;
-    top: 20px;
-    left: -40px;
-    border-left: 1px solid black;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black; }
+  #rules button {
+    border-radius: 10px;
+    border: 1px solid black;
+    box-shadow: 0 0 0 1px white, 0 0 6px 1px black;
+    background-color: white;
+    padding: 12px 15px 12px 40px;
+    font-family: Tahoma, Arial, SANS-SERIF;
+    font-size: 16px;
+    background-position: 12px center;
+    background-size: 20px auto;
+    background-repeat: no-repeat; }
+  #rules .play {
+    background-image: url(../images/symbols/spade.svg); }
+  #rules .back {
+    background-image: url(../images/symbols/diamond.svg); }
 
 #game {
   display: none;
@@ -96,6 +102,22 @@ body, html {
   top: 0;
   right: 0;
   left: 0; }
+  #game button {
+    border-radius: 10px;
+    border: 1px solid black;
+    box-shadow: 0 0 0 1px white, 0 0 6px 1px black;
+    background-color: white;
+    padding: 12px 15px 12px 40px;
+    font-family: Tahoma, Arial, SANS-SERIF;
+    font-size: 16px;
+    background-position: 12px center;
+    background-size: 20px auto;
+    background-repeat: no-repeat; }
+  #game .rules {
+    background-image: url(../images/symbols/club.svg);
+    position: absolute;
+    bottom: 5px;
+    right: 15px; }
 
 #board {
   padding: 0;

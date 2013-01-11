@@ -16,39 +16,28 @@
     <button class="rules">How Do You Play?</button>
 </section>
 <section id="rules">
-    <p>The goal of BlakJax is to capture five connecting squares horizontally, vertically or diagonally before the
-        computer can.</p>
+    <p>The goal of BlakJax is to capture five connecting squares horizontally, vertically or diagonally before your opponent can.</p>
 
     <p>The rules are almost just like <a href="http://www.pagat.com/misc/jack.html">One Eyed Jack</a> or Sequence. The
-        difference is there are no one or two eyed jacks. Instead red jacks are used to
-        free up a square that has been captured by your opponent and black jacks are wild and can be played in any open
-        square except for the corners.</p>
+        difference is that there are no one or two eyed jacks. Instead red jacks are used to
+        free up a square that has been captured by your opponent and black jacks are wild which means they can be used to
+        capture any open square except for the jokers.</p>
 
-    <p>The cards are the top are your hand. When its your turn to play click a card in your hand to select it.
+    <p>The cards at the top are yours to play. When its your turn click of your cards to select it.
         The selected card will be highlighted in green. To capture a square click it when the matching card or a jack is
-        selected in your hand.
-        If the play is valid the cell will change to blue signifying that has been captured by you.</p>
+        selected.  If the play is valid the cell will change to blue signifying that it has been captured by you.</p>
 
-    <p>The cards at the bottom are the last four cards that have been played. If you have a dead card, meaning all of
-        the squares where it could have been
-        played are already occupied, you can discard it and get a new one by clicking these cards.</p>
+    <p>The last four cards that have been played are displayed below your cards. If you have a dead card, meaning all of
+        the squares where it could have been played are already occupied, you can discard it and get a new one by clicking these cards.</p>
 
     <button class="play">Start Game</button>
+    <button class="back">Back To Game</button>
 </section>
 <section id="dialog">
     <p class="message"></p>
     <button class="play">Play Again</button>
 </section>
 <section id="game">
-    <div id="panel">
-        <div class="handle"></div>
-        <ul class="games">
-            <li class="sequence">Play Sequence</li>
-            <li class="oneEyedJack">Play One Eyed Jack</li>
-            <li class="swirl">Play Swirl</li>
-        </ul>
-
-    </div>
     <ul id="discardPile"></ul>
     <div id="hands">
         <ul id="player1"></ul>
@@ -56,6 +45,7 @@
         <ul id="player3"></ul>
     </div>
     <ul id="board"></ul>
+    <button class="rules">Rules</button>
 </section>
 </body>
 </html>

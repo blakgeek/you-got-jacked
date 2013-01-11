@@ -112,7 +112,23 @@ var Jax = {
         $('#splash button.rules').click(function() {
 
             $('#splash, #game, #rules').hide();
+            $('#rules button.back').hide()
+            $('#rules button.play').show()
             $('#rules').show();
+        });
+
+        $('#game button.rules').click(function() {
+
+            $('#splash, #game, #rules').hide();
+            $('#rules button.back').show()
+            $('#rules button.play').hide()
+            $('#rules').show();
+        });
+
+        $('#rules button.back').click(function() {
+
+            $('#dialog, #rules').hide();
+            $('#game').show();
         });
 
     },
