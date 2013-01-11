@@ -18,7 +18,8 @@ var Jax = {
     JACK_HEART: 23,
     JACK_CLUB: 36,
     JACK_SPADE: 49,
-    CAPTURE_FACTOR: 4,
+    CAPTURE_FACTOR: 6,
+    IN_HAND_FACTOR: 4,
     SEQUENCE_BOARD: [],
     CLASSIC_BOARD: [],
     SUITS: ['DIAMOND', 'HEART', 'CLUB', 'SPADE'],
@@ -94,9 +95,7 @@ var Jax = {
 
             if (activeCard && Jax.isDeadCard(activeCard.value)) {
 
-                cards.splice(activeCard.index, 1);
-                cards.push(Jax.gameDeck.pop());
-                addToDiscardPile(activeCard.value);
+                discardCard(0, activeCard.index);
                 displayHand();
                 delete Jax.myActiveCard;
             }
@@ -727,17 +726,25 @@ function autoPlay(playerIndex) {
 
     var players = [Jax.P1, Jax.P2, Jax.P3];
     var player = Jax.players[playerIndex];
-    var c = player.cards;
+    var cards = player.cards;
     var maxCell;
     var card;
     var cells;
     var maxCard;
     var maxScore = -1;
 
-    Jax.cells.attr('data-score', null);
-    for (var i = 0; i < c.length; i++) {
+    for(var i=0; i< cards.length; i++) {
 
-        card = c[i];
+        if(Jax.isDeadCard(cards[i])) {
+            discardCard(playerIndex, i);
+            break;
+        }
+    }
+
+    Jax.cells.attr('data-score', null);
+    for (var i = 0; i < cards.length; i++) {
+
+        card = cards[i];
 
         if (Jax.isRedJack(card)) {
             cells = player.jackableCells;
@@ -769,6 +776,7 @@ function autoPlay(playerIndex) {
         }
     }
 
+
     playCard(playerIndex, maxCell, maxCard);
 }
 
@@ -778,6 +786,13 @@ function mark(index, player) {
 
 function unmark(index) {
     $(Jax.cells[index]).removeClass('p1 p2 p3');
+}
+
+function discardCard(playerIndex, cardIndex) {
+
+    var cards = Jax.players[playerIndex].cards;
+    addToDiscardPile(cards[cardIndex]);
+    cards.splice(cardIndex, 1, Jax.gameDeck.pop());
 }
 
 function displayHand() {
