@@ -20,6 +20,7 @@ var Jax = {
     JACK_SPADE: 49,
     CAPTURE_FACTOR: 6,
     IN_HAND_FACTOR: 4,
+    BLOCKER_FACTOR: 1/(6*6),
     SEQUENCE_BOARD: [],
     CLASSIC_BOARD: [],
     SUITS: ['DIAMOND', 'HEART', 'CLUB', 'SPADE'],
@@ -366,14 +367,14 @@ var Jax = {
         return (card % 13 == 10);
     },
 
-    score: function (index, player, scoreCaptured) {
+    score: function (cellIndex, playerIndex, scoreCaptured) {
 
-        if (!scoreCaptured && Jax.isOccupied(index)) {
+        if (!scoreCaptured && Jax.isOccupied(cellIndex)) {
             return 0;
         }
 
-        var cell = Jax.cellify(index),
-            multiplier = Jax.multiplier(index, player),
+        var cell = Jax.cellify(cellIndex),
+            multiplier = Jax.multiplier(cellIndex, playerIndex),
             h = cell.cr - cell.cl,
             v = (cell.bc - cell.tc) / 10,
             dl = (cell.br - cell.tl) / 11,
@@ -383,8 +384,11 @@ var Jax = {
         return  baseScore * multiplier;
     },
 
-    multiplier: function (index, player) {
-        return (Jax.calcHMultiplier(index, player) + Jax.calcVMultiplier(index, player) + Jax.calcDRMultiplier(index, player) + Jax.calcDLMultiplier(index, player)) || 1;
+    multiplier: function (cellIndex, playerIndex) {
+        return (Jax.calcHMultiplier(cellIndex, playerIndex) +
+            Jax.calcVMultiplier(cellIndex, playerIndex) +
+            Jax.calcDRMultiplier(cellIndex, playerIndex) +
+            Jax.calcDLMultiplier(cellIndex, playerIndex)) || 1;
     },
 
     isSeq: function (index, player) {
@@ -531,132 +535,79 @@ var Jax = {
         return isSeq;
     },
 
-    calcHMultiplier: function (index, player) {
+    isCardInHand: function(card, playerIndex) {
 
-        var cell = Jax.cellify(index),
+        var cards = Jax.players[playerIndex].cards;
+
+        return (cards.indexOf(card) != -1);
+    },
+
+    gmc: function(start, end, increment, playerIndex) {
+
+        var player = Jax.PLAYERS[playerIndex],
+            multiplier = 0;
+
+        if (end - start >= 4 * increment) {
+
+            for (var i = start; i <= end - (increment * 4); i += increment) {
+
+                var captureCnt = 0;
+                var blockerCnt = 0;
+                var inHandCnt = 0;
+                // test 5 contiguous cells for captureCnt
+                for (var k = i; k <= i + increment + 4; k++) {
+
+                    if (Jax.isOccupiedBy(k, player)) {
+                        captureCnt++;
+                    } else if (Jax.isOccupied(k)) {
+                        blockerCnt++;
+                    } else if (Jax.isCardInHand(Jax.cellCards[k], playerIndex)) {
+                        inHandCnt++;
+                    }
+                }
+                if (captureCnt > 0) {
+                    multiplier += Math.pow(Jax.CAPTURE_FACTOR, captureCnt) * Math.pow(Jax.BLOCKER_FACTOR, blockerCnt) + Math.pow(Jax.IN_HAND_FACTOR, inHandCnt);
+                }
+            }
+        }
+        return multiplier;
+
+    },
+
+    calcHMultiplier: function (cellIndex, playerIndex) {
+
+        var cell = Jax.cellify(cellIndex),
             start = cell.cl,
-            end = cell.cr,
-            multiplier = 0;
+            end = cell.cr;
 
-        // just 4
-        if (end - start >= 4) {
-
-            for (var i = start; i <= end - 4; i++) {
-
-                var matches = 0;
-                var blockers = 0;
-                // test 5 contiguous cells for matches
-                for (var k = i; k <= i + 4; k++) {
-
-                    if (Jax.isOccupiedBy(k, player)) {
-                        matches++;
-                    } else if (Jax.isOccupied(k)) {
-                        matches--;
-                    }
-                }
-                if (matches > 0) {
-                    multiplier += Math.pow(Jax.CAPTURE_FACTOR, matches);
-                }
-            }
-        }
-        return multiplier;
+        return this.gmc(start, end, 1, playerIndex)
     },
 
-    calcVMultiplier: function (index, player) {
+    calcVMultiplier: function (cellIndex, playerIndex) {
 
-        var cell = Jax.cellify(index),
+        var cell = Jax.cellify(cellIndex),
             start = cell.tc,
-            end = cell.bc,
-            multiplier = 0;
+            end = cell.bc;
 
-        // 4 * 10
-        if (end - start >= 40) {
-
-            for (var i = start; i <= end - 40; i += 10) {
-
-                var matches = 0;
-                var blockers = 0;
-                // test 5 contiguous cells for matches
-                for (var k = i; k <= i + 40; k += 10) {
-
-                    if (Jax.isOccupiedBy(k, player)) {
-                        matches++;
-                    } else if (Jax.isOccupied(k)) {
-                        matches--;
-                    }
-                }
-                if (matches > 0) {
-                    multiplier += Math.pow(Jax.CAPTURE_FACTOR, matches);
-                }
-            }
-        }
-        return multiplier;
-
+        return this.gmc(start, end, 10, playerIndex)
     },
 
-    calcDLMultiplier: function (index, player) {
+    calcDLMultiplier: function (cellIndex, playerIndex) {
 
-        var cell = Jax.cellify(index),
+        var cell = Jax.cellify(cellIndex),
             start = cell.tl,
-            end = cell.br,
-            multiplier = 0;
+            end = cell.br;
 
-        // 4 * 10 + 4
-        if (end - start >= 44) {
-
-            for (var i = start; i <= end - 44; i += 11) {
-
-                var matches = 0;
-                var blockers = 0;
-                // test 5 contiguous cells for matches
-                for (var k = i; k <= i + 44; k += 11) {
-
-                    if (Jax.isOccupiedBy(k, player)) {
-                        matches++;
-                    } else if (Jax.isOccupied(k)) {
-                        matches--;
-                    }
-                }
-                if (matches > 0) {
-                    multiplier += Math.pow(Jax.CAPTURE_FACTOR, matches);
-                }
-            }
-        }
-        return multiplier;
-
+        return this.gmc(start, end, 11, playerIndex)
     },
 
-    calcDRMultiplier: function (index, player) {
+    calcDRMultiplier: function (cellIndex, playerIndex) {
 
-        var cell = Jax.cellify(index),
+        var cell = Jax.cellify(cellIndex),
             start = cell.tr,
-            end = cell.bl,
-            multiplier = 0;
+            end = cell.bl;
 
-        // 4 * 10 - 4
-        if (end - start >= 36) {
-
-            var multiplier = 0;
-            var blockers = 0;
-            for (var i = start; i <= end - 36; i += 9) {
-
-                var matches = 0;
-                // test 5 contiguous cells for matches
-                for (var k = i; k <= i + 36; k += 9) {
-
-                    if (Jax.isOccupiedBy(k, player)) {
-                        matches++;
-                    } else if (Jax.isOccupied(k)) {
-                        matches--;
-                    }
-                }
-                if (matches > 0) {
-                    multiplier += Math.pow(Jax.CAPTURE_FACTOR, matches);
-                }
-            }
-        }
-        return multiplier;
-
+        return this.gmc(start, end, 9, playerIndex)
     }
 };
 
@@ -724,7 +675,6 @@ function addToDiscardPile(card) {
 
 function autoPlay(playerIndex) {
 
-    var players = [Jax.P1, Jax.P2, Jax.P3];
     var player = Jax.players[playerIndex];
     var cards = player.cards;
     var maxCell;
@@ -750,7 +700,7 @@ function autoPlay(playerIndex) {
             cells = player.jackableCells;
             for (var k = 0; k < cells.length; k++) {
 
-                var score = Jax.score(cells[k], players[playerIndex], true) / 9;
+                var score = Jax.score(cells[k], playerIndex, true) / 36;
                 $(Jax.cells[cells[k]]).attr('data-jack-score', score);
 
                 if (score > maxScore) {
@@ -764,7 +714,7 @@ function autoPlay(playerIndex) {
 
             for (var k = 0; k < cells.length; k++) {
 
-                var score = Jax.score(cells[k], players[playerIndex]);
+                var score = Jax.score(cells[k], playerIndex);
                 $(Jax.cells[cells[k]]).attr('data-score', score);
 
                 if (score > maxScore) {
