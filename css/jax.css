@@ -215,10 +215,10 @@ li[data-suit=JOKER] {
   height: 108px;
   width: 81px;
   border-radius: 10px;
-  box-shadow: 0 0 0 1px black, 0 0 6px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
   border: 6px solid #d9d7d3;
   background-color: #f6f3ef;
-  margin-left: 8px;
+  margin-left: 12px;
   position: relative;
   background-size: 45px auto;
   background-position: center center;
