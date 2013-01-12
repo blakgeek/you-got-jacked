@@ -47,6 +47,7 @@ var Jax = {
     cellStates: [],
     cellCards: [],
     players: [],
+    gameServerHost: 'http://localhost:9000/',
     discardPile: [],
 
     init: function () {
@@ -113,7 +114,7 @@ var Jax = {
         $('button.play-online').click(function () {
 
             if (!window.sio) {
-                window.sio = io.connect('http://ec2-184-73-193-207.compute-1.amazonaws.com:9000');
+                window.sio = io.connect(Jax.gameServerHost);
 
                 sio.on('found-game', function (gameId) {
 
@@ -197,7 +198,8 @@ var Jax = {
         // TODO: fix this to use the players index
         Jax.players.push({
             cards: cards
-        })
+        });
+        Jax.discardPile = [];
         $('#player1').on('click', 'li', this.selectCard);
         displayHand();
     },
@@ -246,7 +248,7 @@ var Jax = {
         Jax.cells = $('#board li');
 
         Jax.gameDeck = Jax.shuffleDecks();
-
+        Jax.discardPile = [];
         Jax.numPlayers = 2;
         Jax.players = [];
         for (var i = 0; i < Jax.numPlayers; i++) {
@@ -262,13 +264,7 @@ var Jax = {
             }
         }
 
-        var onlinePlay = true;
-
-        Jax.cells.click(onlinePlay ? function () {
-
-            gameSocket.emit('play', $(this).attr('data-cell'), Jax.myActiveCard.index);
-
-        } : function () {
+        Jax.cells.click(function () {
 
             var cell = $(this),
                 cellIndex = cell.attr('data-cell'),
@@ -849,7 +845,7 @@ $(function () {
 
 var gameSocket;
 function onNewGame(gameId) {
-    gameSocket = io.connect("http://ec2-184-73-193-207.compute-1.amazonaws.com:9000/" + gameId);
+    gameSocket = io.connect(Jax.gameServerHost + gameId);
     gameSocket.on('connect', function () {
         console.log('Connected to game!')
     });
