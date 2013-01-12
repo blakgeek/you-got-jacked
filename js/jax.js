@@ -20,9 +20,10 @@ var Jax = {
     JACK_SPADE: 49,
     CAPTURE_FACTOR: 6,
     IN_HAND_FACTOR: 4,
-    BLOCKER_FACTOR: 1/(6*6),
+    BLOCKER_FACTOR: 1 / (6 * 6),
     SEQUENCE_BOARD: [],
     CLASSIC_BOARD: [],
+    CAPTURED_CELL_CLASSES:  ['p1', 'p2', 'p3'],
     SUITS: ['DIAMOND', 'HEART', 'CLUB', 'SPADE'],
     DECKS: [
         0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
@@ -89,43 +90,73 @@ var Jax = {
             ])
         }
 
-        $('#discardPile').click(function() {
+        // TODO: move this so that different logic can be applied depending on type of game (online/offline)
+        $('#discardPile').click(function () {
 
-            var activeCard = Jax.myActiveCard,
-                cards = Jax.players[0].cards;
+            var activeCard = Jax.myActiveCard;
 
-            if (activeCard && Jax.isDeadCard(activeCard.value)) {
+            if (Jax.onlineMode) {
 
-                discardCard(0, activeCard.index);
-                displayHand();
-                delete Jax.myActiveCard;
+                gameSocket.emit('discard', activeCard.index);
+
+            } else {
+
+                if (activeCard && Jax.isDeadCard(activeCard.value)) {
+
+                    discardCard(0, activeCard.index);
+                    displayHand();
+                    delete Jax.myActiveCard;
+                }
             }
         });
 
-        $('button.play').click(function() {
+        $('button.play-online').click(function () {
+
+            if (!window.sio) {
+                window.sio = io.connect('http://ec2-184-73-193-207.compute-1.amazonaws.com:9000');
+
+                sio.on('found-game', function (gameId) {
+
+                    onNewGame(gameId);
+                });
+
+                sio.on('waiting', function (gameId) {
+
+                    $('#waiting').show();
+                    onNewGame(gameId);
+                });
+            }
+            // TODO: modify to allow the selection of a board to play
+            sio.emit('find-opponent');
+
+        });
+
+        $('button.play').click(function () {
 
             $('#splash, #rules, #dialog').hide();
             $('#game').show();
+
             Jax.newGame(['sequence', 'oneEyedJack', 'custom1'][Math.floor(Math.random() * 3)]);
         });
 
-        $('#splash button.rules').click(function() {
+        $('#splash button.rules').click(function () {
 
             $('#splash, #game, #rules').hide();
-            $('#rules button.back').hide()
+            $('#rules button').hide()
             $('#rules button.play').show()
+            $('#rules button.play-online').show()
             $('#rules').show();
         });
 
-        $('#game button.rules').click(function() {
+        $('#game button.rules').click(function () {
 
             $('#splash, #game, #rules').hide();
-            $('#rules button.back').show()
-            $('#rules button.play').hide()
+            $('#rules button').hide()
+            $('#rules button.back').hide()
             $('#rules').show();
         });
 
-        $('#rules button.back').click(function() {
+        $('#rules button.back').click(function () {
 
             $('#dialog, #rules').hide();
             $('#game').show();
@@ -133,9 +164,48 @@ var Jax = {
 
     },
 
+    newOnlineGame: function (boardName, cards) {
+
+        var board = this.BOARDS[boardName || 'sequence'];
+        var html = [];
+        for (var i = 0; i < 100; i++) {
+
+            var card = board[i];
+
+            if (card != Jax.JOKER) {
+                Jax.cellStates[i] = Jax.OPEN;
+                Jax.cellCards[i] = card;
+                var suit = Jax.SUITS[Math.floor(card / 13)];
+                var val = this.CARDS[card % 13];
+                html.push('<li data-cell="' + i + '" data-value="' + card + '" data-suit="' + suit + '"><div class="tl">' + val + '</div><div class="br">' + val + '</div></li>');
+            } else {
+                html.push('<li data-cell="' + i + '" data-value="' + card + '" data-suit="JOKER"><div>&nbsp;</div><div>&nbsp;</div></li>');
+                Jax.cellStates[i] = Jax.P1 | Jax.P2 | Jax.P3 | Jax.OPEN;
+            }
+        }
+
+        $('#board').html(html.join(''));
+
+        Jax.cells = $('#board li');
+
+        Jax.cells.click(function () {
+
+            gameSocket.emit('play', $(this).attr('data-cell'), Jax.myActiveCard.index);
+
+        });
+
+        // TODO: fix this to use the players index
+        Jax.players.push({
+            cards: cards
+        })
+        $('#player1').on('click', 'li', this.selectCard);
+        displayHand();
+    },
+
     newGame: function (boardName) {
 
         var board = this.BOARDS[boardName || 'sequence'];
+        // TODO: fix this actually find the locations of the jokers or this won't work correctly for boards where jokers are not in the corners
         this.cardToCells[Jax.JACK_SPADE] = this.cardToCells[Jax.JACK_CLUB] = [
             1, 2, 3, 4, 5, 6, 7, 8,
             10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
@@ -192,7 +262,13 @@ var Jax = {
             }
         }
 
-        Jax.cells.click(function () {
+        var onlinePlay = true;
+
+        Jax.cells.click(onlinePlay ? function () {
+
+            gameSocket.emit('play', $(this).attr('data-cell'), Jax.myActiveCard.index);
+
+        } : function () {
 
             var cell = $(this),
                 cellIndex = cell.attr('data-cell'),
@@ -212,11 +288,12 @@ var Jax = {
             }
         });
 
+
         $('#player1').on('click', 'li', this.selectCard);
         displayHand();
     },
 
-    gameOver: function(winner) {
+    gameOver: function (winner) {
 
         $('#dialog p').html(winner == 0 ? "You win!" : "You just got whooped by a computer.");
         $('#dialog').css('z-index', 10000).show();
@@ -300,18 +377,18 @@ var Jax = {
         };
     },
 
-    isDeadCard: function(card) {
+    isDeadCard: function (card) {
 
         var cells = this.cardToCells[card],
             result = true;
 
-        if(this.isJack(card)) {
+        if (this.isJack(card)) {
             result = false;
         } else {
 
-            for(var i=0; i<cells.length; i++) {
+            for (var i = 0; i < cells.length; i++) {
 
-                if(!this.isOccupied(cells[i])) {
+                if (!this.isOccupied(cells[i])) {
 
                     result = false;
                     break;
@@ -535,14 +612,14 @@ var Jax = {
         return isSeq;
     },
 
-    isCardInHand: function(card, playerIndex) {
+    isCardInHand: function (card, playerIndex) {
 
         var cards = Jax.players[playerIndex].cards;
 
         return (cards.indexOf(card) != -1);
     },
 
-    gmc: function(start, end, increment, playerIndex) {
+    gmc: function (start, end, increment, playerIndex) {
 
         var player = Jax.PLAYERS[playerIndex],
             multiplier = 0;
@@ -683,9 +760,9 @@ function autoPlay(playerIndex) {
     var maxCard;
     var maxScore = -1;
 
-    for(var i=0; i< cards.length; i++) {
+    for (var i = 0; i < cards.length; i++) {
 
-        if(Jax.isDeadCard(cards[i])) {
+        if (Jax.isDeadCard(cards[i])) {
             discardCard(playerIndex, i);
             break;
         }
@@ -747,7 +824,7 @@ function discardCard(playerIndex, cardIndex) {
 
 function displayHand() {
     var cards = ['A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K'];
-    var pcards = Jax.players[0].cards;
+    var pcards = (window.localPlayer || Jax.players[0]).cards;
     var html = []
     for (var i = 0; i < pcards.length; i++) {
 
@@ -765,9 +842,48 @@ function displayHand() {
 }
 
 
-
-
 $(function () {
 
     Jax.init();
 });
+
+var gameSocket;
+function onNewGame(gameId) {
+    gameSocket = io.connect("http://ec2-184-73-193-207.compute-1.amazonaws.com:9000/" + gameId);
+    gameSocket.on('connect', function () {
+        console.log('Connected to game!')
+    });
+    gameSocket.on('play-accepted', function (playerIndex, cellIndex, card) {
+
+        if (Jax.isRedJack(card)) {
+            unmark(cellIndex);
+        } else {
+            mark(cellIndex, Jax.CAPTURED_CELL_CLASSES[playerIndex]);
+        }
+        addToDiscardPile(card)
+    });
+
+    gameSocket.on('start-game', function (boardName, cards) {
+
+        $('#waiting').hide();
+        $('#splash, #rules, #dialog').hide();
+        $('#game').show();
+        window.localPlayer = {
+            cards: cards
+        }
+        Jax.newOnlineGame(boardName, cards);
+
+
+    })
+
+    gameSocket.on('opponent-joined', function (name) {
+        console.log('About to play against ' + name)
+    })
+
+    gameSocket.on('card-drawn', function(card, index) {
+        localPlayer.cards.splice(index, 1, card);
+        displayHand();
+
+    })
+    gameSocket.emit('join', ['bill', 'john', 'mark', 'phil'][new Date().getTime() % 4]);
+}

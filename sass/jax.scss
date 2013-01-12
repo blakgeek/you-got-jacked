@@ -76,13 +76,17 @@ body, html {
     @include jaxButton;
   }
 
+  .play-online {
+    background-image: url(../images/symbols/diamond.svg);
+  }
+
   .play {
     background-image: url(../images/symbols/spade.svg);
   }
 
   .rules {
     margin-left: 10px;
-    background-image: url(../images/symbols/diamond.svg);
+    background-image: url(../images/symbols/club.svg);
   }
 }
 
@@ -99,6 +103,22 @@ body, html {
   }
 }
 
+#waiting {
+  display: none;
+  position: absolute;
+  left: 50%;
+  width: 300px;
+  margin: 20px 0 0 -150px;
+  text-align: center;
+  border-radius: 10px;
+  border: 1px solid black;
+  box-shadow: 0 0 0 1px white, 0 0 6px 1px black;
+  background-color: white;
+  padding: 12px 15px 12px 15px;
+  font-family: Tahoma, Arial, SANS-SERIF;
+  font-size: 16px;
+}
+
 #rules {
   margin: 15px auto;
   width: 700px;
@@ -112,8 +132,12 @@ body, html {
     background-image: url(../images/symbols/spade.svg);
   }
 
-  .back {
+  .play-online {
     background-image: url(../images/symbols/diamond.svg);
+  }
+
+  .back {
+    background-image: url(../images/symbols/club.svg);
   }
 }
 
@@ -321,5 +345,12 @@ li[data-suit=JOKER] {
     display: none;
     position: relative;
   }
+
+}
+
+footer {
+  display: none;
+  width: 200px;
+  text-align: center;
 
 }
