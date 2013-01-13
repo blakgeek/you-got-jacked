@@ -23,7 +23,7 @@ var Jax = {
     BLOCKER_FACTOR: 1 / (6 * 6),
     SEQUENCE_BOARD: [],
     CLASSIC_BOARD: [],
-    CAPTURED_CELL_CLASSES:  ['p1', 'p2', 'p3'],
+    CAPTURED_CELL_CLASSES: ['p1', 'p2', 'p3'],
     SUITS: ['DIAMOND', 'HEART', 'CLUB', 'SPADE'],
     DECKS: [
         0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
@@ -113,23 +113,22 @@ var Jax = {
 
         $('button.play-online').click(function () {
 
-            if (!window.sio) {
-                window.sio = io.connect(Jax.gameServerHost);
+            var activeGameId = localStorage.getItem('activeGameId');
 
-                sio.on('found-game', function (gameId) {
+            if (activeGameId) {
+                connectToGame(activeGameId, true);
+            } else {
+                if (!window.sio) {
+                    window.sio = io.connect(Jax.gameServerHost);
 
-                    onNewGame(gameId);
-                });
+                    sio.on('found-game', function (gameId) {
 
-                sio.on('waiting', function (gameId) {
-
-                    $('#waiting').show();
-                    onNewGame(gameId);
-                });
+                        connectToGame(gameId);
+                    });
+                }
+                // TODO: modify to allow the selection of a board to play
+                sio.emit('find-opponent');
             }
-            // TODO: modify to allow the selection of a board to play
-            sio.emit('find-opponent');
-
         });
 
         $('button.play').click(function () {
@@ -165,7 +164,9 @@ var Jax = {
 
     },
 
-    newOnlineGame: function (boardName, cards) {
+    newOnlineGame: function (boardName, cards, cellStates) {
+
+        // TODO: rework this method to more consolidated in the loop
 
         var board = this.BOARDS[boardName || 'sequence'];
         var html = [];
@@ -174,14 +175,20 @@ var Jax = {
             var card = board[i];
 
             if (card != Jax.JOKER) {
-                Jax.cellStates[i] = Jax.OPEN;
+
+                var cellState = Jax.cellStates[i] = cellStates ? cellStates[i] : Jax.OPEN;
+                // This sexy lil bit o code is just finding the index of the class name by taking the cube root and subtracting one.
+                // This only works because the player flags are 2 (2^1),4 (2^2) and 8 (2^3)
+                var className = Jax.CAPTURED_CELL_CLASSES[Math.log(cellState) / Math.LN2 - 1];
                 Jax.cellCards[i] = card;
                 var suit = Jax.SUITS[Math.floor(card / 13)];
                 var val = this.CARDS[card % 13];
-                html.push('<li data-cell="' + i + '" data-value="' + card + '" data-suit="' + suit + '"><div class="tl">' + val + '</div><div class="br">' + val + '</div></li>');
+                html.push('<li class="' + className + '" data-cell="' + i + '" data-value="' + card + '" data-suit="' + suit + '"><div class="tl">' + val + '</div><div class="br">' + val + '</div></li>');
+
             } else {
-                html.push('<li data-cell="' + i + '" data-value="' + card + '" data-suit="JOKER"><div>&nbsp;</div><div>&nbsp;</div></li>');
-                Jax.cellStates[i] = Jax.P1 | Jax.P2 | Jax.P3 | Jax.OPEN;
+                var cellState = Jax.cellStates[i] = cellStates ? cellStates[i] : (Jax.P1 | Jax.P2 | Jax.P3 | Jax.OPEN);
+                var className = Jax.CAPTURED_CELL_CLASSES[Math.log(cellState) / Math.LN2 - 1];
+                html.push('<li class="' + className + '" data-cell="' + i + '" data-value="' + card + '" data-suit="JOKER"><div>&nbsp;</div><div>&nbsp;</div></li>');
             }
         }
 
@@ -291,7 +298,7 @@ var Jax = {
 
     gameOver: function (winner) {
 
-        $('#dialog p').html(winner == 0 ? "You win!" : "You just got whooped by a computer.");
+        $('#dialog p').html(winner ? "You win!" : "You lose.");
         $('#dialog').css('z-index', 10000).show();
         $('#player1').unbind('click', this.selectCard);
     },
@@ -844,11 +851,20 @@ $(function () {
 });
 
 var gameSocket;
-function onNewGame(gameId) {
+function connectToGame(gameId, rejoin) {
+
+    localStorage.setItem('activeGameId', gameId);
+
     gameSocket = io.connect(Jax.gameServerHost + gameId);
     gameSocket.on('connect', function () {
         console.log('Connected to game!')
     });
+
+    gameSocket.on('waiting-for-players', function() {
+
+        $('#message').html('Waiting for another player to join.').show();
+    });
+
     gameSocket.on('play-accepted', function (playerIndex, cellIndex, card) {
 
         if (Jax.isRedJack(card)) {
@@ -861,7 +877,7 @@ function onNewGame(gameId) {
 
     gameSocket.on('start-game', function (boardName, cards) {
 
-        $('#waiting').hide();
+        $('#message').hide();
         $('#splash, #rules, #dialog').hide();
         $('#game').show();
         window.localPlayer = {
@@ -870,16 +886,63 @@ function onNewGame(gameId) {
         Jax.newOnlineGame(boardName, cards);
 
 
-    })
+    });
 
-    gameSocket.on('opponent-joined', function (name) {
-        console.log('About to play against ' + name)
-    })
+    gameSocket.on('player-joined', function (name, index) {
+        console.log('Player number ' + index + '[' + name + '] joined the game.')
+    });
 
-    gameSocket.on('card-drawn', function(card, index) {
+    gameSocket.on('joined', function (name, index) {
+
+        localStorage.setItem('playerIndex', index);
+    });
+
+    gameSocket.on('card-drawn', function (card, index) {
         localPlayer.cards.splice(index, 1, card);
         displayHand();
 
-    })
-    gameSocket.emit('join', ['bill', 'john', 'mark', 'phil'][new Date().getTime() % 4]);
+    });
+
+    gameSocket.on('take-turn', function () {
+
+        $('#message').text("It's your turn.").show().delay(2000).fadeOut();
+    });
+
+    gameSocket.on('winner', function () {
+
+        Jax.gameOver(true);
+        localStorage.removeItem('activeGameId');
+        localStorage.removeItem('playerIndex');
+    });
+
+    gameSocket.on('loser', function () {
+
+        Jax.gameOver(false);
+    });
+;
+    gameSocket.on('game-in-progress', function(gameState) {
+
+        $('#message').hide();
+        $('#splash, #rules, #dialog').hide();
+        $('#game').show();
+        window.localPlayer = {
+            cards: gameState.cards
+        }
+        Jax.newOnlineGame(gameState.boardName, gameState.cards, gameState.cellStates);
+
+        for(var i=0; i<gameState.discarded; i++) {
+            addToDiscardPile(gameState.discarded[i]);
+        }
+        if(gameState.canPlay) {
+
+            $('#message').text("It's your turn.").show().delay(2000).fadeOut();
+        }
+
+    });
+
+    if(rejoin === true) {
+        gameSocket.emit('rejoin', localStorage.getItem('playerIndex'));
+    } else {
+        gameSocket.emit('join', ['bill', 'john', 'mark', 'phil'][new Date().getTime() % 4]);
+    }
 }

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <script src="http://ec2-184-73-193-207.compute-1.amazonaws.com:9000/socket.io/socket.io.js"></script>
     <script src="./js/jquery-1.8.3.min.js"></script>
+    <script src="BG.js"></script>
     <script src="./js/jax.js"></script>
     <script src="./js/config.js"></script>
     <link rel="stylesheet" type="text/css" href="css/jax.css"/>
@@ -45,7 +46,8 @@
 </section>
 <section id="dialog">
     <p class="message"></p>
-    <button class="play">Play Again</button>
+    <button class="play">Play Solo</button>
+    <button class="play-online">Play Someone</button>
 </section>
 <section id="game">
     <ul id="discardPile"></ul>
@@ -58,9 +60,7 @@
     <button class="rules">A Little Help</button>
 </section>
 <!-- consolidate all these dialog sections an make them dynamic -->
-<section id="waiting">
-    Waiting for an an player to join.
-</section>
+<section id="message"></section>
 <footer>
     Another Hairy Black App
 </footer>
