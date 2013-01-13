@@ -57,6 +57,7 @@ body, html {
 }
 
 #splash {
+
   @include dialog;
   background-image: url(../images/joker2.svg);
   background-size: auto 150px;
@@ -77,6 +78,7 @@ body, html {
   }
 
   .play-online {
+    margin-left: 10px;
     background-image: url(../images/symbols/diamond.svg);
   }
 
@@ -103,9 +105,9 @@ body, html {
   }
 }
 
-#waiting {
+#message {
   display: none;
-  position: absolute;
+  position: fixed;
   left: 50%;
   width: 300px;
   margin: 20px 0 0 -150px;
