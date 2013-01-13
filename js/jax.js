@@ -153,7 +153,7 @@ var Jax = {
 
             $('#splash, #game, #rules').hide();
             $('#rules button').hide()
-            $('#rules button.back').hide()
+            $('#rules button.back').show()
             $('#rules').show();
         });
 
