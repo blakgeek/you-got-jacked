@@ -135,6 +135,7 @@ var Jax = {
 
             $('#splash, #rules, #dialog').hide();
             $('#game').show();
+            $('#message').hide();
 
             Jax.newGame(['sequence', 'oneEyedJack', 'custom1'][Math.floor(Math.random() * 3)]);
         });
@@ -710,7 +711,7 @@ function playCard(playerIndex, cellIndex, cardIndex) {
     cards.splice(cardIndex, 1);
 
     if (Jax.isSeq(cellIndex, players[playerIndex])) {
-        Jax.gameOver(playerIndex);
+        Jax.gameOver(playerIndex == 0);
         gameOver = true;
     } else {
         cards.push(Jax.gameDeck.pop());
@@ -729,9 +730,9 @@ function playCard(playerIndex, cellIndex, cardIndex) {
 
 function addToDiscardPile(card) {
 
-    Jax.discardPile.unshift(card);
-    if (Jax.discardPile.length > 4) {
-        Jax.discardPile.pop();
+    Jax.discardPile.push(card);
+    if (Jax.discardPile.length > 10) {
+        Jax.discardPile.shift();
     }
 
 
@@ -943,6 +944,6 @@ function connectToGame(gameId, rejoin) {
     if(rejoin === true) {
         gameSocket.emit('rejoin', localStorage.getItem('playerIndex'));
     } else {
-        gameSocket.emit('join', ['bill', 'john', 'mark', 'phil'][new Date().getTime() % 4]);
+        gameSocket.emit('join', "Anonymous-" + new Date().getTime());
     }
 }

@@ -1,18 +1,5 @@
 @import url(../fonts/stylesheet.css);
 
-$boardSize: 710px;
-$cellSpacing: 10px;
-$cellSize: ($boardSize - ($cellSpacing * 11)) / 10;
-$cellNumberIndent: $cellSize * .05;
-$cellFontSize: $cellSize * .22;
-
-$cardWidth: 100px;
-$cardHeight: $cardWidth *.75;
-$cardFontSize: $cardWidth * .18;
-
-$gameLandscapeHeight: $boardSize - 5;
-$otherStuffLandscapePadding: $boardSize + 5px;
-
 $cardFont: 'ArtifikaMedium';
 $cardBackgroundColor: #f5f3ef;
 $gameRed: #8a0f00;
@@ -143,79 +130,11 @@ body, html {
   }
 }
 
-#game {
-  display: none;
-  position: absolute;
-  height: $gameLandscapeHeight;
-  top: 0;
-  right: 0;
-  left: 0;
-
-  button {
-    @include jaxButton;
-  }
-
-  .rules {
-    background-image: url(../images/symbols/club.svg);
-    position: absolute;
-    bottom: 5px;
-    right: 15px;
-  }
-}
-
-#board {
-  padding: 0;
-  width: $boardSize;
-  height: $boardSize;
-  list-style: none;
-  margin: 0;
-  line-height: 0;
-
-  li {
-    border-radius: 10px;
-    box-shadow: 0 0 6px rgba(0, 0, 0, .9), 0 0 0 1px black;
-    line-height: 1em;
-    text-align: center;
-    display: inline-block;
-    width: $cellSize;
-    height: $cellSize;
-    margin: $cellSpacing 0 0 $cellSpacing;
-    border: 3px solid white;
-    position: relative;
-    background-size: 20px auto;
-    background-position: center center;
-    background-repeat: no-repeat;
-    font-family: $cardFont;
-  }
-
-  li div.tl {
-    top: $cellNumberIndent;
-    left: $cellNumberIndent;
-  }
-
-  li div.br {
-    bottom: $cellNumberIndent;
-    right: $cellNumberIndent;
-  }
-}
-
 #board li div,
 #hands li div,
 #discardPile li div {
   position: absolute;
 }
-
-#board li div {
-  font-size: $cellFontSize;
-}
-
-/*#board li:before {*/
-
-/*position: absolute;*/
-/*top: 5px;*/
-/*right: 5px;*/
-/*content: attr(data-score);*/
-/*}*/
 
 li[data-suit=CLUB] {
   background-image: url('../images/symbols/club.svg');
@@ -225,7 +144,6 @@ li[data-suit=CLUB] {
 li[data-suit=HEART] {
   background-image: url('../images/symbols/heart.svg');
   color: $gameRed;
-  /*text-shadow: -1px 1px rgba(0,0,0,.5);*/
 }
 
 li[data-suit=SPADE] {
@@ -241,113 +159,377 @@ li[data-suit=JOKER] {
   background-image: url('../images/joker2.svg');
 }
 
-#board li[data-suit=JOKER] {
-
-  background-size: auto 45px;
-}
-
 .p1 {
   border-color: #3399cc !important;
-  background-color: #f3f9fc;
+  background-color: #f3f9fc !important;
 }
 
 .p2 {
   border-color: #ffcc00 !important;
-  background-color: #fffdf5;
+  background-color: #fffdf5 !important;
 }
 
 .p3 {
   border-color: #00cc00 !important;
-  background-color: #f5fdf5;
+  background-color: #f5fdf5 !important;
 }
 
-#hands {
-  position: absolute;
-  top: 10px;
-  left: 0;
-  padding: 0 0 0 $otherStuffLandscapePadding;
-  margin: 0;
+@mixin landscapeHands($size) {
+
 }
 
-#hands ul,
-#discardPile ul {
-  padding: 0;
-  margin: 0;
-  list-style: none;
+@mixin portraitHands($size) {
+
 }
 
-#hands li,
-#discardPile li {
+
+@mixin card($height, $width, $borderRadius, $borderSize) {
+
   display: inline-block;
-  height: 108px;
-  width: 81px;
-  border-radius: 10px;
+  height: $height;
+  width: $width;
+  border-radius: $borderRadius;
   box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, .8);
-  border: 6px solid $cardBorderColor;
+  border: $borderSize solid $cardBorderColor;
   background-color: #f6f3ef;
-  margin-left: 12px;
   position: relative;
-  background-size: 45px auto;
+  background-size: round($width * .6) auto;
   background-position: center center;
   background-repeat: no-repeat;
   font-family: $cardFont;
 }
 
-#hands li[data-suit=JOKER],
-#discardPile li[data-suit=JOKER] {
+@mixin handItToMe($size) {
 
-  background-size: auto 70px;
-}
+  $cardWidth: round($size/7 * .75);
+  $playerCardMargin:  round($cardWidth * .15);
+  $discardCardsRightMargin: round($cardWidth * -.6);
+  $cardHeight: round($cardWidth / .75);
+  $cardFontSize: round($cardWidth * .21);
+  $borderSize: round($cardWidth * .07);
+  $cardNumberIndent: round($cardHeight * .105) - $borderSize;
+  $borderRadius: if(($size > 500), 10px, if(($size < 400), 0, 5px));
 
-#hands li.active {
-  box-shadow: 0 0 0 1px #186925, 0 0 6px 3px rgba(24, 105, 37, .8);
-}
-
-#hands li div,
-#discardPile li div {
-  font-size: $cardFontSize;
-}
-
-#hands li div.tl,
-#discardPile li div.tl {
-  top: 0;
-  left: 5px;
-}
-
-#hands li div.br,
-#discardPile li div.br {
-  bottom: 0;
-  right: 5px;
-}
-
-#discardPile {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  padding: 0 0 0 $otherStuffLandscapePadding;
-  margin: 0;
-  list-style: none;
-}
-
-@media all and (max-width: 800px) {
-
-  #board {
-    margin: 0 auto;
+  #discardPile {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 0 0 0 $size + $playerCardMargin;
+    margin: 0;
+    list-style: none;
   }
 
   #hands {
-    top: 720px !important;
-    left: 50% !important;
-    width: 623px;
-    margin-left: -311px;
-    padding: 0 !important;
+    position: absolute;
+    top: 10px;
+    left: 0;
+    padding: 0 0 0 $size;
+    margin: 0;
   }
 
-  #discardPile {
-    display: none;
-    position: relative;
+  #hands ul,
+  #discardPile ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    line-height: 0;
   }
 
+  #hands li {
+    @include card($cardHeight, $cardWidth, $borderRadius, $borderSize);
+    margin-left: $playerCardMargin;
+    margin-bottom: $playerCardMargin;
+  }
+
+  #discardPile li {
+    @include card($cardHeight, $cardWidth, $borderRadius, $borderSize);
+    margin-right: $discardCardsRightMargin;
+  }
+
+  #hands li[data-suit=JOKER],
+  #discardPile li[data-suit=JOKER] {
+
+    background-size: auto round($cardHeight * .75);
+  }
+
+  #hands li.active {
+    box-shadow: 0 0 0 1px #186925, 0 0 6px 3px rgba(24, 105, 37, .8);
+  }
+
+  #hands li div,
+  #discardPile li div {
+    font-weight: bold;
+    font-size: $cardFontSize;
+    line-height: .5em;
+  }
+
+  #hands li div.tl,
+  #discardPile li div.tl {
+    top: $cardNumberIndent;
+    left: $cardNumberIndent;
+  }
+
+  #hands li div.br,
+  #discardPile li div.br {
+    bottom: $cardNumberIndent;
+    right: $cardNumberIndent;
+  }
+
+}
+
+@mixin landscapeBoard($size) {
+
+  $margin: round($size/2) * -1;
+  $boardSize: $size;
+  $borderSize: 3px;
+  $cellSpacing: if(($size < 500px), 5px, 10px);
+  $cellSize: ($boardSize - ($cellSpacing * 11)) / 10;
+  $cellNumberIndent: round($cellSize * .1) - $borderSize;
+  $cellFontSize: $cellSize * .22;
+  $gameLandscapeHeight: $boardSize - 5;
+  $otherStuffLandscapePadding: $boardSize + 5px;
+  $suitSize: $cellSize * .4;
+  $cellRadius: if(($cellSize >= 50), 10px, if(($cellSize < 30), 0, 5px));
+
+  @media all and (min-height: $size) and (orientation: landscape) {
+
+    @include handItToMe($size);
+    #game {
+      display: none;
+      position: absolute;
+      height: $gameLandscapeHeight;
+      top: 0;
+      right: 0;
+      left: 0;
+
+      button {
+        @include jaxButton;
+      }
+
+      .rules {
+        background-image: url(../images/symbols/club.svg);
+        position: absolute;
+        bottom: 5px;
+        right: 15px;
+      }
+    }
+
+    #board {
+      padding: 0;
+      width: $boardSize;
+      height: $boardSize;
+      list-style: none;
+      margin: 0;
+      line-height: 0;
+
+      li {
+        background-color: white;
+        border-radius: $cellRadius;
+        box-shadow: 0 0 6px rgba(0, 0, 0, .9), 0 0 0 1px black;
+        line-height: 1em;
+        text-align: center;
+        display: inline-block;
+        width: $cellSize;
+        height: $cellSize;
+        margin: $cellSpacing 0 0 $cellSpacing;
+        border: $borderSize solid white;
+        position: relative;
+        background-size: $suitSize auto;
+        background-position: center center;
+        background-repeat: no-repeat;
+        font-family: $cardFont;
+        padding: 0;
+      }
+
+      li div.tl {
+        top: $cellNumberIndent + 1;
+        left: $cellNumberIndent;
+      }
+
+      li div.br {
+        bottom: $cellNumberIndent + 2;
+        right: $cellNumberIndent;
+      }
+
+      li div {
+        font-size: $cellFontSize;
+        line-height: .5em;
+        padding: 0;
+        margin: 0;
+      }
+
+      li[data-suit=JOKER] {
+
+        background-size: auto $cellSize * .75;
+      }
+    }
+
+    .info {
+      height: $size;
+      width: $size;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin: $margin 0 0 $margin;
+    }
+
+  /* li:before {*/
+
+  /*position: absolute;*/
+  /*top: 5px;*/
+  /*right: 5px;*/
+  /*content: attr(data-score);*/
+  /*}*/
+
+  }
+}
+
+@mixin portraitBoard($size) {
+
+  $margin: round($size/2) * -1;
+  $boardSize: $size;
+  $borderSize: 3px;
+  $cellSpacing: if(($size < 500px), 5px, 10px);
+  $cellSize: ($boardSize - ($cellSpacing * 11)) / 10;
+  $cellNumberIndent: round($cellSize * .1) - $borderSize;
+  $cellFontSize: $cellSize * .22;
+  $gameLandscapeHeight: $boardSize - 5;
+  $otherStuffLandscapePadding: $boardSize + 5px;
+  $suitSize: $cellSize * .4;
+  $cellRadius: if(($cellSize >= 50), 10px, if(($cellSize < 30), 0, 5px));
+
+  @media all and (min-width: $size) and (orientation: portrait) {
+
+    @include handItToMe($size);
+
+    $cardWidth: round($size/7 * .75);
+    $cardMarginLeft:  round($cardWidth * .2);
+    $handWidth: $cardWidth * 7 + $cardMarginLeft * 8;
+
+    #game {
+      display: none;
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+
+      button {
+        @include jaxButton;
+      }
+
+      .rules {
+        background-image: url(../images/symbols/club.svg);
+        position: absolute;
+        bottom: 5px;
+        right: 15px;
+      }
+
+      #hands {
+        position: absolute;
+        top: $boardSize + 10;
+        left: 0;
+        bottom: 0;
+        right: 0;
+      }
+
+      #hands ul {
+        position: absolute;
+        width: $handWidth;
+        margin: 0 0 0 round($handWidth / -2);
+        left: 50%;
+      }
+    }
+
+    #board {
+      padding: 0;
+      position: absolute;
+      width: $boardSize;
+      height: $boardSize;
+      list-style: none;
+      margin: 0 0 0 round($boardSize / -2);
+      line-height: 0;
+      left: 50%;
+
+      li {
+        border-radius: $cellRadius;
+        box-shadow: 0 0 6px rgba(0, 0, 0, .9), 0 0 0 1px black;
+        line-height: 1em;
+        text-align: center;
+        display: inline-block;
+        width: $cellSize;
+        height: $cellSize;
+        margin: $cellSpacing 0 0 $cellSpacing;
+        border: $borderSize solid white;
+        position: relative;
+        background-size: $suitSize auto;
+        background-position: center center;
+        background-repeat: no-repeat;
+        font-family: $cardFont;
+        padding: 0;
+      }
+
+      li div.tl {
+        top: $cellNumberIndent + 1;
+        left: $cellNumberIndent;
+      }
+
+      li div.br {
+        bottom: $cellNumberIndent + 2;
+        right: $cellNumberIndent;
+      }
+
+      li div {
+        font-size: $cellFontSize;
+        line-height: .5em;
+        padding: 0;
+        margin: 0;
+      }
+
+      li[data-suit=JOKER] {
+
+        background-size: auto $cellSize * .75;
+      }
+    }
+
+    .info {
+      height: $size;
+      width: $size;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin: $margin 0 0 $margin;
+    }
+
+  /* li:before {*/
+
+  /*position: absolute;*/
+  /*top: 5px;*/
+  /*right: 5px;*/
+  /*content: attr(data-score);*/
+  /*}*/
+    #discardPile {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      padding: 0 0 0 $otherStuffLandscapePadding;
+      margin: 0;
+      list-style: none;
+    }
+
+    #hands {
+      position: absolute;
+      top: 10px;
+      left: 0;
+      padding: 0 0 0 $otherStuffLandscapePadding;
+      margin: 0;
+    }
+  }
+}
+
+@for $size from 0 through 5 {
+  @include portraitBoard(300px + $size * 100);
+  @include landscapeBoard(300px + $size * 100);
 }
 
 footer {

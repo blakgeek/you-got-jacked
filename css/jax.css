@@ -43,6 +43,7 @@ body, html {
     background-size: 20px auto;
     background-repeat: no-repeat; }
   #splash .play-online {
+    margin-left: 10px;
     background-image: url(../images/symbols/diamond.svg); }
   #splash .play {
     background-image: url(../images/symbols/spade.svg); }
@@ -77,9 +78,9 @@ body, html {
   #dialog .play {
     background-image: url(../images/symbols/heart.svg); }
 
-#waiting {
+#message {
   display: none;
-  position: absolute;
+  position: fixed;
   left: 50%;
   width: 300px;
   margin: 20px 0 0 -150px;
@@ -114,81 +115,18 @@ body, html {
   #rules .back {
     background-image: url(../images/symbols/club.svg); }
 
-#game {
-  display: none;
-  position: absolute;
-  height: 705px;
-  top: 0;
-  right: 0;
-  left: 0; }
-  #game button {
-    border-radius: 10px;
-    border: 1px solid black;
-    box-shadow: 0 0 0 1px white, 0 0 6px 1px black;
-    background-color: white;
-    padding: 12px 15px 12px 40px;
-    font-family: Tahoma, Arial, SANS-SERIF;
-    font-size: 16px;
-    background-position: 12px center;
-    background-size: 20px auto;
-    background-repeat: no-repeat; }
-  #game .rules {
-    background-image: url(../images/symbols/club.svg);
-    position: absolute;
-    bottom: 5px;
-    right: 15px; }
-
-#board {
-  padding: 0;
-  width: 710px;
-  height: 710px;
-  list-style: none;
-  margin: 0;
-  line-height: 0; }
-  #board li {
-    border-radius: 10px;
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.9), 0 0 0 1px black;
-    line-height: 1em;
-    text-align: center;
-    display: inline-block;
-    width: 60px;
-    height: 60px;
-    margin: 10px 0 0 10px;
-    border: 3px solid white;
-    position: relative;
-    background-size: 20px auto;
-    background-position: center center;
-    background-repeat: no-repeat;
-    font-family: "ArtifikaMedium"; }
-  #board li div.tl {
-    top: 3px;
-    left: 3px; }
-  #board li div.br {
-    bottom: 3px;
-    right: 3px; }
-
 #board li div,
 #hands li div,
 #discardPile li div {
   position: absolute; }
 
-#board li div {
-  font-size: 13.2px; }
-
-/*#board li:before {*/
-/*position: absolute;*/
-/*top: 5px;*/
-/*right: 5px;*/
-/*content: attr(data-score);*/
-/*}*/
 li[data-suit=CLUB] {
   background-image: url("../images/symbols/club.svg");
   color: black; }
 
 li[data-suit=HEART] {
   background-image: url("../images/symbols/heart.svg");
-  color: #8a0f00;
-  /*text-shadow: -1px 1px rgba(0,0,0,.5);*/ }
+  color: #8a0f00; }
 
 li[data-suit=SPADE] {
   background-image: url("../images/symbols/spade.svg"); }
@@ -200,93 +138,2010 @@ li[data-suit=DIAMOND] {
 li[data-suit=JOKER] {
   background-image: url("../images/joker2.svg"); }
 
-#board li[data-suit=JOKER] {
-  background-size: auto 45px; }
-
 .p1 {
   border-color: #3399cc !important;
-  background-color: #f3f9fc; }
+  background-color: #f3f9fc !important; }
 
 .p2 {
   border-color: #ffcc00 !important;
-  background-color: #fffdf5; }
+  background-color: #fffdf5 !important; }
 
 .p3 {
   border-color: #00cc00 !important;
-  background-color: #f5fdf5; }
+  background-color: #f5fdf5 !important; }
 
-#hands {
-  position: absolute;
-  top: 10px;
-  left: 0;
-  padding: 0 0 0 715px;
-  margin: 0; }
-
-#hands ul,
-#discardPile ul {
-  padding: 0;
-  margin: 0;
-  list-style: none; }
-
-#hands li,
-#discardPile li {
-  display: inline-block;
-  height: 108px;
-  width: 81px;
-  border-radius: 10px;
-  box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
-  border: 6px solid #d9d7d3;
-  background-color: #f6f3ef;
-  margin-left: 12px;
-  position: relative;
-  background-size: 45px auto;
-  background-position: center center;
-  background-repeat: no-repeat;
-  font-family: "ArtifikaMedium"; }
-
-#hands li[data-suit=JOKER],
-#discardPile li[data-suit=JOKER] {
-  background-size: auto 70px; }
-
-#hands li.active {
-  box-shadow: 0 0 0 1px #186925, 0 0 6px 3px rgba(24, 105, 37, 0.8); }
-
-#hands li div,
-#discardPile li div {
-  font-size: 18px; }
-
-#hands li div.tl,
-#discardPile li div.tl {
-  top: 0;
-  left: 5px; }
-
-#hands li div.br,
-#discardPile li div.br {
-  bottom: 0;
-  right: 5px; }
-
-#discardPile {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  padding: 0 0 0 715px;
-  margin: 0;
-  list-style: none; }
-
-@media all and (max-width: 800px) {
-  #board {
-    margin: 0 auto; }
+@media all and (min-width: 300px) and (orientation: portrait) {
+  #discardPile {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 0 0 0 305px;
+    margin: 0;
+    list-style: none; }
 
   #hands {
-    top: 720px !important;
-    left: 50% !important;
-    width: 623px;
-    margin-left: -311px;
-    padding: 0 !important; }
+    position: absolute;
+    top: 10px;
+    left: 0;
+    padding: 0 0 0 300px;
+    margin: 0; }
 
-  #discardPile {
+  #hands ul,
+  #discardPile ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    line-height: 0; }
+
+  #hands li {
+    display: inline-block;
+    height: 43px;
+    width: 32px;
+    border-radius: 0;
+    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
+    border: 2px solid #d9d7d3;
+    background-color: #f6f3ef;
+    position: relative;
+    background-size: 19px auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+    font-family: "ArtifikaMedium";
+    margin-left: 5px;
+    margin-bottom: 5px; }
+
+  #discardPile li {
+    display: inline-block;
+    height: 43px;
+    width: 32px;
+    border-radius: 0;
+    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
+    border: 2px solid #d9d7d3;
+    background-color: #f6f3ef;
+    position: relative;
+    background-size: 19px auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+    font-family: "ArtifikaMedium";
+    margin-right: -19px; }
+
+  #hands li[data-suit=JOKER],
+  #discardPile li[data-suit=JOKER] {
+    background-size: auto 32px; }
+
+  #hands li.active {
+    box-shadow: 0 0 0 1px #186925, 0 0 6px 3px rgba(24, 105, 37, 0.8); }
+
+  #hands li div,
+  #discardPile li div {
+    font-weight: bold;
+    font-size: 7px;
+    line-height: .5em; }
+
+  #hands li div.tl,
+  #discardPile li div.tl {
+    top: 3px;
+    left: 3px; }
+
+  #hands li div.br,
+  #discardPile li div.br {
+    bottom: 3px;
+    right: 3px; }
+
+  #game {
     display: none;
-    position: relative; } }
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0; }
+    #game button {
+      border-radius: 10px;
+      border: 1px solid black;
+      box-shadow: 0 0 0 1px white, 0 0 6px 1px black;
+      background-color: white;
+      padding: 12px 15px 12px 40px;
+      font-family: Tahoma, Arial, SANS-SERIF;
+      font-size: 16px;
+      background-position: 12px center;
+      background-size: 20px auto;
+      background-repeat: no-repeat; }
+    #game .rules {
+      background-image: url(../images/symbols/club.svg);
+      position: absolute;
+      bottom: 5px;
+      right: 15px; }
+    #game #hands {
+      position: absolute;
+      top: 310px;
+      left: 0;
+      bottom: 0;
+      right: 0; }
+    #game #hands ul {
+      position: absolute;
+      width: 272px;
+      margin: 0 0 0 -136px;
+      left: 50%; }
+
+  #board {
+    padding: 0;
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    list-style: none;
+    margin: 0 0 0 -150px;
+    line-height: 0;
+    left: 50%; }
+    #board li {
+      border-radius: 0;
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.9), 0 0 0 1px black;
+      line-height: 1em;
+      text-align: center;
+      display: inline-block;
+      width: 24.5px;
+      height: 24.5px;
+      margin: 5px 0 0 5px;
+      border: 3px solid white;
+      position: relative;
+      background-size: 9.8px auto;
+      background-position: center center;
+      background-repeat: no-repeat;
+      font-family: "ArtifikaMedium";
+      padding: 0; }
+    #board li div.tl {
+      top: 0px;
+      left: -1px; }
+    #board li div.br {
+      bottom: 1px;
+      right: -1px; }
+    #board li div {
+      font-size: 5.39px;
+      line-height: .5em;
+      padding: 0;
+      margin: 0; }
+    #board li[data-suit=JOKER] {
+      background-size: auto 18.375px; }
+
+  .info {
+    height: 300px;
+    width: 300px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -150px 0 0 -150px; }
+
+  /* li:before {*/
+  /*position: absolute;*/
+  /*top: 5px;*/
+  /*right: 5px;*/
+  /*content: attr(data-score);*/
+  /*}*/
+  #discardPile {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 0 0 0 305px;
+    margin: 0;
+    list-style: none; }
+
+  #hands {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    padding: 0 0 0 305px;
+    margin: 0; } }
+@media all and (min-height: 300px) and (orientation: landscape) {
+  #discardPile {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 0 0 0 305px;
+    margin: 0;
+    list-style: none; }
+
+  #hands {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    padding: 0 0 0 300px;
+    margin: 0; }
+
+  #hands ul,
+  #discardPile ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    line-height: 0; }
+
+  #hands li {
+    display: inline-block;
+    height: 43px;
+    width: 32px;
+    border-radius: 0;
+    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
+    border: 2px solid #d9d7d3;
+    background-color: #f6f3ef;
+    position: relative;
+    background-size: 19px auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+    font-family: "ArtifikaMedium";
+    margin-left: 5px;
+    margin-bottom: 5px; }
+
+  #discardPile li {
+    display: inline-block;
+    height: 43px;
+    width: 32px;
+    border-radius: 0;
+    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
+    border: 2px solid #d9d7d3;
+    background-color: #f6f3ef;
+    position: relative;
+    background-size: 19px auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+    font-family: "ArtifikaMedium";
+    margin-right: -19px; }
+
+  #hands li[data-suit=JOKER],
+  #discardPile li[data-suit=JOKER] {
+    background-size: auto 32px; }
+
+  #hands li.active {
+    box-shadow: 0 0 0 1px #186925, 0 0 6px 3px rgba(24, 105, 37, 0.8); }
+
+  #hands li div,
+  #discardPile li div {
+    font-weight: bold;
+    font-size: 7px;
+    line-height: .5em; }
+
+  #hands li div.tl,
+  #discardPile li div.tl {
+    top: 3px;
+    left: 3px; }
+
+  #hands li div.br,
+  #discardPile li div.br {
+    bottom: 3px;
+    right: 3px; }
+
+  #game {
+    display: none;
+    position: absolute;
+    height: 295px;
+    top: 0;
+    right: 0;
+    left: 0; }
+    #game button {
+      border-radius: 10px;
+      border: 1px solid black;
+      box-shadow: 0 0 0 1px white, 0 0 6px 1px black;
+      background-color: white;
+      padding: 12px 15px 12px 40px;
+      font-family: Tahoma, Arial, SANS-SERIF;
+      font-size: 16px;
+      background-position: 12px center;
+      background-size: 20px auto;
+      background-repeat: no-repeat; }
+    #game .rules {
+      background-image: url(../images/symbols/club.svg);
+      position: absolute;
+      bottom: 5px;
+      right: 15px; }
+
+  #board {
+    padding: 0;
+    width: 300px;
+    height: 300px;
+    list-style: none;
+    margin: 0;
+    line-height: 0; }
+    #board li {
+      background-color: white;
+      border-radius: 0;
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.9), 0 0 0 1px black;
+      line-height: 1em;
+      text-align: center;
+      display: inline-block;
+      width: 24.5px;
+      height: 24.5px;
+      margin: 5px 0 0 5px;
+      border: 3px solid white;
+      position: relative;
+      background-size: 9.8px auto;
+      background-position: center center;
+      background-repeat: no-repeat;
+      font-family: "ArtifikaMedium";
+      padding: 0; }
+    #board li div.tl {
+      top: 0px;
+      left: -1px; }
+    #board li div.br {
+      bottom: 1px;
+      right: -1px; }
+    #board li div {
+      font-size: 5.39px;
+      line-height: .5em;
+      padding: 0;
+      margin: 0; }
+    #board li[data-suit=JOKER] {
+      background-size: auto 18.375px; }
+
+  .info {
+    height: 300px;
+    width: 300px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -150px 0 0 -150px; }
+
+  /* li:before {*/
+  /*position: absolute;*/
+  /*top: 5px;*/
+  /*right: 5px;*/
+  /*content: attr(data-score);*/
+  /*}*/ }
+@media all and (min-width: 400px) and (orientation: portrait) {
+  #discardPile {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 0 0 0 406px;
+    margin: 0;
+    list-style: none; }
+
+  #hands {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    padding: 0 0 0 400px;
+    margin: 0; }
+
+  #hands ul,
+  #discardPile ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    line-height: 0; }
+
+  #hands li {
+    display: inline-block;
+    height: 57px;
+    width: 43px;
+    border-radius: 5px;
+    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
+    border: 3px solid #d9d7d3;
+    background-color: #f6f3ef;
+    position: relative;
+    background-size: 26px auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+    font-family: "ArtifikaMedium";
+    margin-left: 6px;
+    margin-bottom: 6px; }
+
+  #discardPile li {
+    display: inline-block;
+    height: 57px;
+    width: 43px;
+    border-radius: 5px;
+    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
+    border: 3px solid #d9d7d3;
+    background-color: #f6f3ef;
+    position: relative;
+    background-size: 26px auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+    font-family: "ArtifikaMedium";
+    margin-right: -26px; }
+
+  #hands li[data-suit=JOKER],
+  #discardPile li[data-suit=JOKER] {
+    background-size: auto 43px; }
+
+  #hands li.active {
+    box-shadow: 0 0 0 1px #186925, 0 0 6px 3px rgba(24, 105, 37, 0.8); }
+
+  #hands li div,
+  #discardPile li div {
+    font-weight: bold;
+    font-size: 9px;
+    line-height: .5em; }
+
+  #hands li div.tl,
+  #discardPile li div.tl {
+    top: 3px;
+    left: 3px; }
+
+  #hands li div.br,
+  #discardPile li div.br {
+    bottom: 3px;
+    right: 3px; }
+
+  #game {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0; }
+    #game button {
+      border-radius: 10px;
+      border: 1px solid black;
+      box-shadow: 0 0 0 1px white, 0 0 6px 1px black;
+      background-color: white;
+      padding: 12px 15px 12px 40px;
+      font-family: Tahoma, Arial, SANS-SERIF;
+      font-size: 16px;
+      background-position: 12px center;
+      background-size: 20px auto;
+      background-repeat: no-repeat; }
+    #game .rules {
+      background-image: url(../images/symbols/club.svg);
+      position: absolute;
+      bottom: 5px;
+      right: 15px; }
+    #game #hands {
+      position: absolute;
+      top: 410px;
+      left: 0;
+      bottom: 0;
+      right: 0; }
+    #game #hands ul {
+      position: absolute;
+      width: 373px;
+      margin: 0 0 0 -187px;
+      left: 50%; }
+
+  #board {
+    padding: 0;
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    list-style: none;
+    margin: 0 0 0 -200px;
+    line-height: 0;
+    left: 50%; }
+    #board li {
+      border-radius: 5px;
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.9), 0 0 0 1px black;
+      line-height: 1em;
+      text-align: center;
+      display: inline-block;
+      width: 34.5px;
+      height: 34.5px;
+      margin: 5px 0 0 5px;
+      border: 3px solid white;
+      position: relative;
+      background-size: 13.8px auto;
+      background-position: center center;
+      background-repeat: no-repeat;
+      font-family: "ArtifikaMedium";
+      padding: 0; }
+    #board li div.tl {
+      top: 1px;
+      left: 0px; }
+    #board li div.br {
+      bottom: 2px;
+      right: 0px; }
+    #board li div {
+      font-size: 7.59px;
+      line-height: .5em;
+      padding: 0;
+      margin: 0; }
+    #board li[data-suit=JOKER] {
+      background-size: auto 25.875px; }
+
+  .info {
+    height: 400px;
+    width: 400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -200px 0 0 -200px; }
+
+  /* li:before {*/
+  /*position: absolute;*/
+  /*top: 5px;*/
+  /*right: 5px;*/
+  /*content: attr(data-score);*/
+  /*}*/
+  #discardPile {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 0 0 0 405px;
+    margin: 0;
+    list-style: none; }
+
+  #hands {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    padding: 0 0 0 405px;
+    margin: 0; } }
+@media all and (min-height: 400px) and (orientation: landscape) {
+  #discardPile {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 0 0 0 406px;
+    margin: 0;
+    list-style: none; }
+
+  #hands {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    padding: 0 0 0 400px;
+    margin: 0; }
+
+  #hands ul,
+  #discardPile ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    line-height: 0; }
+
+  #hands li {
+    display: inline-block;
+    height: 57px;
+    width: 43px;
+    border-radius: 5px;
+    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
+    border: 3px solid #d9d7d3;
+    background-color: #f6f3ef;
+    position: relative;
+    background-size: 26px auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+    font-family: "ArtifikaMedium";
+    margin-left: 6px;
+    margin-bottom: 6px; }
+
+  #discardPile li {
+    display: inline-block;
+    height: 57px;
+    width: 43px;
+    border-radius: 5px;
+    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
+    border: 3px solid #d9d7d3;
+    background-color: #f6f3ef;
+    position: relative;
+    background-size: 26px auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+    font-family: "ArtifikaMedium";
+    margin-right: -26px; }
+
+  #hands li[data-suit=JOKER],
+  #discardPile li[data-suit=JOKER] {
+    background-size: auto 43px; }
+
+  #hands li.active {
+    box-shadow: 0 0 0 1px #186925, 0 0 6px 3px rgba(24, 105, 37, 0.8); }
+
+  #hands li div,
+  #discardPile li div {
+    font-weight: bold;
+    font-size: 9px;
+    line-height: .5em; }
+
+  #hands li div.tl,
+  #discardPile li div.tl {
+    top: 3px;
+    left: 3px; }
+
+  #hands li div.br,
+  #discardPile li div.br {
+    bottom: 3px;
+    right: 3px; }
+
+  #game {
+    display: none;
+    position: absolute;
+    height: 395px;
+    top: 0;
+    right: 0;
+    left: 0; }
+    #game button {
+      border-radius: 10px;
+      border: 1px solid black;
+      box-shadow: 0 0 0 1px white, 0 0 6px 1px black;
+      background-color: white;
+      padding: 12px 15px 12px 40px;
+      font-family: Tahoma, Arial, SANS-SERIF;
+      font-size: 16px;
+      background-position: 12px center;
+      background-size: 20px auto;
+      background-repeat: no-repeat; }
+    #game .rules {
+      background-image: url(../images/symbols/club.svg);
+      position: absolute;
+      bottom: 5px;
+      right: 15px; }
+
+  #board {
+    padding: 0;
+    width: 400px;
+    height: 400px;
+    list-style: none;
+    margin: 0;
+    line-height: 0; }
+    #board li {
+      background-color: white;
+      border-radius: 5px;
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.9), 0 0 0 1px black;
+      line-height: 1em;
+      text-align: center;
+      display: inline-block;
+      width: 34.5px;
+      height: 34.5px;
+      margin: 5px 0 0 5px;
+      border: 3px solid white;
+      position: relative;
+      background-size: 13.8px auto;
+      background-position: center center;
+      background-repeat: no-repeat;
+      font-family: "ArtifikaMedium";
+      padding: 0; }
+    #board li div.tl {
+      top: 1px;
+      left: 0px; }
+    #board li div.br {
+      bottom: 2px;
+      right: 0px; }
+    #board li div {
+      font-size: 7.59px;
+      line-height: .5em;
+      padding: 0;
+      margin: 0; }
+    #board li[data-suit=JOKER] {
+      background-size: auto 25.875px; }
+
+  .info {
+    height: 400px;
+    width: 400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -200px 0 0 -200px; }
+
+  /* li:before {*/
+  /*position: absolute;*/
+  /*top: 5px;*/
+  /*right: 5px;*/
+  /*content: attr(data-score);*/
+  /*}*/ }
+@media all and (min-width: 500px) and (orientation: portrait) {
+  #discardPile {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 0 0 0 508px;
+    margin: 0;
+    list-style: none; }
+
+  #hands {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    padding: 0 0 0 500px;
+    margin: 0; }
+
+  #hands ul,
+  #discardPile ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    line-height: 0; }
+
+  #hands li {
+    display: inline-block;
+    height: 72px;
+    width: 54px;
+    border-radius: 5px;
+    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
+    border: 4px solid #d9d7d3;
+    background-color: #f6f3ef;
+    position: relative;
+    background-size: 32px auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+    font-family: "ArtifikaMedium";
+    margin-left: 8px;
+    margin-bottom: 8px; }
+
+  #discardPile li {
+    display: inline-block;
+    height: 72px;
+    width: 54px;
+    border-radius: 5px;
+    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
+    border: 4px solid #d9d7d3;
+    background-color: #f6f3ef;
+    position: relative;
+    background-size: 32px auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+    font-family: "ArtifikaMedium";
+    margin-right: -32px; }
+
+  #hands li[data-suit=JOKER],
+  #discardPile li[data-suit=JOKER] {
+    background-size: auto 54px; }
+
+  #hands li.active {
+    box-shadow: 0 0 0 1px #186925, 0 0 6px 3px rgba(24, 105, 37, 0.8); }
+
+  #hands li div,
+  #discardPile li div {
+    font-weight: bold;
+    font-size: 11px;
+    line-height: .5em; }
+
+  #hands li div.tl,
+  #discardPile li div.tl {
+    top: 4px;
+    left: 4px; }
+
+  #hands li div.br,
+  #discardPile li div.br {
+    bottom: 4px;
+    right: 4px; }
+
+  #game {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0; }
+    #game button {
+      border-radius: 10px;
+      border: 1px solid black;
+      box-shadow: 0 0 0 1px white, 0 0 6px 1px black;
+      background-color: white;
+      padding: 12px 15px 12px 40px;
+      font-family: Tahoma, Arial, SANS-SERIF;
+      font-size: 16px;
+      background-position: 12px center;
+      background-size: 20px auto;
+      background-repeat: no-repeat; }
+    #game .rules {
+      background-image: url(../images/symbols/club.svg);
+      position: absolute;
+      bottom: 5px;
+      right: 15px; }
+    #game #hands {
+      position: absolute;
+      top: 510px;
+      left: 0;
+      bottom: 0;
+      right: 0; }
+    #game #hands ul {
+      position: absolute;
+      width: 466px;
+      margin: 0 0 0 -233px;
+      left: 50%; }
+
+  #board {
+    padding: 0;
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    list-style: none;
+    margin: 0 0 0 -250px;
+    line-height: 0;
+    left: 50%; }
+    #board li {
+      border-radius: 5px;
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.9), 0 0 0 1px black;
+      line-height: 1em;
+      text-align: center;
+      display: inline-block;
+      width: 39px;
+      height: 39px;
+      margin: 10px 0 0 10px;
+      border: 3px solid white;
+      position: relative;
+      background-size: 15.6px auto;
+      background-position: center center;
+      background-repeat: no-repeat;
+      font-family: "ArtifikaMedium";
+      padding: 0; }
+    #board li div.tl {
+      top: 2px;
+      left: 1px; }
+    #board li div.br {
+      bottom: 3px;
+      right: 1px; }
+    #board li div {
+      font-size: 8.58px;
+      line-height: .5em;
+      padding: 0;
+      margin: 0; }
+    #board li[data-suit=JOKER] {
+      background-size: auto 29.25px; }
+
+  .info {
+    height: 500px;
+    width: 500px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -250px 0 0 -250px; }
+
+  /* li:before {*/
+  /*position: absolute;*/
+  /*top: 5px;*/
+  /*right: 5px;*/
+  /*content: attr(data-score);*/
+  /*}*/
+  #discardPile {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 0 0 0 505px;
+    margin: 0;
+    list-style: none; }
+
+  #hands {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    padding: 0 0 0 505px;
+    margin: 0; } }
+@media all and (min-height: 500px) and (orientation: landscape) {
+  #discardPile {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 0 0 0 508px;
+    margin: 0;
+    list-style: none; }
+
+  #hands {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    padding: 0 0 0 500px;
+    margin: 0; }
+
+  #hands ul,
+  #discardPile ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    line-height: 0; }
+
+  #hands li {
+    display: inline-block;
+    height: 72px;
+    width: 54px;
+    border-radius: 5px;
+    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
+    border: 4px solid #d9d7d3;
+    background-color: #f6f3ef;
+    position: relative;
+    background-size: 32px auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+    font-family: "ArtifikaMedium";
+    margin-left: 8px;
+    margin-bottom: 8px; }
+
+  #discardPile li {
+    display: inline-block;
+    height: 72px;
+    width: 54px;
+    border-radius: 5px;
+    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
+    border: 4px solid #d9d7d3;
+    background-color: #f6f3ef;
+    position: relative;
+    background-size: 32px auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+    font-family: "ArtifikaMedium";
+    margin-right: -32px; }
+
+  #hands li[data-suit=JOKER],
+  #discardPile li[data-suit=JOKER] {
+    background-size: auto 54px; }
+
+  #hands li.active {
+    box-shadow: 0 0 0 1px #186925, 0 0 6px 3px rgba(24, 105, 37, 0.8); }
+
+  #hands li div,
+  #discardPile li div {
+    font-weight: bold;
+    font-size: 11px;
+    line-height: .5em; }
+
+  #hands li div.tl,
+  #discardPile li div.tl {
+    top: 4px;
+    left: 4px; }
+
+  #hands li div.br,
+  #discardPile li div.br {
+    bottom: 4px;
+    right: 4px; }
+
+  #game {
+    display: none;
+    position: absolute;
+    height: 495px;
+    top: 0;
+    right: 0;
+    left: 0; }
+    #game button {
+      border-radius: 10px;
+      border: 1px solid black;
+      box-shadow: 0 0 0 1px white, 0 0 6px 1px black;
+      background-color: white;
+      padding: 12px 15px 12px 40px;
+      font-family: Tahoma, Arial, SANS-SERIF;
+      font-size: 16px;
+      background-position: 12px center;
+      background-size: 20px auto;
+      background-repeat: no-repeat; }
+    #game .rules {
+      background-image: url(../images/symbols/club.svg);
+      position: absolute;
+      bottom: 5px;
+      right: 15px; }
+
+  #board {
+    padding: 0;
+    width: 500px;
+    height: 500px;
+    list-style: none;
+    margin: 0;
+    line-height: 0; }
+    #board li {
+      background-color: white;
+      border-radius: 5px;
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.9), 0 0 0 1px black;
+      line-height: 1em;
+      text-align: center;
+      display: inline-block;
+      width: 39px;
+      height: 39px;
+      margin: 10px 0 0 10px;
+      border: 3px solid white;
+      position: relative;
+      background-size: 15.6px auto;
+      background-position: center center;
+      background-repeat: no-repeat;
+      font-family: "ArtifikaMedium";
+      padding: 0; }
+    #board li div.tl {
+      top: 2px;
+      left: 1px; }
+    #board li div.br {
+      bottom: 3px;
+      right: 1px; }
+    #board li div {
+      font-size: 8.58px;
+      line-height: .5em;
+      padding: 0;
+      margin: 0; }
+    #board li[data-suit=JOKER] {
+      background-size: auto 29.25px; }
+
+  .info {
+    height: 500px;
+    width: 500px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -250px 0 0 -250px; }
+
+  /* li:before {*/
+  /*position: absolute;*/
+  /*top: 5px;*/
+  /*right: 5px;*/
+  /*content: attr(data-score);*/
+  /*}*/ }
+@media all and (min-width: 600px) and (orientation: portrait) {
+  #discardPile {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 0 0 0 610px;
+    margin: 0;
+    list-style: none; }
+
+  #hands {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    padding: 0 0 0 600px;
+    margin: 0; }
+
+  #hands ul,
+  #discardPile ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    line-height: 0; }
+
+  #hands li {
+    display: inline-block;
+    height: 85px;
+    width: 64px;
+    border-radius: 10px;
+    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
+    border: 4px solid #d9d7d3;
+    background-color: #f6f3ef;
+    position: relative;
+    background-size: 38px auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+    font-family: "ArtifikaMedium";
+    margin-left: 10px;
+    margin-bottom: 10px; }
+
+  #discardPile li {
+    display: inline-block;
+    height: 85px;
+    width: 64px;
+    border-radius: 10px;
+    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
+    border: 4px solid #d9d7d3;
+    background-color: #f6f3ef;
+    position: relative;
+    background-size: 38px auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+    font-family: "ArtifikaMedium";
+    margin-right: -38px; }
+
+  #hands li[data-suit=JOKER],
+  #discardPile li[data-suit=JOKER] {
+    background-size: auto 64px; }
+
+  #hands li.active {
+    box-shadow: 0 0 0 1px #186925, 0 0 6px 3px rgba(24, 105, 37, 0.8); }
+
+  #hands li div,
+  #discardPile li div {
+    font-weight: bold;
+    font-size: 13px;
+    line-height: .5em; }
+
+  #hands li div.tl,
+  #discardPile li div.tl {
+    top: 5px;
+    left: 5px; }
+
+  #hands li div.br,
+  #discardPile li div.br {
+    bottom: 5px;
+    right: 5px; }
+
+  #game {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0; }
+    #game button {
+      border-radius: 10px;
+      border: 1px solid black;
+      box-shadow: 0 0 0 1px white, 0 0 6px 1px black;
+      background-color: white;
+      padding: 12px 15px 12px 40px;
+      font-family: Tahoma, Arial, SANS-SERIF;
+      font-size: 16px;
+      background-position: 12px center;
+      background-size: 20px auto;
+      background-repeat: no-repeat; }
+    #game .rules {
+      background-image: url(../images/symbols/club.svg);
+      position: absolute;
+      bottom: 5px;
+      right: 15px; }
+    #game #hands {
+      position: absolute;
+      top: 610px;
+      left: 0;
+      bottom: 0;
+      right: 0; }
+    #game #hands ul {
+      position: absolute;
+      width: 552px;
+      margin: 0 0 0 -276px;
+      left: 50%; }
+
+  #board {
+    padding: 0;
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    list-style: none;
+    margin: 0 0 0 -300px;
+    line-height: 0;
+    left: 50%; }
+    #board li {
+      border-radius: 5px;
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.9), 0 0 0 1px black;
+      line-height: 1em;
+      text-align: center;
+      display: inline-block;
+      width: 49px;
+      height: 49px;
+      margin: 10px 0 0 10px;
+      border: 3px solid white;
+      position: relative;
+      background-size: 19.6px auto;
+      background-position: center center;
+      background-repeat: no-repeat;
+      font-family: "ArtifikaMedium";
+      padding: 0; }
+    #board li div.tl {
+      top: 3px;
+      left: 2px; }
+    #board li div.br {
+      bottom: 4px;
+      right: 2px; }
+    #board li div {
+      font-size: 10.78px;
+      line-height: .5em;
+      padding: 0;
+      margin: 0; }
+    #board li[data-suit=JOKER] {
+      background-size: auto 36.75px; }
+
+  .info {
+    height: 600px;
+    width: 600px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -300px 0 0 -300px; }
+
+  /* li:before {*/
+  /*position: absolute;*/
+  /*top: 5px;*/
+  /*right: 5px;*/
+  /*content: attr(data-score);*/
+  /*}*/
+  #discardPile {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 0 0 0 605px;
+    margin: 0;
+    list-style: none; }
+
+  #hands {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    padding: 0 0 0 605px;
+    margin: 0; } }
+@media all and (min-height: 600px) and (orientation: landscape) {
+  #discardPile {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 0 0 0 610px;
+    margin: 0;
+    list-style: none; }
+
+  #hands {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    padding: 0 0 0 600px;
+    margin: 0; }
+
+  #hands ul,
+  #discardPile ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    line-height: 0; }
+
+  #hands li {
+    display: inline-block;
+    height: 85px;
+    width: 64px;
+    border-radius: 10px;
+    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
+    border: 4px solid #d9d7d3;
+    background-color: #f6f3ef;
+    position: relative;
+    background-size: 38px auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+    font-family: "ArtifikaMedium";
+    margin-left: 10px;
+    margin-bottom: 10px; }
+
+  #discardPile li {
+    display: inline-block;
+    height: 85px;
+    width: 64px;
+    border-radius: 10px;
+    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
+    border: 4px solid #d9d7d3;
+    background-color: #f6f3ef;
+    position: relative;
+    background-size: 38px auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+    font-family: "ArtifikaMedium";
+    margin-right: -38px; }
+
+  #hands li[data-suit=JOKER],
+  #discardPile li[data-suit=JOKER] {
+    background-size: auto 64px; }
+
+  #hands li.active {
+    box-shadow: 0 0 0 1px #186925, 0 0 6px 3px rgba(24, 105, 37, 0.8); }
+
+  #hands li div,
+  #discardPile li div {
+    font-weight: bold;
+    font-size: 13px;
+    line-height: .5em; }
+
+  #hands li div.tl,
+  #discardPile li div.tl {
+    top: 5px;
+    left: 5px; }
+
+  #hands li div.br,
+  #discardPile li div.br {
+    bottom: 5px;
+    right: 5px; }
+
+  #game {
+    display: none;
+    position: absolute;
+    height: 595px;
+    top: 0;
+    right: 0;
+    left: 0; }
+    #game button {
+      border-radius: 10px;
+      border: 1px solid black;
+      box-shadow: 0 0 0 1px white, 0 0 6px 1px black;
+      background-color: white;
+      padding: 12px 15px 12px 40px;
+      font-family: Tahoma, Arial, SANS-SERIF;
+      font-size: 16px;
+      background-position: 12px center;
+      background-size: 20px auto;
+      background-repeat: no-repeat; }
+    #game .rules {
+      background-image: url(../images/symbols/club.svg);
+      position: absolute;
+      bottom: 5px;
+      right: 15px; }
+
+  #board {
+    padding: 0;
+    width: 600px;
+    height: 600px;
+    list-style: none;
+    margin: 0;
+    line-height: 0; }
+    #board li {
+      background-color: white;
+      border-radius: 5px;
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.9), 0 0 0 1px black;
+      line-height: 1em;
+      text-align: center;
+      display: inline-block;
+      width: 49px;
+      height: 49px;
+      margin: 10px 0 0 10px;
+      border: 3px solid white;
+      position: relative;
+      background-size: 19.6px auto;
+      background-position: center center;
+      background-repeat: no-repeat;
+      font-family: "ArtifikaMedium";
+      padding: 0; }
+    #board li div.tl {
+      top: 3px;
+      left: 2px; }
+    #board li div.br {
+      bottom: 4px;
+      right: 2px; }
+    #board li div {
+      font-size: 10.78px;
+      line-height: .5em;
+      padding: 0;
+      margin: 0; }
+    #board li[data-suit=JOKER] {
+      background-size: auto 36.75px; }
+
+  .info {
+    height: 600px;
+    width: 600px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -300px 0 0 -300px; }
+
+  /* li:before {*/
+  /*position: absolute;*/
+  /*top: 5px;*/
+  /*right: 5px;*/
+  /*content: attr(data-score);*/
+  /*}*/ }
+@media all and (min-width: 700px) and (orientation: portrait) {
+  #discardPile {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 0 0 0 711px;
+    margin: 0;
+    list-style: none; }
+
+  #hands {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    padding: 0 0 0 700px;
+    margin: 0; }
+
+  #hands ul,
+  #discardPile ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    line-height: 0; }
+
+  #hands li {
+    display: inline-block;
+    height: 100px;
+    width: 75px;
+    border-radius: 10px;
+    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
+    border: 5px solid #d9d7d3;
+    background-color: #f6f3ef;
+    position: relative;
+    background-size: 45px auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+    font-family: "ArtifikaMedium";
+    margin-left: 11px;
+    margin-bottom: 11px; }
+
+  #discardPile li {
+    display: inline-block;
+    height: 100px;
+    width: 75px;
+    border-radius: 10px;
+    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
+    border: 5px solid #d9d7d3;
+    background-color: #f6f3ef;
+    position: relative;
+    background-size: 45px auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+    font-family: "ArtifikaMedium";
+    margin-right: -45px; }
+
+  #hands li[data-suit=JOKER],
+  #discardPile li[data-suit=JOKER] {
+    background-size: auto 75px; }
+
+  #hands li.active {
+    box-shadow: 0 0 0 1px #186925, 0 0 6px 3px rgba(24, 105, 37, 0.8); }
+
+  #hands li div,
+  #discardPile li div {
+    font-weight: bold;
+    font-size: 16px;
+    line-height: .5em; }
+
+  #hands li div.tl,
+  #discardPile li div.tl {
+    top: 6px;
+    left: 6px; }
+
+  #hands li div.br,
+  #discardPile li div.br {
+    bottom: 6px;
+    right: 6px; }
+
+  #game {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0; }
+    #game button {
+      border-radius: 10px;
+      border: 1px solid black;
+      box-shadow: 0 0 0 1px white, 0 0 6px 1px black;
+      background-color: white;
+      padding: 12px 15px 12px 40px;
+      font-family: Tahoma, Arial, SANS-SERIF;
+      font-size: 16px;
+      background-position: 12px center;
+      background-size: 20px auto;
+      background-repeat: no-repeat; }
+    #game .rules {
+      background-image: url(../images/symbols/club.svg);
+      position: absolute;
+      bottom: 5px;
+      right: 15px; }
+    #game #hands {
+      position: absolute;
+      top: 710px;
+      left: 0;
+      bottom: 0;
+      right: 0; }
+    #game #hands ul {
+      position: absolute;
+      width: 645px;
+      margin: 0 0 0 -323px;
+      left: 50%; }
+
+  #board {
+    padding: 0;
+    position: absolute;
+    width: 700px;
+    height: 700px;
+    list-style: none;
+    margin: 0 0 0 -350px;
+    line-height: 0;
+    left: 50%; }
+    #board li {
+      border-radius: 10px;
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.9), 0 0 0 1px black;
+      line-height: 1em;
+      text-align: center;
+      display: inline-block;
+      width: 59px;
+      height: 59px;
+      margin: 10px 0 0 10px;
+      border: 3px solid white;
+      position: relative;
+      background-size: 23.6px auto;
+      background-position: center center;
+      background-repeat: no-repeat;
+      font-family: "ArtifikaMedium";
+      padding: 0; }
+    #board li div.tl {
+      top: 4px;
+      left: 3px; }
+    #board li div.br {
+      bottom: 5px;
+      right: 3px; }
+    #board li div {
+      font-size: 12.98px;
+      line-height: .5em;
+      padding: 0;
+      margin: 0; }
+    #board li[data-suit=JOKER] {
+      background-size: auto 44.25px; }
+
+  .info {
+    height: 700px;
+    width: 700px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -350px 0 0 -350px; }
+
+  /* li:before {*/
+  /*position: absolute;*/
+  /*top: 5px;*/
+  /*right: 5px;*/
+  /*content: attr(data-score);*/
+  /*}*/
+  #discardPile {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 0 0 0 705px;
+    margin: 0;
+    list-style: none; }
+
+  #hands {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    padding: 0 0 0 705px;
+    margin: 0; } }
+@media all and (min-height: 700px) and (orientation: landscape) {
+  #discardPile {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 0 0 0 711px;
+    margin: 0;
+    list-style: none; }
+
+  #hands {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    padding: 0 0 0 700px;
+    margin: 0; }
+
+  #hands ul,
+  #discardPile ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    line-height: 0; }
+
+  #hands li {
+    display: inline-block;
+    height: 100px;
+    width: 75px;
+    border-radius: 10px;
+    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
+    border: 5px solid #d9d7d3;
+    background-color: #f6f3ef;
+    position: relative;
+    background-size: 45px auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+    font-family: "ArtifikaMedium";
+    margin-left: 11px;
+    margin-bottom: 11px; }
+
+  #discardPile li {
+    display: inline-block;
+    height: 100px;
+    width: 75px;
+    border-radius: 10px;
+    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
+    border: 5px solid #d9d7d3;
+    background-color: #f6f3ef;
+    position: relative;
+    background-size: 45px auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+    font-family: "ArtifikaMedium";
+    margin-right: -45px; }
+
+  #hands li[data-suit=JOKER],
+  #discardPile li[data-suit=JOKER] {
+    background-size: auto 75px; }
+
+  #hands li.active {
+    box-shadow: 0 0 0 1px #186925, 0 0 6px 3px rgba(24, 105, 37, 0.8); }
+
+  #hands li div,
+  #discardPile li div {
+    font-weight: bold;
+    font-size: 16px;
+    line-height: .5em; }
+
+  #hands li div.tl,
+  #discardPile li div.tl {
+    top: 6px;
+    left: 6px; }
+
+  #hands li div.br,
+  #discardPile li div.br {
+    bottom: 6px;
+    right: 6px; }
+
+  #game {
+    display: none;
+    position: absolute;
+    height: 695px;
+    top: 0;
+    right: 0;
+    left: 0; }
+    #game button {
+      border-radius: 10px;
+      border: 1px solid black;
+      box-shadow: 0 0 0 1px white, 0 0 6px 1px black;
+      background-color: white;
+      padding: 12px 15px 12px 40px;
+      font-family: Tahoma, Arial, SANS-SERIF;
+      font-size: 16px;
+      background-position: 12px center;
+      background-size: 20px auto;
+      background-repeat: no-repeat; }
+    #game .rules {
+      background-image: url(../images/symbols/club.svg);
+      position: absolute;
+      bottom: 5px;
+      right: 15px; }
+
+  #board {
+    padding: 0;
+    width: 700px;
+    height: 700px;
+    list-style: none;
+    margin: 0;
+    line-height: 0; }
+    #board li {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.9), 0 0 0 1px black;
+      line-height: 1em;
+      text-align: center;
+      display: inline-block;
+      width: 59px;
+      height: 59px;
+      margin: 10px 0 0 10px;
+      border: 3px solid white;
+      position: relative;
+      background-size: 23.6px auto;
+      background-position: center center;
+      background-repeat: no-repeat;
+      font-family: "ArtifikaMedium";
+      padding: 0; }
+    #board li div.tl {
+      top: 4px;
+      left: 3px; }
+    #board li div.br {
+      bottom: 5px;
+      right: 3px; }
+    #board li div {
+      font-size: 12.98px;
+      line-height: .5em;
+      padding: 0;
+      margin: 0; }
+    #board li[data-suit=JOKER] {
+      background-size: auto 44.25px; }
+
+  .info {
+    height: 700px;
+    width: 700px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -350px 0 0 -350px; }
+
+  /* li:before {*/
+  /*position: absolute;*/
+  /*top: 5px;*/
+  /*right: 5px;*/
+  /*content: attr(data-score);*/
+  /*}*/ }
+@media all and (min-width: 800px) and (orientation: portrait) {
+  #discardPile {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 0 0 0 813px;
+    margin: 0;
+    list-style: none; }
+
+  #hands {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    padding: 0 0 0 800px;
+    margin: 0; }
+
+  #hands ul,
+  #discardPile ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    line-height: 0; }
+
+  #hands li {
+    display: inline-block;
+    height: 115px;
+    width: 86px;
+    border-radius: 10px;
+    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
+    border: 6px solid #d9d7d3;
+    background-color: #f6f3ef;
+    position: relative;
+    background-size: 52px auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+    font-family: "ArtifikaMedium";
+    margin-left: 13px;
+    margin-bottom: 13px; }
+
+  #discardPile li {
+    display: inline-block;
+    height: 115px;
+    width: 86px;
+    border-radius: 10px;
+    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
+    border: 6px solid #d9d7d3;
+    background-color: #f6f3ef;
+    position: relative;
+    background-size: 52px auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+    font-family: "ArtifikaMedium";
+    margin-right: -52px; }
+
+  #hands li[data-suit=JOKER],
+  #discardPile li[data-suit=JOKER] {
+    background-size: auto 86px; }
+
+  #hands li.active {
+    box-shadow: 0 0 0 1px #186925, 0 0 6px 3px rgba(24, 105, 37, 0.8); }
+
+  #hands li div,
+  #discardPile li div {
+    font-weight: bold;
+    font-size: 18px;
+    line-height: .5em; }
+
+  #hands li div.tl,
+  #discardPile li div.tl {
+    top: 6px;
+    left: 6px; }
+
+  #hands li div.br,
+  #discardPile li div.br {
+    bottom: 6px;
+    right: 6px; }
+
+  #game {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0; }
+    #game button {
+      border-radius: 10px;
+      border: 1px solid black;
+      box-shadow: 0 0 0 1px white, 0 0 6px 1px black;
+      background-color: white;
+      padding: 12px 15px 12px 40px;
+      font-family: Tahoma, Arial, SANS-SERIF;
+      font-size: 16px;
+      background-position: 12px center;
+      background-size: 20px auto;
+      background-repeat: no-repeat; }
+    #game .rules {
+      background-image: url(../images/symbols/club.svg);
+      position: absolute;
+      bottom: 5px;
+      right: 15px; }
+    #game #hands {
+      position: absolute;
+      top: 810px;
+      left: 0;
+      bottom: 0;
+      right: 0; }
+    #game #hands ul {
+      position: absolute;
+      width: 738px;
+      margin: 0 0 0 -369px;
+      left: 50%; }
+
+  #board {
+    padding: 0;
+    position: absolute;
+    width: 800px;
+    height: 800px;
+    list-style: none;
+    margin: 0 0 0 -400px;
+    line-height: 0;
+    left: 50%; }
+    #board li {
+      border-radius: 10px;
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.9), 0 0 0 1px black;
+      line-height: 1em;
+      text-align: center;
+      display: inline-block;
+      width: 69px;
+      height: 69px;
+      margin: 10px 0 0 10px;
+      border: 3px solid white;
+      position: relative;
+      background-size: 27.6px auto;
+      background-position: center center;
+      background-repeat: no-repeat;
+      font-family: "ArtifikaMedium";
+      padding: 0; }
+    #board li div.tl {
+      top: 5px;
+      left: 4px; }
+    #board li div.br {
+      bottom: 6px;
+      right: 4px; }
+    #board li div {
+      font-size: 15.18px;
+      line-height: .5em;
+      padding: 0;
+      margin: 0; }
+    #board li[data-suit=JOKER] {
+      background-size: auto 51.75px; }
+
+  .info {
+    height: 800px;
+    width: 800px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -400px 0 0 -400px; }
+
+  /* li:before {*/
+  /*position: absolute;*/
+  /*top: 5px;*/
+  /*right: 5px;*/
+  /*content: attr(data-score);*/
+  /*}*/
+  #discardPile {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 0 0 0 805px;
+    margin: 0;
+    list-style: none; }
+
+  #hands {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    padding: 0 0 0 805px;
+    margin: 0; } }
+@media all and (min-height: 800px) and (orientation: landscape) {
+  #discardPile {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 0 0 0 813px;
+    margin: 0;
+    list-style: none; }
+
+  #hands {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    padding: 0 0 0 800px;
+    margin: 0; }
+
+  #hands ul,
+  #discardPile ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    line-height: 0; }
+
+  #hands li {
+    display: inline-block;
+    height: 115px;
+    width: 86px;
+    border-radius: 10px;
+    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
+    border: 6px solid #d9d7d3;
+    background-color: #f6f3ef;
+    position: relative;
+    background-size: 52px auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+    font-family: "ArtifikaMedium";
+    margin-left: 13px;
+    margin-bottom: 13px; }
+
+  #discardPile li {
+    display: inline-block;
+    height: 115px;
+    width: 86px;
+    border-radius: 10px;
+    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
+    border: 6px solid #d9d7d3;
+    background-color: #f6f3ef;
+    position: relative;
+    background-size: 52px auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+    font-family: "ArtifikaMedium";
+    margin-right: -52px; }
+
+  #hands li[data-suit=JOKER],
+  #discardPile li[data-suit=JOKER] {
+    background-size: auto 86px; }
+
+  #hands li.active {
+    box-shadow: 0 0 0 1px #186925, 0 0 6px 3px rgba(24, 105, 37, 0.8); }
+
+  #hands li div,
+  #discardPile li div {
+    font-weight: bold;
+    font-size: 18px;
+    line-height: .5em; }
+
+  #hands li div.tl,
+  #discardPile li div.tl {
+    top: 6px;
+    left: 6px; }
+
+  #hands li div.br,
+  #discardPile li div.br {
+    bottom: 6px;
+    right: 6px; }
+
+  #game {
+    display: none;
+    position: absolute;
+    height: 795px;
+    top: 0;
+    right: 0;
+    left: 0; }
+    #game button {
+      border-radius: 10px;
+      border: 1px solid black;
+      box-shadow: 0 0 0 1px white, 0 0 6px 1px black;
+      background-color: white;
+      padding: 12px 15px 12px 40px;
+      font-family: Tahoma, Arial, SANS-SERIF;
+      font-size: 16px;
+      background-position: 12px center;
+      background-size: 20px auto;
+      background-repeat: no-repeat; }
+    #game .rules {
+      background-image: url(../images/symbols/club.svg);
+      position: absolute;
+      bottom: 5px;
+      right: 15px; }
+
+  #board {
+    padding: 0;
+    width: 800px;
+    height: 800px;
+    list-style: none;
+    margin: 0;
+    line-height: 0; }
+    #board li {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.9), 0 0 0 1px black;
+      line-height: 1em;
+      text-align: center;
+      display: inline-block;
+      width: 69px;
+      height: 69px;
+      margin: 10px 0 0 10px;
+      border: 3px solid white;
+      position: relative;
+      background-size: 27.6px auto;
+      background-position: center center;
+      background-repeat: no-repeat;
+      font-family: "ArtifikaMedium";
+      padding: 0; }
+    #board li div.tl {
+      top: 5px;
+      left: 4px; }
+    #board li div.br {
+      bottom: 6px;
+      right: 4px; }
+    #board li div {
+      font-size: 15.18px;
+      line-height: .5em;
+      padding: 0;
+      margin: 0; }
+    #board li[data-suit=JOKER] {
+      background-size: auto 51.75px; }
+
+  .info {
+    height: 800px;
+    width: 800px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -400px 0 0 -400px; }
+
+  /* li:before {*/
+  /*position: absolute;*/
+  /*top: 5px;*/
+  /*right: 5px;*/
+  /*content: attr(data-score);*/
+  /*}*/ }
 footer {
   display: none;
   width: 200px;
