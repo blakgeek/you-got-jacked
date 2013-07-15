@@ -98,7 +98,7 @@ var Jax = {
 
             if (Jax.onlineMode) {
 
-                gameSocket.emit('discard', activeCard.index);
+                gameSocket.emit('discard-card', activeCard.index);
 
             } else {
 
@@ -116,7 +116,7 @@ var Jax = {
             var activeGameId = localStorage.getItem('activeGameId');
 
             if (activeGameId) {
-                connectToGame(activeGameId, true);
+                connectToGame(activeGameId);
             } else {
                 if (!window.sio) {
                     window.sio = io.connect(Jax.gameServerHost);
@@ -157,6 +157,17 @@ var Jax = {
             $('#rules').show();
         });
 
+        $('#game button.quit').click(function () {
+
+            // TODO: send resign event to server
+            localStorage.removeItem('activeGameId');
+            localStorage.removeItem('playerIndex');
+            $('#splash, #game, #rules').hide();
+            $('#rules button').hide()
+            $('#rules button.back').show()
+            $('#splash').show();
+        });
+
         $('#rules button.back').click(function () {
 
             $('#dialog, #rules').hide();
@@ -167,10 +178,13 @@ var Jax = {
 
     newOnlineGame: function (boardName, cards, cellStates) {
 
-        // TODO: rework this method to more consolidated in the loop
+        // TODO: rework this method to be more consolidated in the loop
 
         var board = this.BOARDS[boardName || 'sequence'];
         var html = [];
+
+        Jax.onlineMode = true;
+
         for (var i = 0; i < 100; i++) {
 
             var card = board[i];
@@ -209,11 +223,13 @@ var Jax = {
         });
         Jax.discardPile = [];
         $('#player1').on('click', 'li', this.selectCard);
+        $('#discardPile').html('')
         displayHand();
     },
 
     newGame: function (boardName) {
 
+        Jax.onlineMode = false;
         var board = this.BOARDS[boardName || 'sequence'];
         // TODO: fix this actually find the locations of the jokers or this won't work correctly for boards where jokers are not in the corners
         this.cardToCells[Jax.JACK_SPADE] = this.cardToCells[Jax.JACK_CLUB] = [
@@ -858,10 +874,16 @@ function connectToGame(gameId, rejoin) {
 
     gameSocket = io.connect(Jax.gameServerHost + gameId);
     gameSocket.on('connect', function () {
-        console.log('Connected to game!')
+        console.log('Connected to game!');
+        var playerIndex = localStorage.getItem('playerIndex');
+        if (playerIndex !== null) {
+            gameSocket.emit('rejoin', playerIndex);
+        } else {
+            gameSocket.emit('join', "Anonymous-" + new Date().getTime());
+        }
     });
 
-    gameSocket.on('waiting-for-players', function() {
+    gameSocket.on('waiting-for-players', function () {
 
         $('#message').html('Waiting for another player to join.').show();
     });
@@ -901,7 +923,10 @@ function connectToGame(gameId, rejoin) {
     gameSocket.on('card-drawn', function (card, index) {
         localPlayer.cards.splice(index, 1, card);
         displayHand();
+    });
 
+    gameSocket.on('card-discarded', function (card) {
+        addToDiscardPile(card);
     });
 
     gameSocket.on('take-turn', function () {
@@ -920,8 +945,8 @@ function connectToGame(gameId, rejoin) {
 
         Jax.gameOver(false);
     });
-;
-    gameSocket.on('game-in-progress', function(gameState) {
+    ;
+    gameSocket.on('game-in-progress', function (gameState) {
 
         $('#message').hide();
         $('#splash, #rules, #dialog').hide();
@@ -931,19 +956,13 @@ function connectToGame(gameId, rejoin) {
         }
         Jax.newOnlineGame(gameState.boardName, gameState.cards, gameState.cellStates);
 
-        for(var i=0; i<gameState.discarded; i++) {
+        for (var i = 0; i < gameState.discarded.length; i++) {
             addToDiscardPile(gameState.discarded[i]);
         }
-        if(gameState.canPlay) {
+        if (gameState.canPlay) {
 
             $('#message').text("It's your turn.").show().delay(2000).fadeOut();
         }
 
     });
-
-    if(rejoin === true) {
-        gameSocket.emit('rejoin', localStorage.getItem('playerIndex'));
-    } else {
-        gameSocket.emit('join', "Anonymous-" + new Date().getTime());
-    }
 }

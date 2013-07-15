@@ -272,6 +272,7 @@ li[data-suit=JOKER] {
     line-height: 0;
     left: 50%; }
     #board li {
+      background-color: white;
       border-radius: 0;
       box-shadow: 0 0 6px rgba(0, 0, 0, 0.9), 0 0 0 1px black;
       line-height: 1em;
@@ -604,6 +605,7 @@ li[data-suit=JOKER] {
     line-height: 0;
     left: 50%; }
     #board li {
+      background-color: white;
       border-radius: 5px;
       box-shadow: 0 0 6px rgba(0, 0, 0, 0.9), 0 0 0 1px black;
       line-height: 1em;
@@ -936,6 +938,7 @@ li[data-suit=JOKER] {
     line-height: 0;
     left: 50%; }
     #board li {
+      background-color: white;
       border-radius: 5px;
       box-shadow: 0 0 6px rgba(0, 0, 0, 0.9), 0 0 0 1px black;
       line-height: 1em;
@@ -1268,6 +1271,7 @@ li[data-suit=JOKER] {
     line-height: 0;
     left: 50%; }
     #board li {
+      background-color: white;
       border-radius: 5px;
       box-shadow: 0 0 6px rgba(0, 0, 0, 0.9), 0 0 0 1px black;
       line-height: 1em;
@@ -1600,6 +1604,7 @@ li[data-suit=JOKER] {
     line-height: 0;
     left: 50%; }
     #board li {
+      background-color: white;
       border-radius: 10px;
       box-shadow: 0 0 6px rgba(0, 0, 0, 0.9), 0 0 0 1px black;
       line-height: 1em;
@@ -1932,6 +1937,7 @@ li[data-suit=JOKER] {
     line-height: 0;
     left: 50%; }
     #board li {
+      background-color: white;
       border-radius: 10px;
       box-shadow: 0 0 6px rgba(0, 0, 0, 0.9), 0 0 0 1px black;
       line-height: 1em;

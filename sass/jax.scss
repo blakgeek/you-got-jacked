@@ -452,6 +452,7 @@ li[data-suit=JOKER] {
       left: 50%;
 
       li {
+        background-color: white;
         border-radius: $cellRadius;
         box-shadow: 0 0 6px rgba(0, 0, 0, .9), 0 0 0 1px black;
         line-height: 1em;
