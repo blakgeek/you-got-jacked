@@ -1,0 +1,245 @@
+@import url("http://linez.blakgeek.com/fonts/attentica/attentica.css");
+@import url("http://linez.blakgeek.com/fonts/uralita/stylesheet.css");
+@import url("http://linez.blakgeek.com/fonts/aaron/aaron.css");
+@import "bourbon/bourbon";
+@import "reset";
+
+$jokerFont: "aaronfaces";
+
+$colors: #dce5d3 #ca8585 #d2dde3;
+
+$faceColor: white;
+$baseColor: nth($colors, 3);
+$frameColor: darken(desaturate($baseColor, 10%), 15%);
+$innerLine: 0 0 0 1px darken($frameColor, 10%);
+$innerShadow: 0 0 2px darken($frameColor, 30%);
+$frame: 0 0 0 7px $frameColor;
+$outerLine: 0 0 0 8px darken($frameColor, 40%);
+$shadow: 0 0 3px 9px rgba(0, 0, 0, .4);
+$cardFont: 'uralitaregular';
+
+$space: "\00a0";
+$heart: "\2665";
+$spade: "\2660";
+$club: "\2663";
+$diamond: "\2666";
+$jokerCharacters: o v x w;
+$cardCharacters: 2 3 4 5 6 7 8 9 10 J Q K A;
+
+h1 {
+  font-family: $cardFont;
+  font-size: 48px;
+
+  &:before {
+    font-size: 30px;
+    vertical-align: middle;
+    font-family: courier;
+    color: darken(red, 15%);
+    content: '#{$heart} #{$diamond}';
+  }
+  &:after {
+    vertical-align: middle;
+    font-size: 30px;
+    font-family: courier;
+    content: '#{$club} #{$spade}';
+  }
+}
+
+#cells {
+
+  font-size: 0;
+  width: 80px * 8 + 8;
+  padding: 4px 0 0 4px;
+
+  li {
+    width: 60px;
+    height: 60px;
+    display: inline-block;
+    position: relative;
+    box-shadow: 0 0 0 1px #aaa, 0 0 0 5px #dfdfdf, 0 0 0 6px #aaa;
+    margin: 8px 12px 12px 8px;
+    @include linear-gradient(-225deg, white, white 50%, #f2f2f2 0);
+
+    &:after {
+      position: absolute;
+      bottom: 4px;
+      right: 2px;
+      font-size: 36px;
+      vertical-align: bottom;
+      padding: 0;
+      line-height: .75em;
+      font-family: serif;
+    }
+
+    &:before {
+      position: absolute;
+      top: 2px;
+      left: 6px;
+      width: 25%;
+      height: 25%;
+      font-size: 26px;
+      font-family: $cardFont;
+    }
+
+    &[data-suit="1"]:after {
+      content: $spade;
+    }
+
+    &[data-suit="2"]:after {
+      content: $club;
+    }
+
+    &[data-suit="3"]:after {
+      content: $heart;
+      color: darken(red, 15%);
+    }
+
+    &[data-suit="4"]:after {
+      content: $diamond;
+      color: darken(red, 15%);
+    }
+
+    &[data-suit="3"]:before,
+    &[data-suit="4"]:before {
+      color: darken(red, 15%);
+    }
+
+    &[data-joker]:before {
+      font-size: 45px;
+      top: 0;
+      left: 0;
+      text-align: center;
+      height: 60px;
+      width: 60px;
+      line-height: 60px;
+    }
+  }
+}
+
+#cards {
+  padding: 10px 0 0 10px;
+  li {
+    line-height: 1em;
+    font-size: 50px;
+    position: relative;
+    border-radius: 5px;
+    display: inline-block;
+    width: 120px;
+    height: 160px;
+    @include linear-gradient(-50deg, $baseColor, $baseColor 35%, $faceColor 0);
+    box-shadow: $innerShadow, $innerLine, $frame, $outerLine, $shadow;
+    margin: 10px 20px 20px 10px;
+    text-align: center;
+    font-family: sans-serif;
+
+    &[data-suit]:before,
+    &[data-joker]:before {
+      font-size: 65px;
+      content: $space;
+      position: absolute;
+      top: 55px;
+      left: 0;
+      width: 70px;
+      line-height: 1em;
+    }
+
+    &[data-suit]:after {
+      position: absolute;
+      top: 4px;
+      left: 0;
+      width: 70px;
+      text-align: center;
+      font-family: $cardFont, cursive;
+    }
+
+    span {
+      position: absolute;
+      bottom: 0;
+      right: 8px;
+
+      &:before {
+        font-size: 42px;
+        color: white !important;
+        font-family: serif;
+      }
+    }
+
+    &[data-suit="1"] {
+      span:before, &:before {
+        content: $spade;
+      }
+    }
+
+    &[data-suit="2"] {
+      span:before, &:before {
+        content: $club;
+      }
+    }
+
+    &[data-suit="3"] {
+      span:before, &:before {
+        content: $heart;
+        color: darken(red, 15%);
+      }
+      &:after {
+        color: darken(red, 15%);
+      }
+    }
+
+    &[data-suit="4"] {
+      span:before, &:before {
+        content: $diamond;
+        color: darken(red, 15%);
+      }
+      &:after {
+        color: darken(red, 15%);
+      }
+    }
+
+    &[data-joker]:before {
+      top: 6px;
+      left: 3px;
+      font-size: 90px;
+    }
+
+    &[data-joker]:after {
+      bottom: 0;
+      right: 6px;
+      font-size: 40px;
+      color: white;
+    }
+
+    &[data-joker="1"]:before,
+    &[data-joker="3"]:before {
+      color: darken(red, 15%);
+    }
+  }
+}
+
+li[data-joker]:before,
+li[data-joker]:after {
+  position: absolute;
+  font-family: $jokerFont !important;
+}
+
+@for $i from 1 through 4 {
+
+  #cells li[data-joker="#{$i}"]:before {
+    content: "#{nth($jokerCharacters, $i)}";
+  }
+
+  #cards li[data-joker="#{$i}"]:before {
+    content: "#{nth($jokerCharacters, $i)}";
+  }
+
+  #cards li[data-joker="#{$i}"]:after {
+    content: "#{nth($jokerCharacters, $i)}";
+  }
+}
+
+@for $i from 1 through 13 {
+  #cells li[data-value="#{$i}"]:before,
+  #cards li[data-value="#{$i}"]:after {
+    content: "#{nth($cardCharacters, $i)}";
+  }
+}

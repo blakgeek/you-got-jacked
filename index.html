@@ -1,69 +1,71 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
-<head>
-    <title>Play BlakJax Online</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <script src="http://ec2-184-73-193-207.compute-1.amazonaws.com:9000/socket.io/socket.io.js"></script>
-    <script src="./js/jquery-1.8.3.min.js"></script>
-    <script src="BG.js"></script>
-    <script src="./js/jax.js"></script>
-    <script src="./js/config.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/jax.css"/>
+    <head>
+        <title>Play BlakJax Online</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+        <link rel="stylesheet" type="text/css" href="css/jax.css"/>
+    </head>
+    <body>
+        <section id="splash">
+            <h1>BlakJax</h1>
+            <button class="play">Play Solo</button>
+            <button class="play-online">Play Someone</button>
+            <button class="rules">Rules</button>
+        </section>
+        <section id="rules">
+            <p>The goal of BlakJax is to capture five connecting squares horizontally, vertically or diagonally before
+                your
+                opponent can.</p>
 
-    <script>
+            <p>The rules are almost just like <a href="http://www.pagat.com/misc/jack.html">One Eyed Jack</a> or
+                Sequence. The
+                difference is that there are no one or two eyed jacks. Instead red jacks are used to
+                free up a square that has been captured by your opponent and black jacks are wild which means they can
+                be used
+                to
+                capture any open square except for the jokers.</p>
 
+            <p>The cards at the top are yours to play. When its your turn click of your cards to select it.
+                The selected card will be highlighted in green. To capture a square click it when the matching card or a
+                jack is
+                selected. If the play is valid the cell will change to blue signifying that it has been captured by
+                you.</p>
 
-    </script>
-</head>
-<body>
-<section id="splash">
-    <h1>BlakJax</h1>
-    <button class="play">Play Solo</button>
-    <button class="play-online">Play Someone</button>
-    <button class="rules">Rules</button>
-</section>
-<section id="rules">
-    <p>The goal of BlakJax is to capture five connecting squares horizontally, vertically or diagonally before your
-        opponent can.</p>
+            <p>The last four cards that have been played are displayed below your cards. If you have a dead card,
+                meaning all of
+                the squares where it could have been played are already occupied, you can discard it and get a new one
+                by
+                clicking these cards.</p>
 
-    <p>The rules are almost just like <a href="http://www.pagat.com/misc/jack.html">One Eyed Jack</a> or Sequence. The
-        difference is that there are no one or two eyed jacks. Instead red jacks are used to
-        free up a square that has been captured by your opponent and black jacks are wild which means they can be used
-        to
-        capture any open square except for the jokers.</p>
-
-    <p>The cards at the top are yours to play. When its your turn click of your cards to select it.
-        The selected card will be highlighted in green. To capture a square click it when the matching card or a jack is
-        selected. If the play is valid the cell will change to blue signifying that it has been captured by you.</p>
-
-    <p>The last four cards that have been played are displayed below your cards. If you have a dead card, meaning all of
-        the squares where it could have been played are already occupied, you can discard it and get a new one by
-        clicking these cards.</p>
-
-    <button class="play">Play Solo</button>
-    <button class="play-online">Play Someone</button>
-    <button class="back">Continue Playing</button>
-</section>
-<section id="dialog">
-    <p class="message"></p>
-    <button class="play">Play Solo</button>
-    <button class="play-online">Play Someone</button>
-</section>
-<section id="game">
-    <ul id="discardPile"></ul>
-    <div id="hands">
-        <ul id="player1"></ul>
-        <ul id="player2"></ul>
-        <ul id="player3"></ul>
-    </div>
-    <ul id="board"></ul>
-    <button class="rules">A Little Help</button>
-    <button class="quit">Quit</button>
-</section>
-<!-- consolidate all these dialog sections an make them dynamic -->
-<section id="message"></section>
-<footer>
-    Another Hairy Black App
-</footer>
-</body>
+            <button class="play">Play Solo</button>
+            <button class="play-online">Play Someone</button>
+            <button class="back">Continue Playing</button>
+        </section>
+        <section id="dialog">
+            <p class="message"></p>
+            <button class="play">Play Solo</button>
+            <button class="play-online">Play Someone</button>
+        </section>
+        <section id="game">
+            <ul id="discardPile"></ul>
+            <div id="hands">
+                <ul id="player1"></ul>
+                <ul id="player2"></ul>
+                <ul id="player3"></ul>
+            </div>
+            <ul id="board"></ul>
+            <button class="rules">A Little Help</button>
+            <button class="quit">Quit</button>
+        </section>
+        <!-- consolidate all these dialog sections an make them dynamic -->
+        <section id="message"></section>
+        <footer>
+            Another Hairy Black App
+        </footer>
+    </body>
+    <script src="//ec2-184-73-193-207.compute-1.amazonaws.com:9000/socket.io/socket.io.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/BG.js"></script>
+    <script src="js/jax.js"></script>
+    <script src="js/config.js"></script>
 </html>
