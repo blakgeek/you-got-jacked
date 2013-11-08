@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'aaronfaces';
+    src: url('aaron-webfont.eot');
+    src: url('aaron-webfont.eot?#iefix') format('embedded-opentype'),
+         url('aaron-webfont.woff') format('woff'),
+         url('aaron-webfont.ttf') format('truetype'),
+         url('aaron-webfont.svg#aaronfacesregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
