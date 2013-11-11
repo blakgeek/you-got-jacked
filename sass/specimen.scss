@@ -1,0 +1,38 @@
+@import "reset";
+@import "bourbon/bourbon";
+@import "fonts";
+@import "colors";
+@import "cards";
+@import "board";
+
+h1 {
+  font-family: uralita;
+  font-size: 48px;
+  text-align: center;
+  padding: 10px 0 20px 0;
+  font-weight: bold;
+
+}
+
+.p1, .p2, .p3, .p4 {
+  position: relative;
+  display: block;
+
+  &:after {
+    clear: both;
+  }
+}
+
+.board {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+}
+
+.cards {
+  margin-left: 50%;
+  top: 0;
+  right: 0;
+  width: 50%;
+}
