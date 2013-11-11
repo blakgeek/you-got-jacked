@@ -1,7 +1,695 @@
-@import url(../fonts/stylesheet.css);
+@import url("../fonts/opensans/opensans.css");
+@import url("../fonts/uralita/uralita.css");
+@import url("../fonts/aaron/aaron.css");
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+a {
+  text-decoration: none; }
+
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner {
+  padding: 0;
+  border: 0; }
+
+.cards, .cards.p1 {
+  padding: 10px 0 0 10px; }
+  .cards li.p1, .cards li, .cards.p1 li.p1, .cards.p1 li {
+    line-height: 1em;
+    position: relative;
+    border-radius: 2px;
+    display: inline-block;
+    width: 90px;
+    height: 150px;
+    background-color: #ca8585;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ca8585), color-stop(35%, #ca8585), color-stop(0, white));
+    background-image: -webkit-linear-gradient(-220deg, #ca8585, #ca8585 35%, white 0);
+    background-image: linear-gradient(-50deg,#ca8585, #ca8585 35%, white 0);
+    box-shadow: 0 0 2px #442525, 0 0 0 1px #864949, 0 0 0 7px #a65c5c, 0 0 0 8px #231313, 0 0 3px 9px rgba(0, 0, 0, 0.4);
+    margin: 10px 20px 20px 10px;
+    text-align: center; }
+    .cards li.p1.suit:before, .cards li.p1.joker:before, .cards li.suit:before, .cards li.joker:before, .cards.p1 li.p1.suit:before, .cards.p1 li.p1.joker:before, .cards.p1 li.suit:before, .cards.p1 li.joker:before {
+      content: "\00a0";
+      position: absolute;
+      top: 55px;
+      left: 0;
+      width: 60px;
+      font: 50px/1em arial; }
+    .cards li.p1.suit:after, .cards li.suit:after, .cards.p1 li.p1.suit:after, .cards.p1 li.suit:after {
+      position: absolute;
+      top: 4px;
+      left: 0;
+      width: 60px;
+      text-align: center;
+      font: 50px/1em "Uralita"; }
+    .cards li.p1 span, .cards li span, .cards.p1 li.p1 span, .cards.p1 li span {
+      position: absolute;
+      bottom: 0;
+      right: 8px; }
+      .cards li.p1 span:before, .cards li span:before, .cards.p1 li.p1 span:before, .cards.p1 li span:before {
+        font-size: 42px;
+        line-height: 42px;
+        color: white !important;
+        font-family: serif; }
+    .cards li.p1.spade span:before, .cards li.p1.spade:before, .cards li.spade span:before, .cards li.spade:before, .cards.p1 li.p1.spade span:before, .cards.p1 li.p1.spade:before, .cards.p1 li.spade span:before, .cards.p1 li.spade:before {
+      content: "\2660";
+      color: #302020; }
+    .cards li.p1.spade:after, .cards li.spade:after, .cards.p1 li.p1.spade:after, .cards.p1 li.spade:after {
+      color: #302020; }
+    .cards li.p1.club span:before, .cards li.p1.club:before, .cards li.club span:before, .cards li.club:before, .cards.p1 li.p1.club span:before, .cards.p1 li.p1.club:before, .cards.p1 li.club span:before, .cards.p1 li.club:before {
+      content: "\2663";
+      color: #302020; }
+    .cards li.p1.club:after, .cards li.club:after, .cards.p1 li.p1.club:after, .cards.p1 li.club:after {
+      color: #302020; }
+    .cards li.p1.heart span:before, .cards li.p1.heart:before, .cards li.heart span:before, .cards li.heart:before, .cards.p1 li.p1.heart span:before, .cards.p1 li.p1.heart:before, .cards.p1 li.heart span:before, .cards.p1 li.heart:before {
+      content: "\2665";
+      color: #d1343f; }
+    .cards li.p1.heart:after, .cards li.heart:after, .cards.p1 li.p1.heart:after, .cards.p1 li.heart:after {
+      color: #d1343f; }
+    .cards li.p1.diamond span:before, .cards li.p1.diamond:before, .cards li.diamond span:before, .cards li.diamond:before, .cards.p1 li.p1.diamond span:before, .cards.p1 li.p1.diamond:before, .cards.p1 li.diamond span:before, .cards.p1 li.diamond:before {
+      content: "\2666";
+      color: #d1343f; }
+    .cards li.p1.diamond:after, .cards li.diamond:after, .cards.p1 li.p1.diamond:after, .cards.p1 li.diamond:after {
+      color: #d1343f; }
+    .cards li.p1.joker:before, .cards li.joker:before, .cards.p1 li.p1.joker:before, .cards.p1 li.joker:before {
+      top: 8px;
+      font-size: 70px;
+      width: 100%;
+      text-align: center;
+      color: #302020; }
+    .cards li.p1.joker:after, .cards li.joker:after, .cards.p1 li.p1.joker:after, .cards.p1 li.joker:after {
+      bottom: 4px;
+      right: 6px;
+      font-size: 30px;
+      line-height: 40px; }
+    .cards li.p1.joker:before, .cards li.p1.joker:after, .cards li.joker:before, .cards li.joker:after, .cards.p1 li.p1.joker:before, .cards.p1 li.p1.joker:after, .cards.p1 li.joker:before, .cards.p1 li.joker:after {
+      position: absolute;
+      font-family: "aaronfaces" !important; }
+    .cards li.p1.joker-1:after, .cards li.p1.joker-3:after, .cards li.joker-1:after, .cards li.joker-3:after, .cards.p1 li.p1.joker-1:after, .cards.p1 li.p1.joker-3:after, .cards.p1 li.joker-1:after, .cards.p1 li.joker-3:after {
+      color: white; }
+    .cards li.p1.joker-2:after, .cards li.p1.joker-4:after, .cards li.joker-2:after, .cards li.joker-4:after, .cards.p1 li.p1.joker-2:after, .cards.p1 li.p1.joker-4:after, .cards.p1 li.joker-2:after, .cards.p1 li.joker-4:after {
+      color: #ca8585; }
+    .cards li.p1.joker-2, .cards li.p1.joker-4, .cards li.joker-2, .cards li.joker-4, .cards.p1 li.p1.joker-2, .cards.p1 li.p1.joker-4, .cards.p1 li.joker-2, .cards.p1 li.joker-4 {
+      background-color: white;
+      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(35%, white), color-stop(0, #ca8585));
+      background-image: -webkit-linear-gradient(-220deg, white, white 35%, #ca8585 0);
+      background-image: linear-gradient(-50deg,white, white 35%, #ca8585 0); }
+    .cards li.p1.joker-1:before, .cards li.joker-1:before, .cards.p1 li.p1.joker-1:before, .cards.p1 li.joker-1:before {
+      content: "o"; }
+    .cards li.p1.joker-1:after, .cards li.joker-1:after, .cards.p1 li.p1.joker-1:after, .cards.p1 li.joker-1:after {
+      content: "o"; }
+    .cards li.p1.joker-2:before, .cards li.joker-2:before, .cards.p1 li.p1.joker-2:before, .cards.p1 li.joker-2:before {
+      content: "v"; }
+    .cards li.p1.joker-2:after, .cards li.joker-2:after, .cards.p1 li.p1.joker-2:after, .cards.p1 li.joker-2:after {
+      content: "v"; }
+    .cards li.p1.joker-3:before, .cards li.joker-3:before, .cards.p1 li.p1.joker-3:before, .cards.p1 li.joker-3:before {
+      content: "x"; }
+    .cards li.p1.joker-3:after, .cards li.joker-3:after, .cards.p1 li.p1.joker-3:after, .cards.p1 li.joker-3:after {
+      content: "x"; }
+    .cards li.p1.joker-4:before, .cards li.joker-4:before, .cards.p1 li.p1.joker-4:before, .cards.p1 li.joker-4:before {
+      content: "w"; }
+    .cards li.p1.joker-4:after, .cards li.joker-4:after, .cards.p1 li.p1.joker-4:after, .cards.p1 li.joker-4:after {
+      content: "w"; }
+    .cards li.p1[data-card="ad"]:after, .cards li.p1[data-card="ah"]:after, .cards li.p1[data-card="ac"]:after, .cards li.p1[data-card="as"]:after, .cards li[data-card="ad"]:after, .cards li[data-card="ah"]:after, .cards li[data-card="ac"]:after, .cards li[data-card="as"]:after, .cards.p1 li.p1[data-card="ad"]:after, .cards.p1 li.p1[data-card="ah"]:after, .cards.p1 li.p1[data-card="ac"]:after, .cards.p1 li.p1[data-card="as"]:after, .cards.p1 li[data-card="ad"]:after, .cards.p1 li[data-card="ah"]:after, .cards.p1 li[data-card="ac"]:after, .cards.p1 li[data-card="as"]:after {
+      content: "A"; }
+    .cards li.p1[data-card="2d"]:after, .cards li.p1[data-card="2h"]:after, .cards li.p1[data-card="2c"]:after, .cards li.p1[data-card="2s"]:after, .cards li[data-card="2d"]:after, .cards li[data-card="2h"]:after, .cards li[data-card="2c"]:after, .cards li[data-card="2s"]:after, .cards.p1 li.p1[data-card="2d"]:after, .cards.p1 li.p1[data-card="2h"]:after, .cards.p1 li.p1[data-card="2c"]:after, .cards.p1 li.p1[data-card="2s"]:after, .cards.p1 li[data-card="2d"]:after, .cards.p1 li[data-card="2h"]:after, .cards.p1 li[data-card="2c"]:after, .cards.p1 li[data-card="2s"]:after {
+      content: "2"; }
+    .cards li.p1[data-card="3d"]:after, .cards li.p1[data-card="3h"]:after, .cards li.p1[data-card="3c"]:after, .cards li.p1[data-card="3s"]:after, .cards li[data-card="3d"]:after, .cards li[data-card="3h"]:after, .cards li[data-card="3c"]:after, .cards li[data-card="3s"]:after, .cards.p1 li.p1[data-card="3d"]:after, .cards.p1 li.p1[data-card="3h"]:after, .cards.p1 li.p1[data-card="3c"]:after, .cards.p1 li.p1[data-card="3s"]:after, .cards.p1 li[data-card="3d"]:after, .cards.p1 li[data-card="3h"]:after, .cards.p1 li[data-card="3c"]:after, .cards.p1 li[data-card="3s"]:after {
+      content: "3"; }
+    .cards li.p1[data-card="4d"]:after, .cards li.p1[data-card="4h"]:after, .cards li.p1[data-card="4c"]:after, .cards li.p1[data-card="4s"]:after, .cards li[data-card="4d"]:after, .cards li[data-card="4h"]:after, .cards li[data-card="4c"]:after, .cards li[data-card="4s"]:after, .cards.p1 li.p1[data-card="4d"]:after, .cards.p1 li.p1[data-card="4h"]:after, .cards.p1 li.p1[data-card="4c"]:after, .cards.p1 li.p1[data-card="4s"]:after, .cards.p1 li[data-card="4d"]:after, .cards.p1 li[data-card="4h"]:after, .cards.p1 li[data-card="4c"]:after, .cards.p1 li[data-card="4s"]:after {
+      content: "4"; }
+    .cards li.p1[data-card="5d"]:after, .cards li.p1[data-card="5h"]:after, .cards li.p1[data-card="5c"]:after, .cards li.p1[data-card="5s"]:after, .cards li[data-card="5d"]:after, .cards li[data-card="5h"]:after, .cards li[data-card="5c"]:after, .cards li[data-card="5s"]:after, .cards.p1 li.p1[data-card="5d"]:after, .cards.p1 li.p1[data-card="5h"]:after, .cards.p1 li.p1[data-card="5c"]:after, .cards.p1 li.p1[data-card="5s"]:after, .cards.p1 li[data-card="5d"]:after, .cards.p1 li[data-card="5h"]:after, .cards.p1 li[data-card="5c"]:after, .cards.p1 li[data-card="5s"]:after {
+      content: "5"; }
+    .cards li.p1[data-card="6d"]:after, .cards li.p1[data-card="6h"]:after, .cards li.p1[data-card="6c"]:after, .cards li.p1[data-card="6s"]:after, .cards li[data-card="6d"]:after, .cards li[data-card="6h"]:after, .cards li[data-card="6c"]:after, .cards li[data-card="6s"]:after, .cards.p1 li.p1[data-card="6d"]:after, .cards.p1 li.p1[data-card="6h"]:after, .cards.p1 li.p1[data-card="6c"]:after, .cards.p1 li.p1[data-card="6s"]:after, .cards.p1 li[data-card="6d"]:after, .cards.p1 li[data-card="6h"]:after, .cards.p1 li[data-card="6c"]:after, .cards.p1 li[data-card="6s"]:after {
+      content: "6"; }
+    .cards li.p1[data-card="7d"]:after, .cards li.p1[data-card="7h"]:after, .cards li.p1[data-card="7c"]:after, .cards li.p1[data-card="7s"]:after, .cards li[data-card="7d"]:after, .cards li[data-card="7h"]:after, .cards li[data-card="7c"]:after, .cards li[data-card="7s"]:after, .cards.p1 li.p1[data-card="7d"]:after, .cards.p1 li.p1[data-card="7h"]:after, .cards.p1 li.p1[data-card="7c"]:after, .cards.p1 li.p1[data-card="7s"]:after, .cards.p1 li[data-card="7d"]:after, .cards.p1 li[data-card="7h"]:after, .cards.p1 li[data-card="7c"]:after, .cards.p1 li[data-card="7s"]:after {
+      content: "7"; }
+    .cards li.p1[data-card="8d"]:after, .cards li.p1[data-card="8h"]:after, .cards li.p1[data-card="8c"]:after, .cards li.p1[data-card="8s"]:after, .cards li[data-card="8d"]:after, .cards li[data-card="8h"]:after, .cards li[data-card="8c"]:after, .cards li[data-card="8s"]:after, .cards.p1 li.p1[data-card="8d"]:after, .cards.p1 li.p1[data-card="8h"]:after, .cards.p1 li.p1[data-card="8c"]:after, .cards.p1 li.p1[data-card="8s"]:after, .cards.p1 li[data-card="8d"]:after, .cards.p1 li[data-card="8h"]:after, .cards.p1 li[data-card="8c"]:after, .cards.p1 li[data-card="8s"]:after {
+      content: "8"; }
+    .cards li.p1[data-card="9d"]:after, .cards li.p1[data-card="9h"]:after, .cards li.p1[data-card="9c"]:after, .cards li.p1[data-card="9s"]:after, .cards li[data-card="9d"]:after, .cards li[data-card="9h"]:after, .cards li[data-card="9c"]:after, .cards li[data-card="9s"]:after, .cards.p1 li.p1[data-card="9d"]:after, .cards.p1 li.p1[data-card="9h"]:after, .cards.p1 li.p1[data-card="9c"]:after, .cards.p1 li.p1[data-card="9s"]:after, .cards.p1 li[data-card="9d"]:after, .cards.p1 li[data-card="9h"]:after, .cards.p1 li[data-card="9c"]:after, .cards.p1 li[data-card="9s"]:after {
+      content: "9"; }
+    .cards li.p1[data-card="td"]:after, .cards li.p1[data-card="th"]:after, .cards li.p1[data-card="tc"]:after, .cards li.p1[data-card="ts"]:after, .cards li[data-card="td"]:after, .cards li[data-card="th"]:after, .cards li[data-card="tc"]:after, .cards li[data-card="ts"]:after, .cards.p1 li.p1[data-card="td"]:after, .cards.p1 li.p1[data-card="th"]:after, .cards.p1 li.p1[data-card="tc"]:after, .cards.p1 li.p1[data-card="ts"]:after, .cards.p1 li[data-card="td"]:after, .cards.p1 li[data-card="th"]:after, .cards.p1 li[data-card="tc"]:after, .cards.p1 li[data-card="ts"]:after {
+      content: "10"; }
+    .cards li.p1[data-card="jd"]:after, .cards li.p1[data-card="jh"]:after, .cards li.p1[data-card="jc"]:after, .cards li.p1[data-card="js"]:after, .cards li[data-card="jd"]:after, .cards li[data-card="jh"]:after, .cards li[data-card="jc"]:after, .cards li[data-card="js"]:after, .cards.p1 li.p1[data-card="jd"]:after, .cards.p1 li.p1[data-card="jh"]:after, .cards.p1 li.p1[data-card="jc"]:after, .cards.p1 li.p1[data-card="js"]:after, .cards.p1 li[data-card="jd"]:after, .cards.p1 li[data-card="jh"]:after, .cards.p1 li[data-card="jc"]:after, .cards.p1 li[data-card="js"]:after {
+      content: "J"; }
+    .cards li.p1[data-card="qd"]:after, .cards li.p1[data-card="qh"]:after, .cards li.p1[data-card="qc"]:after, .cards li.p1[data-card="qs"]:after, .cards li[data-card="qd"]:after, .cards li[data-card="qh"]:after, .cards li[data-card="qc"]:after, .cards li[data-card="qs"]:after, .cards.p1 li.p1[data-card="qd"]:after, .cards.p1 li.p1[data-card="qh"]:after, .cards.p1 li.p1[data-card="qc"]:after, .cards.p1 li.p1[data-card="qs"]:after, .cards.p1 li[data-card="qd"]:after, .cards.p1 li[data-card="qh"]:after, .cards.p1 li[data-card="qc"]:after, .cards.p1 li[data-card="qs"]:after {
+      content: "Q"; }
+    .cards li.p1[data-card="kd"]:after, .cards li.p1[data-card="kh"]:after, .cards li.p1[data-card="kc"]:after, .cards li.p1[data-card="ks"]:after, .cards li[data-card="kd"]:after, .cards li[data-card="kh"]:after, .cards li[data-card="kc"]:after, .cards li[data-card="ks"]:after, .cards.p1 li.p1[data-card="kd"]:after, .cards.p1 li.p1[data-card="kh"]:after, .cards.p1 li.p1[data-card="kc"]:after, .cards.p1 li.p1[data-card="ks"]:after, .cards.p1 li[data-card="kd"]:after, .cards.p1 li[data-card="kh"]:after, .cards.p1 li[data-card="kc"]:after, .cards.p1 li[data-card="ks"]:after {
+      content: "K"; }
+
+.cards, .cards.p2 {
+  padding: 10px 0 0 10px; }
+  .cards li.p2, .cards li, .cards.p2 li.p2, .cards.p2 li {
+    line-height: 1em;
+    position: relative;
+    border-radius: 2px;
+    display: inline-block;
+    width: 90px;
+    height: 150px;
+    background-color: #85cab3;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #85cab3), color-stop(35%, #85cab3), color-stop(0, white));
+    background-image: -webkit-linear-gradient(-220deg, #85cab3, #85cab3 35%, white 0);
+    background-image: linear-gradient(-50deg,#85cab3, #85cab3 35%, white 0);
+    box-shadow: 0 0 2px #25443a, 0 0 0 1px #498672, 0 0 0 7px #5ca68e, 0 0 0 8px #13231e, 0 0 3px 9px rgba(0, 0, 0, 0.4);
+    margin: 10px 20px 20px 10px;
+    text-align: center; }
+    .cards li.p2.suit:before, .cards li.p2.joker:before, .cards li.suit:before, .cards li.joker:before, .cards.p2 li.p2.suit:before, .cards.p2 li.p2.joker:before, .cards.p2 li.suit:before, .cards.p2 li.joker:before {
+      content: "\00a0";
+      position: absolute;
+      top: 55px;
+      left: 0;
+      width: 60px;
+      font: 50px/1em arial; }
+    .cards li.p2.suit:after, .cards li.suit:after, .cards.p2 li.p2.suit:after, .cards.p2 li.suit:after {
+      position: absolute;
+      top: 4px;
+      left: 0;
+      width: 60px;
+      text-align: center;
+      font: 50px/1em "Uralita"; }
+    .cards li.p2 span, .cards li span, .cards.p2 li.p2 span, .cards.p2 li span {
+      position: absolute;
+      bottom: 0;
+      right: 8px; }
+      .cards li.p2 span:before, .cards li span:before, .cards.p2 li.p2 span:before, .cards.p2 li span:before {
+        font-size: 42px;
+        line-height: 42px;
+        color: white !important;
+        font-family: serif; }
+    .cards li.p2.spade span:before, .cards li.p2.spade:before, .cards li.spade span:before, .cards li.spade:before, .cards.p2 li.p2.spade span:before, .cards.p2 li.p2.spade:before, .cards.p2 li.spade span:before, .cards.p2 li.spade:before {
+      content: "\2660";
+      color: #20302b; }
+    .cards li.p2.spade:after, .cards li.spade:after, .cards.p2 li.p2.spade:after, .cards.p2 li.spade:after {
+      color: #20302b; }
+    .cards li.p2.club span:before, .cards li.p2.club:before, .cards li.club span:before, .cards li.club:before, .cards.p2 li.p2.club span:before, .cards.p2 li.p2.club:before, .cards.p2 li.club span:before, .cards.p2 li.club:before {
+      content: "\2663";
+      color: #20302b; }
+    .cards li.p2.club:after, .cards li.club:after, .cards.p2 li.p2.club:after, .cards.p2 li.club:after {
+      color: #20302b; }
+    .cards li.p2.heart span:before, .cards li.p2.heart:before, .cards li.heart span:before, .cards li.heart:before, .cards.p2 li.p2.heart span:before, .cards.p2 li.p2.heart:before, .cards.p2 li.heart span:before, .cards.p2 li.heart:before {
+      content: "\2665";
+      color: #d1343f; }
+    .cards li.p2.heart:after, .cards li.heart:after, .cards.p2 li.p2.heart:after, .cards.p2 li.heart:after {
+      color: #d1343f; }
+    .cards li.p2.diamond span:before, .cards li.p2.diamond:before, .cards li.diamond span:before, .cards li.diamond:before, .cards.p2 li.p2.diamond span:before, .cards.p2 li.p2.diamond:before, .cards.p2 li.diamond span:before, .cards.p2 li.diamond:before {
+      content: "\2666";
+      color: #d1343f; }
+    .cards li.p2.diamond:after, .cards li.diamond:after, .cards.p2 li.p2.diamond:after, .cards.p2 li.diamond:after {
+      color: #d1343f; }
+    .cards li.p2.joker:before, .cards li.joker:before, .cards.p2 li.p2.joker:before, .cards.p2 li.joker:before {
+      top: 8px;
+      font-size: 70px;
+      width: 100%;
+      text-align: center;
+      color: #20302b; }
+    .cards li.p2.joker:after, .cards li.joker:after, .cards.p2 li.p2.joker:after, .cards.p2 li.joker:after {
+      bottom: 4px;
+      right: 6px;
+      font-size: 30px;
+      line-height: 40px; }
+    .cards li.p2.joker:before, .cards li.p2.joker:after, .cards li.joker:before, .cards li.joker:after, .cards.p2 li.p2.joker:before, .cards.p2 li.p2.joker:after, .cards.p2 li.joker:before, .cards.p2 li.joker:after {
+      position: absolute;
+      font-family: "aaronfaces" !important; }
+    .cards li.p2.joker-1:after, .cards li.p2.joker-3:after, .cards li.joker-1:after, .cards li.joker-3:after, .cards.p2 li.p2.joker-1:after, .cards.p2 li.p2.joker-3:after, .cards.p2 li.joker-1:after, .cards.p2 li.joker-3:after {
+      color: white; }
+    .cards li.p2.joker-2:after, .cards li.p2.joker-4:after, .cards li.joker-2:after, .cards li.joker-4:after, .cards.p2 li.p2.joker-2:after, .cards.p2 li.p2.joker-4:after, .cards.p2 li.joker-2:after, .cards.p2 li.joker-4:after {
+      color: #85cab3; }
+    .cards li.p2.joker-2, .cards li.p2.joker-4, .cards li.joker-2, .cards li.joker-4, .cards.p2 li.p2.joker-2, .cards.p2 li.p2.joker-4, .cards.p2 li.joker-2, .cards.p2 li.joker-4 {
+      background-color: white;
+      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(35%, white), color-stop(0, #85cab3));
+      background-image: -webkit-linear-gradient(-220deg, white, white 35%, #85cab3 0);
+      background-image: linear-gradient(-50deg,white, white 35%, #85cab3 0); }
+    .cards li.p2.joker-1:before, .cards li.joker-1:before, .cards.p2 li.p2.joker-1:before, .cards.p2 li.joker-1:before {
+      content: "o"; }
+    .cards li.p2.joker-1:after, .cards li.joker-1:after, .cards.p2 li.p2.joker-1:after, .cards.p2 li.joker-1:after {
+      content: "o"; }
+    .cards li.p2.joker-2:before, .cards li.joker-2:before, .cards.p2 li.p2.joker-2:before, .cards.p2 li.joker-2:before {
+      content: "v"; }
+    .cards li.p2.joker-2:after, .cards li.joker-2:after, .cards.p2 li.p2.joker-2:after, .cards.p2 li.joker-2:after {
+      content: "v"; }
+    .cards li.p2.joker-3:before, .cards li.joker-3:before, .cards.p2 li.p2.joker-3:before, .cards.p2 li.joker-3:before {
+      content: "x"; }
+    .cards li.p2.joker-3:after, .cards li.joker-3:after, .cards.p2 li.p2.joker-3:after, .cards.p2 li.joker-3:after {
+      content: "x"; }
+    .cards li.p2.joker-4:before, .cards li.joker-4:before, .cards.p2 li.p2.joker-4:before, .cards.p2 li.joker-4:before {
+      content: "w"; }
+    .cards li.p2.joker-4:after, .cards li.joker-4:after, .cards.p2 li.p2.joker-4:after, .cards.p2 li.joker-4:after {
+      content: "w"; }
+    .cards li.p2[data-card="ad"]:after, .cards li.p2[data-card="ah"]:after, .cards li.p2[data-card="ac"]:after, .cards li.p2[data-card="as"]:after, .cards li[data-card="ad"]:after, .cards li[data-card="ah"]:after, .cards li[data-card="ac"]:after, .cards li[data-card="as"]:after, .cards.p2 li.p2[data-card="ad"]:after, .cards.p2 li.p2[data-card="ah"]:after, .cards.p2 li.p2[data-card="ac"]:after, .cards.p2 li.p2[data-card="as"]:after, .cards.p2 li[data-card="ad"]:after, .cards.p2 li[data-card="ah"]:after, .cards.p2 li[data-card="ac"]:after, .cards.p2 li[data-card="as"]:after {
+      content: "A"; }
+    .cards li.p2[data-card="2d"]:after, .cards li.p2[data-card="2h"]:after, .cards li.p2[data-card="2c"]:after, .cards li.p2[data-card="2s"]:after, .cards li[data-card="2d"]:after, .cards li[data-card="2h"]:after, .cards li[data-card="2c"]:after, .cards li[data-card="2s"]:after, .cards.p2 li.p2[data-card="2d"]:after, .cards.p2 li.p2[data-card="2h"]:after, .cards.p2 li.p2[data-card="2c"]:after, .cards.p2 li.p2[data-card="2s"]:after, .cards.p2 li[data-card="2d"]:after, .cards.p2 li[data-card="2h"]:after, .cards.p2 li[data-card="2c"]:after, .cards.p2 li[data-card="2s"]:after {
+      content: "2"; }
+    .cards li.p2[data-card="3d"]:after, .cards li.p2[data-card="3h"]:after, .cards li.p2[data-card="3c"]:after, .cards li.p2[data-card="3s"]:after, .cards li[data-card="3d"]:after, .cards li[data-card="3h"]:after, .cards li[data-card="3c"]:after, .cards li[data-card="3s"]:after, .cards.p2 li.p2[data-card="3d"]:after, .cards.p2 li.p2[data-card="3h"]:after, .cards.p2 li.p2[data-card="3c"]:after, .cards.p2 li.p2[data-card="3s"]:after, .cards.p2 li[data-card="3d"]:after, .cards.p2 li[data-card="3h"]:after, .cards.p2 li[data-card="3c"]:after, .cards.p2 li[data-card="3s"]:after {
+      content: "3"; }
+    .cards li.p2[data-card="4d"]:after, .cards li.p2[data-card="4h"]:after, .cards li.p2[data-card="4c"]:after, .cards li.p2[data-card="4s"]:after, .cards li[data-card="4d"]:after, .cards li[data-card="4h"]:after, .cards li[data-card="4c"]:after, .cards li[data-card="4s"]:after, .cards.p2 li.p2[data-card="4d"]:after, .cards.p2 li.p2[data-card="4h"]:after, .cards.p2 li.p2[data-card="4c"]:after, .cards.p2 li.p2[data-card="4s"]:after, .cards.p2 li[data-card="4d"]:after, .cards.p2 li[data-card="4h"]:after, .cards.p2 li[data-card="4c"]:after, .cards.p2 li[data-card="4s"]:after {
+      content: "4"; }
+    .cards li.p2[data-card="5d"]:after, .cards li.p2[data-card="5h"]:after, .cards li.p2[data-card="5c"]:after, .cards li.p2[data-card="5s"]:after, .cards li[data-card="5d"]:after, .cards li[data-card="5h"]:after, .cards li[data-card="5c"]:after, .cards li[data-card="5s"]:after, .cards.p2 li.p2[data-card="5d"]:after, .cards.p2 li.p2[data-card="5h"]:after, .cards.p2 li.p2[data-card="5c"]:after, .cards.p2 li.p2[data-card="5s"]:after, .cards.p2 li[data-card="5d"]:after, .cards.p2 li[data-card="5h"]:after, .cards.p2 li[data-card="5c"]:after, .cards.p2 li[data-card="5s"]:after {
+      content: "5"; }
+    .cards li.p2[data-card="6d"]:after, .cards li.p2[data-card="6h"]:after, .cards li.p2[data-card="6c"]:after, .cards li.p2[data-card="6s"]:after, .cards li[data-card="6d"]:after, .cards li[data-card="6h"]:after, .cards li[data-card="6c"]:after, .cards li[data-card="6s"]:after, .cards.p2 li.p2[data-card="6d"]:after, .cards.p2 li.p2[data-card="6h"]:after, .cards.p2 li.p2[data-card="6c"]:after, .cards.p2 li.p2[data-card="6s"]:after, .cards.p2 li[data-card="6d"]:after, .cards.p2 li[data-card="6h"]:after, .cards.p2 li[data-card="6c"]:after, .cards.p2 li[data-card="6s"]:after {
+      content: "6"; }
+    .cards li.p2[data-card="7d"]:after, .cards li.p2[data-card="7h"]:after, .cards li.p2[data-card="7c"]:after, .cards li.p2[data-card="7s"]:after, .cards li[data-card="7d"]:after, .cards li[data-card="7h"]:after, .cards li[data-card="7c"]:after, .cards li[data-card="7s"]:after, .cards.p2 li.p2[data-card="7d"]:after, .cards.p2 li.p2[data-card="7h"]:after, .cards.p2 li.p2[data-card="7c"]:after, .cards.p2 li.p2[data-card="7s"]:after, .cards.p2 li[data-card="7d"]:after, .cards.p2 li[data-card="7h"]:after, .cards.p2 li[data-card="7c"]:after, .cards.p2 li[data-card="7s"]:after {
+      content: "7"; }
+    .cards li.p2[data-card="8d"]:after, .cards li.p2[data-card="8h"]:after, .cards li.p2[data-card="8c"]:after, .cards li.p2[data-card="8s"]:after, .cards li[data-card="8d"]:after, .cards li[data-card="8h"]:after, .cards li[data-card="8c"]:after, .cards li[data-card="8s"]:after, .cards.p2 li.p2[data-card="8d"]:after, .cards.p2 li.p2[data-card="8h"]:after, .cards.p2 li.p2[data-card="8c"]:after, .cards.p2 li.p2[data-card="8s"]:after, .cards.p2 li[data-card="8d"]:after, .cards.p2 li[data-card="8h"]:after, .cards.p2 li[data-card="8c"]:after, .cards.p2 li[data-card="8s"]:after {
+      content: "8"; }
+    .cards li.p2[data-card="9d"]:after, .cards li.p2[data-card="9h"]:after, .cards li.p2[data-card="9c"]:after, .cards li.p2[data-card="9s"]:after, .cards li[data-card="9d"]:after, .cards li[data-card="9h"]:after, .cards li[data-card="9c"]:after, .cards li[data-card="9s"]:after, .cards.p2 li.p2[data-card="9d"]:after, .cards.p2 li.p2[data-card="9h"]:after, .cards.p2 li.p2[data-card="9c"]:after, .cards.p2 li.p2[data-card="9s"]:after, .cards.p2 li[data-card="9d"]:after, .cards.p2 li[data-card="9h"]:after, .cards.p2 li[data-card="9c"]:after, .cards.p2 li[data-card="9s"]:after {
+      content: "9"; }
+    .cards li.p2[data-card="td"]:after, .cards li.p2[data-card="th"]:after, .cards li.p2[data-card="tc"]:after, .cards li.p2[data-card="ts"]:after, .cards li[data-card="td"]:after, .cards li[data-card="th"]:after, .cards li[data-card="tc"]:after, .cards li[data-card="ts"]:after, .cards.p2 li.p2[data-card="td"]:after, .cards.p2 li.p2[data-card="th"]:after, .cards.p2 li.p2[data-card="tc"]:after, .cards.p2 li.p2[data-card="ts"]:after, .cards.p2 li[data-card="td"]:after, .cards.p2 li[data-card="th"]:after, .cards.p2 li[data-card="tc"]:after, .cards.p2 li[data-card="ts"]:after {
+      content: "10"; }
+    .cards li.p2[data-card="jd"]:after, .cards li.p2[data-card="jh"]:after, .cards li.p2[data-card="jc"]:after, .cards li.p2[data-card="js"]:after, .cards li[data-card="jd"]:after, .cards li[data-card="jh"]:after, .cards li[data-card="jc"]:after, .cards li[data-card="js"]:after, .cards.p2 li.p2[data-card="jd"]:after, .cards.p2 li.p2[data-card="jh"]:after, .cards.p2 li.p2[data-card="jc"]:after, .cards.p2 li.p2[data-card="js"]:after, .cards.p2 li[data-card="jd"]:after, .cards.p2 li[data-card="jh"]:after, .cards.p2 li[data-card="jc"]:after, .cards.p2 li[data-card="js"]:after {
+      content: "J"; }
+    .cards li.p2[data-card="qd"]:after, .cards li.p2[data-card="qh"]:after, .cards li.p2[data-card="qc"]:after, .cards li.p2[data-card="qs"]:after, .cards li[data-card="qd"]:after, .cards li[data-card="qh"]:after, .cards li[data-card="qc"]:after, .cards li[data-card="qs"]:after, .cards.p2 li.p2[data-card="qd"]:after, .cards.p2 li.p2[data-card="qh"]:after, .cards.p2 li.p2[data-card="qc"]:after, .cards.p2 li.p2[data-card="qs"]:after, .cards.p2 li[data-card="qd"]:after, .cards.p2 li[data-card="qh"]:after, .cards.p2 li[data-card="qc"]:after, .cards.p2 li[data-card="qs"]:after {
+      content: "Q"; }
+    .cards li.p2[data-card="kd"]:after, .cards li.p2[data-card="kh"]:after, .cards li.p2[data-card="kc"]:after, .cards li.p2[data-card="ks"]:after, .cards li[data-card="kd"]:after, .cards li[data-card="kh"]:after, .cards li[data-card="kc"]:after, .cards li[data-card="ks"]:after, .cards.p2 li.p2[data-card="kd"]:after, .cards.p2 li.p2[data-card="kh"]:after, .cards.p2 li.p2[data-card="kc"]:after, .cards.p2 li.p2[data-card="ks"]:after, .cards.p2 li[data-card="kd"]:after, .cards.p2 li[data-card="kh"]:after, .cards.p2 li[data-card="kc"]:after, .cards.p2 li[data-card="ks"]:after {
+      content: "K"; }
+
+.cards, .cards.p3 {
+  padding: 10px 0 0 10px; }
+  .cards li.p3, .cards li, .cards.p3 li.p3, .cards.p3 li {
+    line-height: 1em;
+    position: relative;
+    border-radius: 2px;
+    display: inline-block;
+    width: 90px;
+    height: 150px;
+    background-color: #a8ca85;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #a8ca85), color-stop(35%, #a8ca85), color-stop(0, white));
+    background-image: -webkit-linear-gradient(-220deg, #a8ca85, #a8ca85 35%, white 0);
+    background-image: linear-gradient(-50deg,#a8ca85, #a8ca85 35%, white 0);
+    box-shadow: 0 0 2px #354425, 0 0 0 1px #688649, 0 0 0 7px #81a65c, 0 0 0 8px #1b2313, 0 0 3px 9px rgba(0, 0, 0, 0.4);
+    margin: 10px 20px 20px 10px;
+    text-align: center; }
+    .cards li.p3.suit:before, .cards li.p3.joker:before, .cards li.suit:before, .cards li.joker:before, .cards.p3 li.p3.suit:before, .cards.p3 li.p3.joker:before, .cards.p3 li.suit:before, .cards.p3 li.joker:before {
+      content: "\00a0";
+      position: absolute;
+      top: 55px;
+      left: 0;
+      width: 60px;
+      font: 50px/1em arial; }
+    .cards li.p3.suit:after, .cards li.suit:after, .cards.p3 li.p3.suit:after, .cards.p3 li.suit:after {
+      position: absolute;
+      top: 4px;
+      left: 0;
+      width: 60px;
+      text-align: center;
+      font: 50px/1em "Uralita"; }
+    .cards li.p3 span, .cards li span, .cards.p3 li.p3 span, .cards.p3 li span {
+      position: absolute;
+      bottom: 0;
+      right: 8px; }
+      .cards li.p3 span:before, .cards li span:before, .cards.p3 li.p3 span:before, .cards.p3 li span:before {
+        font-size: 42px;
+        line-height: 42px;
+        color: white !important;
+        font-family: serif; }
+    .cards li.p3.spade span:before, .cards li.p3.spade:before, .cards li.spade span:before, .cards li.spade:before, .cards.p3 li.p3.spade span:before, .cards.p3 li.p3.spade:before, .cards.p3 li.spade span:before, .cards.p3 li.spade:before {
+      content: "\2660";
+      color: #283020; }
+    .cards li.p3.spade:after, .cards li.spade:after, .cards.p3 li.p3.spade:after, .cards.p3 li.spade:after {
+      color: #283020; }
+    .cards li.p3.club span:before, .cards li.p3.club:before, .cards li.club span:before, .cards li.club:before, .cards.p3 li.p3.club span:before, .cards.p3 li.p3.club:before, .cards.p3 li.club span:before, .cards.p3 li.club:before {
+      content: "\2663";
+      color: #283020; }
+    .cards li.p3.club:after, .cards li.club:after, .cards.p3 li.p3.club:after, .cards.p3 li.club:after {
+      color: #283020; }
+    .cards li.p3.heart span:before, .cards li.p3.heart:before, .cards li.heart span:before, .cards li.heart:before, .cards.p3 li.p3.heart span:before, .cards.p3 li.p3.heart:before, .cards.p3 li.heart span:before, .cards.p3 li.heart:before {
+      content: "\2665";
+      color: #d1343f; }
+    .cards li.p3.heart:after, .cards li.heart:after, .cards.p3 li.p3.heart:after, .cards.p3 li.heart:after {
+      color: #d1343f; }
+    .cards li.p3.diamond span:before, .cards li.p3.diamond:before, .cards li.diamond span:before, .cards li.diamond:before, .cards.p3 li.p3.diamond span:before, .cards.p3 li.p3.diamond:before, .cards.p3 li.diamond span:before, .cards.p3 li.diamond:before {
+      content: "\2666";
+      color: #d1343f; }
+    .cards li.p3.diamond:after, .cards li.diamond:after, .cards.p3 li.p3.diamond:after, .cards.p3 li.diamond:after {
+      color: #d1343f; }
+    .cards li.p3.joker:before, .cards li.joker:before, .cards.p3 li.p3.joker:before, .cards.p3 li.joker:before {
+      top: 8px;
+      font-size: 70px;
+      width: 100%;
+      text-align: center;
+      color: #283020; }
+    .cards li.p3.joker:after, .cards li.joker:after, .cards.p3 li.p3.joker:after, .cards.p3 li.joker:after {
+      bottom: 4px;
+      right: 6px;
+      font-size: 30px;
+      line-height: 40px; }
+    .cards li.p3.joker:before, .cards li.p3.joker:after, .cards li.joker:before, .cards li.joker:after, .cards.p3 li.p3.joker:before, .cards.p3 li.p3.joker:after, .cards.p3 li.joker:before, .cards.p3 li.joker:after {
+      position: absolute;
+      font-family: "aaronfaces" !important; }
+    .cards li.p3.joker-1:after, .cards li.p3.joker-3:after, .cards li.joker-1:after, .cards li.joker-3:after, .cards.p3 li.p3.joker-1:after, .cards.p3 li.p3.joker-3:after, .cards.p3 li.joker-1:after, .cards.p3 li.joker-3:after {
+      color: white; }
+    .cards li.p3.joker-2:after, .cards li.p3.joker-4:after, .cards li.joker-2:after, .cards li.joker-4:after, .cards.p3 li.p3.joker-2:after, .cards.p3 li.p3.joker-4:after, .cards.p3 li.joker-2:after, .cards.p3 li.joker-4:after {
+      color: #a8ca85; }
+    .cards li.p3.joker-2, .cards li.p3.joker-4, .cards li.joker-2, .cards li.joker-4, .cards.p3 li.p3.joker-2, .cards.p3 li.p3.joker-4, .cards.p3 li.joker-2, .cards.p3 li.joker-4 {
+      background-color: white;
+      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(35%, white), color-stop(0, #a8ca85));
+      background-image: -webkit-linear-gradient(-220deg, white, white 35%, #a8ca85 0);
+      background-image: linear-gradient(-50deg,white, white 35%, #a8ca85 0); }
+    .cards li.p3.joker-1:before, .cards li.joker-1:before, .cards.p3 li.p3.joker-1:before, .cards.p3 li.joker-1:before {
+      content: "o"; }
+    .cards li.p3.joker-1:after, .cards li.joker-1:after, .cards.p3 li.p3.joker-1:after, .cards.p3 li.joker-1:after {
+      content: "o"; }
+    .cards li.p3.joker-2:before, .cards li.joker-2:before, .cards.p3 li.p3.joker-2:before, .cards.p3 li.joker-2:before {
+      content: "v"; }
+    .cards li.p3.joker-2:after, .cards li.joker-2:after, .cards.p3 li.p3.joker-2:after, .cards.p3 li.joker-2:after {
+      content: "v"; }
+    .cards li.p3.joker-3:before, .cards li.joker-3:before, .cards.p3 li.p3.joker-3:before, .cards.p3 li.joker-3:before {
+      content: "x"; }
+    .cards li.p3.joker-3:after, .cards li.joker-3:after, .cards.p3 li.p3.joker-3:after, .cards.p3 li.joker-3:after {
+      content: "x"; }
+    .cards li.p3.joker-4:before, .cards li.joker-4:before, .cards.p3 li.p3.joker-4:before, .cards.p3 li.joker-4:before {
+      content: "w"; }
+    .cards li.p3.joker-4:after, .cards li.joker-4:after, .cards.p3 li.p3.joker-4:after, .cards.p3 li.joker-4:after {
+      content: "w"; }
+    .cards li.p3[data-card="ad"]:after, .cards li.p3[data-card="ah"]:after, .cards li.p3[data-card="ac"]:after, .cards li.p3[data-card="as"]:after, .cards li[data-card="ad"]:after, .cards li[data-card="ah"]:after, .cards li[data-card="ac"]:after, .cards li[data-card="as"]:after, .cards.p3 li.p3[data-card="ad"]:after, .cards.p3 li.p3[data-card="ah"]:after, .cards.p3 li.p3[data-card="ac"]:after, .cards.p3 li.p3[data-card="as"]:after, .cards.p3 li[data-card="ad"]:after, .cards.p3 li[data-card="ah"]:after, .cards.p3 li[data-card="ac"]:after, .cards.p3 li[data-card="as"]:after {
+      content: "A"; }
+    .cards li.p3[data-card="2d"]:after, .cards li.p3[data-card="2h"]:after, .cards li.p3[data-card="2c"]:after, .cards li.p3[data-card="2s"]:after, .cards li[data-card="2d"]:after, .cards li[data-card="2h"]:after, .cards li[data-card="2c"]:after, .cards li[data-card="2s"]:after, .cards.p3 li.p3[data-card="2d"]:after, .cards.p3 li.p3[data-card="2h"]:after, .cards.p3 li.p3[data-card="2c"]:after, .cards.p3 li.p3[data-card="2s"]:after, .cards.p3 li[data-card="2d"]:after, .cards.p3 li[data-card="2h"]:after, .cards.p3 li[data-card="2c"]:after, .cards.p3 li[data-card="2s"]:after {
+      content: "2"; }
+    .cards li.p3[data-card="3d"]:after, .cards li.p3[data-card="3h"]:after, .cards li.p3[data-card="3c"]:after, .cards li.p3[data-card="3s"]:after, .cards li[data-card="3d"]:after, .cards li[data-card="3h"]:after, .cards li[data-card="3c"]:after, .cards li[data-card="3s"]:after, .cards.p3 li.p3[data-card="3d"]:after, .cards.p3 li.p3[data-card="3h"]:after, .cards.p3 li.p3[data-card="3c"]:after, .cards.p3 li.p3[data-card="3s"]:after, .cards.p3 li[data-card="3d"]:after, .cards.p3 li[data-card="3h"]:after, .cards.p3 li[data-card="3c"]:after, .cards.p3 li[data-card="3s"]:after {
+      content: "3"; }
+    .cards li.p3[data-card="4d"]:after, .cards li.p3[data-card="4h"]:after, .cards li.p3[data-card="4c"]:after, .cards li.p3[data-card="4s"]:after, .cards li[data-card="4d"]:after, .cards li[data-card="4h"]:after, .cards li[data-card="4c"]:after, .cards li[data-card="4s"]:after, .cards.p3 li.p3[data-card="4d"]:after, .cards.p3 li.p3[data-card="4h"]:after, .cards.p3 li.p3[data-card="4c"]:after, .cards.p3 li.p3[data-card="4s"]:after, .cards.p3 li[data-card="4d"]:after, .cards.p3 li[data-card="4h"]:after, .cards.p3 li[data-card="4c"]:after, .cards.p3 li[data-card="4s"]:after {
+      content: "4"; }
+    .cards li.p3[data-card="5d"]:after, .cards li.p3[data-card="5h"]:after, .cards li.p3[data-card="5c"]:after, .cards li.p3[data-card="5s"]:after, .cards li[data-card="5d"]:after, .cards li[data-card="5h"]:after, .cards li[data-card="5c"]:after, .cards li[data-card="5s"]:after, .cards.p3 li.p3[data-card="5d"]:after, .cards.p3 li.p3[data-card="5h"]:after, .cards.p3 li.p3[data-card="5c"]:after, .cards.p3 li.p3[data-card="5s"]:after, .cards.p3 li[data-card="5d"]:after, .cards.p3 li[data-card="5h"]:after, .cards.p3 li[data-card="5c"]:after, .cards.p3 li[data-card="5s"]:after {
+      content: "5"; }
+    .cards li.p3[data-card="6d"]:after, .cards li.p3[data-card="6h"]:after, .cards li.p3[data-card="6c"]:after, .cards li.p3[data-card="6s"]:after, .cards li[data-card="6d"]:after, .cards li[data-card="6h"]:after, .cards li[data-card="6c"]:after, .cards li[data-card="6s"]:after, .cards.p3 li.p3[data-card="6d"]:after, .cards.p3 li.p3[data-card="6h"]:after, .cards.p3 li.p3[data-card="6c"]:after, .cards.p3 li.p3[data-card="6s"]:after, .cards.p3 li[data-card="6d"]:after, .cards.p3 li[data-card="6h"]:after, .cards.p3 li[data-card="6c"]:after, .cards.p3 li[data-card="6s"]:after {
+      content: "6"; }
+    .cards li.p3[data-card="7d"]:after, .cards li.p3[data-card="7h"]:after, .cards li.p3[data-card="7c"]:after, .cards li.p3[data-card="7s"]:after, .cards li[data-card="7d"]:after, .cards li[data-card="7h"]:after, .cards li[data-card="7c"]:after, .cards li[data-card="7s"]:after, .cards.p3 li.p3[data-card="7d"]:after, .cards.p3 li.p3[data-card="7h"]:after, .cards.p3 li.p3[data-card="7c"]:after, .cards.p3 li.p3[data-card="7s"]:after, .cards.p3 li[data-card="7d"]:after, .cards.p3 li[data-card="7h"]:after, .cards.p3 li[data-card="7c"]:after, .cards.p3 li[data-card="7s"]:after {
+      content: "7"; }
+    .cards li.p3[data-card="8d"]:after, .cards li.p3[data-card="8h"]:after, .cards li.p3[data-card="8c"]:after, .cards li.p3[data-card="8s"]:after, .cards li[data-card="8d"]:after, .cards li[data-card="8h"]:after, .cards li[data-card="8c"]:after, .cards li[data-card="8s"]:after, .cards.p3 li.p3[data-card="8d"]:after, .cards.p3 li.p3[data-card="8h"]:after, .cards.p3 li.p3[data-card="8c"]:after, .cards.p3 li.p3[data-card="8s"]:after, .cards.p3 li[data-card="8d"]:after, .cards.p3 li[data-card="8h"]:after, .cards.p3 li[data-card="8c"]:after, .cards.p3 li[data-card="8s"]:after {
+      content: "8"; }
+    .cards li.p3[data-card="9d"]:after, .cards li.p3[data-card="9h"]:after, .cards li.p3[data-card="9c"]:after, .cards li.p3[data-card="9s"]:after, .cards li[data-card="9d"]:after, .cards li[data-card="9h"]:after, .cards li[data-card="9c"]:after, .cards li[data-card="9s"]:after, .cards.p3 li.p3[data-card="9d"]:after, .cards.p3 li.p3[data-card="9h"]:after, .cards.p3 li.p3[data-card="9c"]:after, .cards.p3 li.p3[data-card="9s"]:after, .cards.p3 li[data-card="9d"]:after, .cards.p3 li[data-card="9h"]:after, .cards.p3 li[data-card="9c"]:after, .cards.p3 li[data-card="9s"]:after {
+      content: "9"; }
+    .cards li.p3[data-card="td"]:after, .cards li.p3[data-card="th"]:after, .cards li.p3[data-card="tc"]:after, .cards li.p3[data-card="ts"]:after, .cards li[data-card="td"]:after, .cards li[data-card="th"]:after, .cards li[data-card="tc"]:after, .cards li[data-card="ts"]:after, .cards.p3 li.p3[data-card="td"]:after, .cards.p3 li.p3[data-card="th"]:after, .cards.p3 li.p3[data-card="tc"]:after, .cards.p3 li.p3[data-card="ts"]:after, .cards.p3 li[data-card="td"]:after, .cards.p3 li[data-card="th"]:after, .cards.p3 li[data-card="tc"]:after, .cards.p3 li[data-card="ts"]:after {
+      content: "10"; }
+    .cards li.p3[data-card="jd"]:after, .cards li.p3[data-card="jh"]:after, .cards li.p3[data-card="jc"]:after, .cards li.p3[data-card="js"]:after, .cards li[data-card="jd"]:after, .cards li[data-card="jh"]:after, .cards li[data-card="jc"]:after, .cards li[data-card="js"]:after, .cards.p3 li.p3[data-card="jd"]:after, .cards.p3 li.p3[data-card="jh"]:after, .cards.p3 li.p3[data-card="jc"]:after, .cards.p3 li.p3[data-card="js"]:after, .cards.p3 li[data-card="jd"]:after, .cards.p3 li[data-card="jh"]:after, .cards.p3 li[data-card="jc"]:after, .cards.p3 li[data-card="js"]:after {
+      content: "J"; }
+    .cards li.p3[data-card="qd"]:after, .cards li.p3[data-card="qh"]:after, .cards li.p3[data-card="qc"]:after, .cards li.p3[data-card="qs"]:after, .cards li[data-card="qd"]:after, .cards li[data-card="qh"]:after, .cards li[data-card="qc"]:after, .cards li[data-card="qs"]:after, .cards.p3 li.p3[data-card="qd"]:after, .cards.p3 li.p3[data-card="qh"]:after, .cards.p3 li.p3[data-card="qc"]:after, .cards.p3 li.p3[data-card="qs"]:after, .cards.p3 li[data-card="qd"]:after, .cards.p3 li[data-card="qh"]:after, .cards.p3 li[data-card="qc"]:after, .cards.p3 li[data-card="qs"]:after {
+      content: "Q"; }
+    .cards li.p3[data-card="kd"]:after, .cards li.p3[data-card="kh"]:after, .cards li.p3[data-card="kc"]:after, .cards li.p3[data-card="ks"]:after, .cards li[data-card="kd"]:after, .cards li[data-card="kh"]:after, .cards li[data-card="kc"]:after, .cards li[data-card="ks"]:after, .cards.p3 li.p3[data-card="kd"]:after, .cards.p3 li.p3[data-card="kh"]:after, .cards.p3 li.p3[data-card="kc"]:after, .cards.p3 li.p3[data-card="ks"]:after, .cards.p3 li[data-card="kd"]:after, .cards.p3 li[data-card="kh"]:after, .cards.p3 li[data-card="kc"]:after, .cards.p3 li[data-card="ks"]:after {
+      content: "K"; }
+
+.cards, .cards.p4 {
+  padding: 10px 0 0 10px; }
+  .cards li.p4, .cards li, .cards.p4 li.p4, .cards.p4 li {
+    line-height: 1em;
+    position: relative;
+    border-radius: 2px;
+    display: inline-block;
+    width: 90px;
+    height: 150px;
+    background-color: #a785ca;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #a785ca), color-stop(35%, #a785ca), color-stop(0, white));
+    background-image: -webkit-linear-gradient(-220deg, #a785ca, #a785ca 35%, white 0);
+    background-image: linear-gradient(-50deg,#a785ca, #a785ca 35%, white 0);
+    box-shadow: 0 0 2px #352544, 0 0 0 1px #684986, 0 0 0 7px #815ca6, 0 0 0 8px #1b1323, 0 0 3px 9px rgba(0, 0, 0, 0.4);
+    margin: 10px 20px 20px 10px;
+    text-align: center; }
+    .cards li.p4.suit:before, .cards li.p4.joker:before, .cards li.suit:before, .cards li.joker:before, .cards.p4 li.p4.suit:before, .cards.p4 li.p4.joker:before, .cards.p4 li.suit:before, .cards.p4 li.joker:before {
+      content: "\00a0";
+      position: absolute;
+      top: 55px;
+      left: 0;
+      width: 60px;
+      font: 50px/1em arial; }
+    .cards li.p4.suit:after, .cards li.suit:after, .cards.p4 li.p4.suit:after, .cards.p4 li.suit:after {
+      position: absolute;
+      top: 4px;
+      left: 0;
+      width: 60px;
+      text-align: center;
+      font: 50px/1em "Uralita"; }
+    .cards li.p4 span, .cards li span, .cards.p4 li.p4 span, .cards.p4 li span {
+      position: absolute;
+      bottom: 0;
+      right: 8px; }
+      .cards li.p4 span:before, .cards li span:before, .cards.p4 li.p4 span:before, .cards.p4 li span:before {
+        font-size: 42px;
+        line-height: 42px;
+        color: white !important;
+        font-family: serif; }
+    .cards li.p4.spade span:before, .cards li.p4.spade:before, .cards li.spade span:before, .cards li.spade:before, .cards.p4 li.p4.spade span:before, .cards.p4 li.p4.spade:before, .cards.p4 li.spade span:before, .cards.p4 li.spade:before {
+      content: "\2660";
+      color: #282030; }
+    .cards li.p4.spade:after, .cards li.spade:after, .cards.p4 li.p4.spade:after, .cards.p4 li.spade:after {
+      color: #282030; }
+    .cards li.p4.club span:before, .cards li.p4.club:before, .cards li.club span:before, .cards li.club:before, .cards.p4 li.p4.club span:before, .cards.p4 li.p4.club:before, .cards.p4 li.club span:before, .cards.p4 li.club:before {
+      content: "\2663";
+      color: #282030; }
+    .cards li.p4.club:after, .cards li.club:after, .cards.p4 li.p4.club:after, .cards.p4 li.club:after {
+      color: #282030; }
+    .cards li.p4.heart span:before, .cards li.p4.heart:before, .cards li.heart span:before, .cards li.heart:before, .cards.p4 li.p4.heart span:before, .cards.p4 li.p4.heart:before, .cards.p4 li.heart span:before, .cards.p4 li.heart:before {
+      content: "\2665";
+      color: #d1343f; }
+    .cards li.p4.heart:after, .cards li.heart:after, .cards.p4 li.p4.heart:after, .cards.p4 li.heart:after {
+      color: #d1343f; }
+    .cards li.p4.diamond span:before, .cards li.p4.diamond:before, .cards li.diamond span:before, .cards li.diamond:before, .cards.p4 li.p4.diamond span:before, .cards.p4 li.p4.diamond:before, .cards.p4 li.diamond span:before, .cards.p4 li.diamond:before {
+      content: "\2666";
+      color: #d1343f; }
+    .cards li.p4.diamond:after, .cards li.diamond:after, .cards.p4 li.p4.diamond:after, .cards.p4 li.diamond:after {
+      color: #d1343f; }
+    .cards li.p4.joker:before, .cards li.joker:before, .cards.p4 li.p4.joker:before, .cards.p4 li.joker:before {
+      top: 8px;
+      font-size: 70px;
+      width: 100%;
+      text-align: center;
+      color: #282030; }
+    .cards li.p4.joker:after, .cards li.joker:after, .cards.p4 li.p4.joker:after, .cards.p4 li.joker:after {
+      bottom: 4px;
+      right: 6px;
+      font-size: 30px;
+      line-height: 40px; }
+    .cards li.p4.joker:before, .cards li.p4.joker:after, .cards li.joker:before, .cards li.joker:after, .cards.p4 li.p4.joker:before, .cards.p4 li.p4.joker:after, .cards.p4 li.joker:before, .cards.p4 li.joker:after {
+      position: absolute;
+      font-family: "aaronfaces" !important; }
+    .cards li.p4.joker-1:after, .cards li.p4.joker-3:after, .cards li.joker-1:after, .cards li.joker-3:after, .cards.p4 li.p4.joker-1:after, .cards.p4 li.p4.joker-3:after, .cards.p4 li.joker-1:after, .cards.p4 li.joker-3:after {
+      color: white; }
+    .cards li.p4.joker-2:after, .cards li.p4.joker-4:after, .cards li.joker-2:after, .cards li.joker-4:after, .cards.p4 li.p4.joker-2:after, .cards.p4 li.p4.joker-4:after, .cards.p4 li.joker-2:after, .cards.p4 li.joker-4:after {
+      color: #a785ca; }
+    .cards li.p4.joker-2, .cards li.p4.joker-4, .cards li.joker-2, .cards li.joker-4, .cards.p4 li.p4.joker-2, .cards.p4 li.p4.joker-4, .cards.p4 li.joker-2, .cards.p4 li.joker-4 {
+      background-color: white;
+      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(35%, white), color-stop(0, #a785ca));
+      background-image: -webkit-linear-gradient(-220deg, white, white 35%, #a785ca 0);
+      background-image: linear-gradient(-50deg,white, white 35%, #a785ca 0); }
+    .cards li.p4.joker-1:before, .cards li.joker-1:before, .cards.p4 li.p4.joker-1:before, .cards.p4 li.joker-1:before {
+      content: "o"; }
+    .cards li.p4.joker-1:after, .cards li.joker-1:after, .cards.p4 li.p4.joker-1:after, .cards.p4 li.joker-1:after {
+      content: "o"; }
+    .cards li.p4.joker-2:before, .cards li.joker-2:before, .cards.p4 li.p4.joker-2:before, .cards.p4 li.joker-2:before {
+      content: "v"; }
+    .cards li.p4.joker-2:after, .cards li.joker-2:after, .cards.p4 li.p4.joker-2:after, .cards.p4 li.joker-2:after {
+      content: "v"; }
+    .cards li.p4.joker-3:before, .cards li.joker-3:before, .cards.p4 li.p4.joker-3:before, .cards.p4 li.joker-3:before {
+      content: "x"; }
+    .cards li.p4.joker-3:after, .cards li.joker-3:after, .cards.p4 li.p4.joker-3:after, .cards.p4 li.joker-3:after {
+      content: "x"; }
+    .cards li.p4.joker-4:before, .cards li.joker-4:before, .cards.p4 li.p4.joker-4:before, .cards.p4 li.joker-4:before {
+      content: "w"; }
+    .cards li.p4.joker-4:after, .cards li.joker-4:after, .cards.p4 li.p4.joker-4:after, .cards.p4 li.joker-4:after {
+      content: "w"; }
+    .cards li.p4[data-card="ad"]:after, .cards li.p4[data-card="ah"]:after, .cards li.p4[data-card="ac"]:after, .cards li.p4[data-card="as"]:after, .cards li[data-card="ad"]:after, .cards li[data-card="ah"]:after, .cards li[data-card="ac"]:after, .cards li[data-card="as"]:after, .cards.p4 li.p4[data-card="ad"]:after, .cards.p4 li.p4[data-card="ah"]:after, .cards.p4 li.p4[data-card="ac"]:after, .cards.p4 li.p4[data-card="as"]:after, .cards.p4 li[data-card="ad"]:after, .cards.p4 li[data-card="ah"]:after, .cards.p4 li[data-card="ac"]:after, .cards.p4 li[data-card="as"]:after {
+      content: "A"; }
+    .cards li.p4[data-card="2d"]:after, .cards li.p4[data-card="2h"]:after, .cards li.p4[data-card="2c"]:after, .cards li.p4[data-card="2s"]:after, .cards li[data-card="2d"]:after, .cards li[data-card="2h"]:after, .cards li[data-card="2c"]:after, .cards li[data-card="2s"]:after, .cards.p4 li.p4[data-card="2d"]:after, .cards.p4 li.p4[data-card="2h"]:after, .cards.p4 li.p4[data-card="2c"]:after, .cards.p4 li.p4[data-card="2s"]:after, .cards.p4 li[data-card="2d"]:after, .cards.p4 li[data-card="2h"]:after, .cards.p4 li[data-card="2c"]:after, .cards.p4 li[data-card="2s"]:after {
+      content: "2"; }
+    .cards li.p4[data-card="3d"]:after, .cards li.p4[data-card="3h"]:after, .cards li.p4[data-card="3c"]:after, .cards li.p4[data-card="3s"]:after, .cards li[data-card="3d"]:after, .cards li[data-card="3h"]:after, .cards li[data-card="3c"]:after, .cards li[data-card="3s"]:after, .cards.p4 li.p4[data-card="3d"]:after, .cards.p4 li.p4[data-card="3h"]:after, .cards.p4 li.p4[data-card="3c"]:after, .cards.p4 li.p4[data-card="3s"]:after, .cards.p4 li[data-card="3d"]:after, .cards.p4 li[data-card="3h"]:after, .cards.p4 li[data-card="3c"]:after, .cards.p4 li[data-card="3s"]:after {
+      content: "3"; }
+    .cards li.p4[data-card="4d"]:after, .cards li.p4[data-card="4h"]:after, .cards li.p4[data-card="4c"]:after, .cards li.p4[data-card="4s"]:after, .cards li[data-card="4d"]:after, .cards li[data-card="4h"]:after, .cards li[data-card="4c"]:after, .cards li[data-card="4s"]:after, .cards.p4 li.p4[data-card="4d"]:after, .cards.p4 li.p4[data-card="4h"]:after, .cards.p4 li.p4[data-card="4c"]:after, .cards.p4 li.p4[data-card="4s"]:after, .cards.p4 li[data-card="4d"]:after, .cards.p4 li[data-card="4h"]:after, .cards.p4 li[data-card="4c"]:after, .cards.p4 li[data-card="4s"]:after {
+      content: "4"; }
+    .cards li.p4[data-card="5d"]:after, .cards li.p4[data-card="5h"]:after, .cards li.p4[data-card="5c"]:after, .cards li.p4[data-card="5s"]:after, .cards li[data-card="5d"]:after, .cards li[data-card="5h"]:after, .cards li[data-card="5c"]:after, .cards li[data-card="5s"]:after, .cards.p4 li.p4[data-card="5d"]:after, .cards.p4 li.p4[data-card="5h"]:after, .cards.p4 li.p4[data-card="5c"]:after, .cards.p4 li.p4[data-card="5s"]:after, .cards.p4 li[data-card="5d"]:after, .cards.p4 li[data-card="5h"]:after, .cards.p4 li[data-card="5c"]:after, .cards.p4 li[data-card="5s"]:after {
+      content: "5"; }
+    .cards li.p4[data-card="6d"]:after, .cards li.p4[data-card="6h"]:after, .cards li.p4[data-card="6c"]:after, .cards li.p4[data-card="6s"]:after, .cards li[data-card="6d"]:after, .cards li[data-card="6h"]:after, .cards li[data-card="6c"]:after, .cards li[data-card="6s"]:after, .cards.p4 li.p4[data-card="6d"]:after, .cards.p4 li.p4[data-card="6h"]:after, .cards.p4 li.p4[data-card="6c"]:after, .cards.p4 li.p4[data-card="6s"]:after, .cards.p4 li[data-card="6d"]:after, .cards.p4 li[data-card="6h"]:after, .cards.p4 li[data-card="6c"]:after, .cards.p4 li[data-card="6s"]:after {
+      content: "6"; }
+    .cards li.p4[data-card="7d"]:after, .cards li.p4[data-card="7h"]:after, .cards li.p4[data-card="7c"]:after, .cards li.p4[data-card="7s"]:after, .cards li[data-card="7d"]:after, .cards li[data-card="7h"]:after, .cards li[data-card="7c"]:after, .cards li[data-card="7s"]:after, .cards.p4 li.p4[data-card="7d"]:after, .cards.p4 li.p4[data-card="7h"]:after, .cards.p4 li.p4[data-card="7c"]:after, .cards.p4 li.p4[data-card="7s"]:after, .cards.p4 li[data-card="7d"]:after, .cards.p4 li[data-card="7h"]:after, .cards.p4 li[data-card="7c"]:after, .cards.p4 li[data-card="7s"]:after {
+      content: "7"; }
+    .cards li.p4[data-card="8d"]:after, .cards li.p4[data-card="8h"]:after, .cards li.p4[data-card="8c"]:after, .cards li.p4[data-card="8s"]:after, .cards li[data-card="8d"]:after, .cards li[data-card="8h"]:after, .cards li[data-card="8c"]:after, .cards li[data-card="8s"]:after, .cards.p4 li.p4[data-card="8d"]:after, .cards.p4 li.p4[data-card="8h"]:after, .cards.p4 li.p4[data-card="8c"]:after, .cards.p4 li.p4[data-card="8s"]:after, .cards.p4 li[data-card="8d"]:after, .cards.p4 li[data-card="8h"]:after, .cards.p4 li[data-card="8c"]:after, .cards.p4 li[data-card="8s"]:after {
+      content: "8"; }
+    .cards li.p4[data-card="9d"]:after, .cards li.p4[data-card="9h"]:after, .cards li.p4[data-card="9c"]:after, .cards li.p4[data-card="9s"]:after, .cards li[data-card="9d"]:after, .cards li[data-card="9h"]:after, .cards li[data-card="9c"]:after, .cards li[data-card="9s"]:after, .cards.p4 li.p4[data-card="9d"]:after, .cards.p4 li.p4[data-card="9h"]:after, .cards.p4 li.p4[data-card="9c"]:after, .cards.p4 li.p4[data-card="9s"]:after, .cards.p4 li[data-card="9d"]:after, .cards.p4 li[data-card="9h"]:after, .cards.p4 li[data-card="9c"]:after, .cards.p4 li[data-card="9s"]:after {
+      content: "9"; }
+    .cards li.p4[data-card="td"]:after, .cards li.p4[data-card="th"]:after, .cards li.p4[data-card="tc"]:after, .cards li.p4[data-card="ts"]:after, .cards li[data-card="td"]:after, .cards li[data-card="th"]:after, .cards li[data-card="tc"]:after, .cards li[data-card="ts"]:after, .cards.p4 li.p4[data-card="td"]:after, .cards.p4 li.p4[data-card="th"]:after, .cards.p4 li.p4[data-card="tc"]:after, .cards.p4 li.p4[data-card="ts"]:after, .cards.p4 li[data-card="td"]:after, .cards.p4 li[data-card="th"]:after, .cards.p4 li[data-card="tc"]:after, .cards.p4 li[data-card="ts"]:after {
+      content: "10"; }
+    .cards li.p4[data-card="jd"]:after, .cards li.p4[data-card="jh"]:after, .cards li.p4[data-card="jc"]:after, .cards li.p4[data-card="js"]:after, .cards li[data-card="jd"]:after, .cards li[data-card="jh"]:after, .cards li[data-card="jc"]:after, .cards li[data-card="js"]:after, .cards.p4 li.p4[data-card="jd"]:after, .cards.p4 li.p4[data-card="jh"]:after, .cards.p4 li.p4[data-card="jc"]:after, .cards.p4 li.p4[data-card="js"]:after, .cards.p4 li[data-card="jd"]:after, .cards.p4 li[data-card="jh"]:after, .cards.p4 li[data-card="jc"]:after, .cards.p4 li[data-card="js"]:after {
+      content: "J"; }
+    .cards li.p4[data-card="qd"]:after, .cards li.p4[data-card="qh"]:after, .cards li.p4[data-card="qc"]:after, .cards li.p4[data-card="qs"]:after, .cards li[data-card="qd"]:after, .cards li[data-card="qh"]:after, .cards li[data-card="qc"]:after, .cards li[data-card="qs"]:after, .cards.p4 li.p4[data-card="qd"]:after, .cards.p4 li.p4[data-card="qh"]:after, .cards.p4 li.p4[data-card="qc"]:after, .cards.p4 li.p4[data-card="qs"]:after, .cards.p4 li[data-card="qd"]:after, .cards.p4 li[data-card="qh"]:after, .cards.p4 li[data-card="qc"]:after, .cards.p4 li[data-card="qs"]:after {
+      content: "Q"; }
+    .cards li.p4[data-card="kd"]:after, .cards li.p4[data-card="kh"]:after, .cards li.p4[data-card="kc"]:after, .cards li.p4[data-card="ks"]:after, .cards li[data-card="kd"]:after, .cards li[data-card="kh"]:after, .cards li[data-card="kc"]:after, .cards li[data-card="ks"]:after, .cards.p4 li.p4[data-card="kd"]:after, .cards.p4 li.p4[data-card="kh"]:after, .cards.p4 li.p4[data-card="kc"]:after, .cards.p4 li.p4[data-card="ks"]:after, .cards.p4 li[data-card="kd"]:after, .cards.p4 li[data-card="kh"]:after, .cards.p4 li[data-card="kc"]:after, .cards.p4 li[data-card="ks"]:after {
+      content: "K"; }
+
+.firefox .cards li.suit:before {
+  font-size: 90px;
+  vertical-align: top; }
+
+#board, .board {
+  margin: 0 auto;
+  font-size: 0;
+  width: 668px;
+  padding: 4px 0 0 4px; }
+  #board li, .board li {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    position: relative;
+    box-shadow: 0 0 0 1px #aaaaaa, 0 0 0 4px #dfdfdf, 0 0 0 5px #aaaaaa;
+    margin: 4px 12px 12px 4px;
+    background-color: white;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(50%, white), color-stop(0, #f2f2f2));
+    background-image: -webkit-linear-gradient(-45deg, white, white 50%, #f2f2f2 0);
+    background-image: linear-gradient(-225deg,white, white 50%, #f2f2f2 0); }
+    #board li:after, .board li:after {
+      position: absolute;
+      bottom: 4px;
+      right: 2px;
+      font-size: 25px;
+      vertical-align: bottom;
+      padding: 0;
+      line-height: .75em;
+      font-family: serif; }
+    #board li:before, .board li:before {
+      position: absolute;
+      top: 2px;
+      left: 6px;
+      width: 25%;
+      height: 25%;
+      font-size: 23.80952px;
+      font-family: "Uralita";
+      font-weight: 200; }
+    #board li.spade:after, .board li.spade:after {
+      content: "\2660"; }
+    #board li.club:after, .board li.club:after {
+      content: "\2663"; }
+    #board li.heart:after, .board li.heart:after {
+      content: "\2665";
+      color: #d1343f; }
+    #board li.diamond:after, .board li.diamond:after {
+      content: "\2666";
+      color: #d1343f; }
+    #board li.heart:before, #board li.diamond:before, .board li.heart:before, .board li.diamond:before {
+      color: #d1343f; }
+    #board li.joker:before, .board li.joker:before {
+      font-size: 37.5px;
+      top: 0;
+      left: 0;
+      text-align: center;
+      height: 50px;
+      width: 50px;
+      line-height: 50px; }
+    #board li.joker:before, #board li.joker:after, .board li.joker:before, .board li.joker:after {
+      position: absolute;
+      font-family: "aaronfaces" !important; }
+    #board li.p1, .board li.p1 {
+      background-color: #ca8585;
+      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ca8585), color-stop(50%, #ca8585), color-stop(0, white));
+      background-image: -webkit-linear-gradient(-45deg, #ca8585, #ca8585 50%, white 0);
+      background-image: linear-gradient(-225deg,#ca8585, #ca8585 50%, white 0);
+      box-shadow: 0 0 0 1px #442525, 0 0 0 5px #a65c5c, 0 0 0 6px #442525; }
+      #board li.p1:before, .board li.p1:before {
+        color: #302020; }
+    #board li.p2, .board li.p2 {
+      background-color: #85cab3;
+      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #85cab3), color-stop(50%, #85cab3), color-stop(0, white));
+      background-image: -webkit-linear-gradient(-45deg, #85cab3, #85cab3 50%, white 0);
+      background-image: linear-gradient(-225deg,#85cab3, #85cab3 50%, white 0);
+      box-shadow: 0 0 0 1px #25443a, 0 0 0 5px #5ca68e, 0 0 0 6px #25443a; }
+      #board li.p2:before, .board li.p2:before {
+        color: #20302b; }
+    #board li.p3, .board li.p3 {
+      background-color: #a8ca85;
+      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #a8ca85), color-stop(50%, #a8ca85), color-stop(0, white));
+      background-image: -webkit-linear-gradient(-45deg, #a8ca85, #a8ca85 50%, white 0);
+      background-image: linear-gradient(-225deg,#a8ca85, #a8ca85 50%, white 0);
+      box-shadow: 0 0 0 1px #354425, 0 0 0 5px #81a65c, 0 0 0 6px #354425; }
+      #board li.p3:before, .board li.p3:before {
+        color: #283020; }
+    #board li.p4, .board li.p4 {
+      background-color: #a785ca;
+      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #a785ca), color-stop(50%, #a785ca), color-stop(0, white));
+      background-image: -webkit-linear-gradient(-45deg, #a785ca, #a785ca 50%, white 0);
+      background-image: linear-gradient(-225deg,#a785ca, #a785ca 50%, white 0);
+      box-shadow: 0 0 0 1px #352544, 0 0 0 5px #815ca6, 0 0 0 6px #352544; }
+      #board li.p4:before, .board li.p4:before {
+        color: #282030; }
+    #board li.joker-1:before, .board li.joker-1:before {
+      content: "o"; }
+    #board li.joker-2:before, .board li.joker-2:before {
+      content: "v"; }
+    #board li.joker-3:before, .board li.joker-3:before {
+      content: "x"; }
+    #board li.joker-4:before, .board li.joker-4:before {
+      content: "w"; }
+    #board li[data-card="ad"]:before, #board li[data-card="ah"]:before, #board li[data-card="ac"]:before, #board li[data-card="as"]:before, .board li[data-card="ad"]:before, .board li[data-card="ah"]:before, .board li[data-card="ac"]:before, .board li[data-card="as"]:before {
+      content: "A"; }
+    #board li[data-card="2d"]:before, #board li[data-card="2h"]:before, #board li[data-card="2c"]:before, #board li[data-card="2s"]:before, .board li[data-card="2d"]:before, .board li[data-card="2h"]:before, .board li[data-card="2c"]:before, .board li[data-card="2s"]:before {
+      content: "2"; }
+    #board li[data-card="3d"]:before, #board li[data-card="3h"]:before, #board li[data-card="3c"]:before, #board li[data-card="3s"]:before, .board li[data-card="3d"]:before, .board li[data-card="3h"]:before, .board li[data-card="3c"]:before, .board li[data-card="3s"]:before {
+      content: "3"; }
+    #board li[data-card="4d"]:before, #board li[data-card="4h"]:before, #board li[data-card="4c"]:before, #board li[data-card="4s"]:before, .board li[data-card="4d"]:before, .board li[data-card="4h"]:before, .board li[data-card="4c"]:before, .board li[data-card="4s"]:before {
+      content: "4"; }
+    #board li[data-card="5d"]:before, #board li[data-card="5h"]:before, #board li[data-card="5c"]:before, #board li[data-card="5s"]:before, .board li[data-card="5d"]:before, .board li[data-card="5h"]:before, .board li[data-card="5c"]:before, .board li[data-card="5s"]:before {
+      content: "5"; }
+    #board li[data-card="6d"]:before, #board li[data-card="6h"]:before, #board li[data-card="6c"]:before, #board li[data-card="6s"]:before, .board li[data-card="6d"]:before, .board li[data-card="6h"]:before, .board li[data-card="6c"]:before, .board li[data-card="6s"]:before {
+      content: "6"; }
+    #board li[data-card="7d"]:before, #board li[data-card="7h"]:before, #board li[data-card="7c"]:before, #board li[data-card="7s"]:before, .board li[data-card="7d"]:before, .board li[data-card="7h"]:before, .board li[data-card="7c"]:before, .board li[data-card="7s"]:before {
+      content: "7"; }
+    #board li[data-card="8d"]:before, #board li[data-card="8h"]:before, #board li[data-card="8c"]:before, #board li[data-card="8s"]:before, .board li[data-card="8d"]:before, .board li[data-card="8h"]:before, .board li[data-card="8c"]:before, .board li[data-card="8s"]:before {
+      content: "8"; }
+    #board li[data-card="9d"]:before, #board li[data-card="9h"]:before, #board li[data-card="9c"]:before, #board li[data-card="9s"]:before, .board li[data-card="9d"]:before, .board li[data-card="9h"]:before, .board li[data-card="9c"]:before, .board li[data-card="9s"]:before {
+      content: "9"; }
+    #board li[data-card="td"]:before, #board li[data-card="th"]:before, #board li[data-card="tc"]:before, #board li[data-card="ts"]:before, .board li[data-card="td"]:before, .board li[data-card="th"]:before, .board li[data-card="tc"]:before, .board li[data-card="ts"]:before {
+      content: "10"; }
+    #board li[data-card="qd"]:before, #board li[data-card="qh"]:before, #board li[data-card="qc"]:before, #board li[data-card="qs"]:before, .board li[data-card="qd"]:before, .board li[data-card="qh"]:before, .board li[data-card="qc"]:before, .board li[data-card="qs"]:before {
+      content: "Q"; }
+    #board li[data-card="kd"]:before, #board li[data-card="kh"]:before, #board li[data-card="kc"]:before, #board li[data-card="ks"]:before, .board li[data-card="kd"]:before, .board li[data-card="kh"]:before, .board li[data-card="kc"]:before, .board li[data-card="ks"]:before {
+      content: "K"; }
+
 body, html {
   margin: 0;
   padding: 0; }
+
+body {
+  background-image: url("http://line.cxm/images/crossed_stripes.png"); }
 
 * {
   box-sizing: border-box;
@@ -10,73 +698,64 @@ body, html {
 
 #splash {
   position: fixed;
-  width: 500px;
+  width: 800px;
   height: 300px;
   top: 50%;
   left: 50%;
   margin-top: -150px;
-  margin-left: -250px;
+  margin-left: -400px;
   border-radius: 20px;
-  background-color: #f5f3ef;
-  text-align: center;
-  box-shadow: 0 0 0 10px #d9d7d3, 0 0 8px 12px rgba(0, 0, 0, 0.8);
-  background-image: url(../images/joker2.svg);
-  background-size: auto 150px;
-  background-position: center 130px;
-  background-repeat: repeat-x;
-  color: #8a0f00; }
-  #splash h1 {
-    margin-top: 15px;
-    text-shadow: 0 0 3px white, 0 0 8px black;
-    font-family: "ArtifikaMedium";
-    font-size: 100px;
-    text-align: center; }
+  text-align: center; }
   #splash button {
+    font-family: "Uralita";
+    font-size: 24px;
+    weight: 300;
     border-radius: 10px;
-    border: 1px solid black;
-    box-shadow: 0 0 0 1px white, 0 0 6px 1px black;
-    background-color: white;
-    padding: 12px 15px 12px 40px;
-    font-family: Tahoma, Arial, SANS-SERIF;
-    font-size: 16px;
-    background-position: 12px center;
-    background-size: 20px auto;
-    background-repeat: no-repeat; }
-  #splash .play-online {
-    margin-left: 10px;
-    background-image: url(../images/symbols/diamond.svg); }
-  #splash .play {
-    background-image: url(../images/symbols/spade.svg); }
-  #splash .rules {
-    margin-left: 10px;
-    background-image: url(../images/symbols/club.svg); }
+    padding: 8px 12px 8px 12px;
+    box-shadow: 0 0 0 8px white, 0 0 0 9px #b30000, 0 0 3px 10px rgba(0, 0, 0, 0.35);
+    border: none;
+    background-color: #b30000;
+    color: white;
+    margin: 9px 18px 9px 9px;
+    width: 150px; }
+    #splash button:before {
+      padding-right: 8px; }
+  #splash .play-online:before {
+    font-family: courier;
+    content: "\2666"; }
+  #splash .play:before {
+    font-family: courier;
+    content: "\2660"; }
+  #splash .rules:before {
+    font-family: courier;
+    content: "\2663"; }
 
 #dialog {
   position: fixed;
-  width: 500px;
+  width: 800px;
   height: 300px;
   top: 50%;
   left: 50%;
   margin-top: -150px;
-  margin-left: -250px;
+  margin-left: -400px;
   border-radius: 20px;
-  background-color: #f5f3ef;
   text-align: center;
-  box-shadow: 0 0 0 10px #d9d7d3, 0 0 8px 12px rgba(0, 0, 0, 0.8);
   display: none; }
   #dialog button {
+    font-family: "Uralita";
+    font-size: 24px;
+    weight: 300;
     border-radius: 10px;
-    border: 1px solid black;
-    box-shadow: 0 0 0 1px white, 0 0 6px 1px black;
-    background-color: white;
-    padding: 12px 15px 12px 40px;
-    font-family: Tahoma, Arial, SANS-SERIF;
-    font-size: 16px;
-    background-position: 12px center;
-    background-size: 20px auto;
-    background-repeat: no-repeat; }
-  #dialog .play {
-    background-image: url(../images/symbols/heart.svg); }
+    padding: 8px 12px 8px 12px;
+    box-shadow: 0 0 0 8px white, 0 0 0 9px #b30000, 0 0 3px 10px rgba(0, 0, 0, 0.35);
+    border: none;
+    background-color: #b30000;
+    color: white;
+    margin: 9px 18px 9px 9px;
+    width: 150px; }
+  #dialog .play:before {
+    margin-left: 10px;
+    content: "\2665"; }
 
 #message {
   display: none;
@@ -90,2065 +769,64 @@ body, html {
   box-shadow: 0 0 0 1px white, 0 0 6px 1px black;
   background-color: white;
   padding: 12px 15px 12px 15px;
-  font-family: Tahoma, Arial, SANS-SERIF;
   font-size: 16px; }
 
 #rules {
   margin: 15px auto;
   width: 700px;
   display: none; }
+  #rules p {
+    font: 14px/2em "Open Sans"; }
   #rules button {
+    font-family: "Uralita";
+    font-size: 24px;
+    weight: 300;
     border-radius: 10px;
-    border: 1px solid black;
-    box-shadow: 0 0 0 1px white, 0 0 6px 1px black;
-    background-color: white;
-    padding: 12px 15px 12px 40px;
-    font-family: Tahoma, Arial, SANS-SERIF;
-    font-size: 16px;
-    background-position: 12px center;
-    background-size: 20px auto;
-    background-repeat: no-repeat; }
-  #rules .play {
-    background-image: url(../images/symbols/spade.svg); }
-  #rules .play-online {
-    background-image: url(../images/symbols/diamond.svg); }
-  #rules .back {
-    background-image: url(../images/symbols/club.svg); }
+    padding: 8px 12px 8px 12px;
+    box-shadow: 0 0 0 8px white, 0 0 0 9px #b30000, 0 0 3px 10px rgba(0, 0, 0, 0.35);
+    border: none;
+    background-color: #b30000;
+    color: white;
+    margin: 9px 18px 9px 9px;
+    width: 150px; }
+  #rules .play:before {
+    margin-left: 10px;
+    content: "\2660"; }
+  #rules .play-online:before {
+    margin-left: 10px;
+    content: "\2666"; }
+  #rules .back:before {
+    margin-left: 10px;
+    content: "\2663"; }
 
 #board li div,
 #hands li div,
 #discardPile li div {
   position: absolute; }
 
-li[data-suit=CLUB] {
-  background-image: url("../images/symbols/club.svg");
-  color: black; }
-
-li[data-suit=HEART] {
-  background-image: url("../images/symbols/heart.svg");
-  color: #8a0f00; }
-
-li[data-suit=SPADE] {
-  background-image: url("../images/symbols/spade.svg"); }
-
-li[data-suit=DIAMOND] {
-  background-image: url("../images/symbols/diamond.svg");
-  color: #8a0f00; }
-
-li[data-suit=JOKER] {
-  background-image: url("../images/joker2.svg"); }
-
-.p1 {
-  border-color: #3399cc !important;
-  background-color: #f3f9fc !important; }
-
-.p2 {
-  border-color: #ffcc00 !important;
-  background-color: #fffdf5 !important; }
-
-.p3 {
-  border-color: #00cc00 !important;
-  background-color: #f5fdf5 !important; }
-
-@media all and (min-width: 300px) and (orientation: portrait) {
-  #discardPile {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    padding: 0 0 0 305px;
-    margin: 0;
-    list-style: none; }
-
-  #hands {
-    position: absolute;
-    top: 10px;
-    left: 0;
-    padding: 0 0 0 300px;
-    margin: 0; }
-
-  #hands ul,
-  #discardPile ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    line-height: 0; }
-
-  #hands li {
-    display: inline-block;
-    height: 43px;
-    width: 32px;
-    border-radius: 0;
-    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
-    border: 2px solid #d9d7d3;
-    background-color: #f6f3ef;
-    position: relative;
-    background-size: 19px auto;
-    background-position: center center;
-    background-repeat: no-repeat;
-    font-family: "ArtifikaMedium";
-    margin-left: 5px;
-    margin-bottom: 5px; }
-
+#discardPile {
+  position: fixed;
+  top: 0;
+  z-index: 9999; }
   #discardPile li {
-    display: inline-block;
-    height: 43px;
-    width: 32px;
-    border-radius: 0;
-    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
-    border: 2px solid #d9d7d3;
-    background-color: #f6f3ef;
-    position: relative;
-    background-size: 19px auto;
-    background-position: center center;
-    background-repeat: no-repeat;
-    font-family: "ArtifikaMedium";
-    margin-right: -19px; }
-
-  #hands li[data-suit=JOKER],
-  #discardPile li[data-suit=JOKER] {
-    background-size: auto 32px; }
-
-  #hands li.active {
-    box-shadow: 0 0 0 1px #186925, 0 0 6px 3px rgba(24, 105, 37, 0.8); }
-
-  #hands li div,
-  #discardPile li div {
-    font-weight: bold;
-    font-size: 7px;
-    line-height: .5em; }
-
-  #hands li div.tl,
-  #discardPile li div.tl {
-    top: 3px;
-    left: 3px; }
-
-  #hands li div.br,
-  #discardPile li div.br {
-    bottom: 3px;
-    right: 3px; }
-
-  #game {
-    display: none;
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0; }
-    #game button {
-      border-radius: 10px;
-      border: 1px solid black;
-      box-shadow: 0 0 0 1px white, 0 0 6px 1px black;
-      background-color: white;
-      padding: 12px 15px 12px 40px;
-      font-family: Tahoma, Arial, SANS-SERIF;
-      font-size: 16px;
-      background-position: 12px center;
-      background-size: 20px auto;
-      background-repeat: no-repeat; }
-    #game .rules {
-      background-image: url(../images/symbols/club.svg);
-      position: absolute;
-      bottom: 5px;
-      right: 15px; }
-    #game #hands {
-      position: absolute;
-      top: 310px;
-      left: 0;
-      bottom: 0;
-      right: 0; }
-    #game #hands ul {
-      position: absolute;
-      width: 272px;
-      margin: 0 0 0 -136px;
-      left: 50%; }
-
-  #board {
-    padding: 0;
-    position: absolute;
-    width: 300px;
-    height: 300px;
-    list-style: none;
-    margin: 0 0 0 -150px;
-    line-height: 0;
-    left: 50%; }
-    #board li {
-      background-color: white;
-      border-radius: 0;
-      box-shadow: 0 0 6px rgba(0, 0, 0, 0.9), 0 0 0 1px black;
-      line-height: 1em;
-      text-align: center;
-      display: inline-block;
-      width: 24.5px;
-      height: 24.5px;
-      margin: 5px 0 0 5px;
-      border: 3px solid white;
-      position: relative;
-      background-size: 9.8px auto;
-      background-position: center center;
-      background-repeat: no-repeat;
-      font-family: "ArtifikaMedium";
-      padding: 0; }
-    #board li div.tl {
-      top: 0px;
-      left: -1px; }
-    #board li div.br {
-      bottom: 1px;
-      right: -1px; }
-    #board li div {
-      font-size: 5.39px;
-      line-height: .5em;
-      padding: 0;
-      margin: 0; }
-    #board li[data-suit=JOKER] {
-      background-size: auto 18.375px; }
-
-  .info {
-    height: 300px;
-    width: 300px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin: -150px 0 0 -150px; }
-
-  /* li:before {*/
-  /*position: absolute;*/
-  /*top: 5px;*/
-  /*right: 5px;*/
-  /*content: attr(data-score);*/
-  /*}*/
-  #discardPile {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    padding: 0 0 0 305px;
-    margin: 0;
-    list-style: none; }
-
-  #hands {
-    position: absolute;
-    top: 10px;
-    left: 0;
-    padding: 0 0 0 305px;
-    margin: 0; } }
-@media all and (min-height: 300px) and (orientation: landscape) {
-  #discardPile {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    padding: 0 0 0 305px;
-    margin: 0;
-    list-style: none; }
-
-  #hands {
-    position: absolute;
-    top: 10px;
-    left: 0;
-    padding: 0 0 0 300px;
-    margin: 0; }
-
-  #hands ul,
-  #discardPile ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    line-height: 0; }
-
-  #hands li {
-    display: inline-block;
-    height: 43px;
-    width: 32px;
-    border-radius: 0;
-    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
-    border: 2px solid #d9d7d3;
-    background-color: #f6f3ef;
-    position: relative;
-    background-size: 19px auto;
-    background-position: center center;
-    background-repeat: no-repeat;
-    font-family: "ArtifikaMedium";
-    margin-left: 5px;
-    margin-bottom: 5px; }
-
-  #discardPile li {
-    display: inline-block;
-    height: 43px;
-    width: 32px;
-    border-radius: 0;
-    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
-    border: 2px solid #d9d7d3;
-    background-color: #f6f3ef;
-    position: relative;
-    background-size: 19px auto;
-    background-position: center center;
-    background-repeat: no-repeat;
-    font-family: "ArtifikaMedium";
-    margin-right: -19px; }
-
-  #hands li[data-suit=JOKER],
-  #discardPile li[data-suit=JOKER] {
-    background-size: auto 32px; }
-
-  #hands li.active {
-    box-shadow: 0 0 0 1px #186925, 0 0 6px 3px rgba(24, 105, 37, 0.8); }
-
-  #hands li div,
-  #discardPile li div {
-    font-weight: bold;
-    font-size: 7px;
-    line-height: .5em; }
-
-  #hands li div.tl,
-  #discardPile li div.tl {
-    top: 3px;
-    left: 3px; }
-
-  #hands li div.br,
-  #discardPile li div.br {
-    bottom: 3px;
-    right: 3px; }
-
-  #game {
-    display: none;
-    position: absolute;
-    height: 295px;
-    top: 0;
-    right: 0;
-    left: 0; }
-    #game button {
-      border-radius: 10px;
-      border: 1px solid black;
-      box-shadow: 0 0 0 1px white, 0 0 6px 1px black;
-      background-color: white;
-      padding: 12px 15px 12px 40px;
-      font-family: Tahoma, Arial, SANS-SERIF;
-      font-size: 16px;
-      background-position: 12px center;
-      background-size: 20px auto;
-      background-repeat: no-repeat; }
-    #game .rules {
-      background-image: url(../images/symbols/club.svg);
-      position: absolute;
-      bottom: 5px;
-      right: 15px; }
-
-  #board {
-    padding: 0;
-    width: 300px;
-    height: 300px;
-    list-style: none;
-    margin: 0;
-    line-height: 0; }
-    #board li {
-      background-color: white;
-      border-radius: 0;
-      box-shadow: 0 0 6px rgba(0, 0, 0, 0.9), 0 0 0 1px black;
-      line-height: 1em;
-      text-align: center;
-      display: inline-block;
-      width: 24.5px;
-      height: 24.5px;
-      margin: 5px 0 0 5px;
-      border: 3px solid white;
-      position: relative;
-      background-size: 9.8px auto;
-      background-position: center center;
-      background-repeat: no-repeat;
-      font-family: "ArtifikaMedium";
-      padding: 0; }
-    #board li div.tl {
-      top: 0px;
-      left: -1px; }
-    #board li div.br {
-      bottom: 1px;
-      right: -1px; }
-    #board li div {
-      font-size: 5.39px;
-      line-height: .5em;
-      padding: 0;
-      margin: 0; }
-    #board li[data-suit=JOKER] {
-      background-size: auto 18.375px; }
-
-  .info {
-    height: 300px;
-    width: 300px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin: -150px 0 0 -150px; }
-
-  /* li:before {*/
-  /*position: absolute;*/
-  /*top: 5px;*/
-  /*right: 5px;*/
-  /*content: attr(data-score);*/
-  /*}*/ }
-@media all and (min-width: 400px) and (orientation: portrait) {
-  #discardPile {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    padding: 0 0 0 406px;
-    margin: 0;
-    list-style: none; }
-
-  #hands {
-    position: absolute;
-    top: 10px;
-    left: 0;
-    padding: 0 0 0 400px;
-    margin: 0; }
-
-  #hands ul,
-  #discardPile ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    line-height: 0; }
-
-  #hands li {
-    display: inline-block;
-    height: 57px;
-    width: 43px;
-    border-radius: 5px;
-    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
-    border: 3px solid #d9d7d3;
-    background-color: #f6f3ef;
-    position: relative;
-    background-size: 26px auto;
-    background-position: center center;
-    background-repeat: no-repeat;
-    font-family: "ArtifikaMedium";
-    margin-left: 6px;
-    margin-bottom: 6px; }
-
-  #discardPile li {
-    display: inline-block;
-    height: 57px;
-    width: 43px;
-    border-radius: 5px;
-    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
-    border: 3px solid #d9d7d3;
-    background-color: #f6f3ef;
-    position: relative;
-    background-size: 26px auto;
-    background-position: center center;
-    background-repeat: no-repeat;
-    font-family: "ArtifikaMedium";
-    margin-right: -26px; }
-
-  #hands li[data-suit=JOKER],
-  #discardPile li[data-suit=JOKER] {
-    background-size: auto 43px; }
-
-  #hands li.active {
-    box-shadow: 0 0 0 1px #186925, 0 0 6px 3px rgba(24, 105, 37, 0.8); }
-
-  #hands li div,
-  #discardPile li div {
-    font-weight: bold;
-    font-size: 9px;
-    line-height: .5em; }
-
-  #hands li div.tl,
-  #discardPile li div.tl {
-    top: 3px;
-    left: 3px; }
-
-  #hands li div.br,
-  #discardPile li div.br {
-    bottom: 3px;
-    right: 3px; }
-
-  #game {
-    display: none;
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0; }
-    #game button {
-      border-radius: 10px;
-      border: 1px solid black;
-      box-shadow: 0 0 0 1px white, 0 0 6px 1px black;
-      background-color: white;
-      padding: 12px 15px 12px 40px;
-      font-family: Tahoma, Arial, SANS-SERIF;
-      font-size: 16px;
-      background-position: 12px center;
-      background-size: 20px auto;
-      background-repeat: no-repeat; }
-    #game .rules {
-      background-image: url(../images/symbols/club.svg);
-      position: absolute;
-      bottom: 5px;
-      right: 15px; }
-    #game #hands {
-      position: absolute;
-      top: 410px;
-      left: 0;
-      bottom: 0;
-      right: 0; }
-    #game #hands ul {
-      position: absolute;
-      width: 373px;
-      margin: 0 0 0 -187px;
-      left: 50%; }
-
-  #board {
-    padding: 0;
-    position: absolute;
-    width: 400px;
-    height: 400px;
-    list-style: none;
-    margin: 0 0 0 -200px;
-    line-height: 0;
-    left: 50%; }
-    #board li {
-      background-color: white;
-      border-radius: 5px;
-      box-shadow: 0 0 6px rgba(0, 0, 0, 0.9), 0 0 0 1px black;
-      line-height: 1em;
-      text-align: center;
-      display: inline-block;
-      width: 34.5px;
-      height: 34.5px;
-      margin: 5px 0 0 5px;
-      border: 3px solid white;
-      position: relative;
-      background-size: 13.8px auto;
-      background-position: center center;
-      background-repeat: no-repeat;
-      font-family: "ArtifikaMedium";
-      padding: 0; }
-    #board li div.tl {
-      top: 1px;
-      left: 0px; }
-    #board li div.br {
-      bottom: 2px;
-      right: 0px; }
-    #board li div {
-      font-size: 7.59px;
-      line-height: .5em;
-      padding: 0;
-      margin: 0; }
-    #board li[data-suit=JOKER] {
-      background-size: auto 25.875px; }
-
-  .info {
-    height: 400px;
-    width: 400px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin: -200px 0 0 -200px; }
-
-  /* li:before {*/
-  /*position: absolute;*/
-  /*top: 5px;*/
-  /*right: 5px;*/
-  /*content: attr(data-score);*/
-  /*}*/
-  #discardPile {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    padding: 0 0 0 405px;
-    margin: 0;
-    list-style: none; }
-
-  #hands {
-    position: absolute;
-    top: 10px;
-    left: 0;
-    padding: 0 0 0 405px;
-    margin: 0; } }
-@media all and (min-height: 400px) and (orientation: landscape) {
-  #discardPile {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    padding: 0 0 0 406px;
-    margin: 0;
-    list-style: none; }
-
-  #hands {
-    position: absolute;
-    top: 10px;
-    left: 0;
-    padding: 0 0 0 400px;
-    margin: 0; }
-
-  #hands ul,
-  #discardPile ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    line-height: 0; }
-
-  #hands li {
-    display: inline-block;
-    height: 57px;
-    width: 43px;
-    border-radius: 5px;
-    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
-    border: 3px solid #d9d7d3;
-    background-color: #f6f3ef;
-    position: relative;
-    background-size: 26px auto;
-    background-position: center center;
-    background-repeat: no-repeat;
-    font-family: "ArtifikaMedium";
-    margin-left: 6px;
-    margin-bottom: 6px; }
-
-  #discardPile li {
-    display: inline-block;
-    height: 57px;
-    width: 43px;
-    border-radius: 5px;
-    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
-    border: 3px solid #d9d7d3;
-    background-color: #f6f3ef;
-    position: relative;
-    background-size: 26px auto;
-    background-position: center center;
-    background-repeat: no-repeat;
-    font-family: "ArtifikaMedium";
-    margin-right: -26px; }
-
-  #hands li[data-suit=JOKER],
-  #discardPile li[data-suit=JOKER] {
-    background-size: auto 43px; }
-
-  #hands li.active {
-    box-shadow: 0 0 0 1px #186925, 0 0 6px 3px rgba(24, 105, 37, 0.8); }
-
-  #hands li div,
-  #discardPile li div {
-    font-weight: bold;
-    font-size: 9px;
-    line-height: .5em; }
-
-  #hands li div.tl,
-  #discardPile li div.tl {
-    top: 3px;
-    left: 3px; }
-
-  #hands li div.br,
-  #discardPile li div.br {
-    bottom: 3px;
-    right: 3px; }
-
-  #game {
-    display: none;
-    position: absolute;
-    height: 395px;
-    top: 0;
-    right: 0;
-    left: 0; }
-    #game button {
-      border-radius: 10px;
-      border: 1px solid black;
-      box-shadow: 0 0 0 1px white, 0 0 6px 1px black;
-      background-color: white;
-      padding: 12px 15px 12px 40px;
-      font-family: Tahoma, Arial, SANS-SERIF;
-      font-size: 16px;
-      background-position: 12px center;
-      background-size: 20px auto;
-      background-repeat: no-repeat; }
-    #game .rules {
-      background-image: url(../images/symbols/club.svg);
-      position: absolute;
-      bottom: 5px;
-      right: 15px; }
-
-  #board {
-    padding: 0;
-    width: 400px;
-    height: 400px;
-    list-style: none;
-    margin: 0;
-    line-height: 0; }
-    #board li {
-      background-color: white;
-      border-radius: 5px;
-      box-shadow: 0 0 6px rgba(0, 0, 0, 0.9), 0 0 0 1px black;
-      line-height: 1em;
-      text-align: center;
-      display: inline-block;
-      width: 34.5px;
-      height: 34.5px;
-      margin: 5px 0 0 5px;
-      border: 3px solid white;
-      position: relative;
-      background-size: 13.8px auto;
-      background-position: center center;
-      background-repeat: no-repeat;
-      font-family: "ArtifikaMedium";
-      padding: 0; }
-    #board li div.tl {
-      top: 1px;
-      left: 0px; }
-    #board li div.br {
-      bottom: 2px;
-      right: 0px; }
-    #board li div {
-      font-size: 7.59px;
-      line-height: .5em;
-      padding: 0;
-      margin: 0; }
-    #board li[data-suit=JOKER] {
-      background-size: auto 25.875px; }
-
-  .info {
-    height: 400px;
-    width: 400px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin: -200px 0 0 -200px; }
-
-  /* li:before {*/
-  /*position: absolute;*/
-  /*top: 5px;*/
-  /*right: 5px;*/
-  /*content: attr(data-score);*/
-  /*}*/ }
-@media all and (min-width: 500px) and (orientation: portrait) {
-  #discardPile {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    padding: 0 0 0 508px;
-    margin: 0;
-    list-style: none; }
-
-  #hands {
-    position: absolute;
-    top: 10px;
-    left: 0;
-    padding: 0 0 0 500px;
-    margin: 0; }
-
-  #hands ul,
-  #discardPile ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    line-height: 0; }
-
-  #hands li {
-    display: inline-block;
-    height: 72px;
-    width: 54px;
-    border-radius: 5px;
-    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
-    border: 4px solid #d9d7d3;
-    background-color: #f6f3ef;
-    position: relative;
-    background-size: 32px auto;
-    background-position: center center;
-    background-repeat: no-repeat;
-    font-family: "ArtifikaMedium";
-    margin-left: 8px;
-    margin-bottom: 8px; }
-
-  #discardPile li {
-    display: inline-block;
-    height: 72px;
-    width: 54px;
-    border-radius: 5px;
-    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
-    border: 4px solid #d9d7d3;
-    background-color: #f6f3ef;
-    position: relative;
-    background-size: 32px auto;
-    background-position: center center;
-    background-repeat: no-repeat;
-    font-family: "ArtifikaMedium";
-    margin-right: -32px; }
-
-  #hands li[data-suit=JOKER],
-  #discardPile li[data-suit=JOKER] {
-    background-size: auto 54px; }
-
-  #hands li.active {
-    box-shadow: 0 0 0 1px #186925, 0 0 6px 3px rgba(24, 105, 37, 0.8); }
-
-  #hands li div,
-  #discardPile li div {
-    font-weight: bold;
-    font-size: 11px;
-    line-height: .5em; }
-
-  #hands li div.tl,
-  #discardPile li div.tl {
-    top: 4px;
-    left: 4px; }
-
-  #hands li div.br,
-  #discardPile li div.br {
-    bottom: 4px;
-    right: 4px; }
-
-  #game {
-    display: none;
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0; }
-    #game button {
-      border-radius: 10px;
-      border: 1px solid black;
-      box-shadow: 0 0 0 1px white, 0 0 6px 1px black;
-      background-color: white;
-      padding: 12px 15px 12px 40px;
-      font-family: Tahoma, Arial, SANS-SERIF;
-      font-size: 16px;
-      background-position: 12px center;
-      background-size: 20px auto;
-      background-repeat: no-repeat; }
-    #game .rules {
-      background-image: url(../images/symbols/club.svg);
-      position: absolute;
-      bottom: 5px;
-      right: 15px; }
-    #game #hands {
-      position: absolute;
-      top: 510px;
-      left: 0;
-      bottom: 0;
-      right: 0; }
-    #game #hands ul {
-      position: absolute;
-      width: 466px;
-      margin: 0 0 0 -233px;
-      left: 50%; }
-
-  #board {
-    padding: 0;
-    position: absolute;
-    width: 500px;
-    height: 500px;
-    list-style: none;
-    margin: 0 0 0 -250px;
-    line-height: 0;
-    left: 50%; }
-    #board li {
-      background-color: white;
-      border-radius: 5px;
-      box-shadow: 0 0 6px rgba(0, 0, 0, 0.9), 0 0 0 1px black;
-      line-height: 1em;
-      text-align: center;
-      display: inline-block;
-      width: 39px;
-      height: 39px;
-      margin: 10px 0 0 10px;
-      border: 3px solid white;
-      position: relative;
-      background-size: 15.6px auto;
-      background-position: center center;
-      background-repeat: no-repeat;
-      font-family: "ArtifikaMedium";
-      padding: 0; }
-    #board li div.tl {
-      top: 2px;
-      left: 1px; }
-    #board li div.br {
-      bottom: 3px;
-      right: 1px; }
-    #board li div {
-      font-size: 8.58px;
-      line-height: .5em;
-      padding: 0;
-      margin: 0; }
-    #board li[data-suit=JOKER] {
-      background-size: auto 29.25px; }
-
-  .info {
-    height: 500px;
-    width: 500px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin: -250px 0 0 -250px; }
-
-  /* li:before {*/
-  /*position: absolute;*/
-  /*top: 5px;*/
-  /*right: 5px;*/
-  /*content: attr(data-score);*/
-  /*}*/
-  #discardPile {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    padding: 0 0 0 505px;
-    margin: 0;
-    list-style: none; }
-
-  #hands {
-    position: absolute;
-    top: 10px;
-    left: 0;
-    padding: 0 0 0 505px;
-    margin: 0; } }
-@media all and (min-height: 500px) and (orientation: landscape) {
-  #discardPile {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    padding: 0 0 0 508px;
-    margin: 0;
-    list-style: none; }
-
-  #hands {
-    position: absolute;
-    top: 10px;
-    left: 0;
-    padding: 0 0 0 500px;
-    margin: 0; }
-
-  #hands ul,
-  #discardPile ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    line-height: 0; }
-
-  #hands li {
-    display: inline-block;
-    height: 72px;
-    width: 54px;
-    border-radius: 5px;
-    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
-    border: 4px solid #d9d7d3;
-    background-color: #f6f3ef;
-    position: relative;
-    background-size: 32px auto;
-    background-position: center center;
-    background-repeat: no-repeat;
-    font-family: "ArtifikaMedium";
-    margin-left: 8px;
-    margin-bottom: 8px; }
-
-  #discardPile li {
-    display: inline-block;
-    height: 72px;
-    width: 54px;
-    border-radius: 5px;
-    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
-    border: 4px solid #d9d7d3;
-    background-color: #f6f3ef;
-    position: relative;
-    background-size: 32px auto;
-    background-position: center center;
-    background-repeat: no-repeat;
-    font-family: "ArtifikaMedium";
-    margin-right: -32px; }
-
-  #hands li[data-suit=JOKER],
-  #discardPile li[data-suit=JOKER] {
-    background-size: auto 54px; }
-
-  #hands li.active {
-    box-shadow: 0 0 0 1px #186925, 0 0 6px 3px rgba(24, 105, 37, 0.8); }
-
-  #hands li div,
-  #discardPile li div {
-    font-weight: bold;
-    font-size: 11px;
-    line-height: .5em; }
-
-  #hands li div.tl,
-  #discardPile li div.tl {
-    top: 4px;
-    left: 4px; }
-
-  #hands li div.br,
-  #discardPile li div.br {
-    bottom: 4px;
-    right: 4px; }
-
-  #game {
-    display: none;
-    position: absolute;
-    height: 495px;
-    top: 0;
-    right: 0;
-    left: 0; }
-    #game button {
-      border-radius: 10px;
-      border: 1px solid black;
-      box-shadow: 0 0 0 1px white, 0 0 6px 1px black;
-      background-color: white;
-      padding: 12px 15px 12px 40px;
-      font-family: Tahoma, Arial, SANS-SERIF;
-      font-size: 16px;
-      background-position: 12px center;
-      background-size: 20px auto;
-      background-repeat: no-repeat; }
-    #game .rules {
-      background-image: url(../images/symbols/club.svg);
-      position: absolute;
-      bottom: 5px;
-      right: 15px; }
-
-  #board {
-    padding: 0;
-    width: 500px;
-    height: 500px;
-    list-style: none;
-    margin: 0;
-    line-height: 0; }
-    #board li {
-      background-color: white;
-      border-radius: 5px;
-      box-shadow: 0 0 6px rgba(0, 0, 0, 0.9), 0 0 0 1px black;
-      line-height: 1em;
-      text-align: center;
-      display: inline-block;
-      width: 39px;
-      height: 39px;
-      margin: 10px 0 0 10px;
-      border: 3px solid white;
-      position: relative;
-      background-size: 15.6px auto;
-      background-position: center center;
-      background-repeat: no-repeat;
-      font-family: "ArtifikaMedium";
-      padding: 0; }
-    #board li div.tl {
-      top: 2px;
-      left: 1px; }
-    #board li div.br {
-      bottom: 3px;
-      right: 1px; }
-    #board li div {
-      font-size: 8.58px;
-      line-height: .5em;
-      padding: 0;
-      margin: 0; }
-    #board li[data-suit=JOKER] {
-      background-size: auto 29.25px; }
-
-  .info {
-    height: 500px;
-    width: 500px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin: -250px 0 0 -250px; }
-
-  /* li:before {*/
-  /*position: absolute;*/
-  /*top: 5px;*/
-  /*right: 5px;*/
-  /*content: attr(data-score);*/
-  /*}*/ }
-@media all and (min-width: 600px) and (orientation: portrait) {
-  #discardPile {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    padding: 0 0 0 610px;
-    margin: 0;
-    list-style: none; }
-
-  #hands {
-    position: absolute;
-    top: 10px;
-    left: 0;
-    padding: 0 0 0 600px;
-    margin: 0; }
-
-  #hands ul,
-  #discardPile ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    line-height: 0; }
-
-  #hands li {
-    display: inline-block;
-    height: 85px;
-    width: 64px;
-    border-radius: 10px;
-    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
-    border: 4px solid #d9d7d3;
-    background-color: #f6f3ef;
-    position: relative;
-    background-size: 38px auto;
-    background-position: center center;
-    background-repeat: no-repeat;
-    font-family: "ArtifikaMedium";
-    margin-left: 10px;
-    margin-bottom: 10px; }
-
-  #discardPile li {
-    display: inline-block;
-    height: 85px;
-    width: 64px;
-    border-radius: 10px;
-    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
-    border: 4px solid #d9d7d3;
-    background-color: #f6f3ef;
-    position: relative;
-    background-size: 38px auto;
-    background-position: center center;
-    background-repeat: no-repeat;
-    font-family: "ArtifikaMedium";
-    margin-right: -38px; }
-
-  #hands li[data-suit=JOKER],
-  #discardPile li[data-suit=JOKER] {
-    background-size: auto 64px; }
-
-  #hands li.active {
-    box-shadow: 0 0 0 1px #186925, 0 0 6px 3px rgba(24, 105, 37, 0.8); }
-
-  #hands li div,
-  #discardPile li div {
-    font-weight: bold;
-    font-size: 13px;
-    line-height: .5em; }
-
-  #hands li div.tl,
-  #discardPile li div.tl {
-    top: 5px;
-    left: 5px; }
-
-  #hands li div.br,
-  #discardPile li div.br {
-    bottom: 5px;
-    right: 5px; }
-
-  #game {
-    display: none;
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0; }
-    #game button {
-      border-radius: 10px;
-      border: 1px solid black;
-      box-shadow: 0 0 0 1px white, 0 0 6px 1px black;
-      background-color: white;
-      padding: 12px 15px 12px 40px;
-      font-family: Tahoma, Arial, SANS-SERIF;
-      font-size: 16px;
-      background-position: 12px center;
-      background-size: 20px auto;
-      background-repeat: no-repeat; }
-    #game .rules {
-      background-image: url(../images/symbols/club.svg);
-      position: absolute;
-      bottom: 5px;
-      right: 15px; }
-    #game #hands {
-      position: absolute;
-      top: 610px;
-      left: 0;
-      bottom: 0;
-      right: 0; }
-    #game #hands ul {
-      position: absolute;
-      width: 552px;
-      margin: 0 0 0 -276px;
-      left: 50%; }
-
-  #board {
-    padding: 0;
-    position: absolute;
-    width: 600px;
-    height: 600px;
-    list-style: none;
-    margin: 0 0 0 -300px;
-    line-height: 0;
-    left: 50%; }
-    #board li {
-      background-color: white;
-      border-radius: 5px;
-      box-shadow: 0 0 6px rgba(0, 0, 0, 0.9), 0 0 0 1px black;
-      line-height: 1em;
-      text-align: center;
-      display: inline-block;
-      width: 49px;
-      height: 49px;
-      margin: 10px 0 0 10px;
-      border: 3px solid white;
-      position: relative;
-      background-size: 19.6px auto;
-      background-position: center center;
-      background-repeat: no-repeat;
-      font-family: "ArtifikaMedium";
-      padding: 0; }
-    #board li div.tl {
-      top: 3px;
-      left: 2px; }
-    #board li div.br {
-      bottom: 4px;
-      right: 2px; }
-    #board li div {
-      font-size: 10.78px;
-      line-height: .5em;
-      padding: 0;
-      margin: 0; }
-    #board li[data-suit=JOKER] {
-      background-size: auto 36.75px; }
-
-  .info {
-    height: 600px;
-    width: 600px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin: -300px 0 0 -300px; }
-
-  /* li:before {*/
-  /*position: absolute;*/
-  /*top: 5px;*/
-  /*right: 5px;*/
-  /*content: attr(data-score);*/
-  /*}*/
-  #discardPile {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    padding: 0 0 0 605px;
-    margin: 0;
-    list-style: none; }
-
-  #hands {
-    position: absolute;
-    top: 10px;
-    left: 0;
-    padding: 0 0 0 605px;
-    margin: 0; } }
-@media all and (min-height: 600px) and (orientation: landscape) {
-  #discardPile {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    padding: 0 0 0 610px;
-    margin: 0;
-    list-style: none; }
-
-  #hands {
-    position: absolute;
-    top: 10px;
-    left: 0;
-    padding: 0 0 0 600px;
-    margin: 0; }
-
-  #hands ul,
-  #discardPile ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    line-height: 0; }
-
-  #hands li {
-    display: inline-block;
-    height: 85px;
-    width: 64px;
-    border-radius: 10px;
-    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
-    border: 4px solid #d9d7d3;
-    background-color: #f6f3ef;
-    position: relative;
-    background-size: 38px auto;
-    background-position: center center;
-    background-repeat: no-repeat;
-    font-family: "ArtifikaMedium";
-    margin-left: 10px;
-    margin-bottom: 10px; }
-
-  #discardPile li {
-    display: inline-block;
-    height: 85px;
-    width: 64px;
-    border-radius: 10px;
-    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
-    border: 4px solid #d9d7d3;
-    background-color: #f6f3ef;
-    position: relative;
-    background-size: 38px auto;
-    background-position: center center;
-    background-repeat: no-repeat;
-    font-family: "ArtifikaMedium";
-    margin-right: -38px; }
-
-  #hands li[data-suit=JOKER],
-  #discardPile li[data-suit=JOKER] {
-    background-size: auto 64px; }
-
-  #hands li.active {
-    box-shadow: 0 0 0 1px #186925, 0 0 6px 3px rgba(24, 105, 37, 0.8); }
-
-  #hands li div,
-  #discardPile li div {
-    font-weight: bold;
-    font-size: 13px;
-    line-height: .5em; }
-
-  #hands li div.tl,
-  #discardPile li div.tl {
-    top: 5px;
-    left: 5px; }
-
-  #hands li div.br,
-  #discardPile li div.br {
-    bottom: 5px;
-    right: 5px; }
-
-  #game {
-    display: none;
-    position: absolute;
-    height: 595px;
-    top: 0;
-    right: 0;
-    left: 0; }
-    #game button {
-      border-radius: 10px;
-      border: 1px solid black;
-      box-shadow: 0 0 0 1px white, 0 0 6px 1px black;
-      background-color: white;
-      padding: 12px 15px 12px 40px;
-      font-family: Tahoma, Arial, SANS-SERIF;
-      font-size: 16px;
-      background-position: 12px center;
-      background-size: 20px auto;
-      background-repeat: no-repeat; }
-    #game .rules {
-      background-image: url(../images/symbols/club.svg);
-      position: absolute;
-      bottom: 5px;
-      right: 15px; }
-
-  #board {
-    padding: 0;
-    width: 600px;
-    height: 600px;
-    list-style: none;
-    margin: 0;
-    line-height: 0; }
-    #board li {
-      background-color: white;
-      border-radius: 5px;
-      box-shadow: 0 0 6px rgba(0, 0, 0, 0.9), 0 0 0 1px black;
-      line-height: 1em;
-      text-align: center;
-      display: inline-block;
-      width: 49px;
-      height: 49px;
-      margin: 10px 0 0 10px;
-      border: 3px solid white;
-      position: relative;
-      background-size: 19.6px auto;
-      background-position: center center;
-      background-repeat: no-repeat;
-      font-family: "ArtifikaMedium";
-      padding: 0; }
-    #board li div.tl {
-      top: 3px;
-      left: 2px; }
-    #board li div.br {
-      bottom: 4px;
-      right: 2px; }
-    #board li div {
-      font-size: 10.78px;
-      line-height: .5em;
-      padding: 0;
-      margin: 0; }
-    #board li[data-suit=JOKER] {
-      background-size: auto 36.75px; }
-
-  .info {
-    height: 600px;
-    width: 600px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin: -300px 0 0 -300px; }
-
-  /* li:before {*/
-  /*position: absolute;*/
-  /*top: 5px;*/
-  /*right: 5px;*/
-  /*content: attr(data-score);*/
-  /*}*/ }
-@media all and (min-width: 700px) and (orientation: portrait) {
-  #discardPile {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    padding: 0 0 0 711px;
-    margin: 0;
-    list-style: none; }
-
-  #hands {
-    position: absolute;
-    top: 10px;
-    left: 0;
-    padding: 0 0 0 700px;
-    margin: 0; }
-
-  #hands ul,
-  #discardPile ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    line-height: 0; }
-
-  #hands li {
-    display: inline-block;
-    height: 100px;
-    width: 75px;
-    border-radius: 10px;
-    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
-    border: 5px solid #d9d7d3;
-    background-color: #f6f3ef;
-    position: relative;
-    background-size: 45px auto;
-    background-position: center center;
-    background-repeat: no-repeat;
-    font-family: "ArtifikaMedium";
-    margin-left: 11px;
-    margin-bottom: 11px; }
-
-  #discardPile li {
-    display: inline-block;
-    height: 100px;
-    width: 75px;
-    border-radius: 10px;
-    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
-    border: 5px solid #d9d7d3;
-    background-color: #f6f3ef;
-    position: relative;
-    background-size: 45px auto;
-    background-position: center center;
-    background-repeat: no-repeat;
-    font-family: "ArtifikaMedium";
-    margin-right: -45px; }
-
-  #hands li[data-suit=JOKER],
-  #discardPile li[data-suit=JOKER] {
-    background-size: auto 75px; }
-
-  #hands li.active {
-    box-shadow: 0 0 0 1px #186925, 0 0 6px 3px rgba(24, 105, 37, 0.8); }
-
-  #hands li div,
-  #discardPile li div {
-    font-weight: bold;
-    font-size: 16px;
-    line-height: .5em; }
-
-  #hands li div.tl,
-  #discardPile li div.tl {
-    top: 6px;
-    left: 6px; }
-
-  #hands li div.br,
-  #discardPile li div.br {
-    bottom: 6px;
-    right: 6px; }
-
-  #game {
-    display: none;
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0; }
-    #game button {
-      border-radius: 10px;
-      border: 1px solid black;
-      box-shadow: 0 0 0 1px white, 0 0 6px 1px black;
-      background-color: white;
-      padding: 12px 15px 12px 40px;
-      font-family: Tahoma, Arial, SANS-SERIF;
-      font-size: 16px;
-      background-position: 12px center;
-      background-size: 20px auto;
-      background-repeat: no-repeat; }
-    #game .rules {
-      background-image: url(../images/symbols/club.svg);
-      position: absolute;
-      bottom: 5px;
-      right: 15px; }
-    #game #hands {
-      position: absolute;
-      top: 710px;
-      left: 0;
-      bottom: 0;
-      right: 0; }
-    #game #hands ul {
-      position: absolute;
-      width: 645px;
-      margin: 0 0 0 -323px;
-      left: 50%; }
-
-  #board {
-    padding: 0;
-    position: absolute;
-    width: 700px;
-    height: 700px;
-    list-style: none;
-    margin: 0 0 0 -350px;
-    line-height: 0;
-    left: 50%; }
-    #board li {
-      background-color: white;
-      border-radius: 10px;
-      box-shadow: 0 0 6px rgba(0, 0, 0, 0.9), 0 0 0 1px black;
-      line-height: 1em;
-      text-align: center;
-      display: inline-block;
-      width: 59px;
-      height: 59px;
-      margin: 10px 0 0 10px;
-      border: 3px solid white;
-      position: relative;
-      background-size: 23.6px auto;
-      background-position: center center;
-      background-repeat: no-repeat;
-      font-family: "ArtifikaMedium";
-      padding: 0; }
-    #board li div.tl {
-      top: 4px;
-      left: 3px; }
-    #board li div.br {
-      bottom: 5px;
-      right: 3px; }
-    #board li div {
-      font-size: 12.98px;
-      line-height: .5em;
-      padding: 0;
-      margin: 0; }
-    #board li[data-suit=JOKER] {
-      background-size: auto 44.25px; }
-
-  .info {
-    height: 700px;
-    width: 700px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin: -350px 0 0 -350px; }
-
-  /* li:before {*/
-  /*position: absolute;*/
-  /*top: 5px;*/
-  /*right: 5px;*/
-  /*content: attr(data-score);*/
-  /*}*/
-  #discardPile {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    padding: 0 0 0 705px;
-    margin: 0;
-    list-style: none; }
-
-  #hands {
-    position: absolute;
-    top: 10px;
-    left: 0;
-    padding: 0 0 0 705px;
-    margin: 0; } }
-@media all and (min-height: 700px) and (orientation: landscape) {
-  #discardPile {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    padding: 0 0 0 711px;
-    margin: 0;
-    list-style: none; }
-
-  #hands {
-    position: absolute;
-    top: 10px;
-    left: 0;
-    padding: 0 0 0 700px;
-    margin: 0; }
-
-  #hands ul,
-  #discardPile ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    line-height: 0; }
-
-  #hands li {
-    display: inline-block;
-    height: 100px;
-    width: 75px;
-    border-radius: 10px;
-    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
-    border: 5px solid #d9d7d3;
-    background-color: #f6f3ef;
-    position: relative;
-    background-size: 45px auto;
-    background-position: center center;
-    background-repeat: no-repeat;
-    font-family: "ArtifikaMedium";
-    margin-left: 11px;
-    margin-bottom: 11px; }
-
-  #discardPile li {
-    display: inline-block;
-    height: 100px;
-    width: 75px;
-    border-radius: 10px;
-    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
-    border: 5px solid #d9d7d3;
-    background-color: #f6f3ef;
-    position: relative;
-    background-size: 45px auto;
-    background-position: center center;
-    background-repeat: no-repeat;
-    font-family: "ArtifikaMedium";
-    margin-right: -45px; }
-
-  #hands li[data-suit=JOKER],
-  #discardPile li[data-suit=JOKER] {
-    background-size: auto 75px; }
-
-  #hands li.active {
-    box-shadow: 0 0 0 1px #186925, 0 0 6px 3px rgba(24, 105, 37, 0.8); }
-
-  #hands li div,
-  #discardPile li div {
-    font-weight: bold;
-    font-size: 16px;
-    line-height: .5em; }
-
-  #hands li div.tl,
-  #discardPile li div.tl {
-    top: 6px;
-    left: 6px; }
-
-  #hands li div.br,
-  #discardPile li div.br {
-    bottom: 6px;
-    right: 6px; }
-
-  #game {
-    display: none;
-    position: absolute;
-    height: 695px;
-    top: 0;
-    right: 0;
-    left: 0; }
-    #game button {
-      border-radius: 10px;
-      border: 1px solid black;
-      box-shadow: 0 0 0 1px white, 0 0 6px 1px black;
-      background-color: white;
-      padding: 12px 15px 12px 40px;
-      font-family: Tahoma, Arial, SANS-SERIF;
-      font-size: 16px;
-      background-position: 12px center;
-      background-size: 20px auto;
-      background-repeat: no-repeat; }
-    #game .rules {
-      background-image: url(../images/symbols/club.svg);
-      position: absolute;
-      bottom: 5px;
-      right: 15px; }
-
-  #board {
-    padding: 0;
-    width: 700px;
-    height: 700px;
-    list-style: none;
-    margin: 0;
-    line-height: 0; }
-    #board li {
-      background-color: white;
-      border-radius: 10px;
-      box-shadow: 0 0 6px rgba(0, 0, 0, 0.9), 0 0 0 1px black;
-      line-height: 1em;
-      text-align: center;
-      display: inline-block;
-      width: 59px;
-      height: 59px;
-      margin: 10px 0 0 10px;
-      border: 3px solid white;
-      position: relative;
-      background-size: 23.6px auto;
-      background-position: center center;
-      background-repeat: no-repeat;
-      font-family: "ArtifikaMedium";
-      padding: 0; }
-    #board li div.tl {
-      top: 4px;
-      left: 3px; }
-    #board li div.br {
-      bottom: 5px;
-      right: 3px; }
-    #board li div {
-      font-size: 12.98px;
-      line-height: .5em;
-      padding: 0;
-      margin: 0; }
-    #board li[data-suit=JOKER] {
-      background-size: auto 44.25px; }
-
-  .info {
-    height: 700px;
-    width: 700px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin: -350px 0 0 -350px; }
-
-  /* li:before {*/
-  /*position: absolute;*/
-  /*top: 5px;*/
-  /*right: 5px;*/
-  /*content: attr(data-score);*/
-  /*}*/ }
-@media all and (min-width: 800px) and (orientation: portrait) {
-  #discardPile {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    padding: 0 0 0 813px;
-    margin: 0;
-    list-style: none; }
-
-  #hands {
-    position: absolute;
-    top: 10px;
-    left: 0;
-    padding: 0 0 0 800px;
-    margin: 0; }
-
-  #hands ul,
-  #discardPile ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    line-height: 0; }
-
-  #hands li {
-    display: inline-block;
-    height: 115px;
-    width: 86px;
-    border-radius: 10px;
-    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
-    border: 6px solid #d9d7d3;
-    background-color: #f6f3ef;
-    position: relative;
-    background-size: 52px auto;
-    background-position: center center;
-    background-repeat: no-repeat;
-    font-family: "ArtifikaMedium";
-    margin-left: 13px;
-    margin-bottom: 13px; }
-
-  #discardPile li {
-    display: inline-block;
-    height: 115px;
-    width: 86px;
-    border-radius: 10px;
-    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
-    border: 6px solid #d9d7d3;
-    background-color: #f6f3ef;
-    position: relative;
-    background-size: 52px auto;
-    background-position: center center;
-    background-repeat: no-repeat;
-    font-family: "ArtifikaMedium";
-    margin-right: -52px; }
-
-  #hands li[data-suit=JOKER],
-  #discardPile li[data-suit=JOKER] {
-    background-size: auto 86px; }
-
-  #hands li.active {
-    box-shadow: 0 0 0 1px #186925, 0 0 6px 3px rgba(24, 105, 37, 0.8); }
-
-  #hands li div,
-  #discardPile li div {
-    font-weight: bold;
-    font-size: 18px;
-    line-height: .5em; }
-
-  #hands li div.tl,
-  #discardPile li div.tl {
-    top: 6px;
-    left: 6px; }
-
-  #hands li div.br,
-  #discardPile li div.br {
-    bottom: 6px;
-    right: 6px; }
-
-  #game {
-    display: none;
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0; }
-    #game button {
-      border-radius: 10px;
-      border: 1px solid black;
-      box-shadow: 0 0 0 1px white, 0 0 6px 1px black;
-      background-color: white;
-      padding: 12px 15px 12px 40px;
-      font-family: Tahoma, Arial, SANS-SERIF;
-      font-size: 16px;
-      background-position: 12px center;
-      background-size: 20px auto;
-      background-repeat: no-repeat; }
-    #game .rules {
-      background-image: url(../images/symbols/club.svg);
-      position: absolute;
-      bottom: 5px;
-      right: 15px; }
-    #game #hands {
-      position: absolute;
-      top: 810px;
-      left: 0;
-      bottom: 0;
-      right: 0; }
-    #game #hands ul {
-      position: absolute;
-      width: 738px;
-      margin: 0 0 0 -369px;
-      left: 50%; }
-
-  #board {
-    padding: 0;
-    position: absolute;
-    width: 800px;
-    height: 800px;
-    list-style: none;
-    margin: 0 0 0 -400px;
-    line-height: 0;
-    left: 50%; }
-    #board li {
-      background-color: white;
-      border-radius: 10px;
-      box-shadow: 0 0 6px rgba(0, 0, 0, 0.9), 0 0 0 1px black;
-      line-height: 1em;
-      text-align: center;
-      display: inline-block;
-      width: 69px;
-      height: 69px;
-      margin: 10px 0 0 10px;
-      border: 3px solid white;
-      position: relative;
-      background-size: 27.6px auto;
-      background-position: center center;
-      background-repeat: no-repeat;
-      font-family: "ArtifikaMedium";
-      padding: 0; }
-    #board li div.tl {
-      top: 5px;
-      left: 4px; }
-    #board li div.br {
-      bottom: 6px;
-      right: 4px; }
-    #board li div {
-      font-size: 15.18px;
-      line-height: .5em;
-      padding: 0;
-      margin: 0; }
-    #board li[data-suit=JOKER] {
-      background-size: auto 51.75px; }
-
-  .info {
-    height: 800px;
-    width: 800px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin: -400px 0 0 -400px; }
-
-  /* li:before {*/
-  /*position: absolute;*/
-  /*top: 5px;*/
-  /*right: 5px;*/
-  /*content: attr(data-score);*/
-  /*}*/
-  #discardPile {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    padding: 0 0 0 805px;
-    margin: 0;
-    list-style: none; }
-
-  #hands {
-    position: absolute;
-    top: 10px;
-    left: 0;
-    padding: 0 0 0 805px;
-    margin: 0; } }
-@media all and (min-height: 800px) and (orientation: landscape) {
-  #discardPile {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    padding: 0 0 0 813px;
-    margin: 0;
-    list-style: none; }
-
-  #hands {
-    position: absolute;
-    top: 10px;
-    left: 0;
-    padding: 0 0 0 800px;
-    margin: 0; }
-
-  #hands ul,
-  #discardPile ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    line-height: 0; }
-
-  #hands li {
-    display: inline-block;
-    height: 115px;
-    width: 86px;
-    border-radius: 10px;
-    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
-    border: 6px solid #d9d7d3;
-    background-color: #f6f3ef;
-    position: relative;
-    background-size: 52px auto;
-    background-position: center center;
-    background-repeat: no-repeat;
-    font-family: "ArtifikaMedium";
-    margin-left: 13px;
-    margin-bottom: 13px; }
-
-  #discardPile li {
-    display: inline-block;
-    height: 115px;
-    width: 86px;
-    border-radius: 10px;
-    box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, 0.8);
-    border: 6px solid #d9d7d3;
-    background-color: #f6f3ef;
-    position: relative;
-    background-size: 52px auto;
-    background-position: center center;
-    background-repeat: no-repeat;
-    font-family: "ArtifikaMedium";
-    margin-right: -52px; }
-
-  #hands li[data-suit=JOKER],
-  #discardPile li[data-suit=JOKER] {
-    background-size: auto 86px; }
-
-  #hands li.active {
-    box-shadow: 0 0 0 1px #186925, 0 0 6px 3px rgba(24, 105, 37, 0.8); }
-
-  #hands li div,
-  #discardPile li div {
-    font-weight: bold;
-    font-size: 18px;
-    line-height: .5em; }
-
-  #hands li div.tl,
-  #discardPile li div.tl {
-    top: 6px;
-    left: 6px; }
-
-  #hands li div.br,
-  #discardPile li div.br {
-    bottom: 6px;
-    right: 6px; }
-
-  #game {
-    display: none;
-    position: absolute;
-    height: 795px;
-    top: 0;
-    right: 0;
-    left: 0; }
-    #game button {
-      border-radius: 10px;
-      border: 1px solid black;
-      box-shadow: 0 0 0 1px white, 0 0 6px 1px black;
-      background-color: white;
-      padding: 12px 15px 12px 40px;
-      font-family: Tahoma, Arial, SANS-SERIF;
-      font-size: 16px;
-      background-position: 12px center;
-      background-size: 20px auto;
-      background-repeat: no-repeat; }
-    #game .rules {
-      background-image: url(../images/symbols/club.svg);
-      position: absolute;
-      bottom: 5px;
-      right: 15px; }
-
-  #board {
-    padding: 0;
-    width: 800px;
-    height: 800px;
-    list-style: none;
-    margin: 0;
-    line-height: 0; }
-    #board li {
-      background-color: white;
-      border-radius: 10px;
-      box-shadow: 0 0 6px rgba(0, 0, 0, 0.9), 0 0 0 1px black;
-      line-height: 1em;
-      text-align: center;
-      display: inline-block;
-      width: 69px;
-      height: 69px;
-      margin: 10px 0 0 10px;
-      border: 3px solid white;
-      position: relative;
-      background-size: 27.6px auto;
-      background-position: center center;
-      background-repeat: no-repeat;
-      font-family: "ArtifikaMedium";
-      padding: 0; }
-    #board li div.tl {
-      top: 5px;
-      left: 4px; }
-    #board li div.br {
-      bottom: 6px;
-      right: 4px; }
-    #board li div {
-      font-size: 15.18px;
-      line-height: .5em;
-      padding: 0;
-      margin: 0; }
-    #board li[data-suit=JOKER] {
-      background-size: auto 51.75px; }
-
-  .info {
-    height: 800px;
-    width: 800px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin: -400px 0 0 -400px; }
-
-  /* li:before {*/
-  /*position: absolute;*/
-  /*top: 5px;*/
-  /*right: 5px;*/
-  /*content: attr(data-score);*/
-  /*}*/ }
-footer {
-  display: none;
-  width: 200px;
-  text-align: center; }
+    margin-right: -40px; }
+
+#hands {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  z-index: 9999; }
+  #hands .cards {
+    padding-left: 36px; }
+    #hands .cards li {
+      margin: 0 0 0 -30px;
+      -webkit-transition: all 0.1s ease-in;
+      -moz-transition: all 0.1s ease-in;
+      transition: all 0.1s ease-in; }
+      #hands .cards li.active {
+        margin-top: -50px;
+        margin-bottom: 50px; }
+
+#game {
+  padding: 180px 0 180px 0; }

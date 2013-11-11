@@ -1,0 +1,128 @@
+$space: "\00a0";
+$heart: "\2665";
+$spade: "\2660";
+$club: "\2663";
+$diamond: "\2666";
+$jokerCharacters: o v x w;
+
+$cellSize: 50px;
+$borderSize: $cellSize/10 - 1;
+
+#board, .board {
+  margin: 0 auto;
+  font-size: 0;
+  width: ($cellSize + $borderSize * 2 + 8) * 10 + 8;
+  padding: 4px 0 0 4px;
+
+  li {
+    width: $cellSize;
+    height: $cellSize;
+    display: inline-block;
+    position: relative;
+    box-shadow: 0 0 0 1px #aaa, 0 0 0 $borderSize #dfdfdf, 0 0 0 $borderSize + 1 #aaa;
+    margin: $borderSize $borderSize + 8 $borderSize + 8  $borderSize;
+    @include linear-gradient(-225deg, white, white 50%, #f2f2f2 0);
+
+    &:after {
+      position: absolute;
+      bottom: 4px;
+      right: 2px;
+      font-size: $cellSize/2;
+      vertical-align: bottom;
+      padding: 0;
+      line-height: .75em;
+      font-family: serif;
+    }
+
+    &:before {
+      position: absolute;
+      top: 2px;
+      left: 6px;
+      width: 25%;
+      height: 25%;
+      font-size: $cellSize/2.1;
+      font-family: $cardFont;
+      font-weight: 200;
+    }
+
+    &.spade:after {
+      content: $spade;
+    }
+
+    &.club:after {
+      content: $club;
+    }
+
+    &.heart:after {
+      content: $heart;
+      color: $suitRed;
+    }
+
+    &.diamond:after {
+      content: $diamond;
+      color: $suitRed;
+    }
+
+    &.heart:before,
+    &.diamond:before {
+      color: $suitRed;
+    }
+
+    &.joker:before {
+      font-size: $cellSize * .75;
+      top: 0;
+      left: 0;
+      text-align: center;
+      height: $cellSize;
+      width: $cellSize;
+      line-height: $cellSize;
+    }
+
+    &.joker:before,
+    &.joker:after {
+      position: absolute;
+      font-family: $jokerFont !important;
+    }
+
+    $players: p1 p2 p3 p4;
+
+    @for $index from 1 through 4 {
+      &.#{nth($players, $index)} {
+        $color: nth($baseColors, $index);
+        //$color: lighten(nth($baseColors, $index),20%);
+        $borderColor: darken(desaturate($color, 10%), 15%);
+        $outlineColor: darken($borderColor, 30%);
+        @include linear-gradient(-225deg, $color, $color 50%, white 0);
+        box-shadow: 0 0 0 1px $outlineColor, 0 0 0 5px $borderColor, 0 0 0 6px $outlineColor;
+
+        &:before {
+          color: nth($suitBlacks, $index);
+        }
+      }
+    }
+
+    @for $i from 1 through 4 {
+
+      &.joker-#{$i}:before {
+        content: "#{nth($jokerCharacters, $i)}";
+      }
+    }
+
+    $cardValues: a, 2, 3, 4, 5, 6, 7, 8, 9, t, q, k;
+    $cardCharacters: A, 2, 3, 4, 5, 6, 7, 8, 9, 10, Q, K;
+
+    @for $i from 1 through 12  {
+
+      $value: nth($cardValues, $i);
+      &[data-card="#{$value}d"]:before,
+      &[data-card="#{$value}h"]:before,
+      &[data-card="#{$value}c"]:before,
+      &[data-card="#{$value}s"]:before {
+        content: "#{nth($cardCharacters, $i)}";
+      }
+    }
+  }
+}
+
+
+

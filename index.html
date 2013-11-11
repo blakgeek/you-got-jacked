@@ -7,10 +7,13 @@
     </head>
     <body>
         <section id="splash">
-            <h1>BlakJax</h1>
-            <button class="play">Play Solo</button>
-            <button class="play-online">Play Someone</button>
-            <button class="rules">Rules</button>
+            <img src="images/splash.png"/>
+
+            <div class="buttons">
+                <button class="play">Solo</button>
+                <button class="play-online">Online</button>
+                <button class="rules">Rules</button>
+            </div>
         </section>
         <section id="rules">
             <p>The goal of BlakJax is to capture five connecting squares horizontally, vertically or diagonally before
@@ -37,9 +40,11 @@
                 by
                 clicking these cards.</p>
 
-            <button class="play">Play Solo</button>
-            <button class="play-online">Play Someone</button>
-            <button class="back">Continue Playing</button>
+            <div class="buttons">
+                <button class="play">Play Solo</button>
+                <button class="play-online">Play Online</button>
+                <button class="back">Close</button>
+            </div>
         </section>
         <section id="dialog">
             <p class="message"></p>
@@ -47,11 +52,12 @@
             <button class="play-online">Play Someone</button>
         </section>
         <section id="game">
-            <ul id="discardPile"></ul>
+            <ul id="discardPile" class="cards"></ul>
             <div id="hands">
-                <ul id="player1"></ul>
-                <ul id="player2"></ul>
-                <ul id="player3"></ul>
+                <ul id="player1" class="cards p1"></ul>
+                <ul id="player2" class="cards p2"></ul>
+                <ul id="player3" class="cards p3"></ul>
+                <ul id="player4" class="cards p4"></ul>
             </div>
             <ul id="board"></ul>
             <button class="rules">A Little Help</button>
@@ -65,7 +71,9 @@
     </body>
     <script src="//ec2-184-73-193-207.compute-1.amazonaws.com:9000/socket.io/socket.io.js"></script>
     <script src="js/jquery.js"></script>
+    <script src="js/handlebars.js"></script>
     <script src="js/BG.js"></script>
     <script src="js/jax.js"></script>
+    <script src="js/brains/hal.js"></script>
     <script src="js/config.js"></script>
 </html>

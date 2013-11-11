@@ -1,0 +1,183 @@
+$space: "\00a0";
+$heart: "\2665";
+$spade: "\2660";
+$club: "\2663";
+$diamond: "\2666";
+$jokerCharacters: o v x w;
+$cardCharacters: A 2 3 4 5 6 7 8 9 10 J Q K;
+
+$cardWidth: 90px;
+
+$players: p1 p2 p3 p4;
+
+@for $index from 1 through 4 {
+
+  $baseColor: nth($baseColors, $index);
+  $suitBlack: nth($suitBlacks, $index);
+  $frameColor: darken(desaturate($baseColor, 10%), 15%);
+  $innerLine: 0 0 0 1px darken($frameColor, 10%);
+  $innerShadow: 0 0 2px darken($frameColor, 30%);
+  $frame: 0 0 0 7px $frameColor;
+  $outerLine: 0 0 0 8px darken($frameColor, 40%);
+  $shadow: 0 0 3px 9px rgba(0, 0, 0, .4);
+
+  .cards, .cards.#{nth($players, $index)} {
+
+    padding: 10px 0 0 10px;
+
+    li.#{nth($players, $index)}, li {
+      line-height: 1em;
+      position: relative;
+      border-radius: 2px;
+      display: inline-block;
+      width: $cardWidth;
+      height: $cardWidth * 5 / 3;
+      @include linear-gradient(-50deg, $baseColor, $baseColor 35%, $faceColor 0);
+      box-shadow: $innerShadow, $innerLine, $frame, $outerLine, $shadow;
+      margin: 10px 20px 20px 10px;
+      text-align: center;
+
+      &.suit:before,
+      &.joker:before {
+
+        content: $space;
+        position: absolute;
+        top: 55px;
+        left: 0;
+        width: 60px;
+        font: 50px/1em arial;
+
+      }
+
+      &.suit:after {
+        position: absolute;
+        top: 4px;
+        left: 0;
+        width: 60px;
+        text-align: center;
+        font: 50px/1em $cardFont;
+      }
+
+      span {
+        position: absolute;
+        bottom: 0;
+        right: 8px;
+
+        &:before {
+          font-size: 42px;
+          line-height: 42px;
+          color: white !important;
+          font-family: serif;
+        }
+      }
+
+      &.spade {
+        span:before, &:before {
+          content: $spade;
+          color: $suitBlack;
+        }
+        &:after {
+          color: $suitBlack;
+        }
+      }
+
+      &.club {
+        span:before, &:before {
+          content: $club;
+          color: $suitBlack;
+        }
+        &:after {
+          color: $suitBlack;
+        }
+      }
+
+      &.heart {
+        span:before, &:before {
+          content: $heart;
+          color: $suitRed;
+        }
+        &:after {
+          color: $suitRed;
+        }
+      }
+
+      &.diamond {
+        span:before, &:before {
+          content: $diamond;
+          color: $suitRed;
+        }
+        &:after {
+          color: $suitRed;
+        }
+      }
+
+      &.joker:before {
+        top: 8px;
+        font-size: 70px;
+        width: 100%;
+        text-align: center;
+        color: $suitBlack;
+      }
+
+      &.joker:after {
+        bottom: 4px;
+        right: 6px;
+        font-size: 30px;
+        line-height: 40px;
+      }
+
+      &.joker:before,
+      &.joker:after {
+        position: absolute;
+        font-family: $jokerFont !important;
+      }
+
+      &.joker-1:after,
+      &.joker-3:after {
+        color: white;
+      }
+
+      &.joker-2:after,
+      &.joker-4:after, {
+        color: $baseColor;
+      }
+
+      &.joker-2,
+      &.joker-4 {
+
+        @include linear-gradient(-50deg, $faceColor, $faceColor 35%, $baseColor 0);
+      }
+
+      @for $i from 1 through 4 {
+
+        &.joker-#{$i}:before {
+          content: "#{nth($jokerCharacters, $i)}";
+        }
+
+        &.joker-#{$i}:after {
+          content: "#{nth($jokerCharacters, $i)}";
+        }
+      }
+
+      $cardValues: a 2 3 4 5 6 7 8 9 t j q k;
+      $cardCharacters: A 2 3 4 5 6 7 8 9 10 J Q K;
+
+      @for $i from 1 through 13 {
+
+        $value: nth($cardValues, $i);
+        &[data-card="#{$value}d"]:after,
+        &[data-card="#{$value}h"]:after,
+        &[data-card="#{$value}c"]:after,
+        &[data-card="#{$value}s"]:after {
+          content: "#{nth($cardCharacters, $i)}";
+        }
+      }
+
+    }
+  }
+}
+
+.firefox .cards li.suit:before {
+  font-size: 90px;
+  vertical-align: top;
+}
