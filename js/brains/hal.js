@@ -12,7 +12,8 @@ var Hal = function(config) {
 		hand = config.hand,
 		unrevealedCardCount = 104 - hand.length,
 		totalPlayers = config.totalPlayers,
-		playerIndex = config.playerIndex;
+		playerIndex = config.playerIndex,
+		playDelay = config.playDelay || 0;
 
 	init();
 
@@ -37,7 +38,8 @@ var Hal = function(config) {
 		},
 		turnchanged: function(event, player) {
 			if(player == playerIndex) {
-				play();
+
+				setTimeout(play, playDelay);
 			}
 		},
 		celljacked: function(event, data) {

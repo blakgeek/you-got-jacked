@@ -1,0 +1,432 @@
+@import "colors";
+
+$space: "\00a0";
+$heart: "\2665";
+$spade: "\2660";
+$club: "\2663";
+$diamond: "\2666";
+$jokerCharacters: o v x w;
+
+@mixin game($size, $avatarSize, $avatarFrameWidth, $spacing: 10px) {
+
+  .game {
+
+    header {
+
+      height: 45px;
+      line-height: 45px;
+      box-shadow: 0 0 3px 1px black;
+
+      h1 {
+        padding-left: $spacing;
+        font-family: Uralita;
+        font-weight: bold;
+        font-size: 35px;
+      }
+
+      nav {
+        position: absolute;
+        top: 0;
+        right: $spacing;
+        li {
+          display: inline-block;
+        }
+      }
+    }
+
+    .board {
+
+      margin-top: $spacing;
+      margin-left: $spacing;
+      float: left;
+    }
+
+    .cards {
+
+      position: relative;
+      margin-top: $spacing;
+      margin-left: $spacing - 3;
+      float: left;
+      //border: 1px solid blue;
+      width: $size / 1.61;
+      height: $size;
+      font-size: 0;
+
+      .hand, .discarded {
+
+        position: absolute;
+      }
+
+      .hand {
+        bottom: 3px;
+
+      }
+
+      .discarded {
+        top: 0;
+      }
+    }
+
+    .players {
+
+      margin-top: $spacing;
+      margin-left: $spacing;
+      float: left;
+      width: $size / 1.61 / 1.61;
+      height: $size;
+      //border: 1px solid blue;
+
+      h1 {
+        font-family: Uralita;
+        font-size: 30px;
+      }
+
+      li {
+        line-height: $avatarSize * .4;
+        margin-top: 1em;
+        font-family: "Open Sans";
+        font-size: $avatarSize * .4;
+
+        img {
+          position: relative;
+          vertical-align: middle;
+          max-height: $avatarSize;
+          border-radius: 50%;
+          box-shadow: 0 0 0 1px black, 0 0 0 $avatarFrameWidth - 1 white, 0 0 0 $avatarFrameWidth black;
+          margin: $avatarFrameWidth $avatarFrameWidth + $avatarSize * .25 $avatarFrameWidth $avatarFrameWidth
+
+        }
+
+        &.active img {
+
+          box-shadow: 0 0 0 1px black, 0 0 0 $avatarFrameWidth + 1 #48dd3c, 0 0 0 $avatarFrameWidth + 2 black, 0 0 4px $avatarFrameWidth + 3 rgba(0,0,0,.4);
+
+        }
+      }
+    }
+  }
+}
+
+@mixin cards($class, $height, $frameWidth, $baseColor, $black: $DEFAULT_BLACK, $red: $DEFAULT_RED, $faceColor: white, $radius: 2px) {
+
+  $frameColor: darken(desaturate($baseColor, 10%), 15%);
+  $innerLine: 0 0 0 1px darken($frameColor, 10%);
+  $frame: 0 0 0 $frameWidth - 1 $frameColor;
+  $outerLine: 0 0 0 $frameWidth darken($frameColor, 40%);
+  $shadow: 0 0 3px $frameWidth + 1 rgba(0, 0, 0, .4);
+  $width: $height * 3/5;
+
+  ul.#{$class} {
+
+    li {
+      line-height: 1em;
+      position: relative;
+      border-radius: $radius;
+      display: inline-block;
+      width: $width;
+      height: $height;
+      @include linear-gradient(-50deg, $baseColor, $baseColor 35%, $faceColor 0);
+      box-shadow: $innerLine, $frame, $outerLine, $shadow;
+      margin: $frameWidth $frameWidth $frameWidth $frameWidth;
+      text-align: center;
+
+      &.suit:before,
+      &.joker:before {
+
+        content: $space;
+        position: absolute;
+        top: $width * 2/3;
+        left: 0;
+        width: $width * 2/3;
+        text-align: center;
+        font-family: arial;
+        line-height: 1em;
+        font-size: $width * 2/3 - 5;
+      }
+
+      &.suit:after {
+        position: absolute;
+        top: 4px;
+        left: 0;
+        width: $width * 2/3;
+        text-align: center;
+        font-family: $cardFont;
+        line-height: 1em;
+        font-size: $width * 2/3 - 5;
+      }
+
+      span {
+        position: absolute;
+        bottom: 0;
+        right: $width/10;
+
+        &:before {
+          font-size: $width * 21/45;
+          line-height: 1em;
+          color: white !important;
+          font-family: serif;
+        }
+      }
+
+      &.spade {
+        span:before, &:before {
+          content: $spade;
+          color: $black;
+        }
+        &:after {
+          color: $black;
+        }
+      }
+
+      &.club {
+        span:before, &:before {
+          content: $club;
+          color: $black;
+        }
+        &:after {
+          color: $black;
+        }
+      }
+
+      &.heart {
+        span:before, &:before {
+          content: $heart;
+          color: $red;
+        }
+        &:after {
+          color: $red;
+        }
+      }
+
+      &.diamond {
+        span:before, &:before {
+          content: $diamond;
+          color: $red;
+        }
+        &:after {
+          color: $red;
+        }
+      }
+
+      &.joker:before {
+        top: $width/10;
+        font-size: $width * 7/9;
+        width: 100%;
+        text-align: center;
+        color: $black;
+      }
+
+      &.joker:after {
+        bottom: 4px;
+        right: 6px;
+        font-size: $width/3;
+        line-height: 1.2em;
+      }
+
+      &.joker:before,
+      &.joker:after {
+        position: absolute;
+        font-family: $jokerFont !important;
+      }
+
+      &.joker-1:after,
+      &.joker-3:after {
+        color: white;
+      }
+
+      &.joker-2:after,
+      &.joker-4:after, {
+        color: $baseColor;
+      }
+
+      &.joker-2,
+      &.joker-4 {
+
+        @include linear-gradient(-50deg, $faceColor, $faceColor 35%, $baseColor 0);
+      }
+
+      $jokerCharacters: o, v, x, w;
+      @for $i from 1 through 4 {
+
+        &.joker-#{$i}:before {
+          content: "#{nth($jokerCharacters, $i)}";
+        }
+
+        &.joker-#{$i}:after {
+          content: "#{nth($jokerCharacters, $i)}";
+        }
+      }
+
+      $cardValues: a 2 3 4 5 6 7 8 9 t j q k;
+      $cardCharacters: A 2 3 4 5 6 7 8 9 10 J Q K;
+
+      @for $i from 1 through 13 {
+
+        $value: nth($cardValues, $i);
+        &[data-card="#{$value}d"]:after,
+        &[data-card="#{$value}h"]:after,
+        &[data-card="#{$value}c"]:after,
+        &[data-card="#{$value}s"]:after {
+          content: "#{nth($cardCharacters, $i)}";
+        }
+      }
+    }
+  }
+}
+
+@mixin board($boardSize, $cellFrameWidth, $cellMargin) {
+
+  $cellFrameFillWidth: $cellFrameWidth - 1;
+  $cellSize: $boardSize/10 - $cellFrameWidth * 2 - $cellMargin;
+
+  .board {
+
+    font-size: 0;
+    width: $boardSize;
+
+    li {
+      position: relative;
+      display: inline-block;
+      width: $cellSize;
+      height: $cellSize;
+      margin: $cellFrameWidth $cellFrameWidth + $cellMargin $cellFrameWidth + $cellMargin $cellFrameWidth;
+      box-shadow: 0 0 0 1px #aaaaaa, 0 0 0 $cellFrameFillWidth #dfdfdf, 0 0 0 $cellFrameWidth #aaaaaa;
+      background-color: white;
+      @include linear-gradient(-225deg, white, white 50%, #f2f2f2 0);
+
+      &:nth-child(10n) {
+        margin-right: 0;
+      }
+
+      &:after {
+        position: absolute;
+        bottom: 4px;
+        right: 2px;
+        font-size: $cellSize/2;
+        vertical-align: bottom;
+        padding: 0;
+        line-height: .75em;
+        font-family: serif;
+      }
+
+      &:before {
+        position: absolute;
+        top: 2px;
+        left: 6px;
+        width: 25%;
+        height: 25%;
+        font-size: $cellSize/2.1;
+        font-family: $cardFont;
+        font-weight: 200;
+      }
+
+      &.spade:after {
+        content: $spade;
+      }
+
+      &.club:after {
+        content: $club;
+      }
+
+      &.heart:after {
+        content: $heart;
+        color: $red;
+      }
+
+      &.diamond:after {
+        content: $diamond;
+        color: $red;
+      }
+
+      &.heart:before,
+      &.diamond:before {
+        color: $red;
+      }
+
+      &.joker:before {
+        font-size: $cellSize * .75;
+        top: 0;
+        left: 0;
+        text-align: center;
+        height: $cellSize;
+        width: $cellSize;
+        line-height: $cellSize;
+      }
+
+      &.joker:before,
+      &.joker:after {
+        position: absolute;
+        font-family: $jokerFont !important;
+      }
+
+      $jokerCharacters: o, v, x, w;
+      @for $i from 1 through 4 {
+
+        &.joker-#{$i}:before {
+          content: "#{nth($jokerCharacters, $i)}";
+        }
+      }
+
+      $cardValues: a, 2, 3, 4, 5, 6, 7, 8, 9, t, q, k;
+      $cardCharacters: A, 2, 3, 4, 5, 6, 7, 8, 9, 10, Q, K;
+
+      @for $i from 1 through 12 {
+
+        $value: nth($cardValues, $i);
+        &[data-card="#{$value}d"]:before,
+        &[data-card="#{$value}h"]:before,
+        &[data-card="#{$value}c"]:before,
+        &[data-card="#{$value}s"]:before {
+          content: "#{nth($cardCharacters, $i)}";
+        }
+      }
+    }
+  }
+}
+
+@mixin cells($class, $color, $frameWidth, $black: $DEFAULT_BLACK) {
+
+  .board .#{$class} {
+
+    $borderColor: darken(desaturate($color, 10%), 15%);
+    $outlineColor: darken($borderColor, 30%);
+    $fontColor: darken($borderColor, 55%);
+    @include linear-gradient(-225deg, $color, $color 50%, white 0);
+    box-shadow: 0 0 0 1px $outlineColor, 0 0 0 $frameWidth - 1 $borderColor, 0 0 0 $frameWidth $outlineColor;
+
+    &:before {
+      color: $fontColor;
+    }
+  }
+}
+
+@mixin dialog {
+  position: fixed;
+  width: 800px;
+  height: 300px;
+  top: 50%;
+  left: 50%;
+  margin-top: -150px;
+  margin-left: -400px;
+  border-radius: 20px;
+//background-color: $cardBackgroundColor;
+  text-align: center;
+//box-shadow: 0 0 0 10px $cardBorderColor, 0 0 8px 12px rgba(0, 0, 0, .8);
+}
+
+@mixin jaxButton {
+
+  font-family: $cardFont;
+  font-size: 24px;
+  font-weight: 300;
+//border-radius: 10px;
+  padding: 8px 16px 8px 16px;
+  box-shadow: 0 0 0 1px darken($suitRed, 60%), 0 0 0 6px white, 0 0 0 7px darken($suitRed, 60%), 0 0 3px 8px rgba(0, 0, 0, .35);
+  border: none;
+//background-color: $suitRed;
+  @include linear-gradient($suitRed, $suitRed 50%, #b21f24 50%);
+  color: white;
+  margin: 9px 18px 9px 9px;
+  min-width: 150px;
+  text-align: center;
+}

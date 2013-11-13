@@ -1,0 +1,32 @@
+@import "reset";
+@import "fonts";
+@import "helpers";
+
+$space: "\00a0";
+
+* {
+  box-sizing: border-box;
+}
+
+@media all and (max-height: 775px) {
+
+  @include game(550px, 50px, 4px);
+  @include board(550px, 5px, 4px);
+  @include cards(hand, 110px, 6px, #dce5d3, $radius: 0);
+  @include cards(discarded, 110px, 6px, #ccc, $radius: 0);
+  .hand li, .discarded li {
+    margin-right: -22px !important;
+  }
+
+}
+
+@media all and (min-height: 776px) {
+
+  @include game(700px, 60px, 6px, $spacing: 20px);
+  @include board(700px, 6px, 5px);
+  @include cards(hand, 150px, 8px, #dce5d3, $radius: 0);
+  @include cards(discarded, 150px, 8px, #ccc, $radius: 0);
+  .hand li, .discarded li {
+    margin-right: -30px !important;
+  }
+}

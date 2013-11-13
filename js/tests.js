@@ -1,5 +1,3 @@
-
-
 function displayCellPositions() {
 	for(row = 0; row < 10; row++) {
 
@@ -63,14 +61,40 @@ function testCalcBestPlay() {
 //console.log(calcLineOdds([95,96,97,98,99], ['td', '9d', '8d', '7d'], 'p1'));
 displayCellPositions();
 
-decks = [
-	"ac", "2c", "3c", "4c", "5c", "6c", "7c", "8c", "9c", "tc", "jc", "qc", "kc",
-	"ac", "2c", "3c", "4c", "5c", "6c", "7c", "8c", "9c", "tc", "jc", "qc", "kc",
-	"ad", "2d", "3d", "4d", "5d", "6d", "7d", "8d", "9d", "td", "jd", "qd", "kd",
-	"ad", "2d", "3d", "4d", "5d", "6d", "7d", "8d", "9d", "td", "jd", "qd", "kd",
-	"ah", "2h", "3h", "4h", "5h", "6h", "7h", "8h", "9h", "th", "jh", "qh", "kh",
-	"ah", "2h", "3h", "4h", "5h", "6h", "7h", "8h", "9h", "th", "jh", "qh", "kh",
-	"as", "2s", "3s", "4s", "5s", "6s", "7s", "8s", "9s", "ts", "js", "qs", "ks",
-	"as", "2s", "3s", "4s", "5s", "6s", "7s", "8s", "9s", "ts", "js", "qs", "ks",
-	"j1", "j2", "j3", "j4"
+red = [
+	"ad", "2d", "3d", "4d", "5d", "6d", "7d", "8d", "9d", "td", "qd", "kd",
+	"ah", "2h", "3h", "4h", "5h", "6h", "7h", "8h", "9h", "th", "qh", "kh",
+	"ad", "2d", "3d", "4d", "5d", "6d", "7d", "8d", "9d", "td", "qd", "kd",
+	"ah", "2h", "3h", "4h", "5h", "6h", "7h", "8h", "9h", "th", "qh", "kh"
 ]
+
+black = [
+	"ac", "2c", "3c", "4c", "5c", "6c", "7c", "8c", "9c", "tc", "qc", "kc",
+	"as", "2s", "3s", "4s", "5s", "6s", "7s", "8s", "9s", "ts", "qs", "ks",
+	"ac", "2c", "3c", "4c", "5c", "6c", "7c", "8c", "9c", "tc", "qc", "kc",
+	"as", "2s", "3s", "4s", "5s", "6s", "7s", "8s", "9s", "ts", "qs", "ks"
+]
+var str = "J1 "
+var flag = true
+for(i = 1; i < 100; i++) {
+
+	if(i == 9) {
+		str += "J2 "
+
+	} else if(i == 90) {
+		str += "J3 "
+	} else if(i == 99) {
+		str += "J4 "
+	} else if(i % 2 == flag) {
+		str += red.pop() + " ";
+	} else {
+		str += black.shift() + " ";
+	}
+
+	if(i % 10 == 9) {
+		str += "\n";
+		flag = !flag;
+	}
+}
+
+console.log(str)

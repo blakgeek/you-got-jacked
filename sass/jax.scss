@@ -2,8 +2,7 @@
 @import "bourbon/bourbon";
 @import "fonts";
 @import "colors";
-@import "cards";
-@import "board";
+@import "helpers";
 
 $red: darken(red, 15%);;
 
@@ -13,7 +12,7 @@ body, html {
 }
 
 body {
-  background-image: url("http://line.cxm/images/crossed_stripes.png")
+  background-color: white;
 }
 
 * {
@@ -22,33 +21,35 @@ body {
   -webkit-user-select: none;
 }
 
-@mixin dialog {
-  position: fixed;
-  width: 800px;
-  height: 300px;
-  top: 50%;
-  left: 50%;
-  margin-top: -150px;
-  margin-left: -400px;
-  border-radius: 20px;
-//background-color: $cardBackgroundColor;
-  text-align: center;
-//box-shadow: 0 0 0 10px $cardBorderColor, 0 0 8px 12px rgba(0, 0, 0, .8);
+@media all and (max-height: 775px) {
+
+  @include game(550px, 50px, 4px);
+  @include board(550px, 5px, 4px);
+  @include cards(hand, 110px, 6px, #dce5d3, $radius: 0);
+  @include cards(discarded, 110px, 6px, #ccc, $radius: 0);
+  @include cells(p1, #ca8585, 5px);
+  @include cells(p2, adjust_hue(#ca8585, 90deg), 5px);
+  @include cells(p3, adjust_hue(#ca8585, 180deg), 5px);
+  @include cells(p4, adjust_hue(#ca8585, 270deg), 5px);
+  .hand li, .discarded li {
+    margin-right: -22px !important;
+  }
+
 }
 
-@mixin jaxButton {
+@media all and (min-height: 776px) {
 
-  font-family: $cardFont;
-  font-size: 24px;
-  weight: 300;
-  border-radius: 10px;
-  padding: 8px 12px 8px 12px;
-  box-shadow: 0 0 0 8px white, 0 0 0 9px $red, 0 0 3px 10px rgba(0,0,0,.35);
-  border: none;
-  background-color: $red;
-  color: white;
-  margin: 9px 18px 9px 9px;
-  width: 150px;
+  @include game(700px, 60px, 6px, $spacing: 20px);
+  @include board(700px, 6px, 5px);
+  @include cards(hand, 150px, 8px, #dce5d3, $radius: 0);
+  @include cards(discarded, 150px, 8px, #ccc, $radius: 0);
+  @include cells(p1, #ca8585, 5px);
+  @include cells(p2, adjust_hue(#ca8585, 90deg), 6px);
+  @include cells(p3, adjust_hue(#ca8585, 180deg), 6px);
+  @include cells(p4, adjust_hue(#ca8585, 270deg), 6px);
+  .hand li, .discarded li {
+    margin-right: -30px !important;
+  }
 }
 
 #splash {
@@ -82,13 +83,14 @@ body {
   @include dialog;
   display: none;
 
-  button {
-    @include jaxButton;
+  .message {
+    font-family: "Uralita";
+    font-weight: bold;
+    font-size: 48px;
   }
 
-  .play:before {
-    margin-left: 10px;
-    content: '#{$heart}';
+  button {
+    @include jaxButton;
   }
 }
 
@@ -138,15 +140,7 @@ body {
   }
 }
 
-#board li div,
-#hands li div,
-#discardPile li div {
-  position: absolute;
-}
-
 #discardPile {
-  position: fixed;
-  top: 0;
   z-index: 9999;
 
   li {
@@ -163,387 +157,87 @@ body {
 
 }
 
-#hands {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  text-align: center;
-  z-index: 9999;
+.cards {
 
-  .cards {
+  .hand {
 
-    padding-left: 36px;
     li {
-      margin: 0 0 0 -30px;
+      //margin: 5px 5px 5px -30px;
       @include transition(all .1s ease-in);
 
       &.active {
         margin-top: -50px;
         margin-bottom: 50px;
       }
+
+      &.dragged {
+        opacity: .5;
+      }
     }
   }
 }
 
 #game {
-
-  padding: 180px 0 180px 0;
+  height: 682px;
+  position: relative;
+  background-image: url("../images/crossed_stripes.png");
 }
 
-//
-//@mixin card($height, $width, $borderRadius, $borderSize) {
-//
-//  display: inline-block;
-//  height: $height;
-//  width: $width;
-//  border-radius: $borderRadius;
-//  box-shadow: 0 0 0 1px black, 0 0 5px 1px rgba(0, 0, 0, .8);
-//  border: $borderSize solid $cardBorderColor;
-//  background-color: #f6f3ef;
-//  position: relative;
-//  background-size: round($width * .6) auto;
-//  background-position: center center;
-//  background-repeat: no-repeat;
-//  font-family: $cardFont;
-//}
-//
-//@mixin handItToMe($size) {
-//
-//  $cardWidth: round($size/7 * .75);
-//  $playerCardMargin:  round($cardWidth * .15);
-//  $discardCardsRightMargin: round($cardWidth * -.6);
-//  $cardHeight: round($cardWidth / .75);
-//  $cardFontSize: round($cardWidth * .21);
-//  $borderSize: round($cardWidth * .07);
-//  $cardNumberIndent: round($cardHeight * .105) - $borderSize;
-//  $borderRadius: if(($size > 500), 10px, if(($size < 400), 0, 5px));
-//
-//  #discardPile {
-//    position: absolute;
-//    bottom: 0;
-//    left: 0;
-//    padding: 0 0 0 $size + $playerCardMargin;
-//    margin: 0;
-//    list-style: none;
-//  }
-//
-//  #hands {
-//    position: absolute;
-//    top: 10px;
-//    left: 0;
-//    padding: 0 0 0 $size;
-//    margin: 0;
-//  }
-//
-//  #hands ul,
-//  #discardPile ul {
-//    padding: 0;
-//    margin: 0;
-//    list-style: none;
-//    line-height: 0;
-//  }
-//
-//  #hands li {
-//    @include card($cardHeight, $cardWidth, $borderRadius, $borderSize);
-//    margin-left: $playerCardMargin;
-//    margin-bottom: $playerCardMargin;
-//  }
-//
-//  #discardPile li {
-//    @include card($cardHeight, $cardWidth, $borderRadius, $borderSize);
-//    margin-right: $discardCardsRightMargin;
-//  }
-//
-//  #hands li[data-suit=JOKER],
-//  #discardPile li[data-suit=JOKER] {
-//
-//    background-size: auto round($cardHeight * .75);
-//  }
-//
-//  #hands li.active {
-//    box-shadow: 0 0 0 1px #186925, 0 0 6px 3px rgba(24, 105, 37, .8);
-//  }
-//
-//  #hands li div,
-//  #discardPile li div {
-//    font-weight: bold;
-//    font-size: $cardFontSize;
-//    line-height: .5em;
-//  }
-//
-//  #hands li div.tl,
-//  #discardPile li div.tl {
-//    top: $cardNumberIndent;
-//    left: $cardNumberIndent;
-//  }
-//
-//  #hands li div.br,
-//  #discardPile li div.br {
-//    bottom: $cardNumberIndent;
-//    right: $cardNumberIndent;
-//  }
-//
-//}
-//
-//@mixin landscapeBoard($size) {
-//
-//  $margin: round($size/2) * -1;
-//  $boardSize: $size;
-//  $borderSize: 3px;
-//  $cellSpacing: if(($size < 500px), 5px, 10px);
-//  $cellSize: ($boardSize - ($cellSpacing * 11)) / 10;
-//  $cellNumberIndent: round($cellSize * .1) - $borderSize;
-//  $cellFontSize: $cellSize * .22;
-//  $gameLandscapeHeight: $boardSize - 5;
-//  $otherStuffLandscapePadding: $boardSize + 5px;
-//  $suitSize: $cellSize * .4;
-//  $cellRadius: if(($cellSize >= 50), 10px, if(($cellSize < 30), 0, 5px));
-//
-//  @media all and (min-height: $size) and (orientation: landscape) {
-//
-//    @include handItToMe($size);
-//    #game {
-//      display: none;
-//      position: absolute;
-//      height: $gameLandscapeHeight;
-//      top: 0;
-//      right: 0;
-//      left: 0;
-//
-//      button {
-//        @include jaxButton;
-//      }
-//
-//      .rules {
-//        background-image: url(../images/symbols/club.svg);
-//        position: absolute;
-//        bottom: 5px;
-//        right: 15px;
-//      }
-//    }
-//
-//    #board {
-//      padding: 0;
-//      width: $boardSize;
-//      height: $boardSize;
-//      list-style: none;
-//      margin: 0;
-//      line-height: 0;
-//
-//      li {
-//        background-color: white;
-//        border-radius: $cellRadius;
-//        box-shadow: 0 0 6px rgba(0, 0, 0, .9), 0 0 0 1px black;
-//        line-height: 1em;
-//        text-align: center;
-//        display: inline-block;
-//        width: $cellSize;
-//        height: $cellSize;
-//        margin: $cellSpacing 0 0 $cellSpacing;
-//        border: $borderSize solid white;
-//        position: relative;
-//        background-size: $suitSize auto;
-//        background-position: center center;
-//        background-repeat: no-repeat;
-//        font-family: $cardFont;
-//        padding: 0;
-//      }
-//
-//      li div.tl {
-//        top: $cellNumberIndent + 1;
-//        left: $cellNumberIndent;
-//      }
-//
-//      li div.br {
-//        bottom: $cellNumberIndent + 2;
-//        right: $cellNumberIndent;
-//      }
-//
-//      li div {
-//        font-size: $cellFontSize;
-//        line-height: .5em;
-//        padding: 0;
-//        margin: 0;
-//      }
-//
-//      li[data-suit=JOKER] {
-//
-//        background-size: auto $cellSize * .75;
-//      }
-//    }
-//
-//    .info {
-//      height: $size;
-//      width: $size;
-//      position: absolute;
-//      top: 50%;
-//      left: 50%;
-//      margin: $margin 0 0 $margin;
-//    }
-//
-//  /* li:before {*/
-//
-//  /*position: absolute;*/
-//  /*top: 5px;*/
-//  /*right: 5px;*/
-//  /*content: attr(data-score);*/
-//  /*}*/
-//
-//  }
-//}
-//
-//@mixin portraitBoard($size) {
-//
-//  $margin: round($size/2) * -1;
-//  $boardSize: $size;
-//  $borderSize: 3px;
-//  $cellSpacing: if(($size < 500px), 5px, 10px);
-//  $cellSize: ($boardSize - ($cellSpacing * 11)) / 10;
-//  $cellNumberIndent: round($cellSize * .1) - $borderSize;
-//  $cellFontSize: $cellSize * .22;
-//  $gameLandscapeHeight: $boardSize - 5;
-//  $otherStuffLandscapePadding: $boardSize + 5px;
-//  $suitSize: $cellSize * .4;
-//  $cellRadius: if(($cellSize >= 50), 10px, if(($cellSize < 30), 0, 5px));
-//
-//  @media all and (min-width: $size) and (orientation: portrait) {
-//
-//    @include handItToMe($size);
-//
-//    $cardWidth: round($size/7 * .75);
-//    $cardMarginLeft:  round($cardWidth * .2);
-//    $handWidth: $cardWidth * 7 + $cardMarginLeft * 8;
-//
-//    #game {
-//      display: none;
-//      position: absolute;
-//      top: 0;
-//      right: 0;
-//      left: 0;
-//      bottom: 0;
-//
-//      button {
-//        @include jaxButton;
-//      }
-//
-//      .rules {
-//        background-image: url(../images/symbols/club.svg);
-//        position: absolute;
-//        bottom: 5px;
-//        right: 15px;
-//      }
-//
-//      #hands {
-//        position: absolute;
-//        top: $boardSize + 10;
-//        left: 0;
-//        bottom: 0;
-//        right: 0;
-//      }
-//
-//      #hands ul {
-//        position: absolute;
-//        width: $handWidth;
-//        margin: 0 0 0 round($handWidth / -2);
-//        left: 50%;
-//      }
-//    }
-//
-//    #board {
-//      padding: 0;
-//      position: absolute;
-//      width: $boardSize;
-//      height: $boardSize;
-//      list-style: none;
-//      margin: 0 0 0 round($boardSize / -2);
-//      line-height: 0;
-//      left: 50%;
-//
-//      li {
-//        background-color: white;
-//        border-radius: $cellRadius;
-//        box-shadow: 0 0 6px rgba(0, 0, 0, .9), 0 0 0 1px black;
-//        line-height: 1em;
-//        text-align: center;
-//        display: inline-block;
-//        width: $cellSize;
-//        height: $cellSize;
-//        margin: $cellSpacing 0 0 $cellSpacing;
-//        border: $borderSize solid white;
-//        position: relative;
-//        background-size: $suitSize auto;
-//        background-position: center center;
-//        background-repeat: no-repeat;
-//        font-family: $cardFont;
-//        padding: 0;
-//      }
-//
-//      li div.tl {
-//        top: $cellNumberIndent + 1;
-//        left: $cellNumberIndent;
-//      }
-//
-//      li div.br {
-//        bottom: $cellNumberIndent + 2;
-//        right: $cellNumberIndent;
-//      }
-//
-//      li div {
-//        font-size: $cellFontSize;
-//        line-height: .5em;
-//        padding: 0;
-//        margin: 0;
-//      }
-//
-//      li[data-suit=JOKER] {
-//
-//        background-size: auto $cellSize * .75;
-//      }
-//    }
-//
-//    .info {
-//      height: $size;
-//      width: $size;
-//      position: absolute;
-//      top: 50%;
-//      left: 50%;
-//      margin: $margin 0 0 $margin;
-//    }
-//
-//  /* li:before {*/
-//
-//  /*position: absolute;*/
-//  /*top: 5px;*/
-//  /*right: 5px;*/
-//  /*content: attr(data-score);*/
-//  /*}*/
-//    #discardPile {
-//      position: absolute;
-//      bottom: 0;
-//      left: 0;
-//      padding: 0 0 0 $otherStuffLandscapePadding;
-//      margin: 0;
-//      list-style: none;
-//    }
-//
-//    #hands {
-//      position: absolute;
-//      top: 10px;
-//      left: 0;
-//      padding: 0 0 0 $otherStuffLandscapePadding;
-//      margin: 0;
-//    }
-//  }
-//}
-//
-//@for $size from 0 through 5 {
-//  @include portraitBoard(300px + $size * 100);
-//  @include landscapeBoard(300px + $size * 100);
-//}
-//
-//footer {
-//  display: none;
-//  width: 200px;
-//  text-align: center;
-//
-//}
+header {
+
+  position: relative;
+  height: 50px;
+  line-height: 50px;
+  box-shadow: 0 0 0 1px darken($suitRed, 60%), 0 0 0 6px white, 0 0 0 7px darken($suitRed, 60%), 0 0 3px 8px rgba(0,0,0,.35);
+  @include linear-gradient($suitRed, $suitRed 50%, #b21f24 50%);
+  margin-bottom: 7px;
+  z-index: 9999;
+
+  h1 {
+    font-family: "Uralita";
+    font-size: 40px;
+    font-weight: bold;
+    color: white;
+    padding-left: 13px;
+  }
+
+  nav {
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    li {
+      @include jaxButton;
+      line-height: 12px;
+      font-size: 18px;
+      margin-top: 8px !important;
+      display: inline-block;
+    }
+  }
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  top: 760px;
+  left: 0;
+  right: 0;
+  background-image: url("../images/light_crossed_stripes.png");
+  box-shadow: 0 0 0 1px black, 0 -1px 4px 2px rgba(0,0,0,.5);
+
+
+}
+
+#board {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: none;
+
+}
+
+.gameover {
+  li:not(.sequence), .cards {
+    opacity: .2;
+  }
+}

@@ -5,29 +5,32 @@ $club: "\2663";
 $diamond: "\2666";
 $jokerCharacters: o v x w;
 
-$cellSize: 50px;
-$borderSize: $cellSize/10 - 1;
+$size: 50px;
+$borderSize: $size/10 - 1;
 
 #board, .board {
-  margin: 0 auto;
+
   font-size: 0;
-  width: ($cellSize + $borderSize * 2 + 8) * 10 + 8;
-  padding: 4px 0 0 4px;
+  width: ($size + $borderSize * 2 + 8) * 10 - 4;
 
   li {
-    width: $cellSize;
-    height: $cellSize;
+    width: $size;
+    height: $size;
     display: inline-block;
     position: relative;
     box-shadow: 0 0 0 1px #aaa, 0 0 0 $borderSize #dfdfdf, 0 0 0 $borderSize + 1 #aaa;
     margin: $borderSize $borderSize + 8 $borderSize + 8  $borderSize;
     @include linear-gradient(-225deg, white, white 50%, #f2f2f2 0);
 
+    &:nth-child(10n) {
+      margin-right: $borderSize;
+    }
+
     &:after {
       position: absolute;
       bottom: 4px;
       right: 2px;
-      font-size: $cellSize/2;
+      font-size: $size/2;
       vertical-align: bottom;
       padding: 0;
       line-height: .75em;
@@ -40,7 +43,7 @@ $borderSize: $cellSize/10 - 1;
       left: 6px;
       width: 25%;
       height: 25%;
-      font-size: $cellSize/2.1;
+      font-size: $size/2.1;
       font-family: $cardFont;
       font-weight: 200;
     }
@@ -55,27 +58,27 @@ $borderSize: $cellSize/10 - 1;
 
     &.heart:after {
       content: $heart;
-      color: $suitRed;
+      color: $red;
     }
 
     &.diamond:after {
       content: $diamond;
-      color: $suitRed;
+      color: $red;
     }
 
     &.heart:before,
     &.diamond:before {
-      color: $suitRed;
+      color: $red;
     }
 
     &.joker:before {
-      font-size: $cellSize * .75;
+      font-size: $size * .75;
       top: 0;
       left: 0;
       text-align: center;
-      height: $cellSize;
-      width: $cellSize;
-      line-height: $cellSize;
+      height: $size;
+      width: $size;
+      line-height: $size;
     }
 
     &.joker:before,

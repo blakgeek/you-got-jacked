@@ -1,40 +1,31 @@
 $space: "\00a0";
-$heart: "\2665";
-$spade: "\2660";
-$club: "\2663";
-$diamond: "\2666";
-$jokerCharacters: o v x w;
-$cardCharacters: A 2 3 4 5 6 7 8 9 10 J Q K;
 
-$cardWidth: 90px;
 
-$players: p1 p2 p3 p4;
+@mixin cards($class, $height, $frameWidth, $baseColor, $black: $DEFAULT_BLACK, $red: $DEFAULT_RED, $faceColor: white, $radius: 2px) {
 
-@for $index from 1 through 4 {
-
-  $baseColor: nth($baseColors, $index);
-  $suitBlack: nth($suitBlacks, $index);
+  $heart: "\2665";
+  $spade: "\2660";
+  $club: "\2663";
+  $diamond: "\2666";
   $frameColor: darken(desaturate($baseColor, 10%), 15%);
   $innerLine: 0 0 0 1px darken($frameColor, 10%);
-  $innerShadow: 0 0 2px darken($frameColor, 30%);
-  $frame: 0 0 0 7px $frameColor;
-  $outerLine: 0 0 0 8px darken($frameColor, 40%);
-  $shadow: 0 0 3px 9px rgba(0, 0, 0, .4);
+  $frame: 0 0 0 $frameWidth - 1 $frameColor;
+  $outerLine: 0 0 0 $frameWidth darken($frameColor, 40%);
+  $shadow: 0 0 3px $frameWidth + 1 rgba(0, 0, 0, .4);
+  $width: $height * 3/5;
 
-  .cards, .cards.#{nth($players, $index)} {
+  ul.#{$class} {
 
-    padding: 10px 0 0 10px;
-
-    li.#{nth($players, $index)}, li {
+    li {
       line-height: 1em;
       position: relative;
-      border-radius: 2px;
+      border-radius: $radius;
       display: inline-block;
-      width: $cardWidth;
-      height: $cardWidth * 5 / 3;
+      width: $width;
+      height: $height;
       @include linear-gradient(-50deg, $baseColor, $baseColor 35%, $faceColor 0);
-      box-shadow: $innerShadow, $innerLine, $frame, $outerLine, $shadow;
-      margin: 10px 20px 20px 10px;
+      box-shadow: $innerLine, $frame, $outerLine, $shadow;
+      margin: $frameWidth $frameWidth $frameWidth $frameWidth;
       text-align: center;
 
       &.suit:before,
@@ -42,10 +33,13 @@ $players: p1 p2 p3 p4;
 
         content: $space;
         position: absolute;
-        top: 55px;
+        top: $width * 2/3;
         left: 0;
-        width: 60px;
-        font: 50px/1em arial;
+        width: $width * 2/3;
+        text-align: center;
+        font-family: arial;
+        line-height: 1em;
+        font-size: $width * 2/3 - 5;
 
       }
 
@@ -53,19 +47,21 @@ $players: p1 p2 p3 p4;
         position: absolute;
         top: 4px;
         left: 0;
-        width: 60px;
+        width: $width * 2/3;
         text-align: center;
-        font: 50px/1em $cardFont;
+        font-family: $cardFont;
+        line-height: 1em;
+        font-size: $width * 2/3 - 5;
       }
 
       span {
         position: absolute;
         bottom: 0;
-        right: 8px;
+        right: $width/10;
 
         &:before {
-          font-size: 42px;
-          line-height: 42px;
+          font-size: $width * 21/45;
+          line-height: 1em;
           color: white !important;
           font-family: serif;
         }
@@ -74,56 +70,56 @@ $players: p1 p2 p3 p4;
       &.spade {
         span:before, &:before {
           content: $spade;
-          color: $suitBlack;
+          color: $black;
         }
         &:after {
-          color: $suitBlack;
+          color: $black;
         }
       }
 
       &.club {
         span:before, &:before {
           content: $club;
-          color: $suitBlack;
+          color: $black;
         }
         &:after {
-          color: $suitBlack;
+          color: $black;
         }
       }
 
       &.heart {
         span:before, &:before {
           content: $heart;
-          color: $suitRed;
+          color: $red;
         }
         &:after {
-          color: $suitRed;
+          color: $red;
         }
       }
 
       &.diamond {
         span:before, &:before {
           content: $diamond;
-          color: $suitRed;
+          color: $red;
         }
         &:after {
-          color: $suitRed;
+          color: $red;
         }
       }
 
       &.joker:before {
-        top: 8px;
-        font-size: 70px;
+        top: $width/10;
+        font-size: $width * 7/9;
         width: 100%;
         text-align: center;
-        color: $suitBlack;
+        color: $black;
       }
 
       &.joker:after {
         bottom: 4px;
         right: 6px;
-        font-size: 30px;
-        line-height: 40px;
+        font-size: $width/3;
+        line-height: 1.2em;
       }
 
       &.joker:before,
@@ -148,6 +144,8 @@ $players: p1 p2 p3 p4;
         @include linear-gradient(-50deg, $faceColor, $faceColor 35%, $baseColor 0);
       }
 
+
+      $jokerCharacters: o, v, x, w;
       @for $i from 1 through 4 {
 
         &.joker-#{$i}:before {
@@ -172,12 +170,17 @@ $players: p1 p2 p3 p4;
           content: "#{nth($cardCharacters, $i)}";
         }
       }
-
     }
   }
+}
+
+
+@each $class in p1, p2, p3, p4, discarded {
+
 }
 
 .firefox .cards li.suit:before {
   font-size: 90px;
   vertical-align: top;
 }
+

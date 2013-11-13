@@ -2,8 +2,22 @@
 @import "bourbon/bourbon";
 @import "fonts";
 @import "colors";
-@import "cards";
-@import "board";
+@import "helpers";
+
+
+@include cards(p1, 150px, 8px, #eba897, $radius: 0);
+@include cards(p2, 120px, 7px, #ccc, $radius: 0);
+@include cards(p3, 110px, 6px, #ccc, $radius: 0);
+@include cards(p4, 100px, 5px, #ccc, $radius: 0);
+
+
+@include game(550px, 5px, 4px);
+@include board(550px, 5px, 4px);
+
+.cards li {
+  margin-right: 15px !important;
+  margin-bottom: 15px !important;
+}
 
 h1 {
   font-family: uralita;
@@ -27,7 +41,8 @@ h1 {
   position: absolute;
   top: 0;
   left: 0;
-  width: 50%;
+  width: 550px;
+
 }
 
 .cards {

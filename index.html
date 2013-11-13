@@ -6,15 +6,6 @@
         <link rel="stylesheet" type="text/css" href="css/jax.css"/>
     </head>
     <body>
-        <section id="splash">
-            <img src="images/splash.png"/>
-
-            <div class="buttons">
-                <button class="play">Solo</button>
-                <button class="play-online">Online</button>
-                <button class="rules">Rules</button>
-            </div>
-        </section>
         <section id="rules">
             <p>The goal of BlakJax is to capture five connecting squares horizontally, vertically or diagonally before
                 your
@@ -46,34 +37,55 @@
                 <button class="back">Close</button>
             </div>
         </section>
+
         <section id="dialog">
             <p class="message"></p>
-            <button class="play">Play Solo</button>
-            <button class="play-online">Play Someone</button>
+            <button class="play">Play Again</button>
         </section>
-        <section id="game">
-            <ul id="discardPile" class="cards"></ul>
-            <div id="hands">
-                <ul id="player1" class="cards p1"></ul>
-                <ul id="player2" class="cards p2"></ul>
-                <ul id="player3" class="cards p3"></ul>
-                <ul id="player4" class="cards p4"></ul>
+
+        <section class="game">
+             <header>
+                 <h1>You Got Jacked</h1>
+                 <nav>
+                     <li>Help</li>
+                     <li>Quit</li>
+                 </nav>
+             </header>
+
+             <ul class="players">
+                 <h1>Players</h1>
+                 <li class="active"><img src="./images/chapelle.jpg"/>You</li>
+                 <li><img src="./images/chapelle.jpg"/>Hal</li>
+                 <li><img src="./images/chapelle.jpg"/>Garf</li>
+                 <li><img src="./images/chapelle.jpg"/>Gu</li>
+             </ul>
+
+             <ul class="board"></ul>
+
+             <div class="cards">
+                 <ul class="hand"></ul>
+                 <ul id="discardPile" class="discarded"></ul>
+             </div>
+         </section>
+
+        <section id="splash">
+            <img src="images/splash.png"/>
+
+            <div class="buttons">
+                <button class="play">Solo</button>
+                <button class="play-online">Online</button>
+                <button class="rules">Rules</button>
             </div>
-            <ul id="board"></ul>
-            <button class="rules">A Little Help</button>
-            <button class="quit">Quit</button>
         </section>
-        <!-- consolidate all these dialog sections an make them dynamic -->
-        <section id="message"></section>
-        <footer>
-            Another Hairy Black App
-        </footer>
     </body>
     <script src="//ec2-184-73-193-207.compute-1.amazonaws.com:9000/socket.io/socket.io.js"></script>
     <script src="js/jquery.js"></script>
+    <script src="js/jquery-ui.js"></script>
     <script src="js/handlebars.js"></script>
     <script src="js/BG.js"></script>
-    <script src="js/jax.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/game.js"></script>
     <script src="js/brains/hal.js"></script>
+    <script src="js/boards.js"></script>
     <script src="js/config.js"></script>
 </html>

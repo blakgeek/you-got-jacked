@@ -37,6 +37,10 @@ $(function() {
 				type: card[1],
 				card: card
 			}));
+			cellsHtml.push(tpls.joker({
+				card: card,
+				type: card[1]
+			}));
 		} else {
 			cardsHtml.push(tpls.stdCard({
 				card: card,
