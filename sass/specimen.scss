@@ -5,7 +5,7 @@
 @import "helpers";
 
 
-@include cards(p1, 150px, 8px, #eba897, $radius: 0);
+@include cards(p1, 150px, 8px, #ca8585, $radius: 0);
 @include cards(p2, 120px, 7px, #ccc, $radius: 0);
 @include cards(p3, 110px, 6px, #ccc, $radius: 0);
 @include cards(p4, 100px, 5px, #ccc, $radius: 0);
@@ -15,8 +15,8 @@
 @include board(550px, 5px, 4px);
 
 .cards li {
-  margin-right: 15px !important;
-  margin-bottom: 15px !important;
+  margin-right: 30px !important;
+  margin-bottom: 30px !important;
 }
 
 h1 {

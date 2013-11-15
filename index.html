@@ -1,91 +1,203 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
-    <head>
-        <title>Play BlakJax Online</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-        <link rel="stylesheet" type="text/css" href="css/jax.css"/>
-    </head>
-    <body>
-        <section id="rules">
-            <p>The goal of BlakJax is to capture five connecting squares horizontally, vertically or diagonally before
-                your
-                opponent can.</p>
+<head>
+    <title>Play BlakJax Online</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <link rel="stylesheet" type="text/css" href="css/jax.css"/>
+    <link rel="stylesheet" type="text/css" href="css/help.css"/>
+    <link rel="icon" type="image/png" href="favicon.png"/>
+</head>
+<body>
+<section id="dialog">
+    <p class="message"></p>
+    <button class="play">Play Again</button>
+</section>
 
-            <p>The rules are almost just like <a href="http://www.pagat.com/misc/jack.html">One Eyed Jack</a> or
-                Sequence. The
-                difference is that there are no one or two eyed jacks. Instead red jacks are used to
-                free up a square that has been captured by your opponent and black jacks are wild which means they can
-                be used
-                to
-                capture any open square except for the jokers.</p>
+<section class="game">
+    <header>
+        <h1>You Got Jacked</h1>
+        <nav>
+            <li class="rules">Help</li>
+            <li class="quit">Quit</li>
+        </nav>
+    </header>
 
-            <p>The cards at the top are yours to play. When its your turn click of your cards to select it.
-                The selected card will be highlighted in green. To capture a square click it when the matching card or a
-                jack is
-                selected. If the play is valid the cell will change to blue signifying that it has been captured by
-                you.</p>
+    <ul class="players">
+        <h1>Players</h1>
+        <li class="active p1">You</li>
+        <li class="p2">Hal</li>
+        <li class="p3">Garf</li>
+        <li class="p4">Gu</li>
+    </ul>
 
-            <p>The last four cards that have been played are displayed below your cards. If you have a dead card,
-                meaning all of
-                the squares where it could have been played are already occupied, you can discard it and get a new one
-                by
-                clicking these cards.</p>
+    <ul class="board"></ul>
 
-            <div class="buttons">
-                <button class="play">Play Solo</button>
-                <button class="play-online">Play Online</button>
-                <button class="back">Close</button>
-            </div>
-        </section>
+    <div class="cards">
+        <ul id="discardPile" class="discarded"></ul>
+        <ul class="hand"></ul>
+    </div>
+</section>
 
-        <section id="dialog">
-            <p class="message"></p>
-            <button class="play">Play Again</button>
-        </section>
+<section id="splash">
+    <img src="images/splash.png"/>
 
-        <section class="game">
-             <header>
-                 <h1>You Got Jacked</h1>
-                 <nav>
-                     <li>Help</li>
-                     <li>Quit</li>
-                 </nav>
-             </header>
+    <div class="buttons">
+        <button class="play">Play</button>
+        <!--<button class="play-online">Online</button>-->
+        <button class="rules">Tutorial</button>
+    </div>
+</section>
 
-             <ul class="players">
-                 <h1>Players</h1>
-                 <li class="active"><img src="./images/chapelle.jpg"/>You</li>
-                 <li><img src="./images/chapelle.jpg"/>Hal</li>
-                 <li><img src="./images/chapelle.jpg"/>Garf</li>
-                 <li><img src="./images/chapelle.jpg"/>Gu</li>
-             </ul>
+<div class="container" id="rules">
 
-             <ul class="board"></ul>
+    <section>
+        <h2>The Board</h2>
+        <img src="./images/help/board.png"/>
 
-             <div class="cards">
-                 <ul class="hand"></ul>
-                 <ul id="discardPile" class="discarded"></ul>
-             </div>
-         </section>
+        <p>
+            The board is made up of 100 cells arranged in a 10x10 grid. Each card in the deck two matching cells
+            on the board expect for jokers which have four and jacks which have none.
 
-        <section id="splash">
-            <img src="images/splash.png"/>
+        <p>
+    </section>
 
-            <div class="buttons">
-                <button class="play">Solo</button>
-                <button class="play-online">Online</button>
-                <button class="rules">Rules</button>
-            </div>
-        </section>
-    </body>
-    <script src="//ec2-184-73-193-207.compute-1.amazonaws.com:9000/socket.io/socket.io.js"></script>
-    <script src="js/jquery.js"></script>
-    <script src="js/jquery-ui.js"></script>
-    <script src="js/handlebars.js"></script>
-    <script src="js/BG.js"></script>
-    <script src="js/ui.js"></script>
-    <script src="js/game.js"></script>
-    <script src="js/brains/hal.js"></script>
-    <script src="js/boards.js"></script>
-    <script src="js/config.js"></script>
+    <section>
+        <h2>Your Hand</h2>
+        <img src="./images/help/hand.png"/>
+
+        <p>Your hand shows the cards that you can use to capture or free cells.</p>
+
+    </section>
+
+    <section>
+        <h2>The Discard Pile</h2>
+        <img src="./images/help/discard-pile.png"/>
+
+        <p>The discard pile shows the last four cards played.</p>
+    </section>
+
+    <section>
+        <h2>The Player List</h2>
+        <img src="./images/help/player-list.png"/>
+
+        <p>The player list shows the name and color for each player.</p>
+    </section>
+
+    <section>
+        <h2>Capturing Cells</h2>
+
+        <p>
+            Click on any of your cards to select it. Then click on a matching free cell to capture it. A
+            captured cell will change to the captor's color.
+        </p>
+    </section>
+
+    <section>
+        <h2>Free Jacking</h2>
+        <img src="images/help/jack-o-diamonds.png"/>
+        <img src="images/help/jack-o-hearts.png"/>
+
+        <p>
+            Free jacking is using a jack of diamonds or jack of hearts to free up a previously captured cell.
+            You
+            cannot free jack a joker.
+        </p>
+    </section>
+
+    <section>
+        <h2>Cell Jacking</h2>
+        <img src="images/help/jack-o-clubs.png"/>
+        <img src="images/help/jack-o-spades.png"/>
+
+        <p>
+            Cell jacking is using a jack of clubs or jack of spades to capture any open any open cell on the
+            board.
+            You cannot cell jack a joker.
+        </p>
+    </section>
+
+    <section>
+        <h2>Win Left To Right!</h2>
+        <img src="./images/help/winning-h1.png"/>
+        <img src="./images/help/winning-h2.png"/>
+
+        <p>Winning is simple. Be the first player to capture five cells in a line and you win.</p>
+    </section>
+
+    <section>
+        <h2>Win Up and Down!</h2>
+        <img src="./images/help/winning-v1.png"/>
+        <img src="./images/help/winning-v2.png"/>
+
+        <p>Winning at You Got Jacked is simple. Be the first player to capture five cells in a line and you
+            win.</p>
+    </section>
+
+    <section>
+        <h2>Win Diagonally!</h2>
+        <img src="./images/help/winning-d1.png"/>
+        <img src="./images/help/winning-d2.png"/>
+        <img src="./images/help/winning-d3.png"/>
+
+        <p>Winning at You Got Jacked is simple. Be the first player to capture five cells in a line and you
+            win.</p>
+    </section>
+
+    <section>
+        <h2>Jokers</h2>
+        <img src="images/help/joker-card1.png"/>
+        <img src="images/help/joker-card2.png"/>
+        <img src="images/help/joker-card3.png"/>
+        <img src="images/help/joker-card4.png"/>
+        <br/>
+        <img src="images/help/joker-cell1.png"/>
+        <img src="images/help/joker-cell2.png"/>
+        <img src="images/help/joker-cell3.png"/>
+        <img src="images/help/joker-cell4.png"/>
+
+        <p>
+            Joker cells that have not been captured can be used by any player to complete a line. After a joker
+            cell
+            is captured by a player it can only be used to complete that player's lines.
+        </p>
+
+        <p>Jokers cannot be free jacked or cell jacked.</p>
+    </section>
+
+    <section class="dead-cards">
+        <h2>I See Dead Cards</h2>
+        <span>x</span>
+
+        <p>
+            Dead cards are cards that cannot be played because all of the matching cells have already been
+            captured. These cards can be discard and replace with fresh ones from the deck. This is done by
+            clicking the dead card in your and then either dragging it to the discard pile or clicking the
+            discard pile.
+        </p>
+
+        <p>You can only do this once per play and you have to do it before capturing a cell.</p>
+    </section>
+
+    <footer>
+        <nav>
+            <!--<button class="play-online">Play Online</button>-->
+            <li class="play">Got It</li>
+            <li class="back">Got It</li>
+            <li class="prev">Back</li>
+            <li class="next">Next</li>
+        </nav>
+    </footer>
+</div>
+</body>
+<script src="//ec2-184-73-193-207.compute-1.amazonaws.com:9000/socket.io/socket.io.js"></script>
+<script src="js/jquery.js"></script>
+<script src="js/jquery-ui.js"></script>
+<script src="js/handlebars.js"></script>
+<script src="js/BG.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/game.js"></script>
+<script src="js/brains/hal.js"></script>
+<script src="js/boards.js"></script>
+<script src="js/config.js"></script>
+<script src="js/help.js"></script>
 </html>

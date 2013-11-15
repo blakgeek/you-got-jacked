@@ -1,6 +1,7 @@
 @import url("../fonts/opensans/opensans.css");
 @import url("../fonts/uralita/uralita.css");
 @import url("../fonts/aaron/aaron.css");
+@import url("../fonts/fontawesome/fontawesome.css");
 /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
@@ -112,21 +113,36 @@ body {
     height: 550px; }
     .game .players h1 {
       font-family: Uralita;
-      font-size: 30px; }
+      font-size: 30px;
+      display: none; }
     .game .players li {
-      line-height: 20px;
-      margin-top: 1em;
+      line-height: 1em;
+      margin-bottom: 1em;
       font-family: "Open Sans";
-      font-size: 20px; }
-      .game .players li img {
-        position: relative;
-        vertical-align: middle;
-        max-height: 50px;
-        border-radius: 50%;
-        box-shadow: 0 0 0 1px black, 0 0 0 3px white, 0 0 0 4px black;
-        margin: 4px 16.5px 4px 4px; }
-      .game .players li.active img {
-        box-shadow: 0 0 0 1px black, 0 0 0 5px #48dd3c, 0 0 0 6px black, 0 0 4px 7px rgba(0, 0, 0, 0.4); }
+      font-size: 20px;
+      position: relative; }
+      .game .players li:before {
+        content: "\00a0";
+        display: inline-block;
+        margin: 5px 10px 5px 5px;
+        width: 1em;
+        height: 1em;
+        margin: 5px 15px 5px 5px;
+        background-color: white; }
+  .game .avatars li {
+    line-height: 20px;
+    margin-top: 1em;
+    font-family: "Open Sans";
+    font-size: 20px; }
+    .game .avatars li img {
+      position: relative;
+      vertical-align: middle;
+      max-height: 50px;
+      border-radius: 50%;
+      box-shadow: 0 0 0 1px black, 0 0 0 3px white, 0 0 0 4px black;
+      margin: 4px 16.5px 4px 4px; }
+    .game .avatars li.active img {
+      box-shadow: 0 0 0 1px black, 0 0 0 5px #48dd3c, 0 0 0 6px black, 0 0 4px 7px rgba(0, 0, 0, 0.4); }
 
   .board {
     font-size: 0;
@@ -187,11 +203,11 @@ body {
         position: absolute;
         font-family: "aaronfaces" !important; }
       .board li.joker-1:before {
-        content: "o"; }
+        content: "p"; }
       .board li.joker-2:before {
         content: "v"; }
       .board li.joker-3:before {
-        content: "x"; }
+        content: "d"; }
       .board li.joker-4:before {
         content: "w"; }
       .board li[data-card="ad"]:before, .board li[data-card="ah"]:before, .board li[data-card="ac"]:before, .board li[data-card="as"]:before {
@@ -226,11 +242,11 @@ body {
     display: inline-block;
     width: 66px;
     height: 110px;
-    background-color: #dce5d3;
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #dce5d3), color-stop(35%, #dce5d3), color-stop(0, white));
-    background-image: -webkit-linear-gradient(-220deg, #dce5d3, #dce5d3 35%, white 0);
-    background-image: linear-gradient(-50deg,#dce5d3, #dce5d3 35%, white 0);
-    box-shadow: 0 0 0 1px #9cac8d, 0 0 0 5px #b6c1aa, 0 0 0 6px #505c43, 0 0 3px 7px rgba(0, 0, 0, 0.4);
+    background-color: #ca8585;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ca8585), color-stop(35%, #ca8585), color-stop(0, white));
+    background-image: -webkit-linear-gradient(-220deg, #ca8585, #ca8585 35%, white 0);
+    background-image: linear-gradient(-50deg,#ca8585, #ca8585 35%, white 0);
+    box-shadow: 0 0 0 1px #864949, 0 0 0 5px #a65c5c, 0 0 0 6px #231313, 0 0 3px 7px rgba(0, 0, 0, 0.4);
     margin: 6px 6px 6px 6px;
     text-align: center; }
     ul.hand li.suit:before, ul.hand li.joker:before {
@@ -240,7 +256,7 @@ body {
       left: 0;
       width: 44px;
       text-align: center;
-      font-family: arial;
+      font-family: DotumChe, courier;
       line-height: 1em;
       font-size: 39px; }
     ul.hand li.suit:after {
@@ -250,6 +266,7 @@ body {
       width: 44px;
       text-align: center;
       font-family: "Uralita";
+      font-weight: 400;
       line-height: 1em;
       font-size: 39px; }
     ul.hand li span {
@@ -298,24 +315,24 @@ body {
     ul.hand li.joker-1:after, ul.hand li.joker-3:after {
       color: white; }
     ul.hand li.joker-2:after, ul.hand li.joker-4:after {
-      color: #dce5d3; }
+      color: #ca8585; }
     ul.hand li.joker-2, ul.hand li.joker-4 {
       background-color: white;
-      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(35%, white), color-stop(0, #dce5d3));
-      background-image: -webkit-linear-gradient(-220deg, white, white 35%, #dce5d3 0);
-      background-image: linear-gradient(-50deg,white, white 35%, #dce5d3 0); }
+      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(35%, white), color-stop(0, #ca8585));
+      background-image: -webkit-linear-gradient(-220deg, white, white 35%, #ca8585 0);
+      background-image: linear-gradient(-50deg,white, white 35%, #ca8585 0); }
     ul.hand li.joker-1:before {
-      content: "o"; }
+      content: "p"; }
     ul.hand li.joker-1:after {
-      content: "o"; }
+      content: "p"; }
     ul.hand li.joker-2:before {
       content: "v"; }
     ul.hand li.joker-2:after {
       content: "v"; }
     ul.hand li.joker-3:before {
-      content: "x"; }
+      content: "d"; }
     ul.hand li.joker-3:after {
-      content: "x"; }
+      content: "d"; }
     ul.hand li.joker-4:before {
       content: "w"; }
     ul.hand li.joker-4:after {
@@ -368,7 +385,7 @@ body {
       left: 0;
       width: 44px;
       text-align: center;
-      font-family: arial;
+      font-family: DotumChe, courier;
       line-height: 1em;
       font-size: 39px; }
     ul.discarded li.suit:after {
@@ -378,6 +395,7 @@ body {
       width: 44px;
       text-align: center;
       font-family: "Uralita";
+      font-weight: 400;
       line-height: 1em;
       font-size: 39px; }
     ul.discarded li span {
@@ -433,17 +451,17 @@ body {
       background-image: -webkit-linear-gradient(-220deg, white, white 35%, #cccccc 0);
       background-image: linear-gradient(-50deg,white, white 35%, #cccccc 0); }
     ul.discarded li.joker-1:before {
-      content: "o"; }
+      content: "p"; }
     ul.discarded li.joker-1:after {
-      content: "o"; }
+      content: "p"; }
     ul.discarded li.joker-2:before {
       content: "v"; }
     ul.discarded li.joker-2:after {
       content: "v"; }
     ul.discarded li.joker-3:before {
-      content: "x"; }
+      content: "d"; }
     ul.discarded li.joker-3:after {
-      content: "x"; }
+      content: "d"; }
     ul.discarded li.joker-4:before {
       content: "w"; }
     ul.discarded li.joker-4:after {
@@ -482,7 +500,14 @@ body {
     background-image: linear-gradient(-225deg,#ca8585, #ca8585 50%, white 0);
     box-shadow: 0 0 0 1px #442525, 0 0 0 4px #a65c5c, 0 0 0 5px #442525; }
     .board .p1:before {
-      color: black; }
+      color: black !important; }
+
+  .players .p1:before {
+    background-color: #ca8585;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ca8585), color-stop(50%, #ca8585), color-stop(0, white));
+    background-image: -webkit-linear-gradient(-45deg, #ca8585, #ca8585 50%, white 0);
+    background-image: linear-gradient(-225deg,#ca8585, #ca8585 50%, white 0);
+    box-shadow: 0 0 0 1px #442525, 0 0 0 4px #a65c5c, 0 0 0 5px #442525; }
 
   .board .p2 {
     background-color: #a8ca85;
@@ -491,7 +516,14 @@ body {
     background-image: linear-gradient(-225deg,#a8ca85, #a8ca85 50%, white 0);
     box-shadow: 0 0 0 1px #354425, 0 0 0 4px #81a65c, 0 0 0 5px #354425; }
     .board .p2:before {
-      color: black; }
+      color: black !important; }
+
+  .players .p2:before {
+    background-color: #a8ca85;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #a8ca85), color-stop(50%, #a8ca85), color-stop(0, white));
+    background-image: -webkit-linear-gradient(-45deg, #a8ca85, #a8ca85 50%, white 0);
+    background-image: linear-gradient(-225deg,#a8ca85, #a8ca85 50%, white 0);
+    box-shadow: 0 0 0 1px #354425, 0 0 0 4px #81a65c, 0 0 0 5px #354425; }
 
   .board .p3 {
     background-color: #85caca;
@@ -500,7 +532,14 @@ body {
     background-image: linear-gradient(-225deg,#85caca, #85caca 50%, white 0);
     box-shadow: 0 0 0 1px #254444, 0 0 0 4px #5ca6a6, 0 0 0 5px #254444; }
     .board .p3:before {
-      color: black; }
+      color: black !important; }
+
+  .players .p3:before {
+    background-color: #85caca;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #85caca), color-stop(50%, #85caca), color-stop(0, white));
+    background-image: -webkit-linear-gradient(-45deg, #85caca, #85caca 50%, white 0);
+    background-image: linear-gradient(-225deg,#85caca, #85caca 50%, white 0);
+    box-shadow: 0 0 0 1px #254444, 0 0 0 4px #5ca6a6, 0 0 0 5px #254444; }
 
   .board .p4 {
     background-color: #a785ca;
@@ -509,7 +548,14 @@ body {
     background-image: linear-gradient(-225deg,#a785ca, #a785ca 50%, white 0);
     box-shadow: 0 0 0 1px #352544, 0 0 0 4px #815ca6, 0 0 0 5px #352544; }
     .board .p4:before {
-      color: black; }
+      color: black !important; }
+
+  .players .p4:before {
+    background-color: #a785ca;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #a785ca), color-stop(50%, #a785ca), color-stop(0, white));
+    background-image: -webkit-linear-gradient(-45deg, #a785ca, #a785ca 50%, white 0);
+    background-image: linear-gradient(-225deg,#a785ca, #a785ca 50%, white 0);
+    box-shadow: 0 0 0 1px #352544, 0 0 0 4px #815ca6, 0 0 0 5px #352544; }
 
   .hand li, .discarded li {
     margin-right: -22px !important; } }
@@ -555,21 +601,36 @@ body {
     height: 700px; }
     .game .players h1 {
       font-family: Uralita;
-      font-size: 30px; }
+      font-size: 30px;
+      display: none; }
     .game .players li {
-      line-height: 24px;
-      margin-top: 1em;
+      line-height: 1em;
+      margin-bottom: 1em;
       font-family: "Open Sans";
-      font-size: 24px; }
-      .game .players li img {
-        position: relative;
-        vertical-align: middle;
-        max-height: 60px;
-        border-radius: 50%;
-        box-shadow: 0 0 0 1px black, 0 0 0 5px white, 0 0 0 6px black;
-        margin: 6px 21px 6px 6px; }
-      .game .players li.active img {
-        box-shadow: 0 0 0 1px black, 0 0 0 7px #48dd3c, 0 0 0 8px black, 0 0 4px 9px rgba(0, 0, 0, 0.4); }
+      font-size: 24px;
+      position: relative; }
+      .game .players li:before {
+        content: "\00a0";
+        display: inline-block;
+        margin: 5px 10px 5px 5px;
+        width: 1em;
+        height: 1em;
+        margin: 5px 15px 5px 5px;
+        background-color: white; }
+  .game .avatars li {
+    line-height: 24px;
+    margin-top: 1em;
+    font-family: "Open Sans";
+    font-size: 24px; }
+    .game .avatars li img {
+      position: relative;
+      vertical-align: middle;
+      max-height: 60px;
+      border-radius: 50%;
+      box-shadow: 0 0 0 1px black, 0 0 0 5px white, 0 0 0 6px black;
+      margin: 6px 21px 6px 6px; }
+    .game .avatars li.active img {
+      box-shadow: 0 0 0 1px black, 0 0 0 7px #48dd3c, 0 0 0 8px black, 0 0 4px 9px rgba(0, 0, 0, 0.4); }
 
   .board {
     font-size: 0;
@@ -630,11 +691,11 @@ body {
         position: absolute;
         font-family: "aaronfaces" !important; }
       .board li.joker-1:before {
-        content: "o"; }
+        content: "p"; }
       .board li.joker-2:before {
         content: "v"; }
       .board li.joker-3:before {
-        content: "x"; }
+        content: "d"; }
       .board li.joker-4:before {
         content: "w"; }
       .board li[data-card="ad"]:before, .board li[data-card="ah"]:before, .board li[data-card="ac"]:before, .board li[data-card="as"]:before {
@@ -669,11 +730,11 @@ body {
     display: inline-block;
     width: 90px;
     height: 150px;
-    background-color: #dce5d3;
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #dce5d3), color-stop(35%, #dce5d3), color-stop(0, white));
-    background-image: -webkit-linear-gradient(-220deg, #dce5d3, #dce5d3 35%, white 0);
-    background-image: linear-gradient(-50deg,#dce5d3, #dce5d3 35%, white 0);
-    box-shadow: 0 0 0 1px #9cac8d, 0 0 0 7px #b6c1aa, 0 0 0 8px #505c43, 0 0 3px 9px rgba(0, 0, 0, 0.4);
+    background-color: #ca8585;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ca8585), color-stop(35%, #ca8585), color-stop(0, white));
+    background-image: -webkit-linear-gradient(-220deg, #ca8585, #ca8585 35%, white 0);
+    background-image: linear-gradient(-50deg,#ca8585, #ca8585 35%, white 0);
+    box-shadow: 0 0 0 1px #864949, 0 0 0 7px #a65c5c, 0 0 0 8px #231313, 0 0 3px 9px rgba(0, 0, 0, 0.4);
     margin: 8px 8px 8px 8px;
     text-align: center; }
     ul.hand li.suit:before, ul.hand li.joker:before {
@@ -683,7 +744,7 @@ body {
       left: 0;
       width: 60px;
       text-align: center;
-      font-family: arial;
+      font-family: DotumChe, courier;
       line-height: 1em;
       font-size: 55px; }
     ul.hand li.suit:after {
@@ -693,6 +754,7 @@ body {
       width: 60px;
       text-align: center;
       font-family: "Uralita";
+      font-weight: 400;
       line-height: 1em;
       font-size: 55px; }
     ul.hand li span {
@@ -741,24 +803,24 @@ body {
     ul.hand li.joker-1:after, ul.hand li.joker-3:after {
       color: white; }
     ul.hand li.joker-2:after, ul.hand li.joker-4:after {
-      color: #dce5d3; }
+      color: #ca8585; }
     ul.hand li.joker-2, ul.hand li.joker-4 {
       background-color: white;
-      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(35%, white), color-stop(0, #dce5d3));
-      background-image: -webkit-linear-gradient(-220deg, white, white 35%, #dce5d3 0);
-      background-image: linear-gradient(-50deg,white, white 35%, #dce5d3 0); }
+      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(35%, white), color-stop(0, #ca8585));
+      background-image: -webkit-linear-gradient(-220deg, white, white 35%, #ca8585 0);
+      background-image: linear-gradient(-50deg,white, white 35%, #ca8585 0); }
     ul.hand li.joker-1:before {
-      content: "o"; }
+      content: "p"; }
     ul.hand li.joker-1:after {
-      content: "o"; }
+      content: "p"; }
     ul.hand li.joker-2:before {
       content: "v"; }
     ul.hand li.joker-2:after {
       content: "v"; }
     ul.hand li.joker-3:before {
-      content: "x"; }
+      content: "d"; }
     ul.hand li.joker-3:after {
-      content: "x"; }
+      content: "d"; }
     ul.hand li.joker-4:before {
       content: "w"; }
     ul.hand li.joker-4:after {
@@ -811,7 +873,7 @@ body {
       left: 0;
       width: 60px;
       text-align: center;
-      font-family: arial;
+      font-family: DotumChe, courier;
       line-height: 1em;
       font-size: 55px; }
     ul.discarded li.suit:after {
@@ -821,6 +883,7 @@ body {
       width: 60px;
       text-align: center;
       font-family: "Uralita";
+      font-weight: 400;
       line-height: 1em;
       font-size: 55px; }
     ul.discarded li span {
@@ -876,17 +939,17 @@ body {
       background-image: -webkit-linear-gradient(-220deg, white, white 35%, #cccccc 0);
       background-image: linear-gradient(-50deg,white, white 35%, #cccccc 0); }
     ul.discarded li.joker-1:before {
-      content: "o"; }
+      content: "p"; }
     ul.discarded li.joker-1:after {
-      content: "o"; }
+      content: "p"; }
     ul.discarded li.joker-2:before {
       content: "v"; }
     ul.discarded li.joker-2:after {
       content: "v"; }
     ul.discarded li.joker-3:before {
-      content: "x"; }
+      content: "d"; }
     ul.discarded li.joker-3:after {
-      content: "x"; }
+      content: "d"; }
     ul.discarded li.joker-4:before {
       content: "w"; }
     ul.discarded li.joker-4:after {
@@ -925,7 +988,14 @@ body {
     background-image: linear-gradient(-225deg,#ca8585, #ca8585 50%, white 0);
     box-shadow: 0 0 0 1px #442525, 0 0 0 4px #a65c5c, 0 0 0 5px #442525; }
     .board .p1:before {
-      color: black; }
+      color: black !important; }
+
+  .players .p1:before {
+    background-color: #ca8585;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ca8585), color-stop(50%, #ca8585), color-stop(0, white));
+    background-image: -webkit-linear-gradient(-45deg, #ca8585, #ca8585 50%, white 0);
+    background-image: linear-gradient(-225deg,#ca8585, #ca8585 50%, white 0);
+    box-shadow: 0 0 0 1px #442525, 0 0 0 4px #a65c5c, 0 0 0 5px #442525; }
 
   .board .p2 {
     background-color: #a8ca85;
@@ -934,7 +1004,14 @@ body {
     background-image: linear-gradient(-225deg,#a8ca85, #a8ca85 50%, white 0);
     box-shadow: 0 0 0 1px #354425, 0 0 0 5px #81a65c, 0 0 0 6px #354425; }
     .board .p2:before {
-      color: black; }
+      color: black !important; }
+
+  .players .p2:before {
+    background-color: #a8ca85;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #a8ca85), color-stop(50%, #a8ca85), color-stop(0, white));
+    background-image: -webkit-linear-gradient(-45deg, #a8ca85, #a8ca85 50%, white 0);
+    background-image: linear-gradient(-225deg,#a8ca85, #a8ca85 50%, white 0);
+    box-shadow: 0 0 0 1px #354425, 0 0 0 4px #81a65c, 0 0 0 5px #354425; }
 
   .board .p3 {
     background-color: #85caca;
@@ -943,7 +1020,14 @@ body {
     background-image: linear-gradient(-225deg,#85caca, #85caca 50%, white 0);
     box-shadow: 0 0 0 1px #254444, 0 0 0 5px #5ca6a6, 0 0 0 6px #254444; }
     .board .p3:before {
-      color: black; }
+      color: black !important; }
+
+  .players .p3:before {
+    background-color: #85caca;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #85caca), color-stop(50%, #85caca), color-stop(0, white));
+    background-image: -webkit-linear-gradient(-45deg, #85caca, #85caca 50%, white 0);
+    background-image: linear-gradient(-225deg,#85caca, #85caca 50%, white 0);
+    box-shadow: 0 0 0 1px #254444, 0 0 0 4px #5ca6a6, 0 0 0 5px #254444; }
 
   .board .p4 {
     background-color: #a785ca;
@@ -952,7 +1036,14 @@ body {
     background-image: linear-gradient(-225deg,#a785ca, #a785ca 50%, white 0);
     box-shadow: 0 0 0 1px #352544, 0 0 0 5px #815ca6, 0 0 0 6px #352544; }
     .board .p4:before {
-      color: black; }
+      color: black !important; }
+
+  .players .p4:before {
+    background-color: #a785ca;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #a785ca), color-stop(50%, #a785ca), color-stop(0, white));
+    background-image: -webkit-linear-gradient(-45deg, #a785ca, #a785ca 50%, white 0);
+    background-image: linear-gradient(-225deg,#a785ca, #a785ca 50%, white 0);
+    box-shadow: 0 0 0 1px #352544, 0 0 0 4px #815ca6, 0 0 0 5px #352544; }
 
   .hand li, .discarded li {
     margin-right: -30px !important; } }
@@ -967,6 +1058,11 @@ body {
   border-radius: 20px;
   text-align: center; }
   #splash button {
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     font-family: "Uralita";
     font-size: 24px;
     font-weight: 300;
@@ -978,7 +1074,7 @@ body {
     background-image: -webkit-linear-gradient(#d1343f, #d1343f 50%, #b21f24 50%);
     background-image: linear-gradient(#d1343f, #d1343f 50%, #b21f24 50%);
     color: white;
-    margin: 9px 18px 9px 9px;
+    margin: 8px 8px 8px 18px;
     min-width: 150px;
     text-align: center; }
     #splash button:before {
@@ -1009,6 +1105,11 @@ body {
     font-weight: bold;
     font-size: 48px; }
   #dialog button {
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     font-family: "Uralita";
     font-size: 24px;
     font-weight: 300;
@@ -1020,7 +1121,7 @@ body {
     background-image: -webkit-linear-gradient(#d1343f, #d1343f 50%, #b21f24 50%);
     background-image: linear-gradient(#d1343f, #d1343f 50%, #b21f24 50%);
     color: white;
-    margin: 9px 18px 9px 9px;
+    margin: 8px 8px 8px 18px;
     min-width: 150px;
     text-align: center; }
 
@@ -1042,9 +1143,17 @@ body {
   margin: 15px auto;
   width: 700px;
   display: none; }
+  #rules .buttons {
+    margin-top: 15px;
+    text-align: center; }
   #rules p {
     font: 14px/2em "Open Sans"; }
   #rules button {
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     font-family: "Uralita";
     font-size: 24px;
     font-weight: 300;
@@ -1056,17 +1165,17 @@ body {
     background-image: -webkit-linear-gradient(#d1343f, #d1343f 50%, #b21f24 50%);
     background-image: linear-gradient(#d1343f, #d1343f 50%, #b21f24 50%);
     color: white;
-    margin: 9px 18px 9px 9px;
+    margin: 8px 8px 8px 18px;
     min-width: 150px;
     text-align: center; }
   #rules .play:before {
-    margin-left: 10px;
+    margin-right: 10px;
     content: "\2660"; }
   #rules .play-online:before {
-    margin-left: 10px;
+    margin-right: 10px;
     content: "\2666"; }
   #rules .back:before {
-    margin-left: 10px;
+    margin-right: 10px;
     content: "\2663"; }
 
 #discardPile {
@@ -1075,14 +1184,16 @@ body {
     margin-right: -40px; }
 
 .cards .hand li {
-  -webkit-transition: all 0.1s ease-in;
-  -moz-transition: all 0.1s ease-in;
-  transition: all 0.1s ease-in; }
+  -webkit-transition: margin 0.1s ease-in;
+  -moz-transition: margin 0.1s ease-in;
+  transition: margin 0.1s ease-in; }
   .cards .hand li.active {
     margin-top: -50px;
     margin-bottom: 50px; }
   .cards .hand li.dragged {
     opacity: .5; }
+  .cards .hand li.ui-draggable-dragging {
+    z-index: 10000; }
 
 #game {
   height: 682px;
@@ -1111,6 +1222,11 @@ header {
     right: 0;
     top: 0; }
     header nav li {
+      cursor: pointer;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
       font-family: "Uralita";
       font-size: 24px;
       font-weight: 300;
@@ -1122,22 +1238,13 @@ header {
       background-image: -webkit-linear-gradient(#d1343f, #d1343f 50%, #b21f24 50%);
       background-image: linear-gradient(#d1343f, #d1343f 50%, #b21f24 50%);
       color: white;
-      margin: 9px 18px 9px 9px;
+      margin: 8px 8px 8px 18px;
       min-width: 150px;
       text-align: center;
       line-height: 12px;
       font-size: 18px;
       margin-top: 8px !important;
       display: inline-block; }
-
-footer {
-  position: absolute;
-  bottom: 0;
-  top: 760px;
-  left: 0;
-  right: 0;
-  background-image: url("../images/light_crossed_stripes.png");
-  box-shadow: 0 0 0 1px black, 0 -1px 4px 2px rgba(0, 0, 0, 0.5); }
 
 #board {
   position: absolute;

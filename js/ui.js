@@ -20,6 +20,7 @@ function UI(config) {
 		$jax = $(jax),
 		$hand = $('.cards .hand'),
 		$discardPile = $('.cards .discarded'),
+		$allSections = $('#rules, .game, #splash, #dialog'),
 		discardPile = [],
 		$board = $('.board'),
 		$splash = $('#splash'),
@@ -43,9 +44,27 @@ function UI(config) {
 				self.displayHand(cards);
 			}
 		}
-	});
+	}).droppable({
+			addClasses: false,
+			over: function(event, ui) {
+				var $card = $(ui.draggble);
+				$card.addClass('dead-card');
+			},
+			out: function(event, ui) {
+				var $card = $(ui.draggble);
+				$card.removeClass('dead-card');
+			},
+			drop: function(event, ui) {
+				var $card = $(ui.draggable),
+					newHand = jax.discardDeadCard(0, $card.attr('data-pos'));
 
-	$('button.play-online').click(function() {
+				if(newHand) {
+					self.displayHand(newHand);
+				}
+			}
+		});
+
+	$('.play-online').click(function() {
 
 		var activeGameId = localStorage.getItem('activeGameId');
 
@@ -65,7 +84,7 @@ function UI(config) {
 		}
 	});
 
-	$('button.play').click(function() {
+	$('.play').click(function() {
 
 		$('#splash, #rules, #dialog').hide();
 		$game.show();
@@ -74,38 +93,32 @@ function UI(config) {
 		jax.startOfflineGame();
 	});
 
-	$('#splash button.rules').click(function() {
+	$splash.find('.rules').click(function() {
 
-		$('#splash, #game, #rules').hide();
-		$('#rules button').hide()
-		$('#rules button.play').show()
-		$('#rules button.play-online').show()
-		$('#rules').show();
+		$allSections.hide();
+		$rules.find('.back').hide();
+		$rules.find('.play').show();
+		$rules.show();
 	});
 
-	$('.game button.rules').click(function() {
+	$game.find('nav .rules').click(function() {
 
-		$('#splash, #game, #rules').hide();
-		$('#rules button').hide()
-		$('#rules button.back').show()
-		$('#rules').show();
+		$allSections.hide();
+		$rules.find('.play').hide();
+		$rules.find('.back').show();
+		$rules.show();
 	});
 
-	$('.game button.quit').click(function() {
+	$game.find('nav .quit').click(function() {
 
-		// TODO: send resign event to server
-		localStorage.removeItem('activeGameId');
-		localStorage.removeItem('playerIndex');
-		$('#splash, #game, #rules').hide();
-		$('#rules button').hide()
-		$('#rules button.back').show()
-		$('#splash').show();
+		$allSections.hide();
+		$splash.show();
 	});
 
-	$('#rules button.back').click(function() {
+	$rules.find('.back').click(function() {
 
-		$('#dialog, #rules').hide();
-		$('#game').show();
+		$allSections.hide();
+		$game.show();
 	});
 
 	$board.on('click', 'li', function() {
@@ -120,6 +133,27 @@ function UI(config) {
 				self.displayHand(jax.discardAndReplaceCard(0, activeIndex));
 				jax.completeTurn(0);
 
+			}
+		}
+	}).droppable({
+			over: function(event, ui) {
+
+				ui.helper.addClass('over-board')
+			},
+			out: function(event, ui) {
+
+				ui.helper.removeClass('over-board')
+			}
+		});
+
+	$discardPile.on('click', function() {
+		var activeIndex = $hand.find('li.active').attr('data-pos'),
+			newHand;
+
+		if(activeIndex) {
+			newHand = jax.discardDeadCard(0, activeIndex);
+			if(newHand) {
+				self.displayHand(newHand);
 			}
 		}
 	});
@@ -158,7 +192,12 @@ function UI(config) {
 			start: function(event, ui) {
 
 				var $card = $(this);
-				$card.addClass('active dragged');
+				if($card.is('.active') === false) {
+					$hand.find('.active').removeClass('active');
+					$card.addClass('active');
+				}
+
+				$card.addClass('dragged');
 			},
 			stop: function(event, ui) {
 

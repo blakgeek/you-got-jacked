@@ -25,7 +25,7 @@ body {
 
   @include game(550px, 50px, 4px);
   @include board(550px, 5px, 4px);
-  @include cards(hand, 110px, 6px, #dce5d3, $radius: 0);
+  @include cards(hand, 110px, 6px, #ca8585, $radius: 0);
   @include cards(discarded, 110px, 6px, #ccc, $radius: 0);
   @include cells(p1, #ca8585, 5px);
   @include cells(p2, adjust_hue(#ca8585, 90deg), 5px);
@@ -41,7 +41,7 @@ body {
 
   @include game(700px, 60px, 6px, $spacing: 20px);
   @include board(700px, 6px, 5px);
-  @include cards(hand, 150px, 8px, #dce5d3, $radius: 0);
+  @include cards(hand, 150px, 8px, #ca8585, $radius: 0);
   @include cards(discarded, 150px, 8px, #ccc, $radius: 0);
   @include cells(p1, #ca8585, 5px);
   @include cells(p2, adjust_hue(#ca8585, 90deg), 6px);
@@ -57,7 +57,7 @@ body {
   @include dialog;
 
   button {
-    @include jaxButton;
+    @include jax-button;
     &:before {
       padding-right: 8px;
     }
@@ -90,7 +90,7 @@ body {
   }
 
   button {
-    @include jaxButton;
+    @include jax-button;
   }
 }
 
@@ -116,26 +116,31 @@ body {
   width: 700px;
   display: none;
 
+  .buttons {
+    margin-top: 15px;
+    text-align: center;
+  }
+
   p {
     font: 14px/2em "Open Sans";
   }
 
   button {
-    @include jaxButton;
+    @include jax-button;
   }
 
   .play:before {
-    margin-left: 10px;
+    margin-right: 10px;
     content: '#{$spade}';
   }
 
   .play-online:before {
-    margin-left: 10px;
+    margin-right: 10px;
     content: '#{$diamond}';
   }
 
   .back:before {
-    margin-left: 10px;
+    margin-right: 10px;
     content: '#{$club}';
   }
 }
@@ -162,8 +167,8 @@ body {
   .hand {
 
     li {
+      @include transition(margin .1s ease-in);
       //margin: 5px 5px 5px -30px;
-      @include transition(all .1s ease-in);
 
       &.active {
         margin-top: -50px;
@@ -172,6 +177,10 @@ body {
 
       &.dragged {
         opacity: .5;
+      }
+
+      &.ui-draggable-dragging {
+        z-index: 10000;
       }
     }
   }
@@ -207,25 +216,13 @@ header {
     top: 0;
 
     li {
-      @include jaxButton;
+      @include jax-button;
       line-height: 12px;
       font-size: 18px;
       margin-top: 8px !important;
       display: inline-block;
     }
   }
-}
-
-footer {
-  position: absolute;
-  bottom: 0;
-  top: 760px;
-  left: 0;
-  right: 0;
-  background-image: url("../images/light_crossed_stripes.png");
-  box-shadow: 0 0 0 1px black, 0 -1px 4px 2px rgba(0,0,0,.5);
-
-
 }
 
 #board {

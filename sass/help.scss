@@ -1,0 +1,133 @@
+@import "reset";
+@import "fonts";
+@import "helpers";
+
+//html, body {
+//  height: 100%;
+//  margin: 0;
+//  padding: 0;
+//  position: relative;
+//}
+//
+//body {
+//  font-family: "open sans";
+//}
+
+#rules {
+
+  &.container {
+    white-space: nowrap;
+    font-size: 0;
+    overflow: hidden;
+    width: 650px;
+    height: 450px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin: -225px 0 0 -325px;
+    box-shadow: 0 0 5px 1px rgba(0, 0, 0, .6);
+
+    &:before {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background-color: rgba(0, 0, 0, .4);
+      content: $space;
+      z-index: -1;
+    }
+  }
+
+  section {
+    transition: all .5s ease-in;
+    display: inline-block;
+    width: 100%;
+    font-size: 14px;
+    vertical-align: top;
+    line-height: 1.5em;
+    white-space: normal;
+    padding: 10px 15px 10px 15px;
+    box-sizing: border-box;
+    margin: none;
+    height: 100%;
+    overflow-y: auto;
+    background-color: white;
+    z-index: 9999;
+
+    h2 {
+      font-family: Uralita;
+      font-weight: bold;
+      font-size: 36px;
+      padding: 8px 0 16px 0;
+    }
+
+    p {
+      //margin-top: 3em;
+    }
+
+    //&:nth-child(8n) {
+    //  background-color: #7ee;
+    //}
+    //&:nth-child(8n + 1) {
+    //  background-color: #eee;
+    //}
+    //&:nth-child(8n + 2) {
+    //  background-color: #dee;
+    //}
+    //&:nth-child(8n + 3) {
+    //  background-color: #cee;
+    //}
+    //&:nth-child(8n + 4) {
+    //  background-color: #bee;
+    //}
+    //&:nth-child(8n + 5) {
+    //  background-color: #aee;
+    //}
+    //&:nth-child(8n + 6) {
+    //  background-color: #9ee;
+    //}
+    //&:nth-child(8n + 7) {
+    //  background-color: #8ee;
+    //}
+  }
+
+  img {
+    //box-shadow: 0 0 0 1px black, 0 0 0 4px white, 0 0 0 1px black, 0 0 3px 6px rgba(0,0,0,.4);
+    //margin: 10px 10px 10px 10px;
+  }
+
+  footer {
+
+    font-size: 14px;
+    z-index: 9999;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    left: 10px;
+
+    &:after {
+      clear: both;
+    }
+
+    nav {
+
+      float: right;
+
+      li {
+        display: inline-block;
+        padding: 4px 12px 4px 12px;
+        cursor: pointer;
+        @include jax-button();
+        font-size: 18px;
+      }
+    }
+  }
+
+  .dead-cards span {
+    font-family: $jokerFont;
+    font-size: 90px;
+    line-height: 110px;
+    color: $DEFAULT_RED;
+  }
+}

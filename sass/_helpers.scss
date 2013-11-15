@@ -1,11 +1,16 @@
 @import "colors";
+@import "bourbon/bourbon";
 
 $space: "\00a0";
 $heart: "\2665";
 $spade: "\2660";
 $club: "\2663";
 $diamond: "\2666";
-$jokerCharacters: o v x w;
+$jokerCharacters: p v d w;
+$cellValues: a, 2, 3, 4, 5, 6, 7, 8, 9, t, q, k;
+$cellCharacters: A, 2, 3, 4, 5, 6, 7, 8, 9, 10, Q, K;
+$cardValues: a 2 3 4 5 6 7 8 9 t j q k;
+$cardCharacters: A 2 3 4 5 6 7 8 9 10 J Q K;
 
 @mixin game($size, $avatarSize, $avatarFrameWidth, $spacing: 10px) {
 
@@ -47,7 +52,6 @@ $jokerCharacters: o v x w;
       margin-top: $spacing;
       margin-left: $spacing - 3;
       float: left;
-      //border: 1px solid blue;
       width: $size / 1.61;
       height: $size;
       font-size: 0;
@@ -74,12 +78,42 @@ $jokerCharacters: o v x w;
       float: left;
       width: $size / 1.61 / 1.61;
       height: $size;
-      //border: 1px solid blue;
 
       h1 {
         font-family: Uralita;
         font-size: 30px;
+        display: none;
       }
+
+      li {
+        line-height: 1em;
+        margin-bottom: 1em;
+        font-family: "Open Sans";
+        font-size: $avatarSize * .4;
+        position: relative;
+
+        &:before {
+
+          content: $space;
+          display: inline-block;
+          margin: 5px 10px 5px 5px;
+          width: 1em;
+          height: 1em;
+          margin: 5px 15px 5px 5px;
+          background-color: white;
+        }
+
+        //&.active:before {
+        //  font-family: $fontawesome;
+        //  content: $fontawesome-check-sign;
+        //  line-height: 1em;
+        //  text-align: center;
+        //  font-size: .5em;
+        //}
+      }
+    }
+
+    .avatars {
 
       li {
         line-height: $avatarSize * .4;
@@ -99,7 +133,7 @@ $jokerCharacters: o v x w;
 
         &.active img {
 
-          box-shadow: 0 0 0 1px black, 0 0 0 $avatarFrameWidth + 1 #48dd3c, 0 0 0 $avatarFrameWidth + 2 black, 0 0 4px $avatarFrameWidth + 3 rgba(0,0,0,.4);
+          box-shadow: 0 0 0 1px black, 0 0 0 $avatarFrameWidth + 1 #48dd3c, 0 0 0 $avatarFrameWidth + 2 black, 0 0 4px $avatarFrameWidth + 3 rgba(0, 0, 0, .4);
 
         }
       }
@@ -139,7 +173,7 @@ $jokerCharacters: o v x w;
         left: 0;
         width: $width * 2/3;
         text-align: center;
-        font-family: arial;
+        font-family: DotumChe, courier;
         line-height: 1em;
         font-size: $width * 2/3 - 5;
       }
@@ -151,6 +185,7 @@ $jokerCharacters: o v x w;
         width: $width * 2/3;
         text-align: center;
         font-family: $cardFont;
+        font-weight: 400;
         line-height: 1em;
         font-size: $width * 2/3 - 5;
       }
@@ -245,7 +280,6 @@ $jokerCharacters: o v x w;
         @include linear-gradient(-50deg, $faceColor, $faceColor 35%, $baseColor 0);
       }
 
-      $jokerCharacters: o, v, x, w;
       @for $i from 1 through 4 {
 
         &.joker-#{$i}:before {
@@ -256,9 +290,6 @@ $jokerCharacters: o v x w;
           content: "#{nth($jokerCharacters, $i)}";
         }
       }
-
-      $cardValues: a 2 3 4 5 6 7 8 9 t j q k;
-      $cardCharacters: A 2 3 4 5 6 7 8 9 10 J Q K;
 
       @for $i from 1 through 13 {
 
@@ -359,7 +390,6 @@ $jokerCharacters: o v x w;
         font-family: $jokerFont !important;
       }
 
-      $jokerCharacters: o, v, x, w;
       @for $i from 1 through 4 {
 
         &.joker-#{$i}:before {
@@ -367,17 +397,14 @@ $jokerCharacters: o v x w;
         }
       }
 
-      $cardValues: a, 2, 3, 4, 5, 6, 7, 8, 9, t, q, k;
-      $cardCharacters: A, 2, 3, 4, 5, 6, 7, 8, 9, 10, Q, K;
-
       @for $i from 1 through 12 {
 
-        $value: nth($cardValues, $i);
+        $value: nth($cellValues, $i);
         &[data-card="#{$value}d"]:before,
         &[data-card="#{$value}h"]:before,
         &[data-card="#{$value}c"]:before,
         &[data-card="#{$value}s"]:before {
-          content: "#{nth($cardCharacters, $i)}";
+          content: "#{nth($cellCharacters, $i)}";
         }
       }
     }
@@ -386,17 +413,23 @@ $jokerCharacters: o v x w;
 
 @mixin cells($class, $color, $frameWidth, $black: $DEFAULT_BLACK) {
 
-  .board .#{$class} {
 
-    $borderColor: darken(desaturate($color, 10%), 15%);
-    $outlineColor: darken($borderColor, 30%);
-    $fontColor: darken($borderColor, 55%);
+  $borderColor: darken(desaturate($color, 10%), 15%);
+  $outlineColor: darken($borderColor, 30%);
+  $fontColor: darken($borderColor, 55%);
+
+  .board .#{$class} {
     @include linear-gradient(-225deg, $color, $color 50%, white 0);
     box-shadow: 0 0 0 1px $outlineColor, 0 0 0 $frameWidth - 1 $borderColor, 0 0 0 $frameWidth $outlineColor;
 
     &:before {
-      color: $fontColor;
+      color: $fontColor !important;
     }
+  }
+
+  .players .#{$class}:before {
+    @include linear-gradient(-225deg, $color, $color 50%, white 0);
+    box-shadow: 0 0 0 1px $outlineColor, 0 0 0 4px $borderColor, 0 0 0 5px $outlineColor;
   }
 }
 
@@ -414,19 +447,19 @@ $jokerCharacters: o v x w;
 //box-shadow: 0 0 0 10px $cardBorderColor, 0 0 8px 12px rgba(0, 0, 0, .8);
 }
 
-@mixin jaxButton {
+@mixin jax-button {
 
+  cursor: pointer;
+  @include user-select(none);
   font-family: $cardFont;
   font-size: 24px;
   font-weight: 300;
-//border-radius: 10px;
   padding: 8px 16px 8px 16px;
   box-shadow: 0 0 0 1px darken($suitRed, 60%), 0 0 0 6px white, 0 0 0 7px darken($suitRed, 60%), 0 0 3px 8px rgba(0, 0, 0, .35);
   border: none;
-//background-color: $suitRed;
   @include linear-gradient($suitRed, $suitRed 50%, #b21f24 50%);
   color: white;
-  margin: 9px 18px 9px 9px;
+  margin: 8px 8px 8px 18px;
   min-width: 150px;
   text-align: center;
 }

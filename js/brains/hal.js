@@ -21,7 +21,7 @@ var Hal = function(config) {
 	$game.on({
 		cardplayed: function(event, data) {
 			captorByCell[data.cell] = data.player;
-			if(data.player != playerIndex) {
+			if(data.player != playerIndex && data.card[0] != 'J' && data.card[0] != 'j') {
 				cellsByCard['jd'].push(data.cell);
 			}
 		},
@@ -50,13 +50,60 @@ var Hal = function(config) {
 		}
 	});
 
+	function discardADeadCard() {
+
+		console.debug('Player ' + playerIndex + ': checking for dead cards');
+
+		var newHand, i, k, cells, card, isDead, deadCardIndex = false;
+
+		// find the first dead card in hand
+		// TODO: add logic for discarding the least useful dead card
+		for(i = 0; i < hand.length; i++) {
+
+			card = hand[i];
+			// jacks and jokers can never be dead
+			if(card[0] != 'J' && card[0] != 'j') {
+
+				// assume the card is dead until proven otherwise
+				isDead = true;
+
+				cells = cellsByCard[card];
+				for(k = 0; k < cells.length; k++) {
+
+					if(captorByCell[cells[k]] === false) {
+						isDead = false;
+						break;
+					}
+				}
+
+				if(isDead) {
+					console.debug('Player ' + playerIndex + ': found dead card ' + card);
+					deadCardIndex = i;
+					break;
+				}
+			}
+		}
+
+		if(deadCardIndex !== false) {
+			newHand = game.discardDeadCard(playerIndex, deadCardIndex);
+
+			defensiveCardCounts[hand[hand.length - 1]]--;
+		}
+
+		// we should never have a case that this would return false but just in case we'll check so we don't screw up
+		// our hand array
+		if(newHand) {
+			hand = newHand;
+		}
+	}
+
 	function play() {
 
 		var bestOffensivePlay = calcBestOffensivePlay()[0],
 			bestDefensivePlay = calcBestDefensivePlay()[0];
 
 		// todo add support for dead card detection
-		//	discardDeadCard();
+		discardADeadCard();
 
 		if(bestDefensivePlay.cell != -1 || bestOffensivePlay.cell != -1) {
 			// if we can block a play better play for an opponent then do it
@@ -74,15 +121,18 @@ var Hal = function(config) {
 				game.playCard(playerIndex, bestOffensivePlay.cell, bestOffensivePlay.cardIndex);
 				hand = game.discardAndReplaceCard(playerIndex, bestOffensivePlay.cardIndex);
 			}
+
+			defensiveCardCounts[hand[hand.length - 1]]--;
+
 		} else {
+
+			// TODO: add logic card swapping
 			console.log('Player ' + playerIndex + " passes");
 		}
-
-		defensiveCardCounts[hand[hand.length - 1]]--;
 		game.completeTurn(playerIndex);
 	}
 
-	// offensive play 
+	// offensive play
 	function calcBestOffensivePlay() {
 
 		var max = 0, bestCells, cell, playableCells = [], cardIndex,
@@ -235,65 +285,65 @@ var Hal = function(config) {
 
 		for(i = 0; i < playableCells.length; i++) {
 			k = 0;
-//			for(k = 0; k < totalPlayers; k++) {
-//
-//				if(k != playerIndex) {
-					card = playableCells[i].card;
-					cell = playableCells[i].cell;
-					cardIndex = playableCells[i].cardIndex;
-					odds = calcDefensiveCellOdds(cell, k, card);
-					highestOdds = odds[0];
+			//			for(k = 0; k < totalPlayers; k++) {
+			//
+			//				if(k != playerIndex) {
+			card = playableCells[i].card;
+			cell = playableCells[i].cell;
+			cardIndex = playableCells[i].cardIndex;
+			odds = calcDefensiveCellOdds(cell, k, card);
+			highestOdds = odds[0];
 
-					if(highestOdds > max) {
+			if(highestOdds > max) {
 
-						bestCells = [
-							{
-								player: k,
-								cardIndex: cardIndex,
-								card: card,
-								cell: cell,
-								odds: odds
-							}
-						];
+				bestCells = [
+					{
+						player: k,
+						cardIndex: cardIndex,
+						card: card,
+						cell: cell,
+						odds: odds
+					}
+				];
 
-						max = highestOdds;
+				max = highestOdds;
 
-					} else if(highestOdds == max && max != 0) {
+			} else if(highestOdds == max && max != 0) {
 
-						bestCard = bestCells[0].card;
-						bestOdds = bestCells[0].odds;
-						equality = 0;
+				bestCard = bestCells[0].card;
+				bestOdds = bestCells[0].odds;
+				equality = 0;
 
-						for(j = 1; j < Math.max(odds.length, bestOdds.length); j++) {
-							equality = (odds[j] || 0) - (bestOdds[j] || 0);
-							if(equality !== 0) {
-								break;
-							}
+				for(j = 1; j < Math.max(odds.length, bestOdds.length); j++) {
+					equality = (odds[j] || 0) - (bestOdds[j] || 0);
+					if(equality !== 0) {
+						break;
+					}
+				}
+
+				if(equality === 0 && bestCard[0] != 'j') {
+					bestCells.push({
+						player: k,
+						cardIndex: cardIndex,
+						card: card,
+						cell: cell,
+						odds: odds
+					});
+
+					// don't waste a free jack when there's a suited alternative
+				} else if(equality >= 0) {
+					bestCells = [
+						{
+							player: k,
+							cardIndex: cardIndex,
+							card: card,
+							cell: cell,
+							odds: odds
 						}
-
-						if(equality === 0 && bestCard[0] != 'j') {
-							bestCells.push({
-								player: k,
-								cardIndex: cardIndex,
-								card: card,
-								cell: cell,
-								odds: odds
-							});
-
-							// don't waste a free jack when there's a suited alternative
-						} else if(equality >= 0) {
-							bestCells = [
-								{
-									player: k,
-									cardIndex: cardIndex,
-									card: card,
-									cell: cell,
-									odds: odds
-								}
-							];
-						}
-//					}
-//				}
+					];
+				}
+				//					}
+				//				}
 			}
 
 		}

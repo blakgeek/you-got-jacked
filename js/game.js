@@ -29,6 +29,7 @@ var Jax = function() {
 		online,
 		gameDeck,
 		activePlayer,
+		cardDiscarded,
 		$self = $(this),
 		self = this,
 		ui = new UI({
@@ -69,18 +70,19 @@ var Jax = function() {
 
 		var card, i;
 
+		cellsByCard = {};
 		board = board instanceof Array ? board : board.replace(/^\s+/, '').replace(/\s+$/, '').split(/\s+/);
 
 		for(i = 0; i < board.length; i++) {
 
 			card = board[i];
-			if(card[0] == 'J') {
+			if(card[0] != 'J') {
 				cellsByCard[card] = (cellsByCard[card] || []).concat([i]);
 			} else {
-				cellsByCard['j1'] = (cellsByCard['j1'] || []).concat([i]);
-				cellsByCard['j2'] = (cellsByCard['j2'] || []).concat([i]);
-				cellsByCard['j3'] = (cellsByCard['j3'] || []).concat([i]);
-				cellsByCard['j4'] = (cellsByCard['j4'] || []).concat([i]);
+				cellsByCard['J1'] = (cellsByCard['J1'] || []).concat([i]);
+				cellsByCard['J2'] = (cellsByCard['J2'] || []).concat([i]);
+				cellsByCard['J3'] = (cellsByCard['J3'] || []).concat([i]);
+				cellsByCard['J4'] = (cellsByCard['J4'] || []).concat([i]);
 			}
 		}
 
@@ -150,11 +152,12 @@ var Jax = function() {
 			card = cards[cardIndex],
 			flag = playerFlags[playerIndex],
 			playAccepted = false,
+			cellCard = board[cell],
 			completedSequence;
 
 		// cell must be unoccupied and the card being played must match the cell or be a freejack.
 		// freejacks can't be used to capture jokers
-		if(isOpen(cell) && isMatch(card, board[cell])) {
+		if(isOpen(cell) && isMatch(card, cellCard)) {
 
 			// consider play accepted unless the game is over.
 			playAccepted = true;
@@ -179,7 +182,7 @@ var Jax = function() {
 				$self.off();
 			}
 
-		} else if(isCellJacker(card) && isOccupied(cell) && cellStates[cell] != playerFlags[playerIndex]) {
+		} else if(isCellJacker(card) && isOccupied(cell) && cellStates[cell] != playerFlags[playerIndex]  &&  cellCard[0] != 'J') {
 
 			self.jackCell(0, cell);
 			playAccepted = true;
@@ -222,12 +225,38 @@ var Jax = function() {
 		return cards;
 	}
 
+	this.discardDeadCard = function(playerIndex, cardIndex) {
+
+		var result = false,
+			cards = players[playerIndex].cards,
+			card = cards[cardIndex];
+
+		if(isDeadCard(card) && !cardDiscarded) {
+
+			cardDiscarded = true;
+			ui.addToDiscardPile(card, playerIndex);
+			cards.splice(cardIndex, 1);
+
+			if(gameDeck.length > 0) {
+				cards.push(gameDeck.pop());
+			}
+
+			$self.trigger('carddiscarded', {
+				player: playerIndex,
+				card: card
+			});
+			result = cards;
+		}
+		return result;
+	}
+
 	this.completeTurn = function(player) {
+		cardDiscarded = false;
 		activePlayer = (player + 1) % numPlayers;
 		$self.trigger('turnchanged', activePlayer);
 	};
 
-	self.startOfflineGame = function(config) {
+	this.startOfflineGame = function(config) {
 
 		config = config || {
 
@@ -235,6 +264,7 @@ var Jax = function() {
 		online = false;
 		activePlayer = 0;
 		cellCaptors = [];
+		cardDiscarded = false;
 		numPlayers = config.totalPlayers || 4;
 
 		board = readBoard(Jax.BOARDS[[
@@ -296,10 +326,7 @@ var Jax = function() {
 		ui.displayHand(players[0].cards);
 	}
 
-
-
 	// line calculations
-
 
 	var line, row, col, start, card;
 
@@ -368,57 +395,57 @@ $(function() {
 
 /*
 
-		gameServerHost = 'http=//localhost=9000/',
+ gameServerHost = 'http=//localhost=9000/',
 
-	//	function newOnlineGame(boardName, cards, cellStates) {
-	//
-	//		// TODO: rework this method to be more consolidated in the loop
-	//
-	//		var board = this.BOARDS[boardName || 'sequence'];
-	//		var html = [];
-	//
-	//		online = true;
-	//
-	//		for(var i = 0; i < 100; i++) {
-	//
-	//			var card = board[i];
-	//
-	//			if(card != JOKER) {
-	//
-	//				var cellState = cellStates[i] = cellStates ? cellStates[i] : OPEN;
-	//				// This sexy lil bit o code is just finding the index of the class name by taking the cube root and subtracting one.
-	//				// This only works because the player flags are 2 (2^1),4 (2^2) and 8 (2^3)
-	//				var className = CAPTURED_CELL_CLASSES[Math.log(cellState) / Math.LN2 - 1];
-	//				cellCards[i] = card;
-	//				var suit = SUITS[Math.floor(card / 13)];
-	//				html.push('<li class="' + className + '" data-cell="' + i + '" data-value="' + card + '" data-suit="' + suit + '></li>');
-	//
-	//			} else {
-	//				var cellState = cellStates[i] = cellStates ? cellStates[i] : (P1 | P2 | P3 | OPEN);
-	//				var className = CAPTURED_CELL_CLASSES[Math.log(cellState) / Math.LN2 - 1];
-	//				html.push('<li class="' + className + '" data-cell="' + i + '" data-joker="' + card + '" data-suit="JOKER"></li>');
-	//			}
-	//		}
-	//
-	//		$('#board').html(html.join(''));
-	//
-	//		cells = $('#board li');
-	//
-	//		cells.click(function() {
-	//
-	//			gameSocket.emit('play', $(this).attr('data-cell'), selectedCard.index);
-	//
-	//		});
-	//
-	//		// TODO: fix this to use the players index
-	//		players.push({
-	//			cards: cards
-	//		});
-	//		discardPile = [];
-	//		$('.game .hand').on('click', 'li', this.selectCard);
-	//		$('#discardPile').html('')
-	//		displayHand();
-	//	}
+ //	function newOnlineGame(boardName, cards, cellStates) {
+ //
+ //		// TODO: rework this method to be more consolidated in the loop
+ //
+ //		var board = this.BOARDS[boardName || 'sequence'];
+ //		var html = [];
+ //
+ //		online = true;
+ //
+ //		for(var i = 0; i < 100; i++) {
+ //
+ //			var card = board[i];
+ //
+ //			if(card != JOKER) {
+ //
+ //				var cellState = cellStates[i] = cellStates ? cellStates[i] : OPEN;
+ //				// This sexy lil bit o code is just finding the index of the class name by taking the cube root and subtracting one.
+ //				// This only works because the player flags are 2 (2^1),4 (2^2) and 8 (2^3)
+ //				var className = CAPTURED_CELL_CLASSES[Math.log(cellState) / Math.LN2 - 1];
+ //				cellCards[i] = card;
+ //				var suit = SUITS[Math.floor(card / 13)];
+ //				html.push('<li class="' + className + '" data-cell="' + i + '" data-value="' + card + '" data-suit="' + suit + '></li>');
+ //
+ //			} else {
+ //				var cellState = cellStates[i] = cellStates ? cellStates[i] : (P1 | P2 | P3 | OPEN);
+ //				var className = CAPTURED_CELL_CLASSES[Math.log(cellState) / Math.LN2 - 1];
+ //				html.push('<li class="' + className + '" data-cell="' + i + '" data-joker="' + card + '" data-suit="JOKER"></li>');
+ //			}
+ //		}
+ //
+ //		$('#board').html(html.join(''));
+ //
+ //		cells = $('#board li');
+ //
+ //		cells.click(function() {
+ //
+ //			gameSocket.emit('play', $(this).attr('data-cell'), selectedCard.index);
+ //
+ //		});
+ //
+ //		// TODO: fix this to use the players index
+ //		players.push({
+ //			cards: cards
+ //		});
+ //		discardPile = [];
+ //		$('.game .hand').on('click', 'li', this.selectCard);
+ //		$('#discardPile').html('')
+ //		displayHand();
+ //	}
 
  var gameSocket;
 

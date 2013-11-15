@@ -1,0 +1,141 @@
+@import url("../fonts/opensans/opensans.css");
+@import url("../fonts/uralita/uralita.css");
+@import url("../fonts/aaron/aaron.css");
+@import url("../fonts/fontawesome/fontawesome.css");
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+a {
+  text-decoration: none; }
+
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner {
+  padding: 0;
+  border: 0; }
+
+#rules.container {
+  white-space: nowrap;
+  font-size: 0;
+  overflow: hidden;
+  width: 650px;
+  height: 450px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin: -225px 0 0 -325px;
+  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.6); }
+  #rules.container:before {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    content: "\00a0";
+    z-index: -1; }
+#rules section {
+  transition: all .5s ease-in;
+  display: inline-block;
+  width: 100%;
+  font-size: 14px;
+  vertical-align: top;
+  line-height: 1.5em;
+  white-space: normal;
+  padding: 10px 15px 10px 15px;
+  box-sizing: border-box;
+  margin: none;
+  height: 100%;
+  overflow-y: auto;
+  background-color: white;
+  z-index: 9999; }
+  #rules section h2 {
+    font-family: Uralita;
+    font-weight: bold;
+    font-size: 36px;
+    padding: 8px 0 16px 0; }
+#rules footer {
+  font-size: 14px;
+  z-index: 9999;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  left: 10px; }
+  #rules footer:after {
+    clear: both; }
+  #rules footer nav {
+    float: right; }
+    #rules footer nav li {
+      display: inline-block;
+      padding: 4px 12px 4px 12px;
+      cursor: pointer;
+      cursor: pointer;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      font-family: "Uralita";
+      font-size: 24px;
+      font-weight: 300;
+      padding: 8px 16px 8px 16px;
+      box-shadow: 0 0 0 1px black, 0 0 0 6px white, 0 0 0 7px black, 0 0 3px 8px rgba(0, 0, 0, 0.35);
+      border: none;
+      background-color: #d1343f;
+      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #d1343f), color-stop(50%, #d1343f), color-stop(50%, #b21f24));
+      background-image: -webkit-linear-gradient(#d1343f, #d1343f 50%, #b21f24 50%);
+      background-image: linear-gradient(#d1343f, #d1343f 50%, #b21f24 50%);
+      color: white;
+      margin: 8px 8px 8px 18px;
+      min-width: 150px;
+      text-align: center;
+      font-size: 18px; }
+#rules .dead-cards span {
+  font-family: "aaronfaces";
+  font-size: 90px;
+  line-height: 110px;
+  color: #b21f24; }
