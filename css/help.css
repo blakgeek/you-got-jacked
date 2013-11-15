@@ -109,7 +109,8 @@ button::-moz-focus-inner,
   #rules footer:after {
     clear: both; }
   #rules footer nav {
-    float: right; }
+    width: 100%;
+    text-align: right; }
     #rules footer nav li {
       display: inline-block;
       padding: 4px 12px 4px 12px;
@@ -119,9 +120,10 @@ button::-moz-focus-inner,
       -moz-user-select: none;
       -ms-user-select: none;
       user-select: none;
-      font-family: "Uralita";
-      font-size: 24px;
+      font-family: Uralita;
       font-weight: 300;
+      text-shadow: 0 0 3px black;
+      font-size: 24px;
       padding: 8px 16px 8px 16px;
       box-shadow: 0 0 0 1px black, 0 0 0 6px white, 0 0 0 7px black, 0 0 3px 8px rgba(0, 0, 0, 0.35);
       border: none;
@@ -131,9 +133,12 @@ button::-moz-focus-inner,
       background-image: linear-gradient(#d1343f, #d1343f 50%, #b21f24 50%);
       color: white;
       margin: 8px 8px 8px 18px;
-      min-width: 150px;
+      min-width: 100px;
       text-align: center;
       font-size: 18px; }
+    #rules footer nav li.play, #rules footer nav li.back {
+      float: left;
+      margin-left: 8px; }
 #rules .dead-cards span {
   font-family: "aaronfaces";
   font-size: 90px;

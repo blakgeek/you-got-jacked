@@ -127,21 +127,7 @@ body {
 
   button {
     @include jax-button;
-  }
-
-  .play:before {
-    margin-right: 10px;
-    content: '#{$spade}';
-  }
-
-  .play-online:before {
-    margin-right: 10px;
-    content: '#{$diamond}';
-  }
-
-  .back:before {
-    margin-right: 10px;
-    content: '#{$club}';
+    width: 100px;
   }
 }
 
@@ -151,14 +137,6 @@ body {
   li {
     margin-right: -40px
   }
-
-}
-
-@mixin landscapeHands($size) {
-
-}
-
-@mixin portraitHands($size) {
 
 }
 
@@ -186,9 +164,12 @@ body {
   }
 }
 
-#game {
-  height: 682px;
-  position: relative;
+.game {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
   background-image: url("../images/crossed_stripes.png");
 }
 
@@ -206,6 +187,7 @@ header {
     font-family: "Uralita";
     font-size: 40px;
     font-weight: bold;
+    text-shadow: 0 0 5px black;
     color: white;
     padding-left: 13px;
   }

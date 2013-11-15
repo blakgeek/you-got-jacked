@@ -71,7 +71,6 @@ var Jax = function() {
 		var card, i;
 
 		cellsByCard = {};
-		board = board instanceof Array ? board : board.replace(/^\s+/, '').replace(/\s+$/, '').split(/\s+/);
 
 		for(i = 0; i < board.length; i++) {
 
@@ -182,7 +181,7 @@ var Jax = function() {
 				$self.off();
 			}
 
-		} else if(isCellJacker(card) && isOccupied(cell) && cellStates[cell] != playerFlags[playerIndex]  &&  cellCard[0] != 'J') {
+		} else if(isCellJacker(card) && isOccupied(cell) && cellStates[cell] != playerFlags[playerIndex] && cellCard[0] != 'J') {
 
 			self.jackCell(0, cell);
 			playAccepted = true;
@@ -265,11 +264,11 @@ var Jax = function() {
 		activePlayer = 0;
 		cellCaptors = [];
 		cardDiscarded = false;
-		numPlayers = config.totalPlayers || 4;
+		numPlayers = (config.totalPlayers || 4);
 
-		board = readBoard(Jax.BOARDS[[
-			'checkerBoard', 'sequence', 'oneEyedJack', 'custom1'
-		][Math.floor(Math.random() * 4)]]);
+		var boardName = config.board || Jax.BOARD_NAMES[Math.floor(Math.random() * Jax.BOARD_NAMES.length)];
+
+		board = readBoard(Jax.BOARDS[boardName]);
 
 		ui.enableEvents();
 
@@ -289,18 +288,22 @@ var Jax = function() {
 			cellCaptors[i] = false;
 		}
 
-		$self.trigger('gamestarted', {
-			board: board
-		});
-
 		gameDeck = shuffleDecks();
 
+		// TODO: fix this BS with playerNames. for now I just want the right number of players to be displayed.
+
+		var playerNames = ['You', 'Hal', 'Garf', 'Jimmy Two Cards'],
+			eventPlayers = [];
+
 		players = [];
-		for(var i = 0; i < numPlayers; i++) {
+		for(i = 0; i < numPlayers; i++) {
 			players.push({
 				playerIndex: i,
 				cards: []
 			});
+			eventPlayers.push({
+				name: playerNames[i]
+			})
 		}
 
 		// if there are more than two player only give out 6 cards
@@ -323,6 +326,10 @@ var Jax = function() {
 			}))
 		}
 
+		$self.trigger('gamestarted', {
+			board: board,
+			players: eventPlayers
+		});
 		ui.displayHand(players[0].cards);
 	}
 

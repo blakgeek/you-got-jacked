@@ -1,4 +1,4 @@
-Jax = Jax || {}
+Jax = window.Jax || {}
 Jax.BOARDS = {
 	sequence: [
 		'J1', '6d', '7d', '8d', '9d', 'td', 'qd', 'kd', 'ad', 'J2',
@@ -22,7 +22,7 @@ Jax.BOARDS = {
 		8h 5h 3h qs as ad qd 3c 5c 8c \
 		9h 6h qh 3s 2s 2d 3d qc 6c 9c \
 		th kh 6s 5s 4s 4d 5d 6d kc tc \
-		J3 ts 9s 8s 7s 7d 8d 9d td J4",
+		J3 ts 9s 8s 7s 7d 8d 9d td J4".replace(/^\s+|\s+$/, '').split(/\s+/),
 	custom1: [
 		'kh', 'qh', 'th', '9h', '8h', '7h', '6h', '5h', '4h', 'ks',
 		'4c', '3c', '2c', '6s', '7s', '8s', '9s', 'ts', '3h', 'qs',
@@ -45,5 +45,7 @@ Jax.BOARDS = {
 		6c 7h 7c 6h 8c 5h 9c 4h tc 3h \
 		2h qc ah kc kd as qd 2s td 3s \
 		4s 9d 5s 8d 6s 7d 7s 6d 8s 5d \
-		J3 9s 4d ts 3d qs 2d ks ad J4"
+		J3 9s 4d ts 3d qs 2d ks ad J4".replace(/^\s+|\s+$/, '').split(/\s+/)
 }
+
+Jax.BOARD_NAMES = Object.keys(Jax.BOARDS);

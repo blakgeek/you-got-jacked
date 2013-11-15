@@ -111,15 +111,20 @@
     }
 
     nav {
-
-      float: right;
+      width: 100%;
+      text-align: right;
 
       li {
         display: inline-block;
         padding: 4px 12px 4px 12px;
         cursor: pointer;
-        @include jax-button();
+        @include jax-button($min-width: 100px);
         font-size: 18px;
+      }
+
+      li.play, li.back {
+        float: left;
+        margin-left: 8px;
       }
     }
   }

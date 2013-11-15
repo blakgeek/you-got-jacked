@@ -20,17 +20,19 @@ function UI(config) {
 		$jax = $(jax),
 		$hand = $('.cards .hand'),
 		$discardPile = $('.cards .discarded'),
-		$allSections = $('#rules, .game, #splash, #dialog'),
+		$allViews = $('.view'),
 		discardPile = [],
-		$board = $('.board'),
+		$board = $('.board ul'),
+		$dialog = $('#dialog'),
 		$splash = $('#splash'),
+		$wizard = $('#wizard'),
 		$game = $('section.game'),
 		$rules = $('#rules'),
-		$players = $game.find('.players li'),
+		$players = $game.find('.players ul'),
 		self = this;
 
-	$game.hide();
-	$rules.hide();
+	$allViews.hide();
+	$splash.show();
 
 	$discardPile.click(function() {
 
@@ -84,18 +86,41 @@ function UI(config) {
 		}
 	});
 
-	$('.play').click(function() {
+	$splash.find('.new-game').click(function() {
 
-		$('#splash, #rules, #dialog').hide();
-		$game.show();
-		$('#message').hide();
+		$allViews.hide();
+		$wizard.show();
+	});
 
-		jax.startOfflineGame();
+	$dialog.find('.replay').click(function() {
+
+		$allViews.hide();
+		jax.startOfflineGame({
+			board: $wizard.find('.board-picker .selected').attr('data-board'),
+			totalPlayers: $wizard.find('.player-picker .selected').attr('data-players'),
+			level: $wizard.find('.level-picker .selected').attr('data-level')
+		});
+	});
+
+	$dialog.find('.new-game').click(function() {
+
+		$allViews.hide();
+		$wizard.show();
+	});
+
+	$wizard.find('.play').click(function() {
+
+		$allViews.hide();
+		jax.startOfflineGame({
+			board: $wizard.find('.board-picker .selected').attr('data-board'),
+			totalPlayers: $wizard.find('.player-picker .selected').attr('data-players'),
+			level: $wizard.find('.level-picker .selected').attr('data-level')
+		});
 	});
 
 	$splash.find('.rules').click(function() {
 
-		$allSections.hide();
+		$allViews.hide();
 		$rules.find('.back').hide();
 		$rules.find('.play').show();
 		$rules.show();
@@ -103,7 +128,7 @@ function UI(config) {
 
 	$game.find('nav .rules').click(function() {
 
-		$allSections.hide();
+		$allViews.hide();
 		$rules.find('.play').hide();
 		$rules.find('.back').show();
 		$rules.show();
@@ -111,17 +136,17 @@ function UI(config) {
 
 	$game.find('nav .quit').click(function() {
 
-		$allSections.hide();
+		$allViews.hide();
 		$splash.show();
 	});
 
 	$rules.find('.back').click(function() {
 
-		$allSections.hide();
+		$allViews.hide();
 		$game.show();
 	});
 
-	$board.on('click', 'li', function() {
+	$board.on('click', 'li',function() {
 
 		var cell = $(this),
 			cellIndex = cell.attr('data-cell'),
@@ -274,9 +299,10 @@ function UI(config) {
 			gamestarted: function(event, data) {
 
 				var board = data.board,
-					card, html = [];
+					players = data.players,
+					card, html = [], i;
 
-				for(var i = 0; i < 100; i++) {
+				for(i = 0; i < 100; i++) {
 
 					card = board[i];
 
@@ -297,10 +323,15 @@ function UI(config) {
 						}));
 					}
 				}
-
 				$board.html(html.join(''));
 
-				$splash.hide();
+				html = [];
+				for(i = 0; i < players.length; i++) {
+					html.push('<li class="p' + (i + 1) + '">' + players[i].name + '</li>');
+				}
+				$players.html(html.join(''));
+
+				$allViews.hide();
 				$game.removeClass('gameover').show();
 			},
 			cardplayed: function(event, data) {
@@ -312,7 +343,7 @@ function UI(config) {
 				$board.find('li[data-cell="' + data.cell + '"]').removeClass(ALL_PLAYER_CLASSES);
 			},
 			turnchanged: function(event, activePlayer) {
-				$players.removeClass('active').filter('li:nth-of-type(' + (activePlayer + 1) + ')').addClass('active');
+				$players.find('li').removeClass('active').filter('li:nth-of-type(' + (activePlayer + 1) + ')').addClass('active');
 
 			}
 		});

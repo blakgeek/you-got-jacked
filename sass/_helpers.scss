@@ -52,7 +52,7 @@ $cardCharacters: A 2 3 4 5 6 7 8 9 10 J Q K;
       margin-top: $spacing;
       margin-left: $spacing - 3;
       float: left;
-      width: $size / 1.61;
+      width: $size;
       height: $size;
       font-size: 0;
 
@@ -91,6 +91,8 @@ $cardCharacters: A 2 3 4 5 6 7 8 9 10 J Q K;
         font-family: "Open Sans";
         font-size: $avatarSize * .4;
         position: relative;
+        color: white;
+        text-shadow: 0 0 2px black;
 
         &:before {
 
@@ -173,7 +175,7 @@ $cardCharacters: A 2 3 4 5 6 7 8 9 10 J Q K;
         left: 0;
         width: $width * 2/3;
         text-align: center;
-        font-family: DotumChe, courier;
+        font-family: DotumChe, "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", courier, serif;
         line-height: 1em;
         font-size: $width * 2/3 - 5;
       }
@@ -447,19 +449,22 @@ $cardCharacters: A 2 3 4 5 6 7 8 9 10 J Q K;
 //box-shadow: 0 0 0 10px $cardBorderColor, 0 0 8px 12px rgba(0, 0, 0, .8);
 }
 
-@mixin jax-button {
+@mixin jax-button($min-width: 150px) {
 
   cursor: pointer;
   @include user-select(none);
-  font-family: $cardFont;
-  font-size: 24px;
+  font-family: Uralita;
   font-weight: 300;
+  text-shadow: 0 0 3px black;
+  font-size: 24px;
+  //font-weight: 300;
   padding: 8px 16px 8px 16px;
   box-shadow: 0 0 0 1px darken($suitRed, 60%), 0 0 0 6px white, 0 0 0 7px darken($suitRed, 60%), 0 0 3px 8px rgba(0, 0, 0, .35);
   border: none;
-  @include linear-gradient($suitRed, $suitRed 50%, #b21f24 50%);
+  @include linear-gradient($suitRed, $suitRed 50%, $DEFAULT_RED 50%);
   color: white;
   margin: 8px 8px 8px 18px;
-  min-width: 150px;
+  min-width: $min-width;
   text-align: center;
 }
+

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url("../fonts/opensans/opensans.css");
 @import url("../fonts/uralita/uralita.css");
 @import url("../fonts/aaron/aaron.css");
@@ -96,7 +97,7 @@ body {
     margin-top: 10px;
     margin-left: 7px;
     float: left;
-    width: 341.61491px;
+    width: 550px;
     height: 550px;
     font-size: 0; }
     .game .cards .hand, .game .cards .discarded {
@@ -120,7 +121,9 @@ body {
       margin-bottom: 1em;
       font-family: "Open Sans";
       font-size: 20px;
-      position: relative; }
+      position: relative;
+      color: white;
+      text-shadow: 0 0 2px black; }
       .game .players li:before {
         content: "\00a0";
         display: inline-block;
@@ -256,7 +259,7 @@ body {
       left: 0;
       width: 44px;
       text-align: center;
-      font-family: DotumChe, courier;
+      font-family: DotumChe, "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", courier, serif;
       line-height: 1em;
       font-size: 39px; }
     ul.hand li.suit:after {
@@ -385,7 +388,7 @@ body {
       left: 0;
       width: 44px;
       text-align: center;
-      font-family: DotumChe, courier;
+      font-family: DotumChe, "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", courier, serif;
       line-height: 1em;
       font-size: 39px; }
     ul.discarded li.suit:after {
@@ -584,7 +587,7 @@ body {
     margin-top: 20px;
     margin-left: 17px;
     float: left;
-    width: 434.78261px;
+    width: 700px;
     height: 700px;
     font-size: 0; }
     .game .cards .hand, .game .cards .discarded {
@@ -608,7 +611,9 @@ body {
       margin-bottom: 1em;
       font-family: "Open Sans";
       font-size: 24px;
-      position: relative; }
+      position: relative;
+      color: white;
+      text-shadow: 0 0 2px black; }
       .game .players li:before {
         content: "\00a0";
         display: inline-block;
@@ -744,7 +749,7 @@ body {
       left: 0;
       width: 60px;
       text-align: center;
-      font-family: DotumChe, courier;
+      font-family: DotumChe, "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", courier, serif;
       line-height: 1em;
       font-size: 55px; }
     ul.hand li.suit:after {
@@ -873,7 +878,7 @@ body {
       left: 0;
       width: 60px;
       text-align: center;
-      font-family: DotumChe, courier;
+      font-family: DotumChe, "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", courier, serif;
       line-height: 1em;
       font-size: 55px; }
     ul.discarded li.suit:after {
@@ -1063,9 +1068,10 @@ body {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    font-family: "Uralita";
-    font-size: 24px;
+    font-family: Uralita;
     font-weight: 300;
+    text-shadow: 0 0 3px black;
+    font-size: 24px;
     padding: 8px 16px 8px 16px;
     box-shadow: 0 0 0 1px black, 0 0 0 6px white, 0 0 0 7px black, 0 0 3px 8px rgba(0, 0, 0, 0.35);
     border: none;
@@ -1110,9 +1116,10 @@ body {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    font-family: "Uralita";
-    font-size: 24px;
+    font-family: Uralita;
     font-weight: 300;
+    text-shadow: 0 0 3px black;
+    font-size: 24px;
     padding: 8px 16px 8px 16px;
     box-shadow: 0 0 0 1px black, 0 0 0 6px white, 0 0 0 7px black, 0 0 3px 8px rgba(0, 0, 0, 0.35);
     border: none;
@@ -1154,9 +1161,10 @@ body {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    font-family: "Uralita";
-    font-size: 24px;
+    font-family: Uralita;
     font-weight: 300;
+    text-shadow: 0 0 3px black;
+    font-size: 24px;
     padding: 8px 16px 8px 16px;
     box-shadow: 0 0 0 1px black, 0 0 0 6px white, 0 0 0 7px black, 0 0 3px 8px rgba(0, 0, 0, 0.35);
     border: none;
@@ -1167,16 +1175,8 @@ body {
     color: white;
     margin: 8px 8px 8px 18px;
     min-width: 150px;
-    text-align: center; }
-  #rules .play:before {
-    margin-right: 10px;
-    content: "\2660"; }
-  #rules .play-online:before {
-    margin-right: 10px;
-    content: "\2666"; }
-  #rules .back:before {
-    margin-right: 10px;
-    content: "\2663"; }
+    text-align: center;
+    width: 100px; }
 
 #discardPile {
   z-index: 9999; }
@@ -1195,9 +1195,12 @@ body {
   .cards .hand li.ui-draggable-dragging {
     z-index: 10000; }
 
-#game {
-  height: 682px;
-  position: relative;
+.game {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
   background-image: url("../images/crossed_stripes.png"); }
 
 header {
@@ -1215,6 +1218,7 @@ header {
     font-family: "Uralita";
     font-size: 40px;
     font-weight: bold;
+    text-shadow: 0 0 5px black;
     color: white;
     padding-left: 13px; }
   header nav {
@@ -1227,9 +1231,10 @@ header {
       -moz-user-select: none;
       -ms-user-select: none;
       user-select: none;
-      font-family: "Uralita";
-      font-size: 24px;
+      font-family: Uralita;
       font-weight: 300;
+      text-shadow: 0 0 3px black;
+      font-size: 24px;
       padding: 8px 16px 8px 16px;
       box-shadow: 0 0 0 1px black, 0 0 0 6px white, 0 0 0 7px black, 0 0 3px 8px rgba(0, 0, 0, 0.35);
       border: none;

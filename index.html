@@ -5,15 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <link rel="stylesheet" type="text/css" href="css/jax.css"/>
     <link rel="stylesheet" type="text/css" href="css/help.css"/>
+    <link rel="stylesheet" type="text/css" href="css/wizard.css"/>
     <link rel="icon" type="image/png" href="favicon.png"/>
 </head>
 <body>
-<section id="dialog">
+<section id="dialog" class="view">
     <p class="message"></p>
-    <button class="play">Play Again</button>
+    <button class="replay">Play Again</button>
+    <button class="new-game">New Game</button>
 </section>
 
-<section class="game">
+<section class="game view">
     <header>
         <h1>You Got Jacked</h1>
         <nav>
@@ -22,15 +24,14 @@
         </nav>
     </header>
 
-    <ul class="players">
-        <h1>Players</h1>
-        <li class="active p1">You</li>
-        <li class="p2">Hal</li>
-        <li class="p3">Garf</li>
-        <li class="p4">Gu</li>
-    </ul>
+    <div class="players">
+        <ul>
+        </ul>
+    </div>
 
-    <ul class="board"></ul>
+    <div class="board">
+        <ul></ul>
+    </div>
 
     <div class="cards">
         <ul id="discardPile" class="discarded"></ul>
@@ -38,17 +39,7 @@
     </div>
 </section>
 
-<section id="splash">
-    <img src="images/splash.png"/>
-
-    <div class="buttons">
-        <button class="play">Play</button>
-        <!--<button class="play-online">Online</button>-->
-        <button class="rules">Tutorial</button>
-    </div>
-</section>
-
-<div class="container" id="rules">
+<div id="rules" class="container view">
 
     <section>
         <h2>The Board</h2>
@@ -188,6 +179,62 @@
         </nav>
     </footer>
 </div>
+
+<div id="wizard" class="container view">
+    <section class="player-picker">
+        <h2>Pick The Number Of Players</h2>
+        <ul>
+            <li class="one" data-players="2">2 <span>t</span><span>k</span></li>
+            <li class="two" data-players="3">3 <span>t</span><span>k</span><span>k</span></li>
+            <li class="three" data-players="4">4 <span>t</span><span>k</span><span>k</span><span>k</span></li>
+        </ul>
+    </section>
+    <section class="board-picker">
+        <h2>Pick A Board</h2>
+
+        <div class="boards">
+
+        </div>
+    </section>
+    <section class="level-picker">
+        <h2>Pick A Difficulty Level</h2>
+        <ul>
+            <li class="easy" data-level="1">
+                <span class="level">Easy</span>
+                <span class="faces">g</span>
+            </li>
+            <li class="medium" data-level="2">
+                <span class="level">Medium</span>
+                <span class="faces">c c</span>
+            </li>
+            <li class="hard" data-level="3">
+                <span class="level">Bring It</span>
+                <span class="faces">k k k</span>
+            </li>
+            <li class="xtra-hard" data-level="4">
+                <span class="level">Hater Mode</span>
+                <span class="faces">w w w w</span>
+            </li>
+        </ul>
+    </section>
+    <footer>
+        <nav>
+            <li class="prev">Back</li>
+            <li class="next">Next</li>
+            <li class="play">Start Game</li>
+        </nav>
+    </footer>
+</div>
+
+<section id="splash" class="view">
+    <img src="images/splash.png"/>
+
+    <div class="buttons">
+        <button class="new-game">Play</button>
+        <!--<button class="play-online">Online</button>-->
+        <button class="rules">Tutorial</button>
+    </div>
+</section>
 </body>
 <script src="//ec2-184-73-193-207.compute-1.amazonaws.com:9000/socket.io/socket.io.js"></script>
 <script src="js/jquery.js"></script>
@@ -200,4 +247,5 @@
 <script src="js/boards.js"></script>
 <script src="js/config.js"></script>
 <script src="js/help.js"></script>
+<script src="js/wizard.js"></script>
 </html>

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url("../fonts/opensans/opensans.css");
 @import url("../fonts/uralita/uralita.css");
 @import url("../fonts/aaron/aaron.css");
@@ -87,7 +88,7 @@ button::-moz-focus-inner,
     margin-top: 10px;
     margin-left: 7px;
     float: left;
-    width: 341.61491px;
+    width: 550px;
     height: 550px;
     font-size: 0; }
     .game .cards .hand, .game .cards .discarded {
@@ -111,7 +112,9 @@ button::-moz-focus-inner,
       margin-bottom: 1em;
       font-family: "Open Sans";
       font-size: 20px;
-      position: relative; }
+      position: relative;
+      color: white;
+      text-shadow: 0 0 2px black; }
       .game .players li:before {
         content: "\00a0";
         display: inline-block;
@@ -247,7 +250,7 @@ button::-moz-focus-inner,
       left: 0;
       width: 44px;
       text-align: center;
-      font-family: DotumChe, courier;
+      font-family: DotumChe, "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", courier, serif;
       line-height: 1em;
       font-size: 39px; }
     ul.hand li.suit:after {
@@ -376,7 +379,7 @@ button::-moz-focus-inner,
       left: 0;
       width: 44px;
       text-align: center;
-      font-family: DotumChe, courier;
+      font-family: DotumChe, "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", courier, serif;
       line-height: 1em;
       font-size: 39px; }
     ul.discarded li.suit:after {
@@ -511,7 +514,7 @@ button::-moz-focus-inner,
     margin-top: 20px;
     margin-left: 17px;
     float: left;
-    width: 434.78261px;
+    width: 700px;
     height: 700px;
     font-size: 0; }
     .game .cards .hand, .game .cards .discarded {
@@ -535,7 +538,9 @@ button::-moz-focus-inner,
       margin-bottom: 1em;
       font-family: "Open Sans";
       font-size: 24px;
-      position: relative; }
+      position: relative;
+      color: white;
+      text-shadow: 0 0 2px black; }
       .game .players li:before {
         content: "\00a0";
         display: inline-block;
@@ -671,7 +676,7 @@ button::-moz-focus-inner,
       left: 0;
       width: 60px;
       text-align: center;
-      font-family: DotumChe, courier;
+      font-family: DotumChe, "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", courier, serif;
       line-height: 1em;
       font-size: 55px; }
     ul.hand li.suit:after {
@@ -800,7 +805,7 @@ button::-moz-focus-inner,
       left: 0;
       width: 60px;
       text-align: center;
-      font-family: DotumChe, courier;
+      font-family: DotumChe, "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", courier, serif;
       line-height: 1em;
       font-size: 55px; }
     ul.discarded li.suit:after {
