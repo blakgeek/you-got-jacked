@@ -68,7 +68,7 @@ body {
     content: '#{$diamond}';
   }
 
-  .play:before {
+  .new-game:before {
     font-family: courier;
     content: '#{$spade}';
   }
@@ -87,6 +87,8 @@ body {
     font-family: "Uralita";
     font-weight: bold;
     font-size: 48px;
+    color: white;
+    text-shadow: 0 0 3px black;
   }
 
   button {

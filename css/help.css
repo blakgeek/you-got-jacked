@@ -136,7 +136,7 @@ button::-moz-focus-inner,
       min-width: 100px;
       text-align: center;
       font-size: 18px; }
-    #rules footer nav li.play, #rules footer nav li.back {
+    #rules footer nav li.new-game, #rules footer nav li.back {
       float: left;
       margin-left: 8px; }
 #rules .dead-cards span {

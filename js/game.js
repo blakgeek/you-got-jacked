@@ -178,7 +178,6 @@ var Jax = function() {
 					winner: playerIndex,
 					sequence: completedSequence
 				});
-				$self.off();
 			}
 
 		} else if(isCellJacker(card) && isOccupied(cell) && cellStates[cell] != playerFlags[playerIndex] && cellCard[0] != 'J') {
@@ -260,6 +259,9 @@ var Jax = function() {
 		config = config || {
 
 		}
+
+		// make sure all previously registered events are disconnected
+		$self.off();
 		online = false;
 		activePlayer = 0;
 		cellCaptors = [];
@@ -270,7 +272,7 @@ var Jax = function() {
 
 		board = readBoard(Jax.BOARDS[boardName]);
 
-		ui.enableEvents();
+		ui.enableGameEvents();
 
 		for(var i = 0; i < 100; i++) {
 

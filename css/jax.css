@@ -1088,7 +1088,7 @@ body {
   #splash .play-online:before {
     font-family: courier;
     content: "\2666"; }
-  #splash .play:before {
+  #splash .new-game:before {
     font-family: courier;
     content: "\2660"; }
   #splash .rules:before {
@@ -1109,7 +1109,9 @@ body {
   #dialog .message {
     font-family: "Uralita";
     font-weight: bold;
-    font-size: 48px; }
+    font-size: 48px;
+    color: white;
+    text-shadow: 0 0 3px black; }
   #dialog button {
     cursor: pointer;
     -webkit-user-select: none;

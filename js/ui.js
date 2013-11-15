@@ -122,14 +122,14 @@ function UI(config) {
 
 		$allViews.hide();
 		$rules.find('.back').hide();
-		$rules.find('.play').show();
+		$rules.find('.new-game').show();
 		$rules.show();
 	});
 
 	$game.find('nav .rules').click(function() {
 
 		$allViews.hide();
-		$rules.find('.play').hide();
+		$rules.find('.new-game').hide();
 		$rules.find('.back').show();
 		$rules.show();
 	});
@@ -144,6 +144,11 @@ function UI(config) {
 
 		$allViews.hide();
 		$game.show();
+	});
+
+	$rules.find('.new-game').click(function() {
+		$allViews.hide();
+		$wizard.show();
 	});
 
 	$board.on('click', 'li',function() {
@@ -180,6 +185,16 @@ function UI(config) {
 			if(newHand) {
 				self.displayHand(newHand);
 			}
+		}
+	});
+
+	$hand.on('click', 'li', function() {
+		var $this = $(this);
+		if($this.is('.active')) {
+			$this.removeClass('active');
+		} else {
+			$hand.find('li').removeClass('active');
+			$(this).addClass('active');
 		}
 	});
 
@@ -270,17 +285,7 @@ function UI(config) {
 		}
 	}
 
-	this.enableEvents = function() {
-
-		$hand.on('click', 'li', function() {
-			var $this = $(this);
-			if($this.is('.active')) {
-				$this.removeClass('active');
-			} else {
-				$hand.find('li').removeClass('active');
-				$(this).addClass('active');
-			}
-		});
+	this.enableGameEvents = function() {
 
 		$jax.on({
 			gameended: function(event, data) {
@@ -297,6 +302,8 @@ function UI(config) {
 				$hand.off();
 			},
 			gamestarted: function(event, data) {
+
+				discardPile = [];
 
 				var board = data.board,
 					players = data.players,
@@ -330,6 +337,8 @@ function UI(config) {
 					html.push('<li class="p' + (i + 1) + '">' + players[i].name + '</li>');
 				}
 				$players.html(html.join(''));
+
+				$('#discardPile').empty();
 
 				$allViews.hide();
 				$game.removeClass('gameover').show();
