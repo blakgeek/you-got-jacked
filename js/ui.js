@@ -19,20 +19,19 @@ function UI(config) {
 		jax = config.game,
 		$jax = $(jax),
 		$hand = $('.cards .hand'),
-		$discardPile = $('.cards .discarded'),
-		$allViews = $('.view'),
+		$allSections = $('body > section'),
 		discardPile = [],
-		$board = $('.board ul'),
+		allModeClasses = "home wizard game tutorial",
+		$body = $('body'),
 		$dialog = $('#dialog'),
-		$splash = $('#splash'),
+		$home = $('#home'),
 		$wizard = $('#wizard'),
-		$game = $('section.game'),
-		$rules = $('#rules'),
+		$game = $('#game'),
+		$tutorial = $('#tutorial'),
+		$board = $game.find('.board ul'),
+		$discardPile = $game.find('.discarded'),
 		$players = $game.find('.players ul'),
 		self = this;
-
-	$allViews.hide();
-	$splash.show();
 
 	$discardPile.click(function() {
 
@@ -86,15 +85,15 @@ function UI(config) {
 		}
 	});
 
-	$splash.find('.new-game').click(function() {
+	$home.find('.new-game').click(function() {
 
-		$allViews.hide();
+		$body.removeClass(allModeClasses).addClass('wizard');
 		$wizard.show();
 	});
 
 	$dialog.find('.replay').click(function() {
 
-		$allViews.hide();
+		$body.removeClass(allModeClasses);
 		jax.startOfflineGame({
 			board: $wizard.find('.board-picker .selected').attr('data-board'),
 			totalPlayers: $wizard.find('.player-picker .selected').attr('data-players'),
@@ -104,13 +103,12 @@ function UI(config) {
 
 	$dialog.find('.new-game').click(function() {
 
-		$allViews.hide();
-		$wizard.show();
+		$body.removeClass(allModeClasses).addClass('wizard');
 	});
 
 	$wizard.find('.play').click(function() {
 
-		$allViews.hide();
+		$body.removeClass(allModeClasses);
 		jax.startOfflineGame({
 			board: $wizard.find('.board-picker .selected').attr('data-board'),
 			totalPlayers: $wizard.find('.player-picker .selected').attr('data-players'),
@@ -118,37 +116,35 @@ function UI(config) {
 		});
 	});
 
-	$splash.find('.rules').click(function() {
+	$home.find('.rules').click(function() {
 
-		$allViews.hide();
-		$rules.find('.back').hide();
-		$rules.find('.new-game').show();
-		$rules.show();
+		$tutorial.find('.back').hide();
+		$tutorial.find('.new-game').show();
+		$body.removeClass(allModeClasses).addClass('tutorial');
 	});
 
 	$game.find('nav .rules').click(function() {
 
-		$allViews.hide();
-		$rules.find('.new-game').hide();
-		$rules.find('.back').show();
-		$rules.show();
+		$tutorial.find('.new-game').hide();
+		$tutorial.find('.back').show();
+		$body.removeClass(allModeClasses).addClass('tutorial');
 	});
 
 	$game.find('nav .quit').click(function() {
 
-		$allViews.hide();
-		$splash.show();
+
+		$body.removeClass(allModeClasses).addClass('home');
 	});
 
-	$rules.find('.back').click(function() {
+	$tutorial.find('.back').click(function() {
 
-		$allViews.hide();
-		$game.show();
+
+		$body.removeClass(allModeClasses).addClass('game');
 	});
 
-	$rules.find('.new-game').click(function() {
-		$allViews.hide();
-		$wizard.show();
+	$tutorial.find('.new-game').click(function() {
+
+		$body.removeClass(allModeClasses).addClass('wizard');
 	});
 
 	$board.on('click', 'li',function() {
@@ -280,7 +276,7 @@ function UI(config) {
 				}));
 			}
 
-			$('#discardPile').html(html.join(''))
+			$discardPile.html(html.join(''))
 
 		}
 	}
@@ -338,9 +334,9 @@ function UI(config) {
 				}
 				$players.html(html.join(''));
 
-				$('#discardPile').empty();
+				$discardPile.empty();
 
-				$allViews.hide();
+				$body.removeClass(allModeClasses).addClass('game');
 				$game.removeClass('gameover').show();
 			},
 			cardplayed: function(event, data) {

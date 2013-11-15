@@ -134,16 +134,17 @@ $space: '\00a0';
       li {
         position: relative;
         font-size: 40px;
-        vertical-align: top;
         font-family: Uralita;
         line-height: 40px;
         cursor: pointer;
+        margin-bottom: 8px;
 
         span {
           font-family: aaronfaces;
           text-align: bottom;
           margin-right: 8px;
           color: #eee;
+          vertical-align: middle;
         }
 
         &.selected {

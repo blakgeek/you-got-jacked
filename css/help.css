@@ -59,7 +59,7 @@ button::-moz-focus-inner,
   padding: 0;
   border: 0; }
 
-#rules.container {
+#tutorial.container {
   white-space: nowrap;
   font-size: 0;
   overflow: hidden;
@@ -70,7 +70,7 @@ button::-moz-focus-inner,
   left: 50%;
   margin: -225px 0 0 -325px;
   box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.6); }
-  #rules.container:before {
+  #tutorial.container:before {
     position: fixed;
     top: 0;
     left: 0;
@@ -79,7 +79,7 @@ button::-moz-focus-inner,
     background-color: rgba(0, 0, 0, 0.4);
     content: "\00a0";
     z-index: -1; }
-#rules section {
+#tutorial section {
   transition: all .5s ease-in;
   display: inline-block;
   width: 100%;
@@ -94,24 +94,24 @@ button::-moz-focus-inner,
   overflow-y: auto;
   background-color: white;
   z-index: 9999; }
-  #rules section h2 {
+  #tutorial section h2 {
     font-family: Uralita;
     font-weight: bold;
     font-size: 36px;
     padding: 8px 0 16px 0; }
-#rules footer {
+#tutorial footer {
   font-size: 14px;
   z-index: 9999;
   position: absolute;
   bottom: 10px;
   right: 10px;
   left: 10px; }
-  #rules footer:after {
+  #tutorial footer:after {
     clear: both; }
-  #rules footer nav {
+  #tutorial footer nav {
     width: 100%;
     text-align: right; }
-    #rules footer nav li {
+    #tutorial footer nav li {
       display: inline-block;
       padding: 4px 12px 4px 12px;
       cursor: pointer;
@@ -136,10 +136,10 @@ button::-moz-focus-inner,
       min-width: 100px;
       text-align: center;
       font-size: 18px; }
-    #rules footer nav li.new-game, #rules footer nav li.back {
+    #tutorial footer nav li.new-game, #tutorial footer nav li.back {
       float: left;
       margin-left: 8px; }
-#rules .dead-cards span {
+#tutorial .dead-cards span {
   font-family: "aaronfaces";
   font-size: 90px;
   line-height: 110px;

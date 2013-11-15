@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 <head>
-    <title>Play BlakJax Online</title>
+    <title>You Got Jacked</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <link rel="stylesheet" type="text/css" href="css/jax.css"/>
     <link rel="stylesheet" type="text/css" href="css/help.css"/>
     <link rel="stylesheet" type="text/css" href="css/wizard.css"/>
     <link rel="icon" type="image/png" href="favicon.png"/>
 </head>
-<body>
+<body class="home">
 <section id="dialog" class="view">
     <p class="message"></p>
     <button class="replay">Play Again</button>
     <button class="new-game">New Game</button>
 </section>
 
-<section class="game view">
+<section id="game" class="view">
     <header>
         <h1>You Got Jacked</h1>
         <nav>
@@ -34,12 +34,12 @@
     </div>
 
     <div class="cards">
-        <ul id="discardPile" class="discarded"></ul>
+        <ul class="discarded"></ul>
         <ul class="hand"></ul>
     </div>
 </section>
 
-<div id="rules" class="container view">
+<section id="tutorial" class="container view">
 
     <section>
         <h2>The Board</h2>
@@ -71,7 +71,7 @@
         <h2>The Player List</h2>
         <img src="./images/help/player-list.png"/>
 
-        <p>There is a list showing each player's name and color.  It also show's which player's turn it is.</p>
+        <p>There is a list showing each player's name and color. It also show's which player's turn it is.</p>
     </section>
 
     <section>
@@ -111,6 +111,7 @@
         <img src="./images/help/winning-h2.png"/>
 
         <p>Winning is simple. Be the first player to capture five cells in a line and you win.</p>
+
         <p>Lines can go left to right.</p>
     </section>
 
@@ -154,12 +155,14 @@
     <section class="dead-cards">
         <h2>I See Dead Cards</h2>
         <span>x</span>
+
         <p>
             Dead cards are cards that cannot be played because all of the matching cells have already been
             captured. These cards can be discard and exchanged for ones from the deck. This is done by
             clicking the dead card in your hand and then either dragging it to the discard pile or clicking the
             discard pile.
         </p>
+
         <p>Only one dead card can be exchanged per play and you have to exchange it before capturing a cell.</p>
     </section>
 
@@ -172,9 +175,9 @@
             <li class="next">Next</li>
         </nav>
     </footer>
-</div>
+</section>
 
-<div id="wizard" class="container view">
+<section id="wizard" class="container view">
     <section class="player-picker">
         <h2>Pick The Number Of Players</h2>
         <ul>
@@ -218,9 +221,9 @@
             <li class="play">Start Game</li>
         </nav>
     </footer>
-</div>
+</section>
 
-<section id="splash" class="view">
+<section id="home" class="view">
     <img src="images/splash.png"/>
 
     <div class="buttons">
@@ -229,7 +232,9 @@
         <button class="rules">Tutorial</button>
     </div>
 </section>
-</body>
+<footer>
+    &copy; Blakgeek Software 2013. All Rights Reserved.
+</footer>
 <script src="//ec2-184-73-193-207.compute-1.amazonaws.com:9000/socket.io/socket.io.js"></script>
 <script src="js/jquery.js"></script>
 <script src="js/jquery-ui.js"></script>
@@ -242,4 +247,5 @@
 <script src="js/config.js"></script>
 <script src="js/help.js"></script>
 <script src="js/wizard.js"></script>
+</body>
 </html>

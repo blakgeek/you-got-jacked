@@ -52,7 +52,7 @@ var Hal = function(config) {
 
 	function discardADeadCard() {
 
-		console.debug('Player ' + playerIndex + ': checking for dead cards');
+		console.log('Player ' + playerIndex + ': checking for dead cards');
 
 		var newHand, i, k, cells, card, isDead, deadCardIndex = false;
 
@@ -77,7 +77,7 @@ var Hal = function(config) {
 				}
 
 				if(isDead) {
-					console.debug('Player ' + playerIndex + ': found dead card ' + card);
+					console.log('Player ' + playerIndex + ': found dead card ' + card);
 					deadCardIndex = i;
 					break;
 				}

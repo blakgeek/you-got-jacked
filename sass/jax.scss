@@ -4,7 +4,8 @@
 @import "colors";
 @import "helpers";
 
-$red: darken(red, 15%);;
+$red: darken(red, 15%);
+;
 
 body, html {
   margin: 0;
@@ -52,7 +53,38 @@ body {
   }
 }
 
-#splash {
+body {
+
+  & > section {
+    display: none;
+  }
+
+  &.home {
+    #home {
+      display: block;
+    }
+  }
+
+  &.wizard {
+    #wizard {
+      display: block;
+    }
+  }
+
+  &.game {
+    #game {
+      display: block;
+    }
+  }
+
+  &.tutorial {
+    #tutorial {
+      display: block;
+    }
+  }
+}
+
+#home {
 
   @include dialog;
 
@@ -97,7 +129,6 @@ body {
 }
 
 #message {
-  display: none;
   position: fixed;
   left: 50%;
   width: 300px;
@@ -112,7 +143,7 @@ body {
   font-size: 16px;
 }
 
-#rules {
+#tutorial {
 
   margin: 15px auto;
   width: 700px;
@@ -133,92 +164,85 @@ body {
   }
 }
 
-#discardPile {
-  z-index: 9999;
+#game {
 
-  li {
-    margin-right: -40px
-  }
-
-}
-
-.cards {
-
-  .hand {
-
-    li {
-      @include transition(margin .1s ease-in);
-      //margin: 5px 5px 5px -30px;
-
-      &.active {
-        margin-top: -50px;
-        margin-bottom: 50px;
-      }
-
-      &.dragged {
-        opacity: .5;
-      }
-
-      &.ui-draggable-dragging {
-        z-index: 10000;
-      }
-    }
-  }
-}
-
-.game {
   position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
   background-image: url("../images/crossed_stripes.png");
-}
 
-header {
-
-  position: relative;
-  height: 50px;
-  line-height: 50px;
-  box-shadow: 0 0 0 1px darken($suitRed, 60%), 0 0 0 6px white, 0 0 0 7px darken($suitRed, 60%), 0 0 3px 8px rgba(0,0,0,.35);
-  @include linear-gradient($suitRed, $suitRed 50%, #b21f24 50%);
-  margin-bottom: 7px;
-  z-index: 9999;
-
-  h1 {
-    font-family: "Uralita";
-    font-size: 40px;
-    font-weight: bold;
-    text-shadow: 0 0 5px black;
-    color: white;
-    padding-left: 13px;
+  .gameover {
+    li:not(.sequence), .cards {
+      opacity: .2;
+    }
   }
 
-  nav {
-    position: absolute;
-    right: 0;
-    top: 0;
+  header {
 
-    li {
-      @include jax-button;
-      line-height: 12px;
-      font-size: 18px;
-      margin-top: 8px !important;
-      display: inline-block;
+    position: relative;
+    height: 50px;
+    line-height: 50px;
+    box-shadow: 0 0 0 1px darken($suitRed, 60%), 0 0 0 6px white, 0 0 0 7px darken($suitRed, 60%), 0 0 3px 8px rgba(0, 0, 0, .35);
+    @include linear-gradient($suitRed, $suitRed 50%, #b21f24 50%);
+    margin-bottom: 7px;
+    z-index: 9999;
+
+    h1 {
+      font-family: "Uralita";
+      font-size: 40px;
+      font-weight: bold;
+      text-shadow: 0 0 5px black;
+      color: white;
+      padding-left: 13px;
+    }
+
+    nav {
+      position: absolute;
+      right: 0;
+      top: 0;
+
+      li {
+        @include jax-button;
+        line-height: 12px;
+        font-size: 18px;
+        margin-top: 8px !important;
+        display: inline-block;
+      }
+    }
+  }
+
+  .cards {
+
+    .hand {
+
+      li {
+        @include transition(margin .1s ease-in);
+        //margin: 5px 5px 5px -30px;
+
+        &.active {
+          margin-top: -50px;
+          margin-bottom: 50px;
+        }
+
+        &.dragged {
+          opacity: .5;
+        }
+
+        &.ui-draggable-dragging {
+          z-index: 10000;
+        }
+      }
     }
   }
 }
 
-#board {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  display: none;
-
-}
-
-.gameover {
-  li:not(.sequence), .cards {
-    opacity: .2;
-  }
+footer {
+  position: fixed;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  font-family: "Open Sans", sans-serf !important;
+  text-align: center;
 }

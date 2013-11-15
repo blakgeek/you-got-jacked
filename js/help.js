@@ -1,7 +1,7 @@
 $(function() {
 
 	var pos = 0,
-		$rules = $('#rules'),
+		$rules = $('#tutorial'),
 		$firstSection = $rules.find('section').first(),
 		totalSections = $rules.find('section').length;
 
