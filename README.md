@@ -4,7 +4,7 @@
 
 It is written in javascript along with html and a good helping of css3.
 
-I did NOT use any super cool frameworks in the making of this game.  Mostly because I loath framework for making developers lazy and not in a good way.  I'm looking at you Angular.
+I did NOT use any super cool frameworks in the making of this game.  Mostly because I loath frameworks for making developers lazy and not in a good way.  I'm looking at you Angular.
 
 I did however make liberal use of jQuery.  I freaking love jQuery.
 
