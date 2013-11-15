@@ -8,4 +8,6 @@ I did NOT use any super cool frameworks in the making of this game.  Mostly beca
 
 I did however make liberal use of jQuery.  I freaking love jQuery.
 
+See the game in action on [bggamehub.com](http://ygj.bggamehub.com)
+
 
