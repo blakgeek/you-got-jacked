@@ -82,6 +82,17 @@ body {
       display: block;
     }
   }
+
+  &.gameover {
+    #dialog {
+      display: block;
+    }
+    #game {
+      li:not(.sequence), .cards {
+        opacity: .2;
+      }
+    }
+  }
 }
 
 #home {
@@ -112,8 +123,10 @@ body {
 }
 
 #dialog {
+
   @include dialog;
   display: none;
+  z-index: 99999;
 
   .message {
     font-family: "Uralita";
@@ -172,12 +185,6 @@ body {
   bottom: 0;
   right: 0;
   background-image: url("../images/crossed_stripes.png");
-
-  &.gameover {
-    li:not(.sequence), .cards {
-      opacity: .2;
-    }
-  }
 
   header {
 

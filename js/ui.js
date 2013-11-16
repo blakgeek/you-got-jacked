@@ -18,10 +18,8 @@ function UI(config) {
 		},
 		jax = config.game,
 		$jax = $(jax),
-		$hand = $('.cards .hand'),
-		$allSections = $('body > section'),
 		discardPile = [],
-		allModeClasses = "home wizard game tutorial",
+		allModeClasses = "home wizard game tutorial gameover",
 		$body = $('body'),
 		$dialog = $('#dialog'),
 		$home = $('#home'),
@@ -30,6 +28,7 @@ function UI(config) {
 		$tutorial = $('#tutorial'),
 		$board = $game.find('.board ul'),
 		$discardPile = $game.find('.discarded'),
+		$hand = $game.find('.hand'),
 		$players = $game.find('.players ul'),
 		self = this;
 
@@ -134,6 +133,7 @@ function UI(config) {
 
 
 		$body.removeClass(allModeClasses).addClass('home');
+		$hand.off();
 	});
 
 	$tutorial.find('.back').click(function() {
@@ -181,16 +181,6 @@ function UI(config) {
 			if(newHand) {
 				self.displayHand(newHand);
 			}
-		}
-	});
-
-	$hand.on('click', 'li', function() {
-		var $this = $(this);
-		if($this.is('.active')) {
-			$this.removeClass('active');
-		} else {
-			$hand.find('li').removeClass('active');
-			$(this).addClass('active');
 		}
 	});
 
@@ -289,12 +279,12 @@ function UI(config) {
 				var winner = data.winner,
 					sequence = data.sequence;
 
-				$game.addClass('gameover');
 				sequence.forEach(function(cell) {
 					$board.find('li[data-cell="' + cell + '"]').addClass('sequence');
 				});
-				$('#dialog p').html(winner === 0 ? "You win!" : "You lose.");
-				$('#dialog').css('z-index', 10000).show();
+
+				$dialog.find('p').html(winner === 0 ? "You win!" : "You lose.");
+				$body.addClass('gameover');
 				$hand.off();
 			},
 			gamestarted: function(event, data) {
@@ -335,6 +325,16 @@ function UI(config) {
 				$players.html(html.join(''));
 
 				$discardPile.empty();
+
+				$hand.on('click', 'li', function() {
+					var $this = $(this);
+					if($this.is('.active')) {
+						$this.removeClass('active');
+					} else {
+						$hand.find('li').removeClass('active');
+						$(this).addClass('active');
+					}
+				});
 
 				$body.removeClass(allModeClasses).addClass('game');
 				$game.removeClass('gameover').show();

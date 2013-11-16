@@ -1062,6 +1062,10 @@ body.game #game {
   display: block; }
 body.tutorial #tutorial {
   display: block; }
+body.gameover #dialog {
+  display: block; }
+body.gameover #game li:not(.sequence), body.gameover #game .cards {
+  opacity: .2; }
 
 #home {
   position: fixed;
@@ -1116,7 +1120,8 @@ body.tutorial #tutorial {
   margin-left: -400px;
   border-radius: 20px;
   text-align: center;
-  display: none; }
+  display: none;
+  z-index: 99999; }
   #dialog .message {
     font-family: "Uralita";
     font-weight: bold;
@@ -1197,8 +1202,6 @@ body.tutorial #tutorial {
   bottom: 0;
   right: 0;
   background-image: url("../images/crossed_stripes.png"); }
-  #game.gameover li:not(.sequence), #game.gameover .cards {
-    opacity: .2; }
   #game header {
     position: relative;
     height: 50px;
