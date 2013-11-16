@@ -174,10 +174,13 @@ var Jax = function() {
 
 			if(completedSequence) {
 
+
 				$self.trigger('gameended', {
 					winner: playerIndex,
 					sequence: completedSequence
 				});
+
+				$self.off();
 			}
 
 		} else if(isCellJacker(card) && isOccupied(cell) && cellStates[cell] != playerFlags[playerIndex] && cellCard[0] != 'J') {

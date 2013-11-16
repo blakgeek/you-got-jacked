@@ -173,7 +173,7 @@ body {
   right: 0;
   background-image: url("../images/crossed_stripes.png");
 
-  .gameover {
+  &.gameover {
     li:not(.sequence), .cards {
       opacity: .2;
     }

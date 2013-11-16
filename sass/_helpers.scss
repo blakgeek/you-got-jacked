@@ -52,7 +52,7 @@ $cardCharacters: A 2 3 4 5 6 7 8 9 10 J Q K;
       margin-top: $spacing;
       margin-left: $spacing - 3;
       float: left;
-      width: $size;
+      width: $size * 5/7;
       height: $size;
       font-size: 0;
 
