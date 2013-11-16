@@ -19,8 +19,10 @@
     <header>
         <h1>You Got Jacked</h1>
         <nav>
-            <li class="rules">Help</li>
-            <li class="quit">Quit</li>
+            <ul>
+                <li class="rules">Help</li>
+                <li class="quit">Quit</li>
+            </ul>
         </nav>
     </header>
 
@@ -169,10 +171,12 @@
     <footer>
         <nav>
             <!--<button class="play-online">Play Online</button>-->
-            <li class="new-game">Got It</li>
-            <li class="back">Got It</li>
-            <li class="prev">Back</li>
-            <li class="next">Next</li>
+            <ul>
+                <li class="new-game">Got It</li>
+                <li class="back">Got It</li>
+                <li class="prev disabled"></li>
+                <li class="next"></li>
+            </ul>
         </nav>
     </footer>
 </section>
@@ -216,9 +220,11 @@
     </section>
     <footer>
         <nav>
-            <li class="prev">Back</li>
-            <li class="next">Next</li>
-            <li class="play">Start Game</li>
+            <ul>
+                <li class="play">Start Game</li>
+                <li class="prev disabled"></li>
+                <li class="next"></li>
+            </ul>
         </nav>
     </footer>
 </section>
@@ -235,7 +241,7 @@
 <footer>
     &copy; Blakgeek Software 2013. All Rights Reserved.
 </footer>
-<script src="//ec2-184-73-193-207.compute-1.amazonaws.com:9000/socket.io/socket.io.js"></script>
+<!--<script src="//ec2-184-73-193-207.compute-1.amazonaws.com:9000/socket.io/socket.io.js"></script>-->
 <script src="js/jquery.js"></script>
 <script src="js/jquery-ui.js"></script>
 <script src="js/handlebars.js"></script>
@@ -244,8 +250,25 @@
 <script src="js/game.js"></script>
 <script src="js/brains/hal.js"></script>
 <script src="js/boards.js"></script>
-<script src="js/config.js"></script>
+<!--<script src="js/config.js"></script>-->
 <script src="js/help.js"></script>
 <script src="js/wizard.js"></script>
+<script>
+    (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-1096774-10', 'bggamehub.com');
+    ga('send', 'pageview');
+
+</script>
 </body>
 </html>

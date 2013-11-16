@@ -82,21 +82,58 @@
       clear: both;
     }
 
+
     nav {
       width: 100%;
       text-align: right;
+      font-size: 0;
 
       li {
-        display: inline-block;
-        padding: 4px 12px 4px 12px;
-        cursor: pointer;
-        @include jax-button($min-width: 100px);
-        font-size: 18px;
-      }
 
-      li.new-game, li.back {
-        float: left;
-        margin-left: 8px;
+        height: 30px;
+        line-height: 30px;
+        display: inline-block;
+        cursor: pointer;
+        font-size: 20px;
+        vertical-align: bottom;
+        @include user-select(none);
+        box-shadow: 0 0 0 1px darken($suitRed, 60%), 0 0 0 6px white, 0 0 0 7px darken($suitRed, 60%), 0 0 2px 8px rgba(0, 0, 0, .1);
+        @include linear-gradient($suitRed, $suitRed 50%, $DEFAULT_RED 50%);
+        color: white;
+        margin: 8px 8px 8px 18px;
+        text-align: center;
+        text-shadow: 0 0 3px black;
+
+        &.next, &.prev {
+
+          width: 30px;
+          &:before {
+            font-family: entypo;
+            font-size: 40px;
+          }
+        }
+
+        &.disabled {
+          @include linear-gradient(-225deg, white, white 50%, #f2f2f2 0);
+        }
+
+        &.next:before {
+          content: $entypo-right-bold;
+        }
+
+        &.prev:before {
+          content: $entypo-left-bold;
+        }
+
+        &.new-game, &.back {
+          font-family: uralita;
+          font-weight: 300;
+          padding-left: 12px;
+          padding-right: 12px;
+          float: left;
+          margin-left: 8px;
+        }
+
       }
     }
   }

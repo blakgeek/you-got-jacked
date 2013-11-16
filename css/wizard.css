@@ -36,7 +36,7 @@ footer, header, hgroup, menu, nav, section {
 body {
   line-height: 1; }
 
-ol, ul {
+ol, ul, nav {
   list-style: none; }
 
 blockquote, q {
@@ -58,6 +58,13 @@ button::-moz-focus-inner,
 [type="button"]::-moz-focus-inner {
   padding: 0;
   border: 0; }
+
+@font-face {
+  font-family: 'entypo';
+  font-style: 'normal';
+  font-weight: 'normal';
+  src: url("../fonts/entypo/entypo.eot");
+  src: url("../fonts/entypo/entypo.eot?#iefix") format("eot"), url("../fonts/entypo/entypo.woff") format("woff"), url("../fonts/entypo/entypo.ttf") format("truetype"), url("../fonts/entypo/entypo.svg#entypo") format("svg"); }
 
 #wizard.container {
   white-space: nowrap;
@@ -91,32 +98,49 @@ button::-moz-focus-inner,
       clear: both; }
     #wizard.container footer nav {
       width: 100%;
-      text-align: right; }
+      text-align: right;
+      font-size: 0; }
       #wizard.container footer nav li {
+        height: 30px;
+        line-height: 30px;
         display: inline-block;
-        padding: 4px 12px 4px 12px;
         cursor: pointer;
-        cursor: pointer;
+        font-size: 20px;
+        vertical-align: bottom;
         -webkit-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
-        font-family: Uralita;
-        font-weight: 300;
-        text-shadow: 0 0 3px black;
-        font-size: 24px;
-        padding: 8px 16px 8px 16px;
-        box-shadow: 0 0 0 1px black, 0 0 0 6px white, 0 0 0 7px black, 0 0 3px 8px rgba(0, 0, 0, 0.35);
-        border: none;
+        box-shadow: 0 0 0 1px black, 0 0 0 6px white, 0 0 0 7px black, 0 0 2px 8px rgba(0, 0, 0, 0.1);
         background-color: #d1343f;
         background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #d1343f), color-stop(50%, #d1343f), color-stop(50%, #b21f24));
         background-image: -webkit-linear-gradient(#d1343f, #d1343f 50%, #b21f24 50%);
         background-image: linear-gradient(#d1343f, #d1343f 50%, #b21f24 50%);
         color: white;
         margin: 8px 8px 8px 18px;
-        min-width: 100px;
         text-align: center;
-        font-size: 18px; }
+        text-shadow: 0 0 3px black; }
+        #wizard.container footer nav li.next, #wizard.container footer nav li.prev {
+          width: 30px; }
+          #wizard.container footer nav li.next:before, #wizard.container footer nav li.prev:before {
+            font-family: entypo;
+            font-size: 40px; }
+        #wizard.container footer nav li.disabled {
+          background-color: white;
+          background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(50%, white), color-stop(0, #f2f2f2));
+          background-image: -webkit-linear-gradient(-45deg, white, white 50%, #f2f2f2 0);
+          background-image: linear-gradient(-225deg,white, white 50%, #f2f2f2 0); }
+        #wizard.container footer nav li.next:before {
+          content: "\e4ae"; }
+        #wizard.container footer nav li.prev:before {
+          content: "\e4ad"; }
+        #wizard.container footer nav li.play {
+          font-family: uralita;
+          font-weight: 300;
+          padding-left: 12px;
+          padding-right: 12px;
+          float: left;
+          margin-left: 8px; }
 #wizard section {
   transition: all .5s ease-in;
   display: inline-block;

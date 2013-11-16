@@ -40,9 +40,8 @@ $(function() {
 		$wizard = $('#wizard'),
 		$firstSection = $wizard.find('section').first(),
 		totalSections = $wizard.find('section').length,
-		$buttons = $wizard.find('.next, .prev, .play');
-
-	$buttons.hide().filter('.next, .prev').show();
+		$nextButton = $wizard.find('.next'),
+		$prevButton = $wizard.find('.prev');
 
 	$wizard.find('.next').on('click', function next() {
 		pos = Math.min(pos + 1, totalSections - 1);
@@ -50,10 +49,9 @@ $(function() {
 			"margin-left": ( -100 * pos) + '%'
 		});
 		if(pos == totalSections - 1) {
-			$buttons.hide().filter('.play, .prev').show();
-		} else {
-			$buttons.hide().filter('.next, .prev').show();
+			$nextButton.addClass('disabled');
 		}
+		$prevButton.removeClass('disabled');
 	});
 
 	$wizard.find('.prev').on('click', function next() {
@@ -61,7 +59,10 @@ $(function() {
 		$firstSection.first().css({
 			"margin-left": ( -100 * pos) + '%'
 		});
-		$buttons.hide().filter('.next, .prev').show();
+		if(pos == 0) {
+			$prevButton.addClass('disabled');
+		}
+		$nextButton.removeClass('disabled');
 	});
 
 });
