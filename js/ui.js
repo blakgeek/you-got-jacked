@@ -11,6 +11,9 @@ function UI(config) {
 		PLAYER_CLASSES = ['p1', 'p2', 'p3', 'p4'],
 		ALL_PLAYER_CLASSES = 'p1 p2 p3 p4',
 		templates = {
+			stdProxy: Handlebars.compile('<div class="hand proxy suit {{suit}}" data-card="{{card}}"><span></span></div>'),
+			jokerProxy: Handlebars.compile('<div class="hand proxy joker joker-{{type}}" data-card="{{card}}"></div>'),
+
 			stdCell: Handlebars.compile('<li class="{{classes}} suit {{suit}}" data-cell="{{cell}}" data-card="{{card}}"></li>'),
 			jokerCell: Handlebars.compile('<li class="{{classes}} joker joker-{{type}}" data-cell="{{cell}}" data-card="{{card}}"></li>'),
 			stdCard: Handlebars.compile('<li class="{{classes}} suit {{suit}}" data-pos="{{position}}" data-card="{{card}}"><span></span></li>'),
@@ -30,6 +33,7 @@ function UI(config) {
 		$discardPile = $game.find('.discarded'),
 		$hand = $game.find('.hand'),
 		$players = $game.find('.players ul'),
+		setupWizard = new SetupWizard(),
 		self = this;
 
 	$discardPile.click(function() {
@@ -47,12 +51,12 @@ function UI(config) {
 	}).droppable({
 			addClasses: false,
 			over: function(event, ui) {
-				var $card = $(ui.draggble);
-				$card.addClass('dead-card');
+
+				ui.helper.addClass('dead-card');
 			},
 			out: function(event, ui) {
-				var $card = $(ui.draggble);
-				$card.removeClass('dead-card');
+
+				ui.helper.removeClass('dead-card');
 			},
 			drop: function(event, ui) {
 				var $card = $(ui.draggable),
@@ -86,18 +90,14 @@ function UI(config) {
 
 	$home.find('.new-game').click(function() {
 
+		setupWizard.reset();
 		$body.removeClass(allModeClasses).addClass('wizard');
-		$wizard.show();
 	});
 
 	$dialog.find('.replay').click(function() {
 
 		$body.removeClass(allModeClasses);
-		jax.startOfflineGame({
-			board: $wizard.find('.board-picker .selected').attr('data-board'),
-			totalPlayers: $wizard.find('.player-picker .selected').attr('data-players'),
-			level: $wizard.find('.level-picker .selected').attr('data-level')
-		});
+		jax.startOfflineGame(setupWizard.values());
 	});
 
 	$dialog.find('.new-game').click(function() {
@@ -108,11 +108,7 @@ function UI(config) {
 	$wizard.find('.play').click(function() {
 
 		$body.removeClass(allModeClasses);
-		jax.startOfflineGame({
-			board: $wizard.find('.board-picker .selected').attr('data-board'),
-			totalPlayers: $wizard.find('.player-picker .selected').attr('data-players'),
-			level: $wizard.find('.level-picker .selected').attr('data-level')
-		});
+		jax.startOfflineGame(setupWizard.values());
 	});
 
 	$home.find('.rules').click(function() {
@@ -131,13 +127,11 @@ function UI(config) {
 
 	$game.find('nav .quit').click(function() {
 
-
 		$body.removeClass(allModeClasses).addClass('home');
 		$hand.off();
 	});
 
 	$tutorial.find('.back').click(function() {
-
 
 		$body.removeClass(allModeClasses).addClass('game');
 	});
@@ -164,13 +158,43 @@ function UI(config) {
 	}).droppable({
 			over: function(event, ui) {
 
-				ui.helper.addClass('over-board')
+				ui.helper.removeClass('proxy').addClass('over-board p1');
 			},
 			out: function(event, ui) {
 
-				ui.helper.removeClass('over-board')
+				ui.helper.removeClass('over-board p1').addClass('proxy');
+			},
+			tolerance: 'touch',
+			drop: function(event, ui) {
+
+				var x = event.pageX - $(window).scrollLeft(),
+					y = event.pageY - $(window).scrollTop(),
+					$cell = $(document.elementFromPoint(x, y)),
+					cellIndex = $cell.attr('data-cell'),
+					activeIndex = $hand.find('li.active').attr('data-pos');
+
+				if(activeIndex) {
+					if(jax.playCard(0, cellIndex, activeIndex)) {
+
+						self.displayHand(jax.discardAndReplaceCard(0, activeIndex));
+						jax.completeTurn(0);
+
+					}
+				}
+				$cell.removeClass('hover');
 			}
 		});
+
+
+
+	if(BG.isChrome) {
+		$board.on('mouseenter', 'li', function() {
+			$(this).addClass('hover');
+		});
+		$board.on('mouseleave', 'li', function() {
+			$(this).removeClass('hover');
+		});
+	}
 
 	$discardPile.on('click', function() {
 		var activeIndex = $hand.find('li.active').attr('data-pos'),
@@ -183,6 +207,93 @@ function UI(config) {
 			}
 		}
 	});
+
+	var name, board, suit, html = [];
+	for(name in Jax.BOARDS) {
+
+		board = Jax.BOARDS[name];
+		html.push('<ul data-board="' + name + '">');
+		board.forEach(function(cell) {
+
+			suit = cell[1];
+			if(isNaN(suit)) {
+				html.push('<li class="' + suit + '"></li>');
+			} else {
+				html.push('<li class="J"></li>');
+			}
+		});
+
+		html.push('</ul>');
+	}
+
+	$('.board-picker .boards').html(html.join('')).on('click', 'ul', function() {
+
+		$('.board-picker ul').removeClass('selected');
+		$(this).addClass('selected');
+	});
+
+	$('.player-picker').on('click', 'li', function() {
+
+		$('.player-picker li').removeClass('selected');
+		$(this).addClass('selected');
+	});
+
+	$('.level-picker').on('click', 'li', function() {
+
+		$('.level-picker li').removeClass('selected');
+		$(this).addClass('selected');
+	});
+
+	function SetupWizard() {
+
+		var pos = 0,
+			$wizard = $('#wizard'),
+			$firstSection = $wizard.find('section').first(),
+			totalSections = $wizard.find('section').length,
+			$nextButton = $wizard.find('.next'),
+			$prevButton = $wizard.find('.prev'),
+			self = this;
+
+		$wizard.find('.next').on('click', function next() {
+			pos = Math.min(pos + 1, totalSections - 1);
+			$firstSection.css({
+				"margin-left": ( -100 * pos) + '%'
+			});
+			if(pos == totalSections - 1) {
+				$nextButton.addClass('disabled');
+			}
+			$prevButton.removeClass('disabled');
+		});
+
+		$wizard.find('.prev').on('click', function next() {
+			pos = Math.max(pos - 1, 0);
+			$firstSection.css({
+				"margin-left": ( -100 * pos) + '%'
+			});
+			if(pos == 0) {
+				$prevButton.addClass('disabled');
+			}
+			$nextButton.removeClass('disabled');
+		});
+
+		this.reset = function() {
+			pos = 0;
+			$firstSection.css({
+				"margin-left": '0'
+			});
+			$prevButton.addClass('disabled');
+			$nextButton.removeClass('disabled');
+			$wizard.find('.selected').removeClass('selected');
+		}
+
+		this.values = function() {
+			return {
+				board: $wizard.find('.board-picker .selected').attr('data-board'),
+				totalPlayers: $wizard.find('.player-picker .selected').attr('data-players'),
+				level: $wizard.find('.level-picker .selected').attr('data-level')
+			}
+		}
+	}
 
 	// public functions
 
@@ -224,12 +335,38 @@ function UI(config) {
 				}
 
 				$card.addClass('dragged');
+				$game.addClass('dragging');
 			},
 			stop: function(event, ui) {
 
+				$game.removeClass('dragging');
 				$(this).removeClass('active dragged');
 			},
-			helper: "clone"
+			cursorAt: {
+				left: 0,
+				top: 0
+			},
+			helper: function(event) {
+
+				var $this = $(this),
+					card = $this.attr('data-card'),
+					proxy;
+
+				if($this.is('.joker')) {
+					proxy = $(templates.jokerProxy({
+						card: card,
+						type: card[1]
+					}));
+				} else {
+					proxy = $(templates.stdProxy({
+						card: card,
+						suit: SUIT_MAPPING[card[1]]
+					}));
+				}
+
+				return proxy;
+			},
+			appendTo: $game
 		});
 	}
 

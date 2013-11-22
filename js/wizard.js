@@ -1,68 +1,65 @@
-$(function() {
+(function($) {
 
-	var name, board, suit, html = [];
-	for(name in Jax.BOARDS) {
+	$.fn.bgWizard = function(options) {
 
-		board = Jax.BOARDS[name];
-		html.push('<ul data-board="' + name + '">');
-		board.forEach(function(cell) {
+		var config = $.extend({
+				next: ".next",
+				prev: ".prev"
+			}, options),
+			currentPosition = 0,
+			$wizard = this,
+			$sections = $wizard.find('> section'),
+			$firstSection = $sections.first(),
+			maxPosition = $sections.length - 1,
+			$next = $wizard.find(config.next),
+			$prev = $wizard.find(config.prev);
 
-			suit = cell[1];
-			if(isNaN(suit)) {
-				html.push('<li class="' + suit + '"></li>');
-			} else {
-				html.push('<li class="J"></li>');
+		$wizard.addClass('bg-wizard');
+
+		$next.click(function next() {
+			currentPosition = Math.min(currentPosition + 1, maxPosition);
+			$firstSection.css({
+				"margin-left": (currentPosition * -100) + '%'
+			});
+			if(currentPosition == totalSections - 1) {
+				$next.addClass('bg-wizard-disabled');
 			}
+			$prev.removeClass('bg-wizard-disabled');
 		});
 
-		html.push('</ul>');
+		$prev.click(function next() {
+			currentPosition = Math.max(currentPosition - 1, 0);
+			$firstSection.css({
+				"margin-left": (currentPosition * -100) + '%'
+			});
+			if(currentPosition == 0) {
+				$prev.addClass('bg-wizard-disabled');
+			}
+			$next.removeClass('bg-wizard-disabled');
+		});
+
+		this.reset = function() {
+			currentPosition = 0;
+			$firstSection.css({
+				"margin-left": '0'
+			});
+			$prev.addClass('bg-wizard-disabled');
+			$next.removeClass('bg-wizard-disabled');
+			$wizard.find('.bg-wizard-selected').removeClass('bg-wizard-selected');
+		}
+
+		this.vals = function() {
+			var result = {};
+
+			$wizard.find('.bg-wizard-selected').each(function() {
+				var $this = $(this);
+				result[$this.attr('data-bg-wizard-name')] = $this.attr('data-bg-wizard-value');
+			});
+
+			return result;
+		}
+
+		return this;
 	}
 
-	$('.board-picker .boards').html(html.join('')).on('click', 'ul', function() {
-
-		$('.board-picker ul').removeClass('selected');
-		$(this).addClass('selected');
-	});
-
-	$('.player-picker').on('click', 'li', function() {
-
-		$('.player-picker li').removeClass('selected');
-		$(this).addClass('selected');
-	});
-
-	$('.level-picker').on('click', 'li', function() {
-
-		$('.level-picker li').removeClass('selected');
-		$(this).addClass('selected');
-	});
-
-	var pos = 0,
-		$wizard = $('#wizard'),
-		$firstSection = $wizard.find('section').first(),
-		totalSections = $wizard.find('section').length,
-		$nextButton = $wizard.find('.next'),
-		$prevButton = $wizard.find('.prev');
-
-	$wizard.find('.next').on('click', function next() {
-		pos = Math.min(pos + 1, totalSections - 1);
-		$firstSection.css({
-			"margin-left": ( -100 * pos) + '%'
-		});
-		if(pos == totalSections - 1) {
-			$nextButton.addClass('disabled');
-		}
-		$prevButton.removeClass('disabled');
-	});
-
-	$wizard.find('.prev').on('click', function next() {
-		pos = Math.max(pos - 1, 0);
-		$firstSection.first().css({
-			"margin-left": ( -100 * pos) + '%'
-		});
-		if(pos == 0) {
-			$prevButton.addClass('disabled');
-		}
-		$nextButton.removeClass('disabled');
-	});
-
-});
+})(jQuery);

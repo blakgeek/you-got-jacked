@@ -243,6 +243,10 @@ body {
       }
     }
   }
+
+  &.dragging {
+    cursor: move;
+  }
 }
 
 footer {
@@ -252,4 +256,16 @@ footer {
   right: 0;
   font-family: "Open Sans", sans-serf !important;
   text-align: center;
+}
+
+.windows {
+
+  #wizard, #tutorial {
+
+    .next, .prev {
+      &:before {
+        line-height: 10px !important;
+      }
+    }
+  }
 }
