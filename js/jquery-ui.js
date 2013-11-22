@@ -2019,7 +2019,6 @@ $.widget("ui.droppable", {
 
 	_over: function(event) {
 
-		console.log('trying');
 		var draggable = $.ui.ddmanager.current;
 
 		// Bail if draggable and droppable are same element
@@ -2226,8 +2225,6 @@ $.ui.ddmanager = {
 			$.ui.ddmanager.prepareOffsets(draggable, event);
 		}
 
-		console.log('wtf?')
-
 		//Run through all droppables and check their positions based on specific tolerance options
 		$.each($.ui.ddmanager.droppables[draggable.options.scope] || [], function() {
 
@@ -2262,15 +2259,12 @@ $.ui.ddmanager = {
 				parentInstance._out.call(parentInstance, event);
 			}
 
-			console.log(c === "isover" ? "_over" : "_out");
 			this[c] = true;
 			this[c === "isout" ? "isover" : "isout"] = false;
 			this[c === "isover" ? "_over" : "_out"].call(this, event);
 
 			// we just moved out of a greedy child
 			if (parentInstance && c === "isout") {
-
-				console.log("the parent thang");
 				parentInstance.isout = false;
 				parentInstance.isover = true;
 				parentInstance._over.call(parentInstance, event);
