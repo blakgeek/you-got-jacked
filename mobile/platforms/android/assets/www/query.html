@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style>
+        body, html {
+            height: 100%;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+        }
+
+        .info {
+            border: 1px solid black;
+        }
+        @media all and (min-height: 100px) and (orientation: landscape) {
+
+            .info:after {
+                content: 'small'
+            }
+
+            .info {
+                height: 100px;
+                width: 100px;
+            }
+        }
+        @media all and (min-height: 400px) and (orientation: landscape) {
+
+            .info:after {
+                content: 'medium'
+            }
+
+            .info {
+                height: 400px;
+                width: 400px;
+            }
+        }
+        @media all and (min-height: 600px) and (orientation: landscape) {
+
+            .info:after {
+                content: 'large'
+            }
+
+            .info {
+                height: 600px;
+                width: 600px;
+            }
+        }
+        @media all and (min-width: 200px) and (orientation: portrait) {
+
+            .info:after {
+                content: 'small'
+            }
+
+            .info {
+                height: 200px;
+                width: 200px;
+                position: absolute;
+                margin: 20px auto;
+            }
+        }
+        @media all and (min-width: 400px) and (orientation: portrait) {
+
+            .info:after {
+                content: 'medium'
+            }
+
+            .info {
+                height: 400px;
+                width: 400px;
+                position: absolute;
+                margin: 20px auto;
+            }
+        }
+        @media all and (min-width: 600px) and (orientation: portrait) {
+
+            .info:after {
+                content: 'large'
+            }
+
+            .info {
+                height: 600px;
+                width: 600px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                margin: -300px 0 0 -300px;
+            }
+        }
+        @media all and (min-aspect-ratio: 1/2) and (max-aspect-ratio: 1/1) {
+
+            body {
+                background-color: blue;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="game">
+        <nav id="bar">
+            <li>Quit</li>
+            <li>New Solo Game</li>
+            <li>New Online Game</li>
+            <li>blah message</li>
+        </nav>
+        <div id="board"></div>
+        <div id="hand"></div>
+        <div id="discarded"></div>
+    </div>
+</body>
+</html>

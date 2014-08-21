@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Game Layout Wireframe</title>
+        <link rel="stylesheet" type="text/css" href="../css/wireframe.css"/>
+    </head>
+    <body>
+
+        <section class="game">
+
+            <header>
+                <h1>You Got Jacked</h1>
+                <nav>
+                    <li>Help</li>
+                    <li>Quit</li>
+                </nav>
+            </header>
+
+            <ul class="players">
+                <h1>Players</h1>
+                <li class="active"><img src="../images/chapelle.jpg"/>You</li>
+                <li><img src="../images/chapelle.jpg"/>Hal</li>
+                <li><img src="../images/chapelle.jpg"/>Garf</li>
+                <li><img src="../images/chapelle.jpg"/>Gu</li>
+            </ul>
+
+            <ul class="board"></ul>
+
+            <div class="cards">
+                <ul class="hand p1"></ul>
+                <ul class="discarded"></ul>
+            </div>
+        </section>
+    </body>
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script>
+        var html = [], i;
+        for(i=0; i<100; i++) {
+            html.push('<li></li>')
+        }
+        $('.board').html(html.join(''));
+
+        html = [];
+        for(i=0; i<4; i++) {
+            html.push('<li></li>')
+        }
+        $('.discarded').html(html.join(''))
+
+        html = []
+        for(i=0; i<6; i++) {
+            html.push('<li></li>')
+        }
+        $('.hand').html(html.join(''))
+    </script>
+</html>

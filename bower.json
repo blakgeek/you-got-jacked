@@ -1,0 +1,26 @@
+{
+  "name": "yougotjacked",
+  "version": "1.0.0",
+  "homepage": "https://github.com/blakgeek/you-got-jacked",
+  "authors": [
+    "blakgeek@gmail.com"
+  ],
+  "description": "A wicked fun card game inspired by Sequence and One Eyed Jack",
+  "main": "index.html",
+  "license": "Blakgeek 2014",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "moment": "~2.8.1",
+    "hammerjs": "~2.0.2",
+    "handlebars": "~1.3.0",
+    "jquery": "<2.0",
+    "jqueryui": "<2.0"
+  }
+}
